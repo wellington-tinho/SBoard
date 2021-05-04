@@ -1,0 +1,102 @@
+/* ==== GLOBAL ==== */
+:root{
+  --background: #F3F8FC;
+  --green: #34D761;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+  
+body {
+  font-size: 93.75%;
+  background: var(--background);
+  -webkit-font-smooth: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, strong{
+  font-weight: 600;
+} 
+
+
+/* ===== HEADER ===== */
+body header{
+  display: flex;
+  align-items:center;
+  background-color: #fff;
+  margin: 1rem 1rem 0 1rem;
+  border-radius: 1rem;
+}
+
+body header img{
+  height: 3rem;
+  margin: 1rem;
+}
+
+body header h1{
+  font-size: 2rem;
+  margin-left: 1rem;
+}
+
+
+/* ==== NAVBAR ==== */
+body nav{
+  display: flex;
+  align-items:center;
+  background-color: #fff;
+  margin: .25rem 1rem;
+  border-radius: 1rem;
+}
+
+body nav div{
+  margin: 0 3rem;
+  display: flex;
+  align-items:center;
+  height: 2rem;
+}
+body nav div img:nth-child( 2n ){
+  margin-left: 1rem;
+}
+
+body nav div img{
+  height:1.5rem;
+  cursor: pointer;
+}
+
+body nav .zoon-level .level-num{
+  font-weight: bold;
+  width: 1rem;
+}
+
+body nav .zoon-level img{
+  transform: rotate(90deg);
+}
+
+body nav div:nth-last-child(1) img{
+  height:2rem;
+  border-bottom: 2px solid #34D761;
+}
+
+section.network-slice{
+  display:grid;
+  grid-template-columns: 5fr 1fr;
+  margin: .25rem 1rem;
+}
+section.network-slice .graph{
+  border-radius: 1rem;
+  height: 79vh;
+  background-color: #fff;
+}
+section.network-slice .graph img{
+  height:100%
+}
+section.network-slice .graph img.expand{
+    height:1rem;
+    position: absolute;
+    right:5px;
+    bottom: 5px;
+    
+ }
