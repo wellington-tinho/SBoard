@@ -98,5 +98,10 @@ section.network-slice .graph img.expand{
     position: absolute;
     right:5px;
     bottom: 5px;
-    
+ }
+
+ section.network-slice .aside{
+   background-color: #fff;
+   margin: .25rem;
+   border-radius: 1rem;
  }
