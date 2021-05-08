@@ -90,18 +90,10 @@ section.network-slice .graph{
   height: 79vh;
   background-color: #fff;
 }
-section.network-slice .graph img{
-  height:100%
-}
-section.network-slice .graph img.expand{
-    height:1rem;
-    position: absolute;
-    right:5px;
-    bottom: 5px;
- }
 
  section.network-slice .aside{
    background-color: #fff;
    margin: .25rem;
    border-radius: 1rem;
  }
+
