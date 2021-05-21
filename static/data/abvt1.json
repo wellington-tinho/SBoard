@@ -242,7 +242,7 @@
       "modularitygroup": 2
     }
   ],
-  "links": [
+  "edges": [
     {
       "LinkLabel": "Leased Wavelength/Managed Service",
       "key": 0,

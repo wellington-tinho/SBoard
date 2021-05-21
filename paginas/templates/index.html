@@ -84,10 +84,16 @@
         <div class="component">
           <div class="title">Component</div>
           <ul>
-            <li>opc</li>
-            <li>opc</li>
-            <li>opc</li>
-            <li>opc</li>
+            <li>
+              <a href="">Creation</a>
+              <div class="info">
+                <a href="">Topology</a>
+                <a href="">Service</a>
+                <a href="">Duration</a>
+              </div>
+            </li>
+            <li>Edition</li>
+            <li>Preview</li>
           </ul>
         </div>
       </div>
@@ -142,8 +148,10 @@
 <script src="{% static 'js/src/misc/sigma.misc.bindEvents.js' %}"></script>
 <script src="{% static 'js/src/misc/sigma.misc.bindDOMEvents.js' %}"></script>
 <script src="{% static 'js/src/misc/sigma.misc.drawHovers.js' %}"></script>
-<script src="{% static 'data/abvt1.json' %}"></script>
 <!-- END SIGMA IMPORTS -->
+<!-- <script src="{% static 'data/abvt1.json' %}"></script> -->
+<script src="{% static 'js/plugins/sigma.parsers.json/sigma.parsers.json.js' %}"></script>
+
 
 <script>
   fetch('http://127.0.0.1:8000/static/data/abvt1.json')
@@ -154,7 +162,7 @@ console.log('Antes',(data));
 var i,
     s,
     N = (data.nodes).length,
-    E = (data.links).length,
+    E = (data.edges).length,
     g = {
       nodes: [],
       edges: []
@@ -174,8 +182,8 @@ for (i = 0; i < N; i++)
 for (i = 0; i < E; i++)
   g.edges.push({
     id:  'e' + i,
-    source: 'n' +(data.links[i].source),
-    target: 'n' +(data.links[i].target),
+    source: 'n' +(data.edges[i].source),
+    target: 'n' +(data.edges[i].target),
     size: Math.random(),
     color: '#3ab'
   });
@@ -188,4 +196,9 @@ s = new sigma({
 });
 
 })
+
+
+// sigma.parsers.json('http://127.0.0.1:8000/static/data/abvt1.json', {
+//   container: 'graph-container'
+// });
 </script>
