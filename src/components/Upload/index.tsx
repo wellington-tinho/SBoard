@@ -14,11 +14,14 @@ export const Upload = () =>{
 
     const fileUrl = URL.createObjectURL(file);
     setSelecFileUrl(fileUrl);
-    console.log(file);
-    
+   
     const data = new FormData();
     data.append('File',file)
-    api.post("/api/upload", data).then(response=> console.log(response.data)); 
+    api.post("/api/upload", data)
+    .then(response=>(response.data)
+    .then( console.log(response)
+     )); 
+    
 
   }, [])
   const {getRootProps, getInputProps} = useDropzone({onDrop})
@@ -26,7 +29,7 @@ export const Upload = () =>{
   return (
     <Dropzone {...getRootProps()}>
       <input {...getInputProps()} />
-     { selectFileUrl?  <div id="graph">Grafo exibido</div>
+     { selectFileUrl?  <div id="graph-container">Grafo exibido</div>
       :
         <p>
           <FiUpload />
@@ -35,4 +38,9 @@ export const Upload = () =>{
         }
     </Dropzone>
   )
+
+
+  function createGraph(data:Object){
+    
+  }
 }
