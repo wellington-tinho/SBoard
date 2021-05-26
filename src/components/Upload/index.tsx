@@ -2,18 +2,32 @@ import React, {useCallback, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
 import { FiUpload } from 'react-icons/fi'
 import { api } from '../../Services'
+import { GraphSigma } from '../GraphSigma'
 
 import { Dropzone } from "./styles"
 
-// export interface propsGraph {
-//   directed: false;
-//   multigraph: false;
-//   graph: Object;
-//   nodes: Array<42>;
-//   links: Array<66>;
-// }
+interface GraphProps {
+  graph: {
+  nodes: Array<{
+    Country: String, 
+    Internal: number,
+    Latitude: number,
+    Longitude: number,
+    id: String,
+    label: String,
+    modularitygroup: number
+  }>;
+  links: Array<{
+    LinkLabel: String,
+    key: number,
+    source: String,
+    target: String
+  }>;
+  }
+}
+
 export const Upload = () =>{
-  const [graph, setGraph] = useState('');
+  const [graphjson, setGraphjson] = useState<GraphProps>();
   const [selectFileUrl, setSelecFileUrl] = useState('');
   const onDrop = useCallback(acceptedFiles => {
     const file = acceptedFiles[0]
@@ -24,17 +38,19 @@ export const Upload = () =>{
     const data = new FormData();
     data.append('File',file)
     api.post("/api/upload", data)
-    .then(response=>
-      setGraph(response.data)
-        
-    ); 
+    .then(response=> {
+      setGraphjson(response.data)
+    })
+    .catch(err=> console.log(err)
+     ); 
   }, [])
   const {getRootProps, getInputProps} = useDropzone({onDrop})
 
   return (
     <Dropzone {...getRootProps()}>
       <input {...getInputProps()} />
-     { selectFileUrl?  <div id="graph-container">Grafo exibido {graph}</div>
+     { selectFileUrl?  <div id="graph-container"> <GraphSigma graph={graphjson} />
+     </div>
       :
         <p>
           <FiUpload />
