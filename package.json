@@ -4,10 +4,14 @@
   "private": true,
   "proxy": "http://127.0.0.1:5000/",
   "dependencies": {
+    "@types/sigmajs": "^1.0.27",
     "axios": "^0.21.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-dropzone": "^11.3.2",
+    "react-icons": "^4.2.0",
     "react-scripts": "4.0.3",
+    "sigma-react": "^1.2.10",
     "styled-components": "^5.3.0",
     "web-vitals": "^1.0.1"
   },
