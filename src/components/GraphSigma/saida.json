@@ -1,0 +1,840 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "node_default": {},
+    "edge_default": {},
+    "DateObtained": "19/10/10",
+    "GeoLocation": "China",
+    "GeoExtent": "Country",
+    "Network": "China Telecom ",
+    "Provenance": "Primary",
+    "Access": 0,
+    "Source": "http://www.chinatelecomusa.com/content.asp?pl=627&amp;sl=637&amp;contentid=660&amp;id=1&amp;indexid=0",
+    "Version": "1.0",
+    "Type": "COM",
+    "DateType": "Current",
+    "Backbone": 1,
+    "Commercial": 0,
+    "label": "Chinanet",
+    "ToolsetVersion": "0.3.34dev-20120328",
+    "Customer": 1,
+    "IX": 0,
+    "SourceGitVersion": "e278b1b",
+    "DateModifier": "=",
+    "DateMonth": "08",
+    "LastAccess": "3/08/10",
+    "Layer": "IP",
+    "Creator": "Topology Zoo Toolset",
+    "Developed": 0,
+    "Transit": 1,
+    "NetworkDate": "2010_08",
+    "DateYear": "2010",
+    "LastProcessed": "2011_09_01",
+    "Testbed": 0
+  },
+  "nodes": [
+    {
+      "Internal": 1,
+      "Latitude": 29.65,
+      "Country": "China",
+      "type": "Blue",
+      "id": "0",
+      "Longitude": 91.1,
+      "label": "Lhasa",
+      "modularitygroup": 2
+    },
+    {
+      "Internal": 1,
+      "Latitude": 36.05639,
+      "Country": "China",
+      "type": "Blue",
+      "id": "1",
+      "Longitude": 103.79222,
+      "label": "Lanzhou",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 1,
+      "Latitude": 39.45472,
+      "Country": "China",
+      "type": "Blue",
+      "id": "2",
+      "Longitude": 75.97972,
+      "label": "Kashi",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 1,
+      "Latitude": 32.51667,
+      "Country": "China",
+      "type": "Blue",
+      "id": "3",
+      "Longitude": 80.06667,
+      "label": "Shiquanhe",
+      "modularitygroup": 2
+    },
+    {
+      "Internal": 1,
+      "Latitude": 36.66833,
+      "Country": "China",
+      "type": "Blue",
+      "id": "4",
+      "Longitude": 116.99722,
+      "label": "Jinan",
+      "modularitygroup": 3
+    },
+    {
+      "Internal": 1,
+      "Latitude": 36.09861,
+      "Country": "China",
+      "type": "Blue",
+      "id": "5",
+      "Longitude": 120.37194,
+      "label": "Qingdao",
+      "modularitygroup": 4
+    },
+    {
+      "Internal": 1,
+      "Latitude": 37.86944,
+      "Country": "China",
+      "type": "Blue",
+      "id": "6",
+      "Longitude": 112.56028,
+      "label": "Taiyuan",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 1,
+      "Latitude": 38.04139,
+      "Country": "China",
+      "type": "Blue",
+      "id": "7",
+      "Longitude": 114.47861,
+      "label": "Shilazhuang",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 1,
+      "Latitude": 31.22222,
+      "Country": "China",
+      "type": "Green",
+      "id": "8",
+      "Longitude": 121.45806,
+      "label": "Shanghai",
+      "modularitygroup": 3
+    },
+    {
+      "Internal": 1,
+      "Latitude": 31.31139,
+      "Country": "China",
+      "type": "Blue",
+      "id": "9",
+      "Longitude": 120.61806,
+      "label": "Suzhou",
+      "modularitygroup": 1
+    },
+    {
+      "Internal": 0,
+      "id": "10",
+      "label": "International Link 1",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 0,
+      "id": "11",
+      "label": "International Link 2",
+      "modularitygroup": 3
+    },
+    {
+      "Internal": 1,
+      "Latitude": 22.81667,
+      "Country": "China",
+      "type": "Blue",
+      "id": "12",
+      "Longitude": 108.31667,
+      "label": "Nanning",
+      "modularitygroup": 2
+    },
+    {
+      "Internal": 1,
+      "Latitude": 28.2,
+      "Country": "China",
+      "type": "Blue",
+      "id": "13",
+      "Longitude": 112.96667,
+      "label": "Changsha",
+      "modularitygroup": 1
+    },
+    {
+      "Internal": 1,
+      "Latitude": 26.58333,
+      "Country": "China",
+      "type": "Blue",
+      "id": "14",
+      "Longitude": 106.71667,
+      "label": "Guiyang",
+      "modularitygroup": 2
+    },
+    {
+      "Internal": 1,
+      "Latitude": 29.56278,
+      "Country": "China",
+      "type": "Blue",
+      "id": "15",
+      "Longitude": 106.55278,
+      "label": "Chongqing",
+      "modularitygroup": 2
+    },
+    {
+      "Internal": 1,
+      "Latitude": 30.66667,
+      "Country": "China",
+      "type": "Blue",
+      "id": "16",
+      "Longitude": 104.06667,
+      "label": "Chengdu",
+      "modularitygroup": 2
+    },
+    {
+      "Internal": 1,
+      "Latitude": 25.03889,
+      "Country": "China",
+      "type": "Blue",
+      "id": "17",
+      "Longitude": 102.71833,
+      "label": "Kunming",
+      "modularitygroup": 2
+    },
+    {
+      "Internal": 1,
+      "Latitude": 34.25833,
+      "Country": "China",
+      "type": "Blue",
+      "id": "18",
+      "Longitude": 108.92861,
+      "label": "Xi'an",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 1,
+      "Latitude": 34.75778,
+      "Country": "China",
+      "type": "Blue",
+      "id": "19",
+      "Longitude": 113.64861,
+      "label": "Zhengzhou",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 0,
+      "id": "20",
+      "label": "International Link 4",
+      "modularitygroup": 3
+    },
+    {
+      "Internal": 0,
+      "id": "21",
+      "label": "International Link 3",
+      "modularitygroup": 2
+    },
+    {
+      "Internal": 1,
+      "Latitude": 20.04583,
+      "Country": "China",
+      "type": "Blue",
+      "id": "22",
+      "Longitude": 110.34167,
+      "label": "Haikou",
+      "modularitygroup": 1
+    },
+    {
+      "Internal": 1,
+      "Latitude": 30.13062,
+      "Country": "China",
+      "type": "Pink",
+      "id": "23",
+      "Longitude": 100.51803,
+      "label": "Hong Kong",
+      "modularitygroup": 3
+    },
+    {
+      "Internal": 1,
+      "Latitude": 30.25528,
+      "Country": "China",
+      "type": "Blue",
+      "id": "24",
+      "Longitude": 120.16889,
+      "label": "Hangzhou",
+      "modularitygroup": 3
+    },
+    {
+      "Internal": 1,
+      "Latitude": 30.58333,
+      "Country": "China",
+      "type": "Blue",
+      "id": "25",
+      "Longitude": 114.26667,
+      "label": "Wuhan",
+      "modularitygroup": 1
+    },
+    {
+      "Internal": 1,
+      "Latitude": 31.86389,
+      "Country": "China",
+      "type": "Blue",
+      "id": "26",
+      "Longitude": 117.28083,
+      "label": "Hefei",
+      "modularitygroup": 3
+    },
+    {
+      "Internal": 1,
+      "Latitude": 32.06167,
+      "Country": "China",
+      "type": "Blue",
+      "id": "27",
+      "Longitude": 118.77778,
+      "label": "Nanjing",
+      "modularitygroup": 1
+    },
+    {
+      "Internal": 1,
+      "Latitude": 23.11667,
+      "Country": "China",
+      "type": "Green",
+      "id": "28",
+      "Longitude": 113.25,
+      "label": "Guangzhou",
+      "modularitygroup": 2
+    },
+    {
+      "Internal": 1,
+      "Latitude": 24.47979,
+      "Country": "China",
+      "type": "Blue",
+      "id": "29",
+      "Longitude": 118.08187,
+      "label": "Xiamen",
+      "modularitygroup": 2
+    },
+    {
+      "Internal": 1,
+      "Latitude": 26.06139,
+      "Country": "China",
+      "type": "Blue",
+      "id": "30",
+      "Longitude": 119.30611,
+      "label": "Fuzhou",
+      "modularitygroup": 1
+    },
+    {
+      "Internal": 1,
+      "Latitude": 28.68333,
+      "Country": "China",
+      "type": "Blue",
+      "id": "31",
+      "Longitude": 115.88333,
+      "label": "Nandhang",
+      "modularitygroup": 3
+    },
+    {
+      "Internal": 1,
+      "Latitude": 36.61667,
+      "Country": "China",
+      "type": "Blue",
+      "id": "32",
+      "Longitude": 101.76667,
+      "label": "Xining",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 1,
+      "Latitude": 43.8,
+      "Country": "China",
+      "type": "Blue",
+      "id": "33",
+      "Longitude": 87.58333,
+      "label": "Urumqi",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 1,
+      "Latitude": 45.75,
+      "Country": "China",
+      "type": "Blue",
+      "id": "34",
+      "Longitude": 126.65,
+      "label": "Harbin",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 1,
+      "Latitude": 43.88,
+      "Country": "China",
+      "type": "Blue",
+      "id": "35",
+      "Longitude": 125.32278,
+      "label": "Changchun",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 1,
+      "Latitude": 41.79222,
+      "Country": "China",
+      "type": "Blue",
+      "id": "36",
+      "Longitude": 123.43278,
+      "label": "Shenyang",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 1,
+      "Latitude": 38.91222,
+      "Country": "China",
+      "type": "Blue",
+      "id": "37",
+      "Longitude": 121.60222,
+      "label": "Dalian",
+      "modularitygroup": 4
+    },
+    {
+      "Internal": 1,
+      "Latitude": 39.14222,
+      "Country": "China",
+      "type": "Blue",
+      "id": "38",
+      "Longitude": 117.17667,
+      "label": "Tianjin",
+      "modularitygroup": 4
+    },
+    {
+      "Internal": 1,
+      "Latitude": 39.9075,
+      "Country": "China",
+      "type": "Green",
+      "id": "39",
+      "Longitude": 116.39723,
+      "label": "Beijing",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 1,
+      "Latitude": 40.81056,
+      "Country": "China",
+      "type": "Blue",
+      "id": "40",
+      "Longitude": 111.65222,
+      "label": "Hohhot",
+      "modularitygroup": 0
+    },
+    {
+      "Internal": 1,
+      "Latitude": 38.46806,
+      "Country": "China",
+      "type": "Blue",
+      "id": "41",
+      "Longitude": 106.27306,
+      "label": "Yinchuan",
+      "modularitygroup": 0
+    }
+  ],
+  "links": [
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "0",
+      "target": "16"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "0",
+      "target": "3"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "0",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "1",
+      "target": "18"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "1",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "2",
+      "target": "33"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "4",
+      "target": "8"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "5",
+      "target": "38"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "6",
+      "target": "18"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "6",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "7",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "8",
+      "target": "38"
+    },
+    {
+      "LinkLabel": "Blue Link",
+      "key": 0,
+      "source": "8",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "8",
+      "target": "9"
+    },
+    {
+      "LinkLabel": "Cyan Link",
+      "key": 0,
+      "source": "8",
+      "target": "11"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "8",
+      "target": "16"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "8",
+      "target": "18"
+    },
+    {
+      "LinkLabel": "Green Link",
+      "key": 0,
+      "source": "8",
+      "target": "23"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "8",
+      "target": "24"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "8",
+      "target": "25"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "8",
+      "target": "26"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "8",
+      "target": "27"
+    },
+    {
+      "LinkLabel": "Blue Link",
+      "key": 0,
+      "source": "8",
+      "target": "28"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "8",
+      "target": "31"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "9",
+      "target": "27"
+    },
+    {
+      "LinkLabel": "Cyan Link",
+      "key": 0,
+      "source": "10",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "12",
+      "target": "28"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "13",
+      "target": "25"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "14",
+      "target": "16"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "14",
+      "target": "28"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "15",
+      "target": "16"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "15",
+      "target": "28"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "16",
+      "target": "27"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "16",
+      "target": "28"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "17",
+      "target": "28"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "18",
+      "target": "32"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "18",
+      "target": "33"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "18",
+      "target": "41"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "18",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "18",
+      "target": "40"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "18",
+      "target": "25"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "18",
+      "target": "27"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "18",
+      "target": "28"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "19",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Cyan Link",
+      "key": 0,
+      "source": "20",
+      "target": "23"
+    },
+    {
+      "LinkLabel": "Cyan Link",
+      "key": 0,
+      "source": "21",
+      "target": "28"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "22",
+      "target": "25"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "22",
+      "target": "28"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "23",
+      "target": "28"
+    },
+    {
+      "LinkLabel": "Green Link",
+      "key": 0,
+      "source": "23",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "25",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "25",
+      "target": "27"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "27",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "27",
+      "target": "30"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "28",
+      "target": "38"
+    },
+    {
+      "LinkLabel": "Blue Link",
+      "key": 0,
+      "source": "28",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "28",
+      "target": "29"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "32",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "33",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "34",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "35",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "36",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "37",
+      "target": "38"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "38",
+      "target": "39"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "39",
+      "target": "40"
+    },
+    {
+      "LinkLabel": "Red Link",
+      "key": 0,
+      "source": "39",
+      "target": "41"
+    }
+  ]
+}

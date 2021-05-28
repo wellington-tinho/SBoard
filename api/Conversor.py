@@ -30,11 +30,11 @@ def graphmltojson(graphfile):
 	node_link = json_graph.node_link_data(G)
 	arq_json = json.dumps(node_link)
 
-	return arq_json
-	# Write to file
-	# fo = open(outfile, "w")
+	# # Write to file
+	# fo = open('saida.json', "w")
 	# fo.write(arq_json)
 	# fo.close()
+	return arq_json
 
 
 # graphmltojson('Abvt.graphml', 'test1.json') #Modification this line
