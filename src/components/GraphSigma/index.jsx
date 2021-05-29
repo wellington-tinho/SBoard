@@ -25,8 +25,7 @@
 //   }
 // }
 import React from 'react'
-import * as data from './saida.json';
-import { Sigma, NodeShapes } from 'react-sigma'
+// import * as data from './saida.json';
 
 // class MyCustomSigma extends React.FC {
 //   constructor(props) {
@@ -36,11 +35,10 @@ import { Sigma, NodeShapes } from 'react-sigma'
 // }
 
 
-export function GraphSigma() {
+export function GraphSigma(props) {
+  console.log(props);
 
   return (
-    <Sigma renderer="canvas" graph={{nodes:["id0", "id1"], edges:[{id:"e0",source:"id0",target:"id1"}]}}>
-    <NodeShapes default="star"/>
-    </Sigma>
+   <h1>{props.graph.nodes[0].Country}</h1>
   );
 }

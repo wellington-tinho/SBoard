@@ -9,42 +9,38 @@ import { Dropzone } from "./styles"
 
 
 
-export interface GraphProps {
-  nodes: Array<{
-    Country: String, 
-    Internal: number,
-    Latitude: number,
-    Longitude: number,
-    id: String,
-    label: String,
-    modularitygroup: number
-  }>;
-  links: Array<{
-    LinkLabel: String,
-    key: number,
-    source: String,
-    target: String
-  }>;
+// export interface GraphProps {
+//   nodes: Array<{
+//     Country: String, 
+//     Internal: number,
+//     Latitude: number,
+//     Longitude: number,
+//     id: String,
+//     label: String,
+//     modularitygroup: number
+//   }>;
+//   links: Array<{
+//     LinkLabel: String,
+//     key: number,
+//     source: String,
+//     target: String
+//   }>;
   
-}
+// }
 
 export const Upload = () =>{
-  // const [graphjson, setGraphjson] = useState<GraphProps>();
+  const [graphjson, setGraphjson] = useState('');
   
-  const [selectFileUrl, setSelecFileUrl] = useState('');
   const onDrop = useCallback(acceptedFiles => {
     const file = acceptedFiles[0]
-    const fileUrl = URL.createObjectURL(file);
-    setSelecFileUrl(fileUrl);
-    
-    const data = new FormData();
-      data.append('File',file)
+    const data = new FormData()
+    data.append('File',file)
       api.post("/api/upload", data)
       .then(response=> {
-        console.log(response.data);
-        // setGraphjson(response.data)
+        // console.log(response.data);
+        setGraphjson(response.data)
       })
-      .catch(err=> console.log(err)
+      .catch(err=> console.log("erro ===",err)
         ); 
   }, [])
   const {getRootProps, getInputProps} = useDropzone({onDrop})
@@ -52,8 +48,10 @@ export const Upload = () =>{
   return (
     <Dropzone {...getRootProps()}>
       <input {...getInputProps()} />
-     { selectFileUrl?  <div id="graph-container"> <GraphSigma />
-     </div>
+     { graphjson?  
+      <div id="graph-container"> <GraphSigma graph={graphjson}/> </div>
+    //  console.log("🎗",graphjson)
+    
       :
         <p>
           <FiUpload />
