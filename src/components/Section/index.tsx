@@ -4,7 +4,11 @@ import { Graph } from "../Graph";
 
 const Content = styled.div `
   display: flex;
-  flex-direction: row;
+  align-items: stretch;
+  flex-grow: 1;
+  flex-basis: auto;
+  height: 88.5vh;
+
 `
 
 export function Section(){

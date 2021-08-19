@@ -1,10 +1,11 @@
 import openOption from "../../assets/icons/import.png"
+import { Container } from "./styles";
 
 
 export function Aside() {
 
   return (
-    <>
+    <Container>
       <main>
         ... (open)
       </main>
@@ -91,6 +92,6 @@ export function Aside() {
           </li>
         </ul>
       </div>
-    </>
+    </Container>
   );
 }

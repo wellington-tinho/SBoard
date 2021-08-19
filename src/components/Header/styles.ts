@@ -6,6 +6,8 @@ background: var(--bg);
   display: flex;
   align-items: center;
   border-radius: 0.25rem;
+  height: 9vh;
+
   
   img{ 
       height: 4rem;

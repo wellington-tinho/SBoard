@@ -36,6 +36,10 @@ body {
   font-size: 93.75%;
   background: var(--background);
   -webkit-font-smooth: antialiased;
+  
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
 }
 
 button {
