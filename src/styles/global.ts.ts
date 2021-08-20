@@ -7,7 +7,6 @@ export const GlobalStyle = createGlobalStyle`
 
 
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600&display=swap');
 
 /*==== GLOBAL ==== */
 :root {
@@ -59,7 +58,11 @@ h5,
 h6,
 strong {
   font-weight: 600;
-  font-family: 'Roboto Slab',serif;
+  font-family: 'Roboto Slab',serif; 
+}
+
+ul li{
+  list-style-type: none;
 }
 
 `
