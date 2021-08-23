@@ -27,9 +27,12 @@ export const Container = styled.div`
         padding: .5rem;
 
         li{
+          margin: .5rem 0 ;
+
           padding: .5rem;
           border-radius: .5rem;
-          border: 1px solid var(--background);
+          border: 1px solid #d3d3d3;
+
 
           button{
             display: flex;
