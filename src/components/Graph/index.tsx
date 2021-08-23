@@ -1,3 +1,4 @@
+import { Upload } from "../Upload"
 import { NavOptions, GraphContainer, Container } from "./styles"
 
 export function Graph(){
@@ -18,7 +19,7 @@ export function Graph(){
       
     
       <GraphContainer>
-          Grafo aqui
+          <Upload/>
       </GraphContainer>
     </Container>
   )

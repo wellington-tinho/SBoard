@@ -4,6 +4,7 @@ export const NavOptions  = styled.nav`
   border-radius: 0.25rem;
   background-color: var(--bg);
   border: 1px solid var(--background);
+
   border-left: 0;
  
   ul {
@@ -17,8 +18,15 @@ export const GraphContainer = styled.div`
   border-radius: 0.25rem;
   background-color: var(--bg);
   height: 100%;  
+  display:flex;
+  justify-content: center;
+  align-items: center;
+    
+
   `
 
 export const Container = styled.div`
   width: 100%;
+
+
 `
