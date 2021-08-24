@@ -1,6 +1,8 @@
-import { useCallback } from "react";
-import { useDropzone } from "react-dropzone";
+
+import { useCallback } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { DropContainer, UploadMessage } from './style';
+
 
 
 
@@ -8,13 +10,31 @@ import { DropContainer, UploadMessage } from './style';
 
 export function Upload() {
 
-  const onDrop = useCallback(
-    (file) => {
-      console.log(file); 
-    },
+
+  // function handleChange(e: any){
+
+  //   const reader = new FileReader();
+  //   reader.onload = function(e:any) {
+  //     // The file's text will be printed here
+  //     console.log(e.target.result)
+  //   };
+  // reader.readAsText(e.target.files[0]);
+  // }
+
+
+  const onDrop = useCallback((file) => {
+    
+    const reader = new FileReader();
+    reader.onload = function(e:any) {
+      // The file's text will be printed here
+      console.log(e.target.result)
+    };
+    reader.readAsText(file[0]);
+ 
+      },
     []
   );
-  
+
 
   const {
     getRootProps,
@@ -28,21 +48,19 @@ export function Upload() {
     onDrop,
   });
 
-  
-  
 
 
-  
+
   const renderDragMessage = useCallback(() => {
     if (!isDragActive) {
       // console.log('isDragActive',isDragActive);
-      
+
       return <UploadMessage>Arraste arquivos aqui...</UploadMessage>;
     }
 
     if (isDragReject) {
       // console.log('isDragReject',isDragReject);
-      
+
       return (
         <UploadMessage type="error">
           Tipo de arquivo não suportado
@@ -55,9 +73,25 @@ export function Upload() {
 
   return (
     <DropContainer {...getRootProps()}>
+    {/* // <DropContainer> */}
       <input  {...getInputProps()} />
+      {/* <input type="file" onChange={ (e) => handleChange(e)} /> */}
+
       {renderDragMessage()}
     </DropContainer>
   );
 }
 
+
+
+// function handleChange(selectorFiles: any){
+//   console.log(selectorFiles);
+//   Array.from(selectorFiles.dataTransfer.files)
+//       .forEach(async (file) => {
+//         const text = await file.text();
+//         const result = parse(text, { header: true });
+//         console.log(result);
+        
+//       });
+// }
+// <input type="file" onChange={ (e) => handleChange(e.target.files)} />

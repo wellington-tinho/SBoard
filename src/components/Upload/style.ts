@@ -13,7 +13,7 @@ type IDropContainer = {
   isDragReject?: boolean;
 };
 
-export const DropContainer = styled.div<IDropContainer>`
+export const DropContainer = styled.form<IDropContainer>`
   width: 100%;
   max-width: 25rem;
   margin: 1rem auto;
