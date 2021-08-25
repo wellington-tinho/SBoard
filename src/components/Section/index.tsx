@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Aside } from "../Aside";
-import { Graph } from "../Graph";
+import { GraphArea } from "../GraphArea";
 
 const Content = styled.div `
   display: flex;
@@ -17,7 +17,7 @@ const Content = styled.div `
 export function Section(){
   return(
     <Content>
-      <Graph/>
+      <GraphArea/>
       <Aside/>
     </Content>
   );

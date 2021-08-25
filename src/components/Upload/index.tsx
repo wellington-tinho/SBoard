@@ -1,5 +1,5 @@
 
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { DropContainer, UploadMessage } from './style';
 
@@ -17,15 +17,12 @@ import { DropContainer, UploadMessage } from './style';
 
 
 export function Upload() {
+  const [graphGML, setGraphGML] = useState('')
 
-  const onDrop = useCallback((file) => {
-    
+  const onDrop = useCallback((file) => {  
     const reader = new FileReader();
-    
-    
     reader.onload = function(e: any) {
-      
-      console.log(e.target.result)
+      setGraphGML(e.target.result)
     };
 
     reader.readAsText(file[0]);
@@ -67,15 +64,27 @@ export function Upload() {
     return <UploadMessage type="success">Solte os arquivos aqui</UploadMessage>;
   }, [isDragActive, isDragReject]);
 
-  return (
-    <DropContainer {...getRootProps()}>
-    {/* // <DropContainer> */}
-      <input  {...getInputProps()} />
-      {/* <input type="file" onChange={ (e) => handleChange(e)} /> */}
 
-      {renderDragMessage()}
-    </DropContainer>
-  );
+  if (!graphGML){
+    console.log(graphGML);
+    
+    return (
+      <DropContainer {...getRootProps()}>
+        {/* // <DropContainer> */}
+        <input  {...getInputProps()} />
+        {/* <input type="file" onChange={ (e) => handleChange(e)} /> */}
+        {renderDragMessage()}
+      </DropContainer>
+    );
+  }
+  else{
+    return(
+      <div id="cy">
+        {graphGML}
+      </div>
+    );
+  }
+  
 }
 
 

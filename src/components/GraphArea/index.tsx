@@ -1,7 +1,7 @@
 import { Upload } from "../Upload"
 import { NavOptions, GraphContainer, Container } from "./styles"
 
-export function Graph(){
+export function GraphArea(){
   return(
     <Container>
       <NavOptions>
