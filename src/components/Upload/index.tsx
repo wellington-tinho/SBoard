@@ -6,34 +6,30 @@ import { DropContainer, UploadMessage } from './style';
 
 
 
+// export interface FileReaderEventTarget extends EventTarget {
+//   result:string
+// }
+
+// export interface FileReaderEvent extends ProgressEvent {
+//   target: FileReaderEventTarget;
+// }
+
 
 
 export function Upload() {
 
-
-  // function handleChange(e: any){
-
-  //   const reader = new FileReader();
-  //   reader.onload = function(e:any) {
-  //     // The file's text will be printed here
-  //     console.log(e.target.result)
-  //   };
-  // reader.readAsText(e.target.files[0]);
-  // }
-
-
   const onDrop = useCallback((file) => {
     
     const reader = new FileReader();
-    reader.onload = function(e:any) {
-      // The file's text will be printed here
+    
+    
+    reader.onload = function(e: any) {
+      
       console.log(e.target.result)
     };
+
     reader.readAsText(file[0]);
- 
-      },
-    []
-  );
+  },[]);
 
 
   const {
