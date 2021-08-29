@@ -1,6 +1,8 @@
 
-import { useCallback, useState } from 'react';
+
+import { useCallback, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { api } from '../../services/api';
 import { DropContainer, UploadMessage } from './style';
 
 
@@ -14,19 +16,40 @@ import { DropContainer, UploadMessage } from './style';
 //   target: FileReaderEventTarget;
 // }
 
+// export interface iGrapJSON {
+//   edges: array,
+//   nodes: 
+// }
 
 
 export function Upload() {
   const [graphGML, setGraphGML] = useState('')
+  const [grapJSON, setGraphJSON] = useState('')
 
-  const onDrop = useCallback((file) => {  
+  // const onDrop = useCallback((file) => {  
+  //   const reader = new FileReader();
+  //   reader.onload = function(e: any) {
+  //     setGraphGML(e.target.result)
+  //   };
+  //   reader.readAsText(file[0]);
+  // },[]);
+
+
+  function onDrop(file:any){ 
+
+
+    
     const reader = new FileReader();
     reader.onload = function(e: any) {
       setGraphGML(e.target.result)
     };
-
     reader.readAsText(file[0]);
-  },[]);
+  };
+
+  useEffect(() => {
+    api.post('convert', {data: graphGML})
+    .then(response => setGraphJSON(response.data.elements))
+  },[graphGML]);
 
 
   const {
@@ -66,7 +89,7 @@ export function Upload() {
 
 
   if (!graphGML){
-    console.log(graphGML);
+    console.log(grapJSON);
     
     return (
       <DropContainer {...getRootProps()}>
@@ -78,9 +101,10 @@ export function Upload() {
     );
   }
   else{
+    
     return(
       <div id="cy">
-        {graphGML}
+        {grapJSON}
       </div>
     );
   }
