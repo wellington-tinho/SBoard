@@ -1,30 +1,31 @@
-
-
 import { useCallback, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { api } from '../../services/api';
+import CytoscapeComponent from 'react-cytoscapejs';
+
 import { DropContainer, UploadMessage } from './style';
 
+import { api } from '../../services/api';
 
 
-
-// export interface FileReaderEventTarget extends EventTarget {
+// interface FileReaderEvent extends ProgressEvent {
+//   target: FileReaderEventTarget;
+// }
+// interface FileReaderEventTarget extends EventTarget {
 //   result:string
 // }
 
-// export interface FileReaderEvent extends ProgressEvent {
-//   target: FileReaderEventTarget;
-// }
 
-// export interface iGrapJSON {
-//   edges: array,
-//   nodes: 
-// }
 
+export interface iGraphJson{
+  edges:any,
+  nodes:any,
+  // edges:Array<Object>,
+  // nodes:Array<Object>,
+}
 
 export function Upload() {
-  const [graphGML, setGraphGML] = useState('')
-  const [grapJSON, setGraphJSON] = useState('')
+  const [graphGML, setGraphGML] = useState()
+  const [grapJSON, setGraphJSON] = useState<iGraphJson>()
 
   // const onDrop = useCallback((file) => {  
   //   const reader = new FileReader();
@@ -36,12 +37,9 @@ export function Upload() {
 
 
   function onDrop(file:any){ 
-
-
-    
     const reader = new FileReader();
     reader.onload = function(e: any) {
-      setGraphGML(e.target.result)
+      setGraphGML(e.target.result)      
     };
     reader.readAsText(file[0]);
   };
@@ -88,9 +86,7 @@ export function Upload() {
   }, [isDragActive, isDragReject]);
 
 
-  if (!graphGML){
-    console.log(grapJSON);
-    
+  if (!grapJSON){   
     return (
       <DropContainer {...getRootProps()}>
         {/* // <DropContainer> */}
@@ -101,12 +97,36 @@ export function Upload() {
     );
   }
   else{
+   const elements = CytoscapeComponent.normalizeElements({
+      nodes: grapJSON.nodes,
+      edges: grapJSON.edges,
+         
+  });
+
+  const layout = {
+    name: "breadthfirst",
+    fit: true,
+    // circle: true,
+    directed: true,
+    padding: 50,
+    // spacingFactor: 1.5,
+    animate: true,
+    animationDuration: 1000,
+    avoidOverlap: true,
+    nodeDimensionsIncludeLabels: false
+  };
     
+
+
+
+    console.log( grapJSON)
+    // console.log( elements )
     return(
       <div id="cy">
-        {grapJSON}
+        <CytoscapeComponent elements={elements} style={{ width: '84vw', height: '87vh' }}  layout={layout} />;
       </div>
     );
+    
   }
   
 }
