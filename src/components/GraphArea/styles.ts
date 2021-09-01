@@ -9,9 +9,25 @@ export const NavOptions  = styled.nav`
  
   ul {
     display: flex;
+    align-items: center;
     list-style: none;
     justify-content: space-around;
-  }
+    li{
+      display: flex;
+      align-items: center;
+
+      svg{
+        margin: 0 .4rem;
+       
+        :hover{
+          transition: 0.2s;
+          border-bottom: 1px solid #34D761;
+                 
+        }
+      }
+    }
+  };
+
 `
 
 export const GraphContainer = styled.div`
