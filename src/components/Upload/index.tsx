@@ -123,7 +123,7 @@ export function Upload() {
     // console.log( elements )
     return(
       <div id="cy">
-        <CytoscapeComponent elements={elements} style={{ width: '84vw', height: '87vh' }}  layout={layout} />;
+        <CytoscapeComponent elements={elements} style={{ width: '84vw', height: '87vh' }}  layout={layout} minZoom= {0.1} maxZoom={3}/>;
       </div>
     );
     
