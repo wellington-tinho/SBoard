@@ -19,7 +19,7 @@ export const Container = styled.form`
         }
 
         p{
-          width: 100%;
+          width: 62%;
           padding: 0 1rem;
           height: 3rem;
           border-radius: 0.25rem;
