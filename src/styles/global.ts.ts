@@ -83,7 +83,7 @@ ul li{
 }
 .react-modal-content{
   width: 100%;
-  max-width: 37.5rem;
+  max-width: 50rem;
   background: var(--background);
   padding: 3rem;
   position: relative;
@@ -91,6 +91,21 @@ ul li{
   width: 42rem;
   height: 42rem;
   overflow:auto; 
+}
+
+.react-modal-close{
+  color: var(--text-tile);
+  position: absolute;
+  font-size: 1.5rem;
+  right: 1.5rem;
+  top:1.5rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover{
+    filter: brightness(0.7);
+  }
 }
 `
 
