@@ -1,79 +1,89 @@
+import arqSetupJson from '../../data/setup.json';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
 import { VscChromeClose } from 'react-icons/vsc'
 import { Container } from './styles';
+import { api } from '../../services/api';
+
+
 
 interface SetupModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
 }
 
-interface I_de_coefficients{
-  mmtc: number[],
-  urllc: number[],
-  embb: number[],
-}
+// interface I_de_coefficients{
+//   mmtc: number[],
+//   urllc: number[],
+//   embb: number[],
+// }
+
 
 export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
+  const [data, setData] = useState(arqSetupJson)
 
-  const [qtd_vnrs, set_qtd_vnrs] = useState(20)
-  const [lowBetter, set_lowBetter] = useState(false)
-  const [alfa, set_alfa] = useState(.5)
-  const [beta, set_beta] = useState(.5)
-  const [qtd_nodes, set_qtd_nodes] = useState(200)
-  const [qtd_virtual_nodes, set_qtd_virtual_nodes] = useState(6)
-  const [qtd_neighbours, set_qtd_neighbours] = useState(5)
-  const [node_capacity_min, set_node_capacity_min] = useState(10)
-  const [node_capacity_max, set_node_capacity_max] = useState(200)
-  const [edge_capacity_min, set_edge_capacity_min] = useState(10)
-  const [edge_capacity_max, set_edge_capacity_max] = useState(20)
-  const [first_population_attempt, set_first_population_attempt] = useState(4)
-  const [core_bandwidth, set_core_bandwidth] = useState(10000)
-  const [bandwidths, set_bandwidths] = useState([10, 100, 100])
-  const [mutation_limit, set_mutation_limit] = useState(10000)
-  const [approach, set_approach] = useState(2)
-  const [step, set_step] = useState(1)
-  const [ga_repetition, set_ga_repetition] = useState(10)
-  const [simulator_repetition, set_simulator_repetition] = useState(5)
-  const [population_size, set_population_size] = useState(5)
-  const [quantity_domains, set_quantity_domains] = useState(3)
-  const [vnr_durations, set_vnr_durations] = useState(500)
-  const [amount_demanded, set_amount_demanded] = useState ([10, 5])
-  const [file_domain, set_file_domain] = useState("config/domains.json")
-  const [distribution_filename, set_distribution_filename] = useState("config/distribution_services_nodes")
-  const [ga_prefix_files, set_ga_prefix_files] = useState("results/ga_results")
-  const [ga_prefix_result_file, set_ga_prefix_result_file] = useState("results/ga_results/Mapping_Results_")
-  const [ga_file_vnr_not_created, set_ga_file_vnr_not_created] = useState("results/ga_results/vnrs_not_created.json")
-  const [de_prefix_files, set_de_prefix_files] = useState("results/de_results/")
-  const [de_prefix_result_file, set_de_prefix_result_file] = useState("results/de_results/Mapping_Results_")
-  const [de_file_vnr_not_created, set_de_file_vnr_not_created] = useState("results/de_results/vnrs_not_created.json")
-  const [stress_prefix_files, set_stress_prefix_files] = useState("results/stress_results/")
-  const [stress_prefix_result_file, set_stress_prefix_result_file] = useState("results/stress_nodes_results/Mapping_Results_")
-  const [stress_file_vnr_not_created, set_stress_file_vnr_not_created] = useState("results/stress_nodes_results/vnrs_not_created.json")
-  const [greedy_prefix_files, set_greedy_prefix_files] = useState("results/greedy_results/")
-  const [greedy_prefix_result_file, set_greedy_prefix_result_file] = useState("results/greedy_edges_results/Mapping_Results_")
-  const [greedy_file_vnr_not_created, set_greedy_file_vnr_not_created] = useState("results/greedy_edges_results/vnrs_not_created.json")
-  const [time_to_create_a_slice, set_time_to_create_a_slice] = useState(1)
-  const [limit_max_bandwidth, set_limit_max_bandwidth] = useState(100000)
-  const [path_approach, set_path_approach] = useState(2)
-  const [quantity_services, set_quantity_services] = useState(5)
-  const [quantity_max_functions, set_quantity_max_functions] = useState(10)
-  const [quantity_max_pkts, set_quantity_max_pkts] = useState(1000)
-  const [file_services, set_file_services] = useState("config/services.json")
-  const [file_functions, set_file_functions] = useState("config/functions.json")
-  const [MTU, set_MTU] = useState(1500)
-  const [DE_C, set_DE_C] = useState(1)
-  const [DE_F, set_DE_F] = useState(0.25)
-  const [link_delay_min, set_link_delay_min] = useState(10)
-  const [link_delay_max, set_link_delay_max] = useState(100)
-  const [link_relibility_min, set_link_relibility_min] = useState(90)
-  const [link_relibility_max, set_link_relibility_max] = useState(99)
-  const [types_slice, set_types_slice] = useState<string[]>(["mmtc","urllc","emb"])
-  const [de_coefficients, set_de_coefficients] = useState<I_de_coefficients>( {"mmtc": [1,0,0], "urllc": [1, 0, 0], "embb": [1,0, 0]})
-  const [hop_coefficients, set_hop_coefficients] = useState(1)
-  const [remove_vnr_not_mapped, set_remove_vnr_not_mapped] = useState(false)
+
+  const [qtd_vnrs, set_qtd_vnrs] = useState(data.qtd_vnrs)
+  const [lowBetter, set_lowBetter] = useState(String(data.lowBetter))
+  const [alfa, set_alfa] = useState(data.alfa)
+  const [beta, set_beta] = useState(data.beta)
+  const [qtd_nodes, set_qtd_nodes] = useState(data.qtd_nodes)
+  const [qtd_virtual_nodes, set_qtd_virtual_nodes] = useState(data.qtd_virtual_nodes)
+  const [qtd_neighbours, set_qtd_neighbours] = useState(data.qtd_neighbours)
+  const [node_capacity_min, set_node_capacity_min] = useState(data.node_capacity_min)
+  const [node_capacity_max, set_node_capacity_max] = useState(data.node_capacity_max)
+  const [edge_capacity_min, set_edge_capacity_min] = useState(data.edge_capacity_min)
+  const [edge_capacity_max, set_edge_capacity_max] = useState(data.edge_capacity_max)
+  const [first_population_attempt, set_first_population_attempt] = useState(data.first_population_attempt)
+  const [core_bandwidth, set_core_bandwidth] = useState(data.core_bandwidth)
+  const [bandwidths, set_bandwidths] = useState(data.bandwidths)
+  const [mutation_limit, set_mutation_limit] = useState(data.mutation_limit)
+  const [approach, set_approach] = useState(data.approach)
+  const [step, set_step] = useState(data.step)
+  const [ga_repetition, set_ga_repetition] = useState(data.ga_repetition)
+  const [simulator_repetition, set_simulator_repetition] = useState(data.simulator_repetition)
+  const [population_size, set_population_size] = useState(data.population_size)
+  const [quantity_domains, set_quantity_domains] = useState(data.quantity_domains)
+  const [vnr_durations, set_vnr_durations] = useState(data.vnr_durations)
+  const [amount_demanded, set_amount_demanded] = useState(data.amount_demanded)
+  const [file_domain, set_file_domain] = useState(data.file_domain)
+  const [distribution_filename, set_distribution_filename] = useState(data.distribution_filename)
+  const [ga_prefix_files, set_ga_prefix_files] = useState(data.ga_prefix_files)
+  const [ga_prefix_result_file, set_ga_prefix_result_file] = useState(data.ga_prefix_result_file)
+  const [ga_file_vnr_not_created, set_ga_file_vnr_not_created] = useState(data.ga_file_vnr_not_created)
+  const [de_prefix_files, set_de_prefix_files] = useState(data.de_prefix_files)
+  const [de_prefix_result_file, set_de_prefix_result_file] = useState(data.de_prefix_result_file)
+  const [de_file_vnr_not_created, set_de_file_vnr_not_created] = useState(data.de_file_vnr_not_created)
+  const [stress_prefix_files, set_stress_prefix_files] = useState(data.stress_prefix_files)
+  const [stress_prefix_result_file, set_stress_prefix_result_file] = useState(data.stress_prefix_result_file)
+  const [stress_file_vnr_not_created, set_stress_file_vnr_not_created] = useState(data.stress_file_vnr_not_created)
+  const [greedy_prefix_files, set_greedy_prefix_files] = useState(data.greedy_prefix_files)
+  const [greedy_prefix_result_file, set_greedy_prefix_result_file] = useState(data.greedy_prefix_result_file)
+  const [greedy_file_vnr_not_created, set_greedy_file_vnr_not_created] = useState(data.greedy_file_vnr_not_created)
+  const [time_to_create_a_slice, set_time_to_create_a_slice] = useState(data.time_to_create_a_slice)
+  const [limit_max_bandwidth, set_limit_max_bandwidth] = useState(data.limit_max_bandwidth)
+  const [path_approach, set_path_approach] = useState(data.path_approach)
+  const [quantity_services, set_quantity_services] = useState(data.quantity_services)
+  const [quantity_max_functions, set_quantity_max_functions] = useState(data.quantity_max_functions)
+  const [quantity_max_pkts, set_quantity_max_pkts] = useState(data.quantity_max_pkts)
+  const [file_services, set_file_services] = useState(data.file_services)
+  const [file_functions, set_file_functions] = useState(data.file_functions)
+  const [MTU, set_MTU] = useState(data.MTU)
+  const [DE_C, set_DE_C] = useState(data.DE_C)
+  const [DE_F, set_DE_F] = useState(data.DE_F)
+  const [link_delay_min, set_link_delay_min] = useState(data.link_delay_min)
+  const [link_delay_max, set_link_delay_max] = useState(data.link_delay_max)
+  const [link_relibility_min, set_link_relibility_min] = useState(data.link_relibility_min)
+  const [link_relibility_max, set_link_relibility_max] = useState(data.link_relibility_max)
+  const [types_slice, set_types_slice] = useState(data.types_slice)
+  const [de_coefficients, set_de_coefficients] = useState(data.de_coefficients)
+  const [hop_coefficients, set_hop_coefficients] = useState(data.hop_coefficients)
+  const [remove_vnr_not_mapped, set_remove_vnr_not_mapped] = useState(String(data.remove_vnr_not_mapped))
+
+
+  
 
 
   function handleCreateNewSetup(event:FormEvent) {
@@ -81,7 +91,7 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
 
     const data = {
       'qtd_vnrs':qtd_vnrs,
-      'lowBetter':lowBetter,
+      'lowBetter':  (String(lowBetter).toLowerCase() === "true"),
       'alfa':alfa,
       'beta':beta,
       'qtd_nodes':qtd_nodes,
@@ -135,12 +145,17 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
       'types_slice':types_slice,
       'de_coefficients':de_coefficients,
       'hop_coefficients':hop_coefficients,
-      'remove_vnr_not_mapped':remove_vnr_not_mapped
+      'remove_vnr_not_mapped':(String(remove_vnr_not_mapped).toLowerCase() === "true")
     };
 
-    console.log(data);
+    setData(data);
     
   }
+  useEffect(() => {
+    api.post('setup', {data: data})
+  },[data]);
+
+ 
 
   return (
     <Modal
@@ -174,11 +189,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <p>Low Better</p>
             <input 
               onChange={
-                event => set_lowBetter(event.target.value.toLowerCase() === 'true')
+                event => set_lowBetter(event.target.value)
               }
               value={String(lowBetter)} id="lowBetter" 
               type="text"
-              placeholder="default: False" 
+              placeholder="default: false" 
             />
             {/* <a href="/" title='in this case take with the greater Evaluation' >          
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -911,13 +926,13 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_remove_vnr_not_mapped(
-                  event.target.value.toLowerCase() === 'true'
+                  event.target.value
                 )
               }
               value={String(remove_vnr_not_mapped)} 
               id="remove_vnr_not_mapped" 
               type="text" 
-              placeholder="default: True" 
+              placeholder="default: true" 
             />
             {/* <a href="/" title="" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
