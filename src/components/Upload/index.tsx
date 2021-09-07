@@ -1,10 +1,10 @@
 import { useCallback, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
-import CytoscapeComponent from 'react-cytoscapejs';
 
 import { DropContainer, UploadMessage } from './style';
 
 import { api } from '../../services/api';
+import { GraphManipulation } from '../GraphManipulation';
 
 
 // interface FileReaderEvent extends ProgressEvent {
@@ -19,11 +19,10 @@ import { api } from '../../services/api';
 export interface iGraphJson{
   edges:any,
   nodes:any,
-  // edges:Array<Object>,
-  // nodes:Array<Object>,
 }
 
 export function Upload() {
+ 
   const [graphGML, setGraphGML] = useState()
   const [grapJSON, setGraphJSON] = useState<iGraphJson>()
 
@@ -64,7 +63,6 @@ export function Upload() {
 
 
 
-
   const renderDragMessage = useCallback(() => {
     if (!isDragActive) {
       // console.log('isDragActive',isDragActive);
@@ -96,51 +94,33 @@ export function Upload() {
       </DropContainer>
     );
   }
+
   else{
-   const elements = CytoscapeComponent.normalizeElements({
-      nodes: grapJSON.nodes,
-      edges: grapJSON.edges,
-         
-  });
+    // const elements = CytoscapeComponent.normalizeElements({
+    //     nodes: grapJSON.nodes,
+    //     edges: grapJSON.edges,  
+    // });
 
-  const layout = {
-    name: "breadthfirst",
-    fit: true,
-    // circle: true,
-    directed: true,
-    padding: 50,
-    // spacingFactor: 1.5,
-    animate: true,
-    animationDuration: 1000,
-    avoidOverlap: true,
-    nodeDimensionsIncludeLabels: false
-  };
+    // const layout = {
+    //   name: "breadthfirst",
+    //   fit: true,
+    //   // circle: true,
+    //   directed: true,
+    //   padding: 50,
+    //   // spacingFactor: 1.5,
+    //   animate: true,
+    //   animationDuration: 1000,
+    //   avoidOverlap: true,
+    //   nodeDimensionsIncludeLabels: false
+    // };
+      
+    // console.log(grapJSON)
     
-
-
-
-    console.log( grapJSON)
-    // console.log( elements )
     return(
-      <div id="cy">
-        <CytoscapeComponent elements={elements} style={{ width: '84vw', height: '87vh' }}  layout={layout} minZoom= {0.1} maxZoom={3}/>;
+      <div >
+        <GraphManipulation grapJSON={grapJSON} />
       </div>
-    );
-    
+     
+    ); 
   }
-  
 }
-
-
-
-// function handleChange(selectorFiles: any){
-//   console.log(selectorFiles);
-//   Array.from(selectorFiles.dataTransfer.files)
-//       .forEach(async (file) => {
-//         const text = await file.text();
-//         const result = parse(text, { header: true });
-//         console.log(result);
-        
-//       });
-// }
-// <input type="file" onChange={ (e) => handleChange(e.target.files)} />
