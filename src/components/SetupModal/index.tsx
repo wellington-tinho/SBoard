@@ -38,7 +38,7 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
   const [edge_capacity_max, set_edge_capacity_max] = useState(data.edge_capacity_max)
   const [first_population_attempt, set_first_population_attempt] = useState(data.first_population_attempt)
   const [core_bandwidth, set_core_bandwidth] = useState(data.core_bandwidth)
-  const [bandwidths, set_bandwidths] = useState(data.bandwidths)
+  const [bandwidths, set_bandwidths] = useState(String(data.bandwidths))
   const [mutation_limit, set_mutation_limit] = useState(data.mutation_limit)
   const [approach, set_approach] = useState(data.approach)
   const [step, set_step] = useState(data.step)
@@ -47,7 +47,7 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
   const [population_size, set_population_size] = useState(data.population_size)
   const [quantity_domains, set_quantity_domains] = useState(data.quantity_domains)
   const [vnr_durations, set_vnr_durations] = useState(data.vnr_durations)
-  const [amount_demanded, set_amount_demanded] = useState(data.amount_demanded)
+  const [amount_demanded, set_amount_demanded] = useState(String(data.amount_demanded))
   const [file_domain, set_file_domain] = useState(data.file_domain)
   const [distribution_filename, set_distribution_filename] = useState(data.distribution_filename)
   const [ga_prefix_files, set_ga_prefix_files] = useState(data.ga_prefix_files)
@@ -103,7 +103,7 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
       'edge_capacity_max':edge_capacity_max,
       'first_population_attempt':first_population_attempt,
       'core_bandwidth':core_bandwidth,
-      'bandwidths':bandwidths,
+      'bandwidths':bandwidths.split(',').map(Number),
       'mutation_limit':mutation_limit,
       'approach':approach,
       'step':step,
@@ -112,7 +112,7 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
       'population_size':population_size,
       'quantity_domains':quantity_domains,
       'vnr_durations':vnr_durations,
-      'amount_demanded':amount_demanded,
+      'amount_demanded':amount_demanded.split(',').map(Number),
       'file_domain':file_domain,
       'distribution_filename':distribution_filename,
       'ga_prefix_files':ga_prefix_files,
@@ -359,13 +359,13 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_bandwidths(
-                  (event.target.value).split(',').map(Number)
+                  (event.target.value)
                   )
               }
-              value={Number(bandwidths)} 
+              value={bandwidths} 
               id="bandwidths" 
               type="text" 
-              placeholder="default:  10, 100, 1000" />
+              placeholder="default:  10,100,1000" />
             {/* <a href="/" title='used in VNRs_Generator.generator()' >
           <img src="/assets/icons/help.png" alt="icon Help" />
            </a> */}
@@ -480,13 +480,13 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_amount_demanded(
-                  (event.target.value).split(',').map(Number)
+                  (event.target.value)
                 )
               }
-              value={Number(amount_demanded)} 
+              value={amount_demanded} 
               id="amount_demanded" 
               type="text"  
-              placeholder="default:  (1050)" 
+              placeholder="default:  10,50" 
             />
             {/* <a href="/" title='(min max) - used in VNRs_Generator.generator()' >
             <img src="/assets/icons/help.png" alt="icon Help" />
