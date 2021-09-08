@@ -1,5 +1,6 @@
 import Modal from 'react-modal';
 
+
 import { AiOutlineZoomIn, AiOutlineZoomOut } from 'react-icons/ai'; 
 import { BiUndo, BiRedo, BiGitPullRequest } from 'react-icons/bi'; 
 import { HiOutlineViewGridAdd } from 'react-icons/hi'; 
@@ -45,7 +46,7 @@ export function GraphArea(){
           </li>
 
           <li> 
-             <HiOutlineViewGridAdd fontSize="1.5em" cursor="not-allowed"/>
+             <HiOutlineViewGridAdd fontSize="1.5em" cursor="pointer" onClick={()=>{}}/>
              <RiChatDeleteLine fontSize="1.5em" cursor="not-allowed" />  
           </li>
           

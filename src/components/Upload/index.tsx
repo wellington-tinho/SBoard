@@ -96,28 +96,8 @@ export function Upload() {
   }
 
   else{
-    // const elements = CytoscapeComponent.normalizeElements({
-    //     nodes: grapJSON.nodes,
-    //     edges: grapJSON.edges,  
-    // });
-
-    // const layout = {
-    //   name: "breadthfirst",
-    //   fit: true,
-    //   // circle: true,
-    //   directed: true,
-    //   padding: 50,
-    //   // spacingFactor: 1.5,
-    //   animate: true,
-    //   animationDuration: 1000,
-    //   avoidOverlap: true,
-    //   nodeDimensionsIncludeLabels: false
-    // };
-      
-    // console.log(grapJSON)
-    
     return(
-      <div >
+      <div id='cy' >
         <GraphManipulation grapJSON={grapJSON} />
       </div>
      
