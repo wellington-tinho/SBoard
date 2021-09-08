@@ -4,7 +4,12 @@ import openOption from "../../assets/icons/import.png"
 import menu from '../../assets/icons/menu-vertical.png' 
 
 
-export function Aside() {
+export function Aside({request}:any) {
+
+  console.log('Aside',request );
+  
+  
+  
 
   return (
     <Container>
@@ -86,61 +91,66 @@ export function Aside() {
             </div>
 
           </li>
+
+
+
           <li>
-            <button> 
-              <img src={openOption} alt="Abrir opção" />  
-              <h3>Preview</h3>
-            </button>
-            
-            <div>
-              <select name="Created Request" id="CreatedRequest" defaultValue={'DEFAULT'}>
-                <option value="DEFAULT" disabled hidden>Created Request</option>
-                <option value="Request1"> Request1 </option>
-                <option value="Request2"> Request2 </option>
-                <option value="Request3"> Request3 </option>
-                <option value="Request4"> Request5 </option>
-                <option value="RequestX"> RequestX </option>
-  
-              </select>
-              <select name="Mapped Requests" id="MappedRequests">
-                <option value="" disabled hidden>Mapped Request</option>
-                <option value="Request1"> Request1 </option>
-                <option value="Request2"> Request2 </option>
-                <option value="Request3"> Request3 </option>
-                <option value="Request4"> Request5 </option>
-                <option value="RequestX"> RequestX </option>
-              </select>
+              <button> 
+                <img src={openOption} alt="Abrir opção" />  
+                <h3>Preview</h3>
+              </button>
+              
+              <div>
+                <select name="Created Request" id="CreatedRequest" defaultValue={'DEFAULT'}>
+                  <option value="DEFAULT" disabled hidden>Created Request</option>
+                  <option value="Request1"> Request1 </option>
+                  <option value="Request2"> Request2 </option>
+                  <option value="Request3"> Request3 </option>
+                  <option value="Request4"> Request5 </option>
+                  <option value="RequestX"> RequestX </option>
+    
+                </select>
+                <select name="Mapped Requests" id="MappedRequests">
+                  <option value="" disabled hidden>Mapped Request</option>
+                  <option value="Request1"> Request1 </option>
+                  <option value="Request2"> Request2 </option>
+                  <option value="Request3"> Request3 </option>
+                  <option value="Request4"> Request5 </option>
+                  <option value="RequestX"> RequestX </option>
+                </select>
 
-              <select name="Change Requests" id="ChangeRequests">
-                <option value="" disabled hidden>Change Request</option>
-                <option value="Request1"> Request1 </option>
-                <option value="Request2"> Request2 </option>
-                <option value="Request3"> Request3 </option>
-                <option value="Request4"> Request5 </option>
-                <option value="RequestX"> RequestX </option>
-              </select>
+                <select name="Change Requests" id="ChangeRequests">
+                  <option value="" disabled hidden>Change Request</option>
+                  <option value="Request1"> Request1 </option>
+                  <option value="Request2"> Request2 </option>
+                  <option value="Request3"> Request3 </option>
+                  <option value="Request4"> Request5 </option>
+                  <option value="RequestX"> RequestX </option>
+                </select>
 
-              <select name="Delete Requisitions" id="DeleteRequisitions">
-                <option value="" disabled hidden>Del Requisition</option>
-                <option value="Request1"> Request1 </option>
-                <option value="Request2"> Request2 </option>
-                <option value="Request3"> Request3 </option>
-                <option value="Request4"> Request5 </option>
-                <option value="RequestX"> RequestX </option>
-              </select>
+                <select name="Delete Requisitions" id="DeleteRequisitions">
+                  <option value="" disabled hidden>Del Requisition</option>
+                  <option value="Request1"> Request1 </option>
+                  <option value="Request2"> Request2 </option>
+                  <option value="Request3"> Request3 </option>
+                  <option value="Request4"> Request5 </option>
+                  <option value="RequestX"> RequestX </option>
+                </select>
 
-              <select name="Remove Mappend Requests" id="RemoveMappendRequests">
-                <option value="" disabled hidden>Del Mappend Requests</option>
-                <option value="Request1"> Request1 </option>
-                <option value="Request2"> Request2 </option>
-                <option value="Request3"> Request3 </option>
-                <option value="Request4"> Request5 </option>
-                <option value="RequestX"> RequestX </option>
-              </select>
+                <select name="Remove Mappend Requests" id="RemoveMappendRequests">
+                  <option value="" disabled hidden>Del Mappend Requests</option>
+                  <option value="Request1"> Request1 </option>
+                  <option value="Request2"> Request2 </option>
+                  <option value="Request3"> Request3 </option>
+                  <option value="Request4"> Request5 </option>
+                  <option value="RequestX"> RequestX </option>
+                </select>
 
-            </div>
+              </div>
 
           </li>
+
+
         </ul>
       </div>
     </Container>

@@ -54,10 +54,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
     setCy(cytoscape(config))
   }, []);
   
-  cy?.on('tap', (event: any) => {
-    console.log('data', event.target._private.data)
-    // setNode(event.target._private.data)
-  });
+ 
 
   
 

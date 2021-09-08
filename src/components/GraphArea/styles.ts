@@ -16,6 +16,15 @@ export const NavOptions  = styled.nav`
       display: flex;
       align-items: center;
 
+      input{
+        /* visibility: hidden; */
+        /* padding: 0;
+        height: 0;
+        margin: 0; */
+        display: none;
+
+      }
+
       svg{
         margin: 0 .4rem;
        

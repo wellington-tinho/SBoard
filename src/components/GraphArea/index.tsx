@@ -11,7 +11,7 @@ import { RiChatDeleteLine } from 'react-icons/ri'
 import { Upload } from "../Upload"
 
 import { NavOptions, GraphContainer, Container } from "./styles"
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { SetupModal } from '../SetupModal';
 import { CytoscapeContext } from '../../CytoscapeContext';
 
@@ -19,10 +19,9 @@ import { CytoscapeContext } from '../../CytoscapeContext';
 
 Modal.setAppElement('#root')
 
-export function GraphArea(){
-  const [cy] = useContext(CytoscapeContext);
-  
-  
+export function GraphArea({setRequest}:any){
+  const [cy,setCy] = useContext(CytoscapeContext);
+  const [node, setNode] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
 
   function handleOpenSetupModal(){
@@ -32,15 +31,46 @@ export function GraphArea(){
   function handleCloseSetupModal(){
     setIsSetupModal(false)
   }
-
+  
   function AddEle(){
-    cy.add([
-          { group: 'nodes', data: { id: 'k0' }, position: { x: 100, y: 100 } },
-          { group: 'nodes', data: { id: 'k1' }, position: { x: 200, y: 200 } },
-          { group: 'edges', data: { id: 'l0', source: 'k0', target: 'k1' } }
-        ]);
+    cy.add({
+      group: 'nodes',
+      data: { weight: Math.floor(Math.random() * 100) + 1 },
+      position: { x: Math.floor(Math.random() * 300) + 1, y: Math.floor(Math.random() * 300) + 1}
+    });
   }
+  
+  function DelEle(){
+    var j = cy.$('#'+node.id);
+    cy.remove( j );
+  }
+  
+  function handleChange(file:any){ 
+    const reader = new FileReader();
+    reader.onload = function(e: any) {
+ 
+      // console.log(JSON.parse(e.target.result));
+      setRequest(JSON.parse(e.target.result));
+      
+    };
+    reader.readAsText(file.target.files[0]);
+  };
 
+
+
+  
+
+  const hiddenFileInput = useRef<any>(null);
+  const handleClick = (event:any) => {
+    hiddenFileInput.current.click();
+  };
+
+  useEffect(() => {
+    cy?.on('tap', (event: any) => {
+      // console.log('data->', event.target._private.data)
+      setNode(event.target._private.data)
+    });
+  },[cy])
 
   return(
     <Container>
@@ -59,10 +89,13 @@ export function GraphArea(){
 
           <li> 
              <HiOutlineViewGridAdd fontSize="1.5em" cursor="pointer" onClick={AddEle}/>
-             <RiChatDeleteLine fontSize="1.5em" cursor="not-allowed" />  
+             <RiChatDeleteLine fontSize="1.5em" cursor="pointer" onClick={DelEle} />  
           </li>
           
-          <li>  <BiGitPullRequest fontSize="1.5em" cursor="not-allowed"/> </li>
+          <li> 
+            <input type="file" name="UploadJSON" id="UploadJSON" ref={hiddenFileInput} onChange={handleChange} />
+            <BiGitPullRequest fontSize="1.5em"  cursor="pointer"  onClick={handleClick} /> 
+          </li>
 
           <li>  <BsGear fontSize="1.5em" cursor="pointer" onClick={handleOpenSetupModal}/> </li>
           

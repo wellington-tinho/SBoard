@@ -7,14 +7,6 @@ import { api } from '../../services/api';
 import { GraphManipulation } from '../GraphManipulation';
 
 
-// interface FileReaderEvent extends ProgressEvent {
-//   target: FileReaderEventTarget;
-// }
-// interface FileReaderEventTarget extends EventTarget {
-//   result:string
-// }
-
-
 
 export interface iGraphJson{
   edges:any,
@@ -22,17 +14,8 @@ export interface iGraphJson{
 }
 
 export function Upload() {
- 
   const [graphGML, setGraphGML] = useState()
   const [grapJSON, setGraphJSON] = useState<iGraphJson>()
-
-  // const onDrop = useCallback((file) => {  
-  //   const reader = new FileReader();
-  //   reader.onload = function(e: any) {
-  //     setGraphGML(e.target.result)
-  //   };
-  //   reader.readAsText(file[0]);
-  // },[]);
 
 
   function onDrop(file:any){ 

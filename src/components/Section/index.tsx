@@ -11,18 +11,17 @@ const Content = styled.div `
   flex-basis: auto;
   height: 88.5vh;
   border: 1px solid var(--background);
-
-
-
 `
 
 export function Section(){
   const [cy, setCy] = useState<cytoscape.Core>()
+  const [request, setRequest]= useState({})
+  
   return(
     <CytoscapeContext.Provider value={[cy, setCy]}>
       <Content>
-        <GraphArea/>
-        <Aside/>
+        <GraphArea setRequest={setRequest}/>
+        <Aside request={request}/>
       </Content>
     </CytoscapeContext.Provider>
 
