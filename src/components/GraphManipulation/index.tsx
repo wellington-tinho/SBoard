@@ -1,7 +1,8 @@
 // import cytoscape from 'cytoscape';
 // import { useEffect, useRef } from 'react';
 
-import { useState } from 'react';
+import cytoscape from 'cytoscape';
+import { useEffect, useRef, useState } from 'react';
 import CytoscapeComponent from 'react-cytoscapejs';
 
 
@@ -13,59 +14,59 @@ export interface iGraphJson{
   nodes:any,
 }
 
+
 export function GraphManipulation({grapJSON}:propsGraphJson){
-  const [node, setNode] = useState({})
-  // const container = useRef<HTMLDivElement>(null);
-  // const cy = useRef<cytoscape.Core>();
-  // const [cy, setCy] = useState({})
+//   // const cy = useRef<cytoscape.Core>();
 
-  // useEffect(() => {
-  //   console.log('effect')
-  //   // cy.layout(layout).run()
-  // })
+  const elements = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges,});
+  const containerRef = useRef(null);
+  const [cy, setCy] = useState<cytoscape.Core>()
 
+
+  useEffect(() => {
+    const config = {
+      container: containerRef.current,
+      layout:{
+        name: "breadthfirst",
+        fit: true,
+        // circle: true,
+        directed: true,
+        padding: 50,
+        // spacingFactor: 1.5,
+        animate: true,
+        animationDuration: 1000,
+        avoidOverlap: true,
+        nodeDimensionsIncludeLabels: false
+      },
+      style: [
+        {
+          selector: "node",
+          style: { content: "data(label)" },
+        },
+      ],
+      elements:elements,
+      minZoom: 0.1,
+      maxZoom:3
+    };
+
+    cytoscape(config);
+    setCy(cytoscape(config))
+  }, []);
+  
+  cy?.on('tap', (event: any) => {
+    console.log('data', event.target._private.data)
+    // setNode(event.target._private.data)
+  });
+//  cy?.add([
+//     { group: 'nodes', data: { id: 'k0' }, position: { x: 100, y: 100 } },
+//     { group: 'nodes', data: { id: 'k1' }, position: { x: 200, y: 200 } },
+//     { group: 'edges', data: { id: 'l0', source: 'k0', target: 'k1' } }
+//   ]);
   
 
-  function initCy(cy: any) {
-    // @ts-ignore
-    cy.on('tap', (event: any) => {
-      console.log('data', event.target._private.data)
-      setNode(event.target._private.data)
-    });
-  }
-
-  // const layout = useRef<cytoscape.Layouts>();
-  const elements = CytoscapeComponent.normalizeElements({
-    nodes: grapJSON.nodes,
-    edges: grapJSON.edges,  
-  });
-
-  const layout = {
-    name: "breadthfirst",
-    fit: true,
-    // circle: true,
-    directed: true,
-    padding: 50,
-    // spacingFactor: 1.5,
-    animate: true,
-    animationDuration: 1000,
-    avoidOverlap: true,
-    nodeDimensionsIncludeLabels: false
-  };
-
- 
-  return(
-    <>
-    <p>{JSON.stringify(node)}</p>
-    <CytoscapeComponent 
-      id='cy' 
-      elements={elements} 
-      style={{ width: '84vw', height: '87vh' }}  
-      layout={layout} 
-      minZoom= {0.1} 
-      maxZoom={3} cy={initCy}/>;
-     {/* <div id='cy' style={{ width: '84vw', height: '87vh' }} /> */}
-    </>
-
+  return (
+    <div>
+      <div ref={containerRef} style={{ width: '84vw', height: '87vh' }} />
+    </div>
   );
 }

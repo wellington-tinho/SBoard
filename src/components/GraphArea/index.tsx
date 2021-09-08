@@ -61,7 +61,7 @@ export function GraphArea(){
       
 
       <GraphContainer>
-          <Upload/>
+          <Upload />
       </GraphContainer>
 
       < SetupModal 
