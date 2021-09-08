@@ -2,8 +2,9 @@
 // import { useEffect, useRef } from 'react';
 
 import cytoscape from 'cytoscape';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import CytoscapeComponent from 'react-cytoscapejs';
+import { CytoscapeContext } from '../../CytoscapeContext';
 
 
 export interface propsGraphJson{
@@ -20,7 +21,8 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
 
   const elements = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges,});
   const containerRef = useRef(null);
-  const [cy, setCy] = useState<cytoscape.Core>()
+  // const [cy, setCy] = useState<cytoscape.Core>()
+  const [cy, setCy] = useContext(CytoscapeContext);
 
 
   useEffect(() => {
@@ -48,7 +50,6 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
       minZoom: 0.1,
       maxZoom:3
     };
-
     cytoscape(config);
     setCy(cytoscape(config))
   }, []);
@@ -57,11 +58,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
     console.log('data', event.target._private.data)
     // setNode(event.target._private.data)
   });
-//  cy?.add([
-//     { group: 'nodes', data: { id: 'k0' }, position: { x: 100, y: 100 } },
-//     { group: 'nodes', data: { id: 'k1' }, position: { x: 200, y: 200 } },
-//     { group: 'edges', data: { id: 'l0', source: 'k0', target: 'k1' } }
-//   ]);
+
   
 
   return (
