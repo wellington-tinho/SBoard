@@ -12,11 +12,6 @@
 /build
 
 
-
-#graphs
-/graphs
-
-
 # misc
 .DS_Store
 .env.local

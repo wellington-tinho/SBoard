@@ -21,9 +21,8 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
 
   const elementos = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges,});
   const containerRef = useRef(null);
-  // const [cy, setCy] = useState<cytoscape.Core>()
   const setCy = useContext(CytoscapeContext)[1]
-  console.log('[cy, setCy]',setCy);
+ 
   
 
 
@@ -43,10 +42,12 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
         nodeDimensionsIncludeLabels: false
       },
       style: [
-        {
-          selector: "node",
-          style: { content: "data(label)" },
-        },
+      
+        {selector: "node",
+        style: { content: "data(label)" }},
+    
+        // {selector: 'edge',
+        // class: {content:"data(id)"}},
       ],
       elements:elementos,
       minZoom: 0.1,
@@ -54,6 +55,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
     };
       cytoscape(config);
       setCy(cytoscape(config))
+      
     }, []);
   
  

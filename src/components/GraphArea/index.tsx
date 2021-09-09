@@ -37,7 +37,7 @@ export function GraphArea({setRequest}:any){
   function AddEle(){
     try {
       cy.add({
-        group: 'nodes',
+        // group: 'nodes',
         data: { weight: Math.floor(Math.random() * 100) + 1 },
         position: { x: Math.floor(Math.random() * 300) + 1, y: Math.floor(Math.random() * 300) + 1}
       });

@@ -27,12 +27,14 @@ export function Aside({request}:any) {
     //     .style({'line-color': 'yellow'})
     //     .update();
 
+    console.log(e.target.id);
+    
+    var randNum = (Math.floor(Math.random() * 50) + 1)
     try {
       if(checked){
         
-      
         cy.style()
-          .selector('edge')
+          .selector(`edge[source >= ${randNum}]`)
               .style({
               'line-color': 'yellow'
             })
@@ -42,7 +44,7 @@ export function Aside({request}:any) {
     
       else{
           cy.style()
-          .selector('edge')
+          .selector(`edge[source >= ${randNum}]`)
               .style({
               'line-color': 'grey'
             })

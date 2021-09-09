@@ -32,7 +32,7 @@ def Create_Setup_Json():
 
 @app.route("/", methods=['GET'])
 def home():
-  return "hello"
+  return "Olá vc clicou na rota errada, dica: 😉 http://localhost:3000/ "
 
 if __name__ == '__main__':
   app.run(debug=True)
