@@ -2,12 +2,83 @@ import { Container } from "./styles";
 
 import openOption from "../../assets/icons/import.png"
 import menu from '../../assets/icons/menu-vertical.png' 
+import { useContext, useEffect, useState } from "react";
+import { CytoscapeContext } from "../../CytoscapeContext";
 
 
 export function Aside({request}:any) {
+  const [requestMenu, setRequestMenu] = useState<any>()
+  const [state, setState] = useState({checked: false})
+  const [cy] = useContext(CytoscapeContext);
 
-  console.log('Aside',request );
-  
+
+
+ const handleChange = (e:any) => {
+    const { checked } = e.target
+    
+    setState({
+      checked: checked
+    })
+    
+    cy.style()
+    .selector('edge')
+        // .selector('#1')
+        .style({'line-color': 'yellow'})
+        .update();
+
+    // if(checked){
+    //   cy.style()
+    //     .selector('edge')
+    //         .style({
+    //         'line-color': 'yellow'
+    //       })
+    //     .update();
+    // }
+    // else{
+    //   cy.style()
+    //     .selector('edge')
+    //         .style({
+    //         'line-color': 'grey'
+    //       })
+    //     .update();
+    // }
+  }
+
+
+  useEffect(() => {   
+   if(request){
+    var ele:any = []
+    Object.keys(request).forEach(key=>{
+      // console.log(request[key]);
+      
+      ele.push(
+            <li key={key}> 
+              <label> 
+                <input 
+                  onChange={e => handleChange(e)} 
+                  defaultChecked={state.checked}
+                  type="checkbox" name={key} id={key} 
+                />  Request {key} 
+              </label>
+            </li>
+        )
+    })
+    
+    
+      setRequestMenu(
+        <>
+          <button style={{width: '10.5rem'}} > 
+            <img src={openOption} alt="Abrir opção" />  
+            <h3 >Virtual Requests</h3>
+          </button> 
+          <ul style={{overflow: "scroll", height: "200px"}} >
+            {ele}
+          </ul>
+        </>
+      );
+   }
+    
+  },[request,state.checked])
   
   
 
@@ -148,6 +219,20 @@ export function Aside({request}:any) {
 
               </div>
 
+          </li>
+
+          <li style={{display: 'flex', flexDirection: 'column'}}>
+          
+              {requestMenu} 
+           
+            {/* <label> <input type="checkbox" name="request 1" id="id1"  onclick={{change()}} />  "request 1 </label> 
+            <label> <input type="checkbox" name="request 2" id="id2" />  "request 2 </label>
+            <label> <input type="checkbox" name="request 3" id="id3" />  "request 3 </label>
+            <label> <input type="checkbox" name="request 4" id="id4" />  "request 4 </label>
+            <label> <input type="checkbox" name="request 5" id="id5" />  "request 5 </label>
+            <label> <input type="checkbox" name="request 6" id="id6" />  "request 6 </label>
+            <label> <input type="checkbox" name="request 7" id="id7" />  "request 7 </label>
+            <label> <input type="checkbox" name="request ....." id="id....." />  "request ..... </label> */}
           </li>
 
 

@@ -14,8 +14,6 @@ def GML_JSON():
   data= request.get_json()
   if(data['data']):
     file=data['data']
-    print('Entrou no POST')
-    print(file)
     df = nx.parse_gml(file, label='id')
     return nx.cytoscape_data(df)
 

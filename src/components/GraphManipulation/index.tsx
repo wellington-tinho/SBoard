@@ -19,15 +19,17 @@ export interface iGraphJson{
 export function GraphManipulation({grapJSON}:propsGraphJson){
 //   // const cy = useRef<cytoscape.Core>();
 
-  const elements = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges,});
+  const elementos = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges,});
   const containerRef = useRef(null);
   // const [cy, setCy] = useState<cytoscape.Core>()
-  const [cy, setCy] = useContext(CytoscapeContext);
+  const setCy = useContext(CytoscapeContext)[1]
+  console.log('[cy, setCy]',setCy);
+  
 
 
   useEffect(() => {
-    const config = {
-      container: containerRef.current,
+  const config = {
+    container: containerRef.current,
       layout:{
         name: "breadthfirst",
         fit: true,
@@ -46,13 +48,13 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
           style: { content: "data(label)" },
         },
       ],
-      elements:elements,
+      elements:elementos,
       minZoom: 0.1,
       maxZoom:3
     };
-    cytoscape(config);
-    setCy(cytoscape(config))
-  }, []);
+      cytoscape(config);
+      setCy(cytoscape(config))
+    }, []);
   
  
 

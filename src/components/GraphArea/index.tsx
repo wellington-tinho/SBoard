@@ -20,7 +20,9 @@ import { CytoscapeContext } from '../../CytoscapeContext';
 Modal.setAppElement('#root')
 
 export function GraphArea({setRequest}:any){
-  const [cy,setCy] = useContext(CytoscapeContext);
+  const [cy] = useContext(CytoscapeContext);
+
+
   const [node, setNode] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
 
@@ -33,22 +35,31 @@ export function GraphArea({setRequest}:any){
   }
   
   function AddEle(){
-    cy.add({
-      group: 'nodes',
-      data: { weight: Math.floor(Math.random() * 100) + 1 },
-      position: { x: Math.floor(Math.random() * 300) + 1, y: Math.floor(Math.random() * 300) + 1}
-    });
+    try {
+      cy.add({
+        group: 'nodes',
+        data: { weight: Math.floor(Math.random() * 100) + 1 },
+        position: { x: Math.floor(Math.random() * 300) + 1, y: Math.floor(Math.random() * 300) + 1}
+      });
+   }
+   catch (e) {
+      console.log('error');
+   }
   }
   
   function DelEle(){
-    var j = cy.$('#'+node.id);
-    cy.remove( j );
+    try {
+      var ele = cy.$('#'+node.id);
+      cy.remove( ele );
+    }
+    catch (e) {
+      console.log('error');
+    }
   }
   
   function handleChange(file:any){ 
     const reader = new FileReader();
     reader.onload = function(e: any) {
- 
       // console.log(JSON.parse(e.target.result));
       setRequest(JSON.parse(e.target.result));
       
