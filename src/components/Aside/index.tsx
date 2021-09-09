@@ -19,29 +19,41 @@ export function Aside({request}:any) {
     setState({
       checked: checked
     })
-    
-    cy.style()
-    .selector('edge')
-        // .selector('#1')
-        .style({'line-color': 'yellow'})
-        .update();
 
-    // if(checked){
-    //   cy.style()
-    //     .selector('edge')
-    //         .style({
-    //         'line-color': 'yellow'
-    //       })
+    
+    // cy.style()
+    // .selector('edge')
+    //     // .selector('#1')
+    //     .style({'line-color': 'yellow'})
     //     .update();
-    // }
-    // else{
-    //   cy.style()
-    //     .selector('edge')
-    //         .style({
-    //         'line-color': 'grey'
-    //       })
-    //     .update();
-    // }
+
+    try {
+      if(checked){
+        
+      
+        cy.style()
+          .selector('edge')
+              .style({
+              'line-color': 'yellow'
+            })
+          .update();
+      
+      }
+    
+      else{
+          cy.style()
+          .selector('edge')
+              .style({
+              'line-color': 'grey'
+            })
+          .update();
+        }
+    }
+  catch (e) {
+    console.log('erro');
+    
+  }
+    
   }
 
 
