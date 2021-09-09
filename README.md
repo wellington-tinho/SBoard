@@ -6,8 +6,6 @@
    </a>
   
   <img alt="License" src="https://img.shields.io/badge/license-MIT-5965e0">
-
-
 </p>
    <br>
 
@@ -15,6 +13,8 @@
 
 <p align="center">
    <h1>SBoard</h1>
+
+   <img src="https://github.com/wrtinho/TCC-view-network-slice-data/blob/main/src/assets/ScreenExemple.png" alt="Tela da Aplicação" width="720"/>
 
 </p>
 
