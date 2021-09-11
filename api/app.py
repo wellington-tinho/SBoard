@@ -12,7 +12,7 @@ cors = CORS(app)
 @app.route("/convert", methods=['POST'])
 def GML_JSON():
   data= request.get_json()
-  if(data['data']):
+  if(data):
     file=data['data']
     df = nx.parse_gml(file, label='id')
     return nx.cytoscape_data(df)

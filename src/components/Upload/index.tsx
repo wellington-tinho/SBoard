@@ -16,19 +16,21 @@ export interface iGraphJson{
 export function Upload() {
   const [graphGML, setGraphGML] = useState()
   const [grapJSON, setGraphJSON] = useState<iGraphJson>()
-
-
+  
   function onDrop(file:any){ 
     const reader = new FileReader();
     reader.onload = function(e: any) {
+      
       setGraphGML(e.target.result)      
     };
     reader.readAsText(file[0]);
   };
-
+  
   useEffect(() => {
-    api.post('convert', {data: graphGML})
-    .then(response => setGraphJSON(response.data.elements))
+    if(graphGML){
+      api.post('convert', {data: graphGML})
+      .then(response => setGraphJSON(response.data.elements))  
+    }
   },[graphGML]);
 
 
