@@ -17,11 +17,37 @@ export interface iGraphJson{
 
 
 export function GraphManipulation({grapJSON}:propsGraphJson){
-//   // const cy = useRef<cytoscape.Core>();
-
-  const elementos = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges,});
   const containerRef = useRef(null);
   const setCy = useContext(CytoscapeContext)[1]
+
+  Object.keys(grapJSON.edges)
+    .forEach(key=>{
+      (
+        (grapJSON.edges[key]) = {
+          ...grapJSON.edges[key], 
+          id:`e${key}`,
+          Bandwidth:(Math.floor(Math.random() * 100) + 1),
+          Delay:(Math.floor(Math.random() * 100) + 1),
+          Reliability:(Math.floor(Math.random() * 100) + 1)
+        }
+      );
+  })
+
+  Object.keys(grapJSON.nodes)
+    .forEach(key=>{
+      (
+        (grapJSON.nodes[key]) = {
+          ...grapJSON.nodes[key], 
+          id:`n${key}`,
+          Weight:(Math.floor(Math.random() * 100) + 1),
+          Type: (['a','c','t'])[Math.floor(Math.random()*(['a','c','t']).length)],
+        }
+      );
+  })
+
+  const elementos = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges,});
+ 
+  
  
   
 
