@@ -7,58 +7,52 @@ import { CytoscapeContext } from "../../CytoscapeContext";
 
 
 export function Aside({request}:any) {
+  const [cy] = useContext(CytoscapeContext);
   const [requestMenu, setRequestMenu] = useState<any>()
   const [state, setState] = useState({checked: false})
-  const [cy] = useContext(CytoscapeContext);
-
-
-
- const handleChange = (e:any) => {
-    const { checked } = e.target
-    
+  var colors = ['#6A5ACD','#0000CD','#4682B4','#00FFFF','#00FF7F','#00FF7F','#ADFF2F','#ADFF2F','#DAA520','#8B4513','#BC8F8F','#7B68EE','#4B0082','#9400D3','#800080','#FF00FF','#C71585','#FF1493','#DB7093','#CD5C5C','#DC143C','#FF0000','#FF4500','#B22222','#FF8C00','#FF8C00']
+  const [showInfoResquest, setShowInfoResquest] = useState(false);
+  
+  const handleChange = (e:any) => {
+    const { checked } = e.target    
     setState({
       checked: checked
     })
-
-    
-    // cy.style()
-    // .selector('edge')
-    //     // .selector('#1')
-    //     .style({'line-color': 'yellow'})
-    //     .update();
-
     console.log(e.target.id);
     
     var randNum = (Math.floor(Math.random() * 50) + 1)
-    try {
-      if(checked){
-        
-        cy.style()
-          .selector(`edge[source >= ${randNum}]`)
-              .style({
-              'line-color': 'yellow'
-            })
-          .update();
-      
-      }
-    
-      else{
-          cy.style()
-          .selector(`edge[source >= ${randNum}]`)
-              .style({
-              'line-color': 'grey'
-            })
+      try {
+        if(checked){
+          cy.edges(`Bandwidth > ${randNum} && Bandwidth >= ${randNum+10} `)
+          .style('line-color', `${(colors)[Math.floor(Math.random()*(colors).length)]}`)
           .update();
         }
+          else{
+            cy.edges(`Bandwidth > ${randNum} && Bandwidth >= ${randNum+10} `)
+            .style('line-color', `grey`)
+            .update();
+          }
+      }
+    catch (e) {
+      console.log('erro');
+      
     }
-  catch (e) {
-    console.log('erro');
-    
-  }
     
   }
 
+  function VisibleDiv(){
+     
+    
+    // divVisible = !divVisible ?  divVisible
+      // if(container.style.display === 'block') {
+      //     container.style.display = 'none';
+      // } else {
+      //     container.style.display = 'block';
+      // }
+  }
+    
 
+  
   useEffect(() => {   
    if(request){
     var ele:any = []
@@ -67,17 +61,36 @@ export function Aside({request}:any) {
       
       ele.push(
             <li key={key}> 
-              <label> 
+                  <div  style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
                 <input 
                   onChange={e => handleChange(e)} 
                   defaultChecked={state.checked}
                   type="checkbox" name={key} id={key} 
-                />  Request {key} 
-              </label>
+                  /> 
+                    <h4> Request {key} </h4> 
+                    <button id='setVisible' style={{border: '1px solid #34D761', borderRadius:'0.25rem', marginTop: '.4rem'}} onClick={VisibleDiv}> Ver Info </button>
+                  </div>
+
+                <div className='visible' style={{display: 'flex' , flexDirection:'column', width: '14rem'}}>
+                  <p>   Id : {request[key].id}                  </p>
+                  <p>   type_slice : {request[key].type_slice}  </p>
+                  <p>   created : {request[key].created}        </p>
+                  <p>   duration : {request[key].duration}      </p>
+                  <p>   period : {request[key].period}          </p>
+                  <p>   bandwidth : {request[key].bandwidth}    </p>
+                  <p>   delay : {request[key].delay}            </p>
+                  <p>   reliability : {request[key].reliability}</p>
+                  <br />
+                  <p>   vnd: {JSON.stringify(request[key].vnd, null, 4)} </p> 
+                  <br />
+                  <p>links: {JSON.stringify(request[key].links, null, 2)}</p>
+                  
+                </div>
+
             </li>
         )
     })
-    
+  
     
       setRequestMenu(
         <>
@@ -236,17 +249,7 @@ export function Aside({request}:any) {
           </li>
 
           <li style={{display: 'flex', flexDirection: 'column'}}>
-          
               {requestMenu} 
-           
-            {/* <label> <input type="checkbox" name="request 1" id="id1"  onclick={{change()}} />  "request 1 </label> 
-            <label> <input type="checkbox" name="request 2" id="id2" />  "request 2 </label>
-            <label> <input type="checkbox" name="request 3" id="id3" />  "request 3 </label>
-            <label> <input type="checkbox" name="request 4" id="id4" />  "request 4 </label>
-            <label> <input type="checkbox" name="request 5" id="id5" />  "request 5 </label>
-            <label> <input type="checkbox" name="request 6" id="id6" />  "request 6 </label>
-            <label> <input type="checkbox" name="request 7" id="id7" />  "request 7 </label>
-            <label> <input type="checkbox" name="request ....." id="id....." />  "request ..... </label> */}
           </li>
 
 
