@@ -13,36 +13,48 @@ export function Aside({request}:any) {
   var colors = ['#6A5ACD','#0000CD','#4682B4','#00FFFF','#00FF7F','#00FF7F','#ADFF2F','#ADFF2F','#DAA520','#8B4513','#BC8F8F','#7B68EE','#4B0082','#9400D3','#800080','#FF00FF','#C71585','#FF1493','#DB7093','#CD5C5C','#DC143C','#FF0000','#FF4500','#B22222','#FF8C00','#FF8C00']
   const [showInfoResquest, setShowInfoResquest] = useState(false);
   
-  const handleChange = (e:any) => {
+  
+  function setColorGraph(checked:any,request:any){
+
+    var randNum = (Math.floor(Math.random() * 50) + 1)
+    // console.log();
+    
+    try {
+      if(checked){
+        // cy.edges(`[Bandwidth <= ${randNum}]`)
+        // .style('line-color', `${(colors)[Math.floor(Math.random()*(colors).length)]}`)
+        Object.keys(request.vnd).forEach(key=>{
+          console.log(request.vnd[key].type);  
+          cy.nodes(`[Type = "${request.vnd[key].type}"]'`).style('background-color', 'red');
+        })
+        cy.elements(1).style('background-color', 'red')
+        
+      }
+        else{
+          // cy.edges(`[Bandwidth >= ${randNum}]`)
+          // .style('line-color', `grey`)
+        cy.elements('[id = "n10"]').style('background-color', 'grey');
+        // cy.style('background-color', 'red');
+
+         
+        }
+    }
+    catch (e) {
+      console.log(e);
+      
+    }
+  }
+  
+  function toggleCheckBoxRequest (e:any, request:any) {
     const { checked } = e.target    
     setState({
       checked: checked
     })
-    console.log(e.target.id);
-    
-    var randNum = (Math.floor(Math.random() * 50) + 1)
-      try {
-        if(checked){
-          cy.edges(`Bandwidth > ${randNum} && Bandwidth >= ${randNum+10} `)
-          .style('line-color', `${(colors)[Math.floor(Math.random()*(colors).length)]}`)
-          .update();
-        }
-          else{
-            cy.edges(`Bandwidth > ${randNum} && Bandwidth >= ${randNum+10} `)
-            .style('line-color', `grey`)
-            .update();
-          }
-      }
-    catch (e) {
-      console.log('erro');
-      
-    }
-    
+    setColorGraph(checked,request)
   }
 
   function VisibleDiv(){
      
-    
     // divVisible = !divVisible ?  divVisible
       // if(container.style.display === 'block') {
       //     container.style.display = 'none';
@@ -57,13 +69,12 @@ export function Aside({request}:any) {
    if(request){
     var ele:any = []
     Object.keys(request).forEach(key=>{
-      // console.log(request[key]);
       
       ele.push(
             <li key={key}> 
                   <div  style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
                 <input 
-                  onChange={e => handleChange(e)} 
+                  onChange={e => toggleCheckBoxRequest(e, request[key])} 
                   defaultChecked={state.checked}
                   type="checkbox" name={key} id={key} 
                   /> 

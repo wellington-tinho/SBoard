@@ -45,7 +45,8 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
       );
   })
 
-  const elementos = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges,});
+  const elementos = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges});
+  
  
   
  
