@@ -16,27 +16,47 @@ export function Aside({request}:any) {
   
   function setColorGraph(checked:any,request:any){
 
-    var randNum = (Math.floor(Math.random() * 50) + 1)
+    var randNum = (Math.floor(Math.random() * 100) + 1)
     // console.log();
     
     try {
       if(checked){
         // cy.edges(`[Bandwidth <= ${randNum}]`)
         // .style('line-color', `${(colors)[Math.floor(Math.random()*(colors).length)]}`)
+
         Object.keys(request.vnd).forEach(key=>{
-          console.log(request.vnd[key].type);  
-          cy.nodes(`[Type = "${request.vnd[key].type}"]'`).style('background-color', 'red');
+          // console.log(request.vnd[key].type);  
+
+          cy.style()
+          // .selector(`node[type == '${request.vnd[key].type}']`)
+          .selector(`node[value >= ${randNum}]`)
+          .style({'background-color': `${(colors)[Math.floor(Math.random()*(colors).length)]}`})
+          .update();
+
         })
-        cy.elements(1).style('background-color', 'red')
+
+        cy.style()
+        .selector(`edge[Delay >= ${randNum}]`)
+        .style({'line-color': `${(colors)[Math.floor(Math.random()*(colors).length)]}`})
+        .update();
+
         
       }
         else{
           // cy.edges(`[Bandwidth >= ${randNum}]`)
           // .style('line-color', `grey`)
-        cy.elements('[id = "n10"]').style('background-color', 'grey');
-        // cy.style('background-color', 'red');
+  
+          // cy.style('background-color', 'grey');
 
-         
+          // cy.nodes().style('background-color','grey')
+
+
+          cy.style()
+          .selector(`edge[source >= ${randNum}]`)
+          .style({'line-color': 'grey'})
+          .update();
+       
+          
         }
     }
     catch (e) {

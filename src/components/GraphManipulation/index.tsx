@@ -23,8 +23,8 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
   Object.keys(grapJSON.edges)
     .forEach(key=>{
       (
-        (grapJSON.edges[key]) = {
-          ...grapJSON.edges[key], 
+        (grapJSON.edges[key].data) = {
+          ...grapJSON.edges[key].data, 
           id:`e${key}`,
           Bandwidth:(Math.floor(Math.random() * 100) + 1),
           Delay:(Math.floor(Math.random() * 100) + 1),
@@ -36,16 +36,18 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
   Object.keys(grapJSON.nodes)
     .forEach(key=>{
       (
-        (grapJSON.nodes[key]) = {
-          ...grapJSON.nodes[key], 
-          id:`n${key}`,
-          Weight:(Math.floor(Math.random() * 100) + 1),
-          Type: (['a','c','t'])[Math.floor(Math.random()*(['a','c','t']).length)],
+        (grapJSON.nodes[key].data) = {
+          ...grapJSON.nodes[key].data, 
+          // id:`n${key}`,
+          // Weight:(Math.floor(Math.random() * 100) + 1),
+          // type: (['a','c','t'])[Math.floor(Math.random()*(['a','c','t']).length)],
         }
       );
   })
 
   const elementos = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges});
+  console.log(grapJSON.nodes);
+  
   
  
   
