@@ -70,12 +70,26 @@ export function Aside({request}:any) {
 
   const VisibleDiv =(divVisible:string, buttonVerInfo:string) => {
     
+    const dataButton = window.document.getElementById(buttonVerInfo)
     if(window.document.getElementById(divVisible)?.getAttribute('style') === 'display: none'){
       window.document.getElementById(divVisible)?.setAttribute('style','display: flex; flex-direction: column; width: 14rem;')  
+      if (dataButton === null){
+        console.log('Erro pois o dataButton é igual a null');
+        
+      }
+      else{
+        dataButton.innerText = 'Enconder Info'
+      }
 
     
     }else{
       window.document.getElementById(divVisible)?.setAttribute('style','display: none')
+      if (dataButton === null){
+        console.log('Erro pois o dataButton é igual a null');
+      }
+      else{
+        dataButton.innerText = 'Ver Info'
+      }
     }
   }
     
@@ -91,7 +105,8 @@ export function Aside({request}:any) {
    
       ele.push(
             <li key={key}> 
-                  <div  style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
+                  <div  
+                  style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around', width: '14rem'}}>
                 <input 
                   onChange={e => toggleCheckBoxRequest(e, request[key])} 
                   defaultChecked={state.checked}
@@ -106,7 +121,7 @@ export function Aside({request}:any) {
                     </button>
                   </div>
 
-                <div id={divVisible + key} className='visible' style={{display: 'flex' , flexDirection:'column', width: '14rem'}}>
+                <div id={divVisible + key} className='visible' style={{display: 'none'}}>
                   <p>   Id : {request[key].id}                  </p>
                   <p>   type_slice : {request[key].type_slice}  </p>
                   <p>   created : {request[key].created}        </p>
