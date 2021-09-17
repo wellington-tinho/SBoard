@@ -11,7 +11,6 @@ export function Aside({request}:any) {
   const [requestMenu, setRequestMenu] = useState<any>()
   const [state, setState] = useState({checked: false})
   var colors = ['#6A5ACD','#0000CD','#4682B4','#00FFFF','#00FF7F','#00FF7F','#ADFF2F','#ADFF2F','#DAA520','#8B4513','#BC8F8F','#7B68EE','#4B0082','#9400D3','#800080','#FF00FF','#C71585','#FF1493','#DB7093','#CD5C5C','#DC143C','#FF0000','#FF4500','#B22222','#FF8C00','#FF8C00']
-  const [showInfoResquest, setShowInfoResquest] = useState(false);
   
   
   function setColorGraph(checked:any,request:any){
@@ -21,34 +20,30 @@ export function Aside({request}:any) {
     
     try {
       if(checked){
-        // cy.edges(`[Bandwidth <= ${randNum}]`)
-        // .style('line-color', `${(colors)[Math.floor(Math.random()*(colors).length)]}`)
 
         Object.keys(request.vnd).forEach(key=>{
-          // console.log(request.vnd[key].type);  
+      
 
           cy.style()
-          // .selector(`node[type == '${request.vnd[key].type}']`)
           .selector(`node[value >= ${randNum}]`)
           .style({'background-color': `${(colors)[Math.floor(Math.random()*(colors).length)]}`})
           .update();
-
         })
 
-        cy.style()
-        .selector(`edge[Delay >= ${randNum}]`)
-        .style({'line-color': `${(colors)[Math.floor(Math.random()*(colors).length)]}`})
-        .update();
+          cy.style()
+          .selector(`edge[Delay >= ${randNum}]`)
+          .style({'line-color': `${(colors)[Math.floor(Math.random()*(colors).length)]}`})
+          .update();
 
         
       }
         else{
-          // cy.edges(`[Bandwidth >= ${randNum}]`)
-          // .style('line-color', `grey`)
-  
-          // cy.style('background-color', 'grey');
+          cy.style()
+          .selector(`node[value >= ${randNum}]`)
+          .style({'background-color': `grey`})
+          .update();
+        
 
-          // cy.nodes().style('background-color','grey')
 
 
           cy.style()
@@ -73,23 +68,27 @@ export function Aside({request}:any) {
     setColorGraph(checked,request)
   }
 
-  function VisibleDiv(){
-     
-    // divVisible = !divVisible ?  divVisible
-      // if(container.style.display === 'block') {
-      //     container.style.display = 'none';
-      // } else {
-      //     container.style.display = 'block';
-      // }
+  const VisibleDiv =(divVisible:string, buttonVerInfo:string) => {
+    
+    if(window.document.getElementById(divVisible)?.getAttribute('style') === 'display: none'){
+      window.document.getElementById(divVisible)?.setAttribute('style','display: flex; flex-direction: column; width: 14rem;')  
+
+    
+    }else{
+      window.document.getElementById(divVisible)?.setAttribute('style','display: none')
+    }
   }
     
 
   
   useEffect(() => {   
    if(request){
+    var divVisible = 'divVisible'
+    var buttonVerInfo = 'buttonVerInfo'
     var ele:any = []
     Object.keys(request).forEach(key=>{
       
+   
       ele.push(
             <li key={key}> 
                   <div  style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
@@ -99,10 +98,15 @@ export function Aside({request}:any) {
                   type="checkbox" name={key} id={key} 
                   /> 
                     <h4> Request {key} </h4> 
-                    <button id='setVisible' style={{border: '1px solid #34D761', borderRadius:'0.25rem', marginTop: '.4rem'}} onClick={VisibleDiv}> Ver Info </button>
+                    <button 
+                      id={buttonVerInfo+key} 
+                      style={{border: '1px solid #34D761', borderRadius:'0.25rem', marginTop: '.4rem'}} 
+                      onClick={() => VisibleDiv((divVisible + key),(buttonVerInfo+key))} > 
+                      Ver Info
+                    </button>
                   </div>
 
-                <div className='visible' style={{display: 'flex' , flexDirection:'column', width: '14rem'}}>
+                <div id={divVisible + key} className='visible' style={{display: 'flex' , flexDirection:'column', width: '14rem'}}>
                   <p>   Id : {request[key].id}                  </p>
                   <p>   type_slice : {request[key].type_slice}  </p>
                   <p>   created : {request[key].created}        </p>
@@ -129,7 +133,7 @@ export function Aside({request}:any) {
             <img src={openOption} alt="Abrir opção" />  
             <h3 >Virtual Requests</h3>
           </button> 
-          <ul style={{overflow: "scroll", height: "200px"}} >
+          <ul style={{overflow: "scroll", height: "20rem"}} >
             {ele}
           </ul>
         </>
