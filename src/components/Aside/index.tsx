@@ -16,6 +16,7 @@ export function Aside({request}:any) {
   function setColorGraph(checked:any,request:any){
 
     var randNum = (Math.floor(Math.random() * 100) + 1)
+    var color = (colors)[Math.floor(Math.random()*(colors).length)]
     // console.log();
     
     try {
@@ -26,16 +27,16 @@ export function Aside({request}:any) {
 
           cy.style()
           .selector(`node[value >= ${randNum}]`)
-          .style({'background-color': `${(colors)[Math.floor(Math.random()*(colors).length)]}`})
+          .style({'background-color': `${color}`})
           .update();
-        })
-
+          
           cy.style()
           .selector(`edge[Delay >= ${randNum}]`)
-          .style({'line-color': `${(colors)[Math.floor(Math.random()*(colors).length)]}`})
+          .style({'line-color': `${color}`})
           .update();
-
-        
+          
+        })
+          
       }
         else{
           cy.style()
@@ -49,14 +50,11 @@ export function Aside({request}:any) {
           cy.style()
           .selector(`edge[source >= ${randNum}]`)
           .style({'line-color': 'grey'})
-          .update();
-       
-          
+          .update();   
         }
     }
     catch (e) {
-      console.log(e);
-      
+      console.log(e); 
     }
   }
   
@@ -69,27 +67,19 @@ export function Aside({request}:any) {
   }
 
   const VisibleDiv =(divVisible:string, buttonVerInfo:string) => {
-    
+  
     const dataButton = window.document.getElementById(buttonVerInfo)
-    if(window.document.getElementById(divVisible)?.getAttribute('style') === 'display: none'){
+    if(window.document.getElementById(divVisible)?.getAttribute('style') === 'display: none;'){
       window.document.getElementById(divVisible)?.setAttribute('style','display: flex; flex-direction: column; width: 14rem;')  
-      if (dataButton === null){
-        console.log('Erro pois o dataButton é igual a null');
-        
+      if (dataButton !== null){
+        dataButton.innerText = 'Enconder Info'  
       }
-      else{
-        dataButton.innerText = 'Enconder Info'
-      }
-
     
     }else{
-      window.document.getElementById(divVisible)?.setAttribute('style','display: none')
-      if (dataButton === null){
-        console.log('Erro pois o dataButton é igual a null');
-      }
-      else{
+      window.document.getElementById(divVisible)?.setAttribute('style','display: none;')
+      if (dataButton !== null){
         dataButton.innerText = 'Ver Info'
-      }
+      } 
     }
   }
     
