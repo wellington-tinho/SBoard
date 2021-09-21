@@ -1,6 +1,3 @@
-// import cytoscape from 'cytoscape';
-// import { useEffect, useRef } from 'react';
-
 import cytoscape from 'cytoscape';
 import { useContext, useEffect, useRef } from 'react';
 import CytoscapeComponent from 'react-cytoscapejs';

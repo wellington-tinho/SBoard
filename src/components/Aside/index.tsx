@@ -5,6 +5,7 @@ import menu from '../../assets/icons/menu-vertical.png'
 import { useContext, useEffect, useState } from "react";
 import { CytoscapeContext } from "../../CytoscapeContext";
 
+var changeDicChecbox: { [index: string]: any; } = {};
 
 export function Aside({request}:any) {
   const [cy] = useContext(CytoscapeContext);
@@ -12,35 +13,47 @@ export function Aside({request}:any) {
   const [state, setState] = useState({checked: false})
   var colors = ['#6A5ACD','#0000CD','#4682B4','#00FFFF','#00FF7F','#00FF7F','#ADFF2F','#ADFF2F','#DAA520','#8B4513','#BC8F8F','#7B68EE','#4B0082','#9400D3','#800080','#FF00FF','#C71585','#FF1493','#DB7093','#CD5C5C','#DC143C','#FF0000','#FF4500','#B22222','#FF8C00','#FF8C00']
   
+ 
   
   function setColorGraph(checked:any,request:any){
-
-    var randNum = (Math.floor(Math.random() * 100) + 1)
-    var color = (colors)[Math.floor(Math.random()*(colors).length)]
-    // console.log();
     
+    
+    
+    
+    
+    
+    var randNum = (Math.floor(Math.random() * 100) + 1)
     try {
       if(checked){
+        var color = (colors)[Math.floor(Math.random()*(colors).length)]
+        changeDicChecbox[request.id] = randNum
 
-        Object.keys(request.vnd).forEach(key=>{
-      
+
+        // console.log('request', request.);
+        
+
+        // Object.keys(request.vnd).forEach(key=>{
+        //   console.log(request.vnd[key]);
+        // })
+          
 
           cy.style()
-          .selector(`node[value >= ${randNum}]`)
+          .selector(`node[value = ${randNum}]`)
           .style({'background-color': `${color}`})
           .update();
           
           cy.style()
-          .selector(`edge[Delay >= ${randNum}]`)
+          .selector(`edge[Delay = ${randNum}]`)
           .style({'line-color': `${color}`})
           .update();
           
-        })
           
       }
         else{
+          
+
           cy.style()
-          .selector(`node[value >= ${randNum}]`)
+          .selector(`node[value = ${changeDicChecbox[request.id]}]`)
           .style({'background-color': `grey`})
           .update();
         
@@ -48,7 +61,7 @@ export function Aside({request}:any) {
 
 
           cy.style()
-          .selector(`edge[source >= ${randNum}]`)
+          .selector(`edge[Delay = ${changeDicChecbox[request.id]}]`)
           .style({'line-color': 'grey'})
           .update();   
         }
