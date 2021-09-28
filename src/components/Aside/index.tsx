@@ -5,7 +5,9 @@ import menu from '../../assets/icons/menu-vertical.png'
 import { useContext, useEffect, useState } from "react";
 import { CytoscapeContext } from "../../CytoscapeContext";
 
-var changeDicChecbox: { [index: string]: any; } = {};
+// Variavel global responsavel por conter um dicinoario com o Id do request e quais nós/edges foram alterados com esse Id
+// Tentei deixar essa variavel global dentro de setColorGraph() mas sempre ele ficava sendo reecriada
+var changeDicChecbox: { [index: string]: any; } = {}; 
 
 export function Aside({request}:any) {
   const [cy] = useContext(CytoscapeContext);
@@ -14,54 +16,53 @@ export function Aside({request}:any) {
   var colors = ['#6A5ACD','#0000CD','#4682B4','#00FFFF','#00FF7F','#00FF7F','#ADFF2F','#ADFF2F','#DAA520','#8B4513','#BC8F8F','#7B68EE','#4B0082','#9400D3','#800080','#FF00FF','#C71585','#FF1493','#DB7093','#CD5C5C','#DC143C','#FF0000','#FF4500','#B22222','#FF8C00','#FF8C00']
   
  
-  
+
+
+  // Funcao principal para colorir o grafo
   function setColorGraph(checked:any,request:any){
-    
-    
-    
-    
-    
-    
-    var randNum = (Math.floor(Math.random() * 100) + 1)
     try {
       if(checked){
+        var randNum = (Math.floor(Math.random() * 100) + 1)
         var color = (colors)[Math.floor(Math.random()*(colors).length)]
         changeDicChecbox[request.id] = randNum
-
-
-        // console.log('request', request.);
         
-
+        // console.log('request',request);
+        // console.log(request.vnd);
+        
         // Object.keys(request.vnd).forEach(key=>{
-        //   console.log(request.vnd[key]);
-        // })
-          
 
+        // })
+        // cy.$(`#2`).neighborhood();
+        
+        console.log('node',cy.$(`node[id = "${randNum}"]`).json());
+        console.log('edge',cy.$(`edge[id = "e${randNum}"]`).json());
+        
+        cy.animate({
+          
+        }, { duration: 1000 });
           cy.style()
-          .selector(`node[value = ${randNum}]`)
+          .selector(`node[id = "${randNum}"]`)
           .style({'background-color': `${color}`})
           .update();
           
           cy.style()
-          .selector(`edge[Delay = ${randNum}]`)
+          .selector(`edge[id = "e${randNum}"]`)
           .style({'line-color': `${color}`})
           .update();
-          
+          // .$(`edge[Delay = ${randNum}]`)
           
       }
         else{
           
 
           cy.style()
-          .selector(`node[value = ${changeDicChecbox[request.id]}]`)
+          .selector(`node[id = "${changeDicChecbox[request.id]}"]`)
           .style({'background-color': `grey`})
           .update();
         
 
-
-
           cy.style()
-          .selector(`edge[Delay = ${changeDicChecbox[request.id]}]`)
+          .selector(`edge[id = "e${changeDicChecbox[request.id]}"]`)
           .style({'line-color': 'grey'})
           .update();   
         }
@@ -71,6 +72,7 @@ export function Aside({request}:any) {
     }
   }
   
+  // Verefificando se foi apertado checkbox dos requests e enviando para funcao de colorir
   function toggleCheckBoxRequest (e:any, request:any) {
     const { checked } = e.target    
     setState({
@@ -79,6 +81,7 @@ export function Aside({request}:any) {
     setColorGraph(checked,request)
   }
 
+  // função para definir a visibilidade de informacoes da lista de requests
   const VisibleDiv =(divVisible:string, buttonVerInfo:string) => {
   
     const dataButton = window.document.getElementById(buttonVerInfo)
@@ -96,8 +99,7 @@ export function Aside({request}:any) {
     }
   }
     
-
-  
+  // Criacao da sessão VIRTUAL REQUESTS após o componete ser carregado com o json na variavel de requests
   useEffect(() => {   
    if(request){
     var divVisible = 'divVisible'
