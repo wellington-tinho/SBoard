@@ -36,15 +36,12 @@ export function Aside({request}:any) {
         
         console.log('node',cy.$(`node[id = "${randNum}"]`).json());
         console.log('edge',cy.$(`edge[id = "e${randNum}"]`).json());
-        
-        cy.animate({
-          
-        }, { duration: 1000 });
+  
           cy.style()
           .selector(`node[id = "${randNum}"]`)
           .style({'background-color': `${color}`})
           .update();
-          
+     
           cy.style()
           .selector(`edge[id = "e${randNum}"]`)
           .style({'line-color': `${color}`})
@@ -86,7 +83,7 @@ export function Aside({request}:any) {
   
     const dataButton = window.document.getElementById(buttonVerInfo)
     if(window.document.getElementById(divVisible)?.getAttribute('style') === 'display: none;'){
-      window.document.getElementById(divVisible)?.setAttribute('style','display: flex; flex-direction: column; width: 14rem;')  
+      window.document.getElementById(divVisible)?.setAttribute('style','display: flex;')  
       if (dataButton !== null){
         dataButton.innerText = 'Enconder Info'  
       }
@@ -110,8 +107,7 @@ export function Aside({request}:any) {
    
       ele.push(
             <li key={key}> 
-                  <div  
-                  style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around', width: '14rem'}}>
+                <div>
                 <input 
                   onChange={e => toggleCheckBoxRequest(e, request[key])} 
                   defaultChecked={state.checked}
@@ -120,7 +116,6 @@ export function Aside({request}:any) {
                     <h4> Request {key} </h4> 
                     <button 
                       id={buttonVerInfo+key} 
-                      style={{border: '1px solid #34D761', borderRadius:'0.25rem', marginTop: '.4rem'}} 
                       onClick={() => VisibleDiv((divVisible + key),(buttonVerInfo+key))} > 
                       Ver Info
                     </button>
@@ -148,13 +143,14 @@ export function Aside({request}:any) {
   
     
       setRequestMenu(
+        
         <>
-          <button style={{width: '10.5rem'}} > 
+          <button > 
             <img src={openOption} alt="Abrir opção" />  
             <h3 >Virtual Requests</h3>
           </button> 
-          <ul style={{overflow: "scroll", height: "20rem"}} >
-            {ele}
+          <ul>
+            {ele}            
           </ul>
         </>
       );
@@ -298,12 +294,11 @@ export function Aside({request}:any) {
                   <option value="Request4"> Request5 </option>
                   <option value="RequestX"> RequestX </option>
                 </select>
-
               </div>
 
           </li>
 
-          <li style={{display: 'flex', flexDirection: 'column'}}>
+          <li className='request'>
               {requestMenu} 
           </li>
 

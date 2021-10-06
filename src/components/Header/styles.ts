@@ -6,11 +6,11 @@ background: var(--bg);
   display: flex;
   align-items: center;
   border-radius: 0.25rem;
-  height: 9vh;
+  height: 8vh;
 
   
   img{ 
-      height: 4rem;
+      height: 3.5rem;
       margin: 0 2rem;
   }
 
@@ -18,4 +18,15 @@ background: var(--bg);
     font: 5rem 'Roboto Slab', 600;
   }
 
+
+  @media (max-width: 1280px){
+    height: 7vh;
+    img{
+      height: 2.5rem;
+      margin: 0 2rem;
+    }
+   h1{ 
+     font-size: 1.5rem;
+   }
+  }
 `;

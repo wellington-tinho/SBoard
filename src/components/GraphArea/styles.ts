@@ -12,6 +12,7 @@ export const NavOptions  = styled.nav`
     align-items: center;
     list-style: none;
     justify-content: space-around;
+    font-size: 80%;
     li{
       display: flex;
       align-items: center;
