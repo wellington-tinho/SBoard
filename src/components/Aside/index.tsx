@@ -130,8 +130,8 @@ export function Aside({request}:any) {
                   <p>   bandwidth : {request[key].bandwidth}    </p>
                   <p>   delay : {request[key].delay}            </p>
                   <p>   reliability : {request[key].reliability}</p>
-                  <br />
-                  <p>   vnd: {JSON.stringify(request[key].vnd, null, 4)} </p> 
+                  {/* <br />
+                  <p>   vnd: {JSON.stringify(request[key].vnd, null, 4)} </p>  */}
                   <br />
                   <p>links: {JSON.stringify(request[key].links, null, 2)}</p>
                   

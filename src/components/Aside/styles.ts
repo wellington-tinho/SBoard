@@ -101,34 +101,37 @@ export const Container = styled.div`
           }
         }
         li.request{
-          height: 13.3rem;
+          height: 15rem;
           background: #fff;
+          
 
           button{
             margin: 1rem 1rem 0rem;
             width:11rem;
           }
           ul{
-            height: 100%;
+            height: 12rem;
             overflow-y: scroll;
             background-color: #fff;
             li{
               div{
-                display: flex; 
-                align-items: center; 
-                justify-content: space-around; 
-                width: 14rem;
-                input{
-                }
+                  display: flex; 
+                  align-items: center; 
+                  justify-content: space-around; 
+                  width: 14rem;
+                  input{
+                  }
                   h4{
                     font-size: .8rem;
+                    margin-left: 1rem;
+
                   }
                   button{
                     border: 1px solid #34D761; 
                     border-radius:0.25rem; 
-                    margin-top: .5rem;
                     font-size: .8rem;
-                    width: 6rem;
+                    width: 7rem;
+                    margin: 0 auto;
                   }
               
                 }
@@ -224,15 +227,14 @@ export const Container = styled.div`
           ul{
             li{
               div{
-                width: 10rem;
-                input{
-                }
+                width: 10rem;                
                   h4{
-                    font-size: .7rem;
+                    font-size: .65rem;
+                    margin-left: .4rem;
                   }
                   button{
-                    font-size: .7rem;
-                    width: 4rem;
+                    font-size: .6rem;
+                    width: 5rem;
                   }
               }
               .visible{

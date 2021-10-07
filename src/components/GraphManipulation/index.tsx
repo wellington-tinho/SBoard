@@ -98,15 +98,18 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
               cy.on('tap', function(event:any){
                 if( event.target === cy ){
                   console.log('tap on background');
+                 
                 } 
               })
               
               cy.on('tap', 'node', function(evt:any){
-                console.log( 'tapped ', (evt.target).data() )
+                alert('Node:'+JSON.stringify((evt.target).data(), null, 2))
+                console.log((evt.target));
               })
-
+              
               cy.on('tap', 'edge', function(evt:any){
-                console.log( 'tapped ', (evt.target).data() )
+                alert('Edgle:'+JSON.stringify((evt.target).data(), null, 2))
+                console.log((evt.target));
               });
           } catch (error) { console.log('CytoscapeFunctions',error)}
       } 
@@ -120,7 +123,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
 
   return (
     <div>
-      <div ref={containerRef} style={{ width: '84vw', height: '87vh' }} />
+      <div ref={containerRef} style={{ width: '80vw', height: '86vh' }} />
     </div>
   );
 }
