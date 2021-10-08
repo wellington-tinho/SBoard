@@ -95,20 +95,41 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
     useEffect(() => {
       function CytoscapeFunctions(){
             try {
-              cy.on('tap', function(event:any){
-                if( event.target === cy ){
-                  console.log('tap on background');
-                 
-                } 
-              })
+              // cy.on('tap', function(event:any){
+              //   if( event.target === cy ){
+              //     console.log('tap on background');
+              //   } 
+              // })
+           
+              var doubleClickDelayMs = 350;
+              var previousTapStamp:any;
+              cy.on('tap', function(e:any) {
+                var currentTapStamp = e.timeStamp;
+                var msFromLastTap = currentTapStamp - previousTapStamp;
+
+                if (msFromLastTap < doubleClickDelayMs) {
+                  e.target.trigger('doubleTap', e);
+                }
+                previousTapStamp = currentTapStamp;
+              });
+            
+              
+
+              cy.on('doubleTap', function(event:any, originalTapEvent:any) {
+                alert('doubleTap');
+                console.log(originalTapEvent);
+              });
               
               cy.on('tap', 'node', function(evt:any){
-                alert('Node:'+JSON.stringify((evt.target).data(), null, 2))
+                cy.on('cxttap', ()=>{
+                  alert('Botao direito')
+                })
+                alert('Node:'+JSON.stringify((evt.target).data(), null, 4))
                 console.log((evt.target));
               })
               
               cy.on('tap', 'edge', function(evt:any){
-                alert('Edgle:'+JSON.stringify((evt.target).data(), null, 2))
+                alert('Edgle:'+JSON.stringify((evt.target).data(), null, 4))
                 console.log((evt.target));
               });
           } catch (error) { console.log('CytoscapeFunctions',error)}

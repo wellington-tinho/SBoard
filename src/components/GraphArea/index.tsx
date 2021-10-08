@@ -46,6 +46,13 @@ export function GraphArea({setRequest}:any){
       console.log('error');
    }
   }
+
+  useEffect(() => {
+    cy?.on('tap', (event: any) => {
+      // console.log('data->', event.target._private.data)
+      setNode(event.target._private.data)
+    });
+  },[cy])
   
   function DelEle(){
     try {
@@ -56,6 +63,8 @@ export function GraphArea({setRequest}:any){
       console.log('error');
     }
   }
+
+
   
   function handleChange(file:any){ 
     const reader = new FileReader();
@@ -76,12 +85,7 @@ export function GraphArea({setRequest}:any){
     hiddenFileInput.current.click();
   };
 
-  useEffect(() => {
-    cy?.on('tap', (event: any) => {
-      // console.log('data->', event.target._private.data)
-      setNode(event.target._private.data)
-    });
-  },[cy])
+
 
   return(
     <Container>

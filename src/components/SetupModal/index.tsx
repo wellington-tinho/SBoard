@@ -14,12 +14,6 @@ interface SetupModalProps {
   onRequestClose: () => void;
 }
 
-// interface I_de_coefficients{
-//   mmtc: number[],
-//   urllc: number[],
-//   embb: number[],
-// }
-
 
 export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
   const [data, setData] = useState(arqSetupJson)
