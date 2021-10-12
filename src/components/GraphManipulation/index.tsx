@@ -76,12 +76,42 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
           nodeDimensionsIncludeLabels: false
         },
         style: [
-        
-          {selector: "node",
-          style: { content: "data(label)" }},
-      
-          // {selector: 'edge',
-          // class: {content:"data(id)"}},
+          {
+            selector: 'node',
+            style: {
+              content: 'data(label)',
+              'background-color': "rgb(153,153,153)"
+            }
+          },
+
+          {
+            selector: 'edge:selected',
+            style: {
+              content: function( ele:any ){ return  ele.data('id')},
+            }
+          },
+
+          {
+            selector: 'node:selected',
+            style: {
+              label: ( ele:any )=>{ 
+                return (
+                 ' id:'+ ele.data().id +
+                 ' label:'+ ele.data().label +
+                 ' name:'+ ele.data().name +
+                 ' Country:'+ ele.data().Country +
+                 ' domain:'+ ele.data().domain +
+                 ' pos:'+ ele.data().pos +
+                 ' region:'+ ele.data().region +
+                 ' type:'+ ele.data().type +
+                 ' value:'+ ele.data().value +
+                 ' weight:'+ ele.data().weight
+              )},
+              "border-width": 5,
+              "border-color": "#2901d9",
+              'background-color':'#019cd9'
+            }
+          }
         ],
         elements:elementos,
         minZoom: 0.1,
@@ -95,11 +125,6 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
     useEffect(() => {
       function CytoscapeFunctions(){
             try {
-              // cy.on('tap', function(event:any){
-              //   if( event.target === cy ){
-              //     console.log('tap on background');
-              //   } 
-              // })
            
               var doubleClickDelayMs = 350;
               var previousTapStamp:any;
@@ -112,19 +137,15 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
                 }
                 previousTapStamp = currentTapStamp;
               });
-            
-              
-
+  
               cy.on('doubleTap', function(event:any, originalTapEvent:any) {
                 alert('doubleTap');
                 console.log(originalTapEvent);
               });
               
-              cy.on('tap', 'node', function(evt:any){
-                cy.on('cxttap', ()=>{
-                  alert('Botao direito')
-                })
+              cy.on('cxttap ', 'node', function(evt:any){
                 alert('Node:'+JSON.stringify((evt.target).data(), null, 4))
+                console.log('Node:'+JSON.stringify((evt.target).data(), null, 4))
                 console.log((evt.target));
               })
               
