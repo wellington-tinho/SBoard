@@ -93,20 +93,26 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
 
           {
             selector: 'node:selected',
+           
             style: {
-              label: ( ele:any )=>{ 
+              content: ( ele:any )=>{ 
                 return (
-                 ' id:'+ ele.data().id +
+                 '\n id:'+ ele.data().id +
                  ' label:'+ ele.data().label +
-                 ' name:'+ ele.data().name +
+                 '\n name:'+ ele.data().name +
                  ' Country:'+ ele.data().Country +
                  ' domain:'+ ele.data().domain +
-                 ' pos:'+ ele.data().pos +
+                 '/n pos:'+ ele.data().pos +
                  ' region:'+ ele.data().region +
-                 ' type:'+ ele.data().type +
+                 '\t type:'+ ele.data().type +
                  ' value:'+ ele.data().value +
                  ' weight:'+ ele.data().weight
               )},
+              // "text-max-width": "10px",
+              // "text-wrap": "wrap",
+              // "text-max-width": 100,
+              // "source-label": "",
+              // "target-label": "",
               "border-width": 5,
               "border-color": "#2901d9",
               'background-color':'#019cd9'

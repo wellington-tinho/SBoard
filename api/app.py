@@ -17,6 +17,7 @@ def GML_JSON():
     df = nx.parse_gml(file, label='id')
     return nx.cytoscape_data(df)
 
+
 @app.route("/setup", methods=['POST'])
 def Create_Setup_Json():
   data= request.get_json()
@@ -28,8 +29,7 @@ def Create_Setup_Json():
   fo.close()
   return ''
 
-  
-  
+
 
 
 @app.route("/", methods=['GET'])
