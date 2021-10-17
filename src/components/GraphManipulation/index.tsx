@@ -1,6 +1,11 @@
+import Modal from 'react-modal';
+
+
 import cytoscape from 'cytoscape';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import CytoscapeComponent from 'react-cytoscapejs';
+
+import { NodeModal } from '../NodeModal';
 import { CytoscapeContext } from '../../CytoscapeContext';
 
 
@@ -12,13 +17,18 @@ export interface iGraphJson{
   nodes:any,
 }
 
+Modal.setAppElement('#root')
 
 export function GraphManipulation({grapJSON}:propsGraphJson){
   const containerRef = useRef(null);
   const [cy,setCy] = useContext(CytoscapeContext)
+  const [nodeElement,setNodeElement] = useState<any>()
 
-  Object.keys(grapJSON.edges)
-    .forEach(key=>{
+
+
+
+
+  Object.keys(grapJSON.edges).forEach(key=>{
       (
         (grapJSON.edges[key].data) = {
           ...grapJSON.edges[key].data,   
@@ -30,8 +40,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
       );
   })
 
-  Object.keys(grapJSON.nodes)
-    .forEach(key=>{
+  Object.keys(grapJSON.nodes).forEach(key=>{
       (
         (grapJSON.nodes[key].data) = {
           ...grapJSON.nodes[key].data, 
@@ -43,23 +52,8 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
   })
 
   const elementos = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges});
-  
-  
-//  // funções automaticas inicializadas junto com o grafico 
-// function CytoscapeFunctions(){
-//       try {
-//         cy.on('tap', 'node', function(evt:any){
-//           var node = evt.target;
-//           console.log( 'tapped ' + node.id() );
-//         });   
-//      } catch (error) { console.log('CytoscapeFunctions',error)}
-// } 
-// CytoscapeFunctions()
-  
- 
-  
 
-
+  //configuraçoes e inicializaçao do cytoscape graph
   useEffect(() => {
     const config = {
       container: containerRef.current,
@@ -97,14 +91,14 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
             style: {
               content: ( ele:any )=>{ 
                 return (
-                 '\n id:'+ ele.data().id +
+                 ' id:'+ ele.data().id +
                  ' label:'+ ele.data().label +
-                 '\n name:'+ ele.data().name +
+                 ' name:'+ ele.data().name +
                  ' Country:'+ ele.data().Country +
                  ' domain:'+ ele.data().domain +
-                 '/n pos:'+ ele.data().pos +
+                 '\n pos:'+ ele.data().pos +
                  ' region:'+ ele.data().region +
-                 '\t type:'+ ele.data().type +
+                 ' type:'+ ele.data().type +
                  ' value:'+ ele.data().value +
                  ' weight:'+ ele.data().weight
               )},
@@ -121,7 +115,9 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
         ],
         elements:elementos,
         minZoom: 0.1,
-        maxZoom:3
+        maxZoom:3,
+        zoomFactor: 0.05, // zoom factor per zoom tick
+        zoomDelay: 45 // how many ms between zoom ticks
       };
       // cytoscape(config);
       setCy(cytoscape(config))
@@ -150,14 +146,22 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
               });
               
               cy.on('cxttap ', 'node', function(evt:any){
-                alert('Node:'+JSON.stringify((evt.target).data(), null, 4))
-                console.log('Node:'+JSON.stringify((evt.target).data(), null, 4))
+                // alert('Node:'+JSON.stringify((evt.target).data(), null, 4))
+                setNodeElement(evt.target.data())
+                handleOpenNodeModal()
+                // console.log('Node:'+JSON.stringify((evt.target).data(), null, 4))
+                // console.log((evt.target));
+              });
+              cy.on('cxttap ', 'edge', function(evt:any){
+                // alert('Node:'+JSON.stringify((evt.target).data(), null, 4))
+                handleOpenNodeModal()
+                console.log('Edge:'+JSON.stringify((evt.target).data(), null, 4))
                 console.log((evt.target));
-              })
+              });
               
               cy.on('tap', 'edge', function(evt:any){
                 alert('Edgle:'+JSON.stringify((evt.target).data(), null, 4))
-                console.log((evt.target));
+                // console.log((evt.target));
               });
           } catch (error) { console.log('CytoscapeFunctions',error)}
       } 
@@ -166,12 +170,26 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
     },[cy])
   
  
-
+    const [isNodeModal, setIsNodeModal] = useState(false);
+    function handleOpenNodeModal(){
+      document.addEventListener('contextmenu', event => event.preventDefault());
+      setIsNodeModal(true)
+    }
+  
+    function handleCloseNodeModal(){
+      setIsNodeModal(false)
+    }
   
 
   return (
     <div>
       <div ref={containerRef} style={{ width: '80vw', height: '86vh' }} />
+
+      <NodeModal 
+        isOpen={isNodeModal}
+        onRequestClose={handleCloseNodeModal}
+        node={nodeElement}
+      />
     </div>
   );
 }
