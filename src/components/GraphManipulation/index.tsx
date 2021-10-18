@@ -6,6 +6,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import CytoscapeComponent from 'react-cytoscapejs';
 
 import { NodeModal } from '../NodeModal';
+import { EdgeModal } from '../EdgeModal';
 import { CytoscapeContext } from '../../CytoscapeContext';
 
 
@@ -23,6 +24,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
   const containerRef = useRef(null);
   const [cy,setCy] = useContext(CytoscapeContext)
   const [nodeElement,setNodeElement] = useState<any>()
+  const [edgeElement,setEdgeElement] = useState<any>()
 
 
 
@@ -81,7 +83,18 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
           {
             selector: 'edge:selected',
             style: {
-              content: function( ele:any ){ return  ele.data('id')},
+              content: ( ele:any )=>{ 
+                return (
+                  ' id:'+ ele.data().id +
+                  ' negative:'+ ele.data().negative +
+                  ' source:'+ ele.data().source +
+                  ' target:'+ ele.data().target +
+                  ' weight:'+ ele.data().weight +
+                  ' Bandwidth:'+ ele.data().Bandwidth +
+                  ' Reliability:'+ ele.data().Reliability +
+                  ' Delay:'+ ele.data().Delay 
+                  ) 
+                },
             }
           },
 
@@ -96,7 +109,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
                  ' name:'+ ele.data().name +
                  ' Country:'+ ele.data().Country +
                  ' domain:'+ ele.data().domain +
-                 '\n pos:'+ ele.data().pos +
+                 ' pos:'+ ele.data().pos +
                  ' region:'+ ele.data().region +
                  ' type:'+ ele.data().type +
                  ' value:'+ ele.data().value +
@@ -146,23 +159,21 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
               });
               
               cy.on('cxttap ', 'node', function(evt:any){
-                // alert('Node:'+JSON.stringify((evt.target).data(), null, 4))
                 setNodeElement(evt.target.data())
                 handleOpenNodeModal()
-                // console.log('Node:'+JSON.stringify((evt.target).data(), null, 4))
-                // console.log((evt.target));
+                console.log('Node:'+JSON.stringify((evt.target).data(), null, 4))
               });
+
               cy.on('cxttap ', 'edge', function(evt:any){
-                // alert('Node:'+JSON.stringify((evt.target).data(), null, 4))
-                handleOpenNodeModal()
+                setEdgeElement(evt.target.data())
+                handleOpenEdgeModal()
                 console.log('Edge:'+JSON.stringify((evt.target).data(), null, 4))
-                console.log((evt.target));
               });
               
-              cy.on('tap', 'edge', function(evt:any){
-                alert('Edgle:'+JSON.stringify((evt.target).data(), null, 4))
-                // console.log((evt.target));
-              });
+              // cy.on('tap', 'edge', function(evt:any){
+              //   // alert('Edgle:'+JSON.stringify((evt.target).data(), null, 4))
+              //   // console.log((evt.target));
+              // });
           } catch (error) { console.log('CytoscapeFunctions',error)}
       } 
       CytoscapeFunctions()
@@ -175,9 +186,17 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
       document.addEventListener('contextmenu', event => event.preventDefault());
       setIsNodeModal(true)
     }
-  
     function handleCloseNodeModal(){
       setIsNodeModal(false)
+    }
+  
+    const [isEdgeModal, setIsEdgeModal] = useState(false);
+    function handleOpenEdgeModal(){
+      document.addEventListener('contextmenu', event => event.preventDefault());
+      setIsEdgeModal(true)
+    }
+    function handleCloseEdgeModal(){
+      setIsEdgeModal(false)
     }
   
 
@@ -189,6 +208,12 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
         isOpen={isNodeModal}
         onRequestClose={handleCloseNodeModal}
         node={nodeElement}
+      />
+
+      <EdgeModal 
+        isOpen={isEdgeModal}
+        onRequestClose={handleCloseEdgeModal}
+        edge={edgeElement}
       />
     </div>
   );
