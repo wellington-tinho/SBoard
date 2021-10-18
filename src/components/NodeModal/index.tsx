@@ -1,5 +1,5 @@
 
-import {FormEvent, useContext, useState } from 'react';
+import {FormEvent, useContext, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
 import { VscChromeClose } from 'react-icons/vsc'
@@ -15,8 +15,8 @@ interface NodeModalProps {
 }
 
 export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
-  // const [cy] = useContext(CytoscapeContext);
-  // const [weight, setWeight] =  useState(node?.weight);
+  const [cy] = useContext(CytoscapeContext);
+
   const [country, setCountry ] = useState(String)
   const [domain, setDomain ] = useState(Number)
   const [id, setId ] = useState(String)
@@ -28,25 +28,48 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
   const [pos, setPos ] = useState<number[]>()
   const [weight, setWeight ] = useState(Number)
     
-  
+  useEffect(() => {
+    setId(node?.id)
+    setCountry(node?.Country)
+    setDomain(node?.domain)
+    setLabel(node?.label)
+    setName(node?.name)
+    setRegion(node?.region)
+    setType(node?.type)
+    setValue(node?.value)
+    setPos(node?.pos)
+    setWeight(node?.weight)
+  },[node])
 
   
 
 
   function EditElements(event:FormEvent) {
-  event.preventDefault();
-   alert(`country ${String(country)} \n
-         domain ${domain}  \n
-         id ${id}  \n
-         label ${label}  \n
-         name ${name}  \n
-         region ${region}  \n
-         type ${type}  \n
-         value ${value}  \n
-         pos ${pos}  \n
-         weight ${weight} 
-        `)
-   console.log(node);
+    event.preventDefault();
+
+    alert(`
+      id ${id}  \n
+      country ${(country)} \n
+      domain ${domain}  \n
+      label ${label}  \n
+      name ${name}  \n
+      region ${region}  \n
+      type ${type}  \n
+      value ${value}  \n
+      pos ${pos}  \n
+      weight ${weight} 
+    `)
+
+    cy.$(`#${id}`)
+    .data('Country', country)
+    .data('domain', domain)
+    .data('label', label)
+    .data('name', name)
+    .data('region', region)
+    .data('type', type)
+    .data('value', value)
+    .data('pos', pos)
+    .data('weight', weight)
   }
 
  
@@ -65,83 +88,58 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
 
         <div>
           <div>
+            <p>id</p>
+            <input 
+              onChange={
+                event =>{setId(event.target.value)
+                  }
+                } 
+              type="string" name="id" id='id' 
+              placeholder={id}
+              disabled 
+            />
+          </div>
+          <div>
             <p>Country</p>
             <input 
               onChange={
-                event =>{
-                    if (event.target.value === ''){
-                      setCountry(node?.Country)
-                    }
-                    setCountry(event.target.value)
-                  }
-                } 
+                event => setCountry(event.target.value)}      
               type="string" name="Country" 
               id="Country" 
-              placeholder={node?.Country}
+              placeholder={country}
             />
           </div>
           <div>
             <p>domain</p>
             <input 
               onChange={
-                event =>{
-                    if (event.target.value === ''){
-                      setDomain(node?.domain)
-                    }
-                    console.log(event.target.value);
-                    setDomain(Number(event.target.value))
+                event =>{setDomain(Number(event.target.value))
                   }
                 } 
               type="number" name="domain" id="domain" 
-              placeholder={node?.domain}
-            />
-          </div>
-          <div>
-            <p>id</p>
-            <input 
-              onChange={
-                event =>{
-                    if (event.target.value === ''){
-                      setId(node?.id)
-                    }
-                    console.log(event.target.value);
-                    setId(event.target.value)
-                  }
-                } 
-              type="string" name="id" id='id' 
-              placeholder={node?.id}
+              placeholder={String(domain)}
             />
           </div>
           <div>
             <p>label</p>
             <input 
               onChange={
-                event =>{
-                    if (event.target.value === ''){
-                      setLabel(node?.label)
-                    }
-                    console.log(event.target.value);
-                    setLabel(event.target.value)
+                event =>{setLabel(event.target.value)
                   }
                 } 
               type="string" name="label" id='label' 
-              placeholder={node?.label}
+              placeholder={label}
             />
           </div>
           <div>
             <p>name</p>
             <input 
               onChange={
-                event =>{
-                    if (event.target.value === ''){
-                      setName(node?.name)
-                    }
-                    console.log(event.target.value);
-                    setName(event.target.value)
+                event =>{setName(event.target.value)
                   }
                 } 
               type="string" name="name" id='name'
-              placeholder={node?.name}
+              placeholder={name}
             
             />
           </div>
@@ -149,48 +147,33 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
             <p>region</p>
             <input 
               onChange={
-                event =>{
-                    if (event.target.value === ''){
-                      setRegion(node?.region)
-                    }
-                    console.log(event.target.value);
-                    setRegion(Number(event.target.value))
+                event =>{setRegion(Number(event.target.value))
                   }
                 } 
               type="number" name="region" id='region' 
-              placeholder={node?.region}
+              placeholder={String(region)}
             />
           </div>
           <div>
             <p>type</p>
             <input 
               onChange={
-                event =>{
-                    if (event.target.value === ''){
-                      setType(node?.type)
-                    }
-                    console.log(event.target.value);
-                    setType(event.target.value)
+                event =>{setType(event.target.value)
                   }
                 } 
               type="string" name="type" id='type' 
-              placeholder={node?.type}
+              placeholder={type}
             />
           </div>
           <div>
             <p>value</p>
             <input 
               onChange={
-                event =>{
-                    if (event.target.value === ''){
-                      setValue(node?.value)
-                    }
-                    console.log(event.target.value);
-                    setValue(Number(event.target.value))
+                event =>{setValue(Number(event.target.value))
                   }
                 } 
               type="number" name="value" id='value' 
-              placeholder={node?.value}
+              placeholder={String(value)}
             />
           </div>
 
@@ -198,16 +181,11 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
             <p>pos</p>
             <input 
               onChange={
-                event =>{
-                    if (event.target.value === ''){
-                      setPos(node?.pos)
-                    }
-                    console.log(event.target.value);
-                    setPos((event.target.value).split(',').map(Number))
+                event =>{setPos((event.target.value).split(',').map(Number))
                   }
                 } 
               type="string" name="pos" id='pos' 
-              placeholder={node?.pos}
+              placeholder={String(pos)}
             />
           </div>
 
@@ -215,17 +193,12 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
             <p>Weight</p>
             <input 
               onChange={
-                event =>{
-                    if (event.target.value === ''){
-                      setWeight(node?.weight)
-                    }
-                    console.log(event.target.value);
-                    setWeight(Number(event.target.value))
+                event =>{setWeight(Number(event.target.value))
                   }
                 } 
               type="number" name="weight" 
               id="weight" 
-              placeholder={node?.weight}
+              placeholder={String(weight)}
             />
           </div>
        
