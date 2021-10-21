@@ -30,31 +30,34 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   const [arrayEdges, setArrayEdges] = useState<any>()
 
   // console.log(cy.nodes()[3].data("weight")); // weight is the first ele's weight
+  
 
   useEffect(()=>{
     // var divVisible = 'divVisible'
     // var buttonVerInfo = 'buttonVerInfo'
-    if(cy){
+    if(cy !== undefined){
 
+      
         var eleNodes:any = []
-        Object.keys(cy.nodes()).forEach(key=>{
-          
+        for (let key = 0; key < cy.nodes().length; key++) {
+
           eleNodes.push(
             <li key={key}> 
                   <div>
                   <input 
                     onChange={e => toggleCheckBoxNodes(e, cy.nodes()[key])} 
                     defaultChecked={state.checked}
-                    type="checkbox" name={key} id={key} 
+                    type="checkbox"  
                     /> 
-                    <h4> Node {cy.nodes()[key].data("label")} </h4> 
+                    <h4> Node {cy.nodes()[key].data("id")} </h4> 
                   </div> 
               </li>
-        )
-      })
+          )
+        }
 
       var eleEdges:any = []
-      Object.keys(cy.edges()).forEach(key=>{
+      for (let key = 0; key < cy.nodes().length; key++) {
+
         
         eleEdges.push(
           <li key={key}> 
@@ -62,13 +65,13 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
                   <input 
                     onChange={e => toggleCheckBoxNodes(e, cy.edges()[key])} 
                     defaultChecked={state.checked}
-                    type="checkbox" name={key} id={key} 
+                    type="checkbox"
                     /> 
-                    <h4> Node {cy.edges()[key].data("label")} </h4> 
+                    <h4> Edge {cy.edges()[key].data("id")} </h4> 
                   </div> 
               </li>
         )
-      })
+      }
       
       
       
@@ -76,6 +79,7 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
       setArrayEdges( <ul> {eleEdges} </ul> );
       
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[cy])
 
   
