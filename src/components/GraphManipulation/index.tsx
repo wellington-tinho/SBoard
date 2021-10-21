@@ -8,6 +8,7 @@ import CytoscapeComponent from 'react-cytoscapejs';
 import { NodeModal } from '../NodeModal';
 import { EdgeModal } from '../EdgeModal';
 import { CytoscapeContext } from '../../CytoscapeContext';
+import { ElementModal } from '../ElementModal';
 
 
 export interface propsGraphJson{
@@ -154,8 +155,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
               });
   
               cy.on('doubleTap', function(event:any, originalTapEvent:any) {
-                alert('doubleTap');
-                console.log(originalTapEvent);
+                handleOpenElementModal()
               });
               
               cy.on('cxttap ', 'node', function(evt:any){
@@ -198,6 +198,15 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
     function handleCloseEdgeModal(){
       setIsEdgeModal(false)
     }
+
+    const [isElementModal, setIsElementModal] = useState(false);
+    function handleOpenElementModal(){
+      document.addEventListener('contextmenu', event => event.preventDefault());
+      setIsElementModal(true)
+    }
+    function handleCloseElementModal(){
+      setIsElementModal(false)
+    }
   
 
   return (
@@ -214,6 +223,11 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
         isOpen={isEdgeModal}
         onRequestClose={handleCloseEdgeModal}
         edge={edgeElement}
+      />
+
+      <ElementModal 
+        isOpen={isElementModal}
+        onRequestClose={handleCloseElementModal}
       />
     </div>
   );
