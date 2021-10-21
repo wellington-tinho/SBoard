@@ -29,16 +29,23 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
   const [weight, setWeight ] = useState(Number)
     
   useEffect(() => {
-    setId(node?.id)
-    setCountry(node?.Country)
-    setDomain(node?.domain)
-    setLabel(node?.label)
-    setName(node?.name)
-    setRegion(node?.region)
-    setType(node?.type)
-    setValue(node?.value)
-    setPos(node?.pos)
-    setWeight(node?.weight)
+
+    if (node){
+      console.log('node',node);
+
+      setId(node.id)
+      setCountry(node.Country)
+      setDomain(node.domain)
+      setLabel(node.label)
+      setName(node.name)
+      setRegion(node.region)
+      setType(node.type)
+      setValue(node.value)
+      setPos(node.pos)
+      setWeight(node.weight)
+      
+    }
+
   },[node])
 
   

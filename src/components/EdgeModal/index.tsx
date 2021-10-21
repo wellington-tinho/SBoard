@@ -27,19 +27,22 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
   const [Delay, setDelay ] = useState(Number)
   
 
- console.log(edge);
  
     
   useEffect(() => {
-    setId(edge?.id)
-    setSource(edge?.source)
-    setTarget(edge?.target)
-    setNegative(edge?.negative)
-    setWeight(edge?.weight)
-    setBandwidth(edge?.Bandwidth)
-    setReliability(edge?.Reliability)
-    setDelay(edge?.Delay)
-
+    if(edge){
+      console.log('edge',edge);
+      
+    
+      setId(edge.id)
+      setSource(edge.source)
+      setTarget(edge.target)
+      setNegative(edge.negative)
+      setWeight(edge.weight)
+      setBandwidth(edge.Bandwidth)
+      setReliability(edge.Reliability)
+      setDelay(edge.Delay)
+    }
   },[edge])
 
   
@@ -47,7 +50,7 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
 
   function EditElements(event:FormEvent) {
     event.preventDefault();
-  console.log(edge);
+    console.log('EditElements');
 
 
     alert(`

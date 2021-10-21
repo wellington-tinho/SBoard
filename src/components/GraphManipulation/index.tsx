@@ -21,6 +21,8 @@ export interface iGraphJson{
 
 Modal.setAppElement('#root')
 
+
+
 export function GraphManipulation({grapJSON}:propsGraphJson){
   const containerRef = useRef(null);
   const [cy,setCy] = useContext(CytoscapeContext)
@@ -29,6 +31,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
 
 
 
+  
 
 
   Object.keys(grapJSON.edges).forEach(key=>{
@@ -134,53 +137,44 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
         zoomDelay: 45 // how many ms between zoom ticks
       };
       // cytoscape(config);
-      setCy(cytoscape(config))
-    }, []);
+      setCy(cytoscape(config))    
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
+    
     // funções automaticas inicializadas junto com o grafico 
-    useEffect(() => {
-      function CytoscapeFunctions(){
-            try {
-           
-              var doubleClickDelayMs = 350;
-              var previousTapStamp:any;
-              cy.on('tap', function(e:any) {
-                var currentTapStamp = e.timeStamp;
-                var msFromLastTap = currentTapStamp - previousTapStamp;
+    function CytoscapeFunctions(){
+      var doubleClickDelayMs = 350;
+      var previousTapStamp:any;
+      cy?.on('tap', function(e:any) {
+        var currentTapStamp = e.timeStamp;
+        var msFromLastTap = currentTapStamp - previousTapStamp;
 
-                if (msFromLastTap < doubleClickDelayMs) {
-                  e.target.trigger('doubleTap', e);
-                }
-                previousTapStamp = currentTapStamp;
-              });
-  
-              cy.on('doubleTap', function(event:any, originalTapEvent:any) {
-                handleOpenElementModal()
-              });
-              
-              cy.on('cxttap ', 'node', function(evt:any){
-                setNodeElement(evt.target.data())
-                handleOpenNodeModal()
-                console.log('Node:'+JSON.stringify((evt.target).data(), null, 4))
-              });
+        if (msFromLastTap < doubleClickDelayMs) {
+          e.target.trigger('doubleTap', e);
+        }
+        previousTapStamp = currentTapStamp;
+      });
 
-              cy.on('cxttap ', 'edge', function(evt:any){
-                setEdgeElement(evt.target.data())
-                handleOpenEdgeModal()
-                console.log('Edge:'+JSON.stringify((evt.target).data(), null, 4))
-              });
-              
-              // cy.on('tap', 'edge', function(evt:any){
-              //   // alert('Edgle:'+JSON.stringify((evt.target).data(), null, 4))
-              //   // console.log((evt.target));
-              // });
-          } catch (error) { console.log('CytoscapeFunctions',error)}
-      } 
-      CytoscapeFunctions()
+      cy?.on('doubleTap', function(event:any, originalTapEvent:any) {
+        handleOpenElementModal()
+      });
+
+      cy?.on('cxttap ', 'node', function(evt:any){
+        setNodeElement(evt.target.data())
+        handleOpenNodeModal()
+        console.log('Node:'+JSON.stringify((evt.target).data(), null, 4))
+      });
+
+      cy?.on('cxttap ', 'edge', function(evt:any){
+        setEdgeElement(evt.target.data())
+        handleOpenEdgeModal()
+        console.log('Edge:'+JSON.stringify((evt.target).data(), null, 4))
+      });
+    } 
+    CytoscapeFunctions()
   
-    },[cy])
-  
- 
+     
     const [isNodeModal, setIsNodeModal] = useState(false);
     function handleOpenNodeModal(){
       document.addEventListener('contextmenu', event => event.preventDefault());
