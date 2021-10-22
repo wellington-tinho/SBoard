@@ -1,4 +1,3 @@
-
 import {FormEvent, useContext, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
@@ -25,7 +24,6 @@ interface ElementModalProps {
 
 export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   const [cy] = useContext(CytoscapeContext);
-  const [state, setState] = useState({checked: false})
   const [arrayNodes, setArrayNodes] = useState<any>()
   const [arrayEdges, setArrayEdges] = useState<any>()
 
@@ -33,8 +31,6 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   
 
   useEffect(()=>{
-    // var divVisible = 'divVisible'
-    // var buttonVerInfo = 'buttonVerInfo'
     if(cy !== undefined){
 
       
@@ -43,32 +39,38 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
 
           eleNodes.push(
             <li key={key}> 
-                  <div>
                   <input 
                     onChange={e => toggleCheckBoxNodes(e, cy.nodes()[key])} 
-                    defaultChecked={state.checked}
                     type="checkbox"  
                     /> 
                     <h4> Node {cy.nodes()[key].data("id")} </h4> 
-                  </div> 
+
+                    <button 
+                      // onClick={() =>  handleOpenNodeModal(cy.edges()[key].data("id"))} > 
+                      onClick={() =>  {}} > 
+                      Change Element
+                    </button>
               </li>
           )
         }
 
       var eleEdges:any = []
-      for (let key = 0; key < cy.nodes().length; key++) {
+      for (let key = 0; key < cy.edges().length; key++) {
 
         
         eleEdges.push(
           <li key={key}> 
-                  <div>
                   <input 
                     onChange={e => toggleCheckBoxNodes(e, cy.edges()[key])} 
-                    defaultChecked={state.checked}
                     type="checkbox"
                     /> 
-                    <h4> Edge {cy.edges()[key].data("id")} </h4> 
-                  </div> 
+                    <h4> Edge {cy.edges()[key].data("id")} </h4>
+                    
+                    <button 
+                      // onClick={() =>  handleOpenNodeModal(cy.edges()[key].data("id"))} > 
+                      onClick={() =>  {}} > 
+                      Change Element
+                    </button>
               </li>
         )
       }
@@ -105,21 +107,23 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
         <VscChromeClose  onClick={onRequestClose} className='react-modal-close' />
         <h2>Elements</h2>
 
-        <div className="coluna">
+        <div className="elements">
           <div>
               <h3>Nodes</h3>
-              <div className='Filtro'>
-                <input type="text" name="Type" id="Type" />
-                <input type="text" name="Weight" id="Weight" />
+              <div className='filtro'>
+                <input type="text" name="Type" id="Type" placeholder="Filtrar por Type"/>
+                <input type="text" name="Weight" id="Weight" placeholder="Filtrar por Type" />
+                <input type="text" name="Weight" id="Weight" placeholder="Filtrar por Type"/>
               </div>
               {arrayNodes}
               
           </div>
           <div>
               <h3>Edges</h3>
-              <div className='Filtro'>
-                <input type="text" name="Type" id="Type" />
-                <input type="text" name="Weight" id="Weight" />
+              <div className='filtro'>
+                <input type="text" name="Type" id="Type" placeholder="Filtrar por Type"/>
+                <input type="text" name="Weight" id="Weight" placeholder="Filtrar por Weight"/>
+                <input type="text" name="Delay" id="Delay" placeholder="Filtrar por Delay"/>
               </div>
               {arrayEdges}
           </div>
@@ -132,6 +136,8 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
 
 
       </Container>
+
+      
     </Modal>
   );
 }
