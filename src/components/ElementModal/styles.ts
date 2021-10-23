@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.form`
+export const Container = styled.div`
 
   h2 {
     color: var(--text-tile);
@@ -11,13 +11,16 @@ export const Container = styled.form`
   .elements{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    
     /* background-color: aqua; */
 
     div{
+      margin-right: 1rem;
       h3{
         margin-bottom: 1rem;
       }
       .filtro{
+        
         input{ 
           width: 100%;
           padding: 0 1rem;
@@ -28,6 +31,25 @@ export const Container = styled.form`
           font-size: 1rem;
         }
         margin: 0 0 1rem 0;
+      }
+      button.changeElement{
+        width: 100%;
+        padding: 0 1rem;
+        height: 2rem;
+        border-radius: 0.25rem;
+        background: #e7e9ee;
+        border: 1px solid var(--green);
+        font-size: 1rem;
+        cursor: pointer;
+        margin: 1rem 0;
+        transition: background-color 0.3s;
+
+
+        :hover{
+          background-color: var(--green);
+          color: white;
+          border: 1px solid black;
+        }
       }
       ul{
         li{
@@ -50,6 +72,8 @@ export const Container = styled.form`
               border: 1px solid #d7d7d7;
               border-radius: .25rem;
               cursor: pointer;
+              transition:  background-color .3s;
+
 
              :hover{
               background-color: #808080;
