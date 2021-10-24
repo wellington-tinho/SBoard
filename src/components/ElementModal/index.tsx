@@ -118,13 +118,24 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
 
   
   function filterElements(value:any,type:string,element:string){
-
-    let elements=(cy.$(`${element}[${type} ${value}]`));
-      console.log('qtd elements filtes ',elements.length);
     
-    for(var i=0; i<elements.length; i++){
-      var ele:any= window.document.getElementsByName(`${element}ElementModalInput${elements[i].data('id')}`)
-      ele[0].checked = true;
+    
+
+    var elemento = cy.$(`${element}`)
+    for(var j=0; j<elemento.length; j++){
+        var eleInput:any= window.document.getElementsByName(`${element}ElementModalInput${elemento[j].data('id')}`)
+        eleInput[0].checked = false;
+      }
+    
+    
+    if (value!==''){
+      let elements=(cy.$(`${element}[${type} ${value}]`));
+      console.log('qtd elements filtes > ',elements.length);
+      
+      for(var i=0; i<elements.length; i++){
+        var ele:any= window.document.getElementsByName(`${element}ElementModalInput${elements[i].data('id')}`)
+        ele[0].checked = true;
+      }
     }
   }
  
