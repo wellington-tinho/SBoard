@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { FormEvent, useContext, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
 import { VscChromeClose } from 'react-icons/vsc'
@@ -14,19 +14,13 @@ interface ElementModalProps {
   onRequestClose: () => void;
 }
 
-  // Verefificando se foi apertado checkbox dos nos e enviando a
-  function toggleCheckBoxNodes (e:any, nodes:any) {
-    const { checked } = e.target    
-    console.log("toggleCheckBoxNodes",checked);
-    alert(checked)
-    
-  }
-
+ 
   // Modal.setAppElement('#root2')
 
 
 export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   const [cy] = useContext(CytoscapeContext);
+  const [checked, setChecked] = useState(false);
   const [arrayNodes, setArrayNodes] = useState<any>()
   const [arrayEdges, setArrayEdges] = useState<any>()
   const [nodeElement,setNodeElement] = useState<any>()
@@ -51,6 +45,17 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
     setIsEdgeModal(false)
   }
 
+   // Verefificando se foi apertado checkbox dos nos e enviando a
+   function toggleCheckBox (e:any, element:any) {
+    // const { checked } = e.target
+    // console.log('checked:',checked);
+    // setChecked(!checked)    
+
+    console.log('element:',element);
+    console.log('e.target.id:',e.target.id);  
+  }
+
+
   useEffect(()=>{
     if(cy !== undefined){
 
@@ -61,8 +66,12 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
           eleNodes.push(
             <li key={key}> 
                   <input 
-                    onChange={e => toggleCheckBoxNodes(e, cy.nodes()[key])} 
-                    type="checkbox"  
+                    onChange={e => toggleCheckBox(e, cy.nodes()[key])}     //{/* lembrar de refatorar cy.edges() aki */}
+                    type="checkbox"
+                    id={'nodeElementModalInput'+cy.nodes()[key].data("id")}  
+                    name={'nodeElementModalInput'+cy.nodes()[key].data("id")} 
+                    defaultChecked={checked} 
+                    // checked={false}
                     /> 
                     <h4> Node {cy.nodes()[key].data("id")} </h4> 
 
@@ -78,17 +87,22 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
       var eleEdges:any = []
       for (let key = 0; key < cy.edges().length; key++) {
 
+        ///lembrar de refatorar cy.edges() aki
         
         eleEdges.push(
           <li key={key}> 
                   <input 
-                    onChange={e => toggleCheckBoxNodes(e, cy.edges()[key])} 
+                    onChange={e => toggleCheckBox(e, cy.edges()[key])}     //{/* lembrar de refatorar cy.edges() aki */}
                     type="checkbox"
+                    id={'edgeElementModalInput'+cy.edges()[key].data("id")}
+                    name={'edgeElementModalInput'+cy.edges()[key].data("id")}
+                    checked={checked}
                     /> 
-                    <h4> Edge {cy.edges()[key].data("id")} </h4>
+                    
+                 <h4> Edge {cy.edges()[key].data("id")} </h4>      {/* lembrar de refatorar cy.edges() aki */}
                     
                     <button 
-                      onClick={() =>  handleOpenEdgeModal(cy.edges()[key].data())} > 
+                      onClick={() =>  handleOpenEdgeModal(cy.edges()[key].data())} >    {/* lembrar de refatorar cy.edges() aki */}
                       {/* onClick={() =>  {}} >  */}
                       Change Element
                     </button>
@@ -106,16 +120,22 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   },[cy])
 
   
-  function filterElements(value:unknown,type:string){
-    console.log(`Filtro igual ${value}, ${type}`);
-    console.log(cy.edges().data());
+  function filterElements(value:any,type:string,element:string){
+    let elements=(cy.$(`${element}[${type} ${value}]`));
+    console.log('qtd elements filtes ',elements.length);
     
+      for(var i=0; i<elements.length; i++){
+        console.log( window.document.getElementsByName(`${element}ElementModalInput${elements[i].data('id')}`))
+        // window.document.getElementsByName(`${element}ElementModalInput${elements[i].data('id')}`)[0].checked = false;
+
+          // window.document.getElementById(`${element}ElementModalInput${elements[i].data('id')}`)
+      }
   }
  
 
-  // function EditElements(event:FormEvent) {
-  //   event.preventDefault();
-  // }
+  function SaveChange(event:FormEvent) {
+    event.preventDefault();
+  }
 
  
 
@@ -127,17 +147,18 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
       className={'react-modal-content'}
     >
 
-      <Container>
-        <VscChromeClose  onClick={onRequestClose} className='react-modal-close' />
+      <Container onSubmit={SaveChange}>
+        <VscChromeClose  onClick={onRequestClose} className='re
+        act-modal-close' />
         <h2>Elements</h2>
 
         <div className="elements">
           <div>
               <h3>Nodes</h3>
               <div className='filtro'>
-                <input type="text" name="Type" id="Type" placeholder="Filtrar por Type" onChange={e => filterElements(e, 'type')}/>
-                <input type="text" name="Value" id="Value" placeholder="Filtrar por Value" onChange={e => filterElements(e, 'value')}/>
-                <input type="text" name="Weight" id="Weight" placeholder="Filtrar por Weight" onChange={e => filterElements(e, 'weight')}/>
+                <input type="text" name="NodeType" id="NodeType" placeholder="Filtrar por Type" onChange={e => filterElements(e.target.value, 'type', 'node' )}/>
+                <input type="text" name="NodeValue" id="NodeValue" placeholder="Filtrar por Value" onChange={e => filterElements(e.target.value, 'value', 'node' )}/>
+                <input type="text" name="NodeWeight" id="NodeWeight" placeholder="Filtrar por Weight" onChange={e => filterElements(e.target.value, 'weight', 'node' )}/>
               </div>
               <button className="changeElement"
                 onClick={() => {} } > 
@@ -150,9 +171,9 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
           <div>
               <h3>Edges</h3>
               <div className='filtro'>
-                <input type="text" name="Type" id="Type" placeholder="Filtrar por Type"/>
-                <input type="text" name="Weight" id="Weight" placeholder="Filtrar por Weight"/>
-                <input type="text" name="Delay" id="Delay" placeholder="Filtrar por Delay"/>
+                <input type="text" name="EdgeType" id="EdgeType" placeholder="Filtrar por Type" onChange={e => filterElements(e.target.value, 'type', 'edge' )}/>
+                <input type="text" name="EdgeDelay" id="EdgeDelay" placeholder="Filtrar por Delay" onChange={e => filterElements(e.target.value, 'delay', 'edge' )}/>
+                <input type="text" name="EdgeWeight" id="EdgeWeight" placeholder="Filtrar por Weight" onChange={e => filterElements(e.target.value, 'weight', 'edge' )}/>
               </div>
               <button className="changeElement"
                 onClick={() => {} } > 
