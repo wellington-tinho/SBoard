@@ -20,7 +20,6 @@ interface ElementModalProps {
 
 export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   const [cy] = useContext(CytoscapeContext);
-  const [checked, setChecked] = useState(false);
   const [arrayNodes, setArrayNodes] = useState<any>()
   const [arrayEdges, setArrayEdges] = useState<any>()
   const [nodeElement,setNodeElement] = useState<any>()
@@ -70,7 +69,6 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
                     type="checkbox"
                     id={'nodeElementModalInput'+cy.nodes()[key].data("id")}  
                     name={'nodeElementModalInput'+cy.nodes()[key].data("id")} 
-                    defaultChecked={checked} 
                     // checked={false}
                     /> 
                     <h4> Node {cy.nodes()[key].data("id")} </h4> 
@@ -96,7 +94,6 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
                     type="checkbox"
                     id={'edgeElementModalInput'+cy.edges()[key].data("id")}
                     name={'edgeElementModalInput'+cy.edges()[key].data("id")}
-                    checked={checked}
                     /> 
                     
                  <h4> Edge {cy.edges()[key].data("id")} </h4>      {/* lembrar de refatorar cy.edges() aki */}
@@ -121,15 +118,14 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
 
   
   function filterElements(value:any,type:string,element:string){
-    let elements=(cy.$(`${element}[${type} ${value}]`));
-    console.log('qtd elements filtes ',elements.length);
-    
-      for(var i=0; i<elements.length; i++){
-        console.log( window.document.getElementsByName(`${element}ElementModalInput${elements[i].data('id')}`))
-        // window.document.getElementsByName(`${element}ElementModalInput${elements[i].data('id')}`)[0].checked = false;
 
-          // window.document.getElementById(`${element}ElementModalInput${elements[i].data('id')}`)
-      }
+    let elements=(cy.$(`${element}[${type} ${value}]`));
+      console.log('qtd elements filtes ',elements.length);
+    
+    for(var i=0; i<elements.length; i++){
+      var ele:any= window.document.getElementsByName(`${element}ElementModalInput${elements[i].data('id')}`)
+      ele[0].checked = true;
+    }
   }
  
 
