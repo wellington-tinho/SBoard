@@ -26,6 +26,7 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   const [edgeElement,setEdgeElement] = useState<any>()
   const [isNodeModal, setIsNodeModal] = useState(false);
   const [isEdgeModal, setIsEdgeModal] = useState(false);
+  var elementsSelected={'node':[String],'edge':[String]};
 
   // console.log(cy.nodes()[3].data("weight")); // weight is the first ele's weight
   function handleOpenNodeModal(node:any){
@@ -44,15 +45,15 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
     setIsEdgeModal(false)
   }
 
-   // Verefificando se foi apertado checkbox dos nos e enviando a
-   function toggleCheckBox (e:any, element:any) {
-    // const { checked } = e.target
-    // console.log('checked:',checked);
-    // setChecked(!checked)    
+  //  // Verefificando se foi apertado checkbox dos nos e
+  //  function toggleCheckBox (e:any, element:any) {
+  //   // const { checked } = e.target
+  //   // console.log('checked:',checked);
+  //   // setChecked(!checked)    
 
-    console.log('element:',element);
-    console.log('e.target.id:',e.target.id);  
-  }
+  //   // console.log('element:',element);
+  //   // console.log('e.target.id:',e.target.id);  
+  // }
 
 
   useEffect(()=>{
@@ -65,7 +66,7 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
           eleNodes.push(
             <li key={key}> 
                   <input 
-                    onChange={e => toggleCheckBox(e, cy.nodes()[key])}     //{/* lembrar de refatorar cy.edges() aki */}
+                    // onChange={e => toggleCheckBox(e, cy.nodes()[key])}     //{/* lembrar de refatorar cy.edges() aki */}
                     type="checkbox"
                     id={'nodeElementModalInput'+cy.nodes()[key].data("id")}  
                     name={'nodeElementModalInput'+cy.nodes()[key].data("id")} 
@@ -90,7 +91,7 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
         eleEdges.push(
           <li key={key}> 
                   <input 
-                    onChange={e => toggleCheckBox(e, cy.edges()[key])}     //{/* lembrar de refatorar cy.edges() aki */}
+                    // onChange={e => toggleCheckBox(e, cy.edges()[key])}     //{/* lembrar de refatorar cy.edges() aki */}
                     type="checkbox"
                     id={'edgeElementModalInput'+cy.edges()[key].data("id")}
                     name={'edgeElementModalInput'+cy.edges()[key].data("id")}
@@ -118,9 +119,6 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
 
   
   function filterElements(value:any,type:string,element:string){
-    
-    
-
     var elemento = cy.$(`${element}`)
     for(var j=0; j<elemento.length; j++){
         var eleInput:any= window.document.getElementsByName(`${element}ElementModalInput${elemento[j].data('id')}`)
@@ -139,6 +137,20 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
     }
   }
  
+  function ChangeSelectedallElements(elementType:'node'|'edge'){
+    var elementArray = cy.$(`${elementType}`)
+    for(var j=0; j<elementArray.length; j++){
+        var eleInput:any= window.document.getElementsByName(`${elementType}ElementModalInput${elementArray[j].data('id')}`)
+        //pega todos os ids dos imputs checked = true
+        if((eleInput[0].checked)===true){
+          console.log(`${elementArray[j].data('id')}`);
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+          elementsSelected[elementType].push(elementArray[j].data('id'))
+        }
+      }
+      //envia para novo componente de mudança
+      console.log('elementsSelected->',elementsSelected);
+  }
 
   function SaveChange(event:FormEvent) {
     event.preventDefault();
@@ -168,7 +180,7 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
                 <input type="text" name="NodeWeight" id="NodeWeight" placeholder="Filtrar por Weight" onChange={e => filterElements(e.target.value, 'weight', 'node' )}/>
               </div>
               <button className="changeElement"
-                onClick={() => {} } > 
+                onClick={()=>ChangeSelectedallElements('node')} > 
                 {/* onClick={() =>  {}} >  */}
                 Change all Nodes Selecionados 
               </button>
@@ -183,7 +195,7 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
                 <input type="text" name="EdgeWeight" id="EdgeWeight" placeholder="Filtrar por Weight" onChange={e => filterElements(e.target.value, 'weight', 'edge' )}/>
               </div>
               <button className="changeElement"
-                onClick={() => {} } > 
+                onClick={() => ChangeSelectedallElements('edge')} > 
                 {/* onClick={() =>  {}} >  */}
                 Change all Edges Selecionados 
               </button>
