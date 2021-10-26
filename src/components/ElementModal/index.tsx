@@ -7,12 +7,23 @@ import { CytoscapeContext } from '../../CytoscapeContext';
 
 import { NodeModal } from '../NodeModal';
 import { EdgeModal } from '../EdgeModal';
+import { ChangeAllSelectedEdgeModal } from '../ChangeAllSelectedEdgeModal';
 
 
 interface ElementModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
 }
+
+// interface nodeSelectedProps{
+//   eleGraph: Array<string>;
+// }
+// interface edgeSelectedProps{
+//   eleGraph: Array<string>;
+// }
+// interface elementsSelectedProps{
+//   eleSelect: {'node':nodeSelectedProps,'edge':edgeSelectedProps}
+// }
 
  
   // Modal.setAppElement('#root2')
@@ -26,7 +37,9 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   const [edgeElement,setEdgeElement] = useState<any>()
   const [isNodeModal, setIsNodeModal] = useState(false);
   const [isEdgeModal, setIsEdgeModal] = useState(false);
-  var elementsSelected={'node':[String],'edge':[String]};
+  const [isSelectedEdgesModal, setIsSelectedEdgesModal] = useState(false);
+  const [elementsSelected, setElementsSelected] = useState({'node':[''],'edge':['']}); //elementsSelectedProps
+  const elementsSelectedAux = {'node':[''],'edge':['']};
 
   // console.log(cy.nodes()[3].data("weight")); // weight is the first ele's weight
   function handleOpenNodeModal(node:any){
@@ -43,6 +56,18 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   }
   function handleCloseEdgeModal(){
     setIsEdgeModal(false)
+  }
+
+  function handleOpenChangeAllSelectedElementsModal(){
+    setElementsSelected(elementsSelectedAux)
+    console.log(elementsSelected);
+    console.log(elementsSelectedAux);
+    
+    setIsSelectedEdgesModal(true)
+  }
+
+  function handleCloseChangeAllSelectedEdgesModal(){
+    setIsSelectedEdgesModal(false)
   }
 
   //  // Verefificando se foi apertado checkbox dos nos e
@@ -87,7 +112,6 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
       for (let key = 0; key < cy.edges().length; key++) {
 
         ///lembrar de refatorar cy.edges() aki
-        
         eleEdges.push(
           <li key={key}> 
                   <input 
@@ -143,13 +167,13 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
         var eleInput:any= window.document.getElementsByName(`${elementType}ElementModalInput${elementArray[j].data('id')}`)
         //pega todos os ids dos imputs checked = true
         if((eleInput[0].checked)===true){
-          console.log(`${elementArray[j].data('id')}`);
+          // console.log(`${elementArray[j].data('id')}`);
           // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-          elementsSelected[elementType].push(elementArray[j].data('id'))
+          elementsSelectedAux[elementType].push(elementArray[j].data('id')) 
         }
       }
       //envia para novo componente de mudança
-      console.log('elementsSelected->',elementsSelected);
+      handleOpenChangeAllSelectedElementsModal()
   }
 
   function SaveChange(event:FormEvent) {
@@ -221,6 +245,12 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
         isOpen={isEdgeModal}
         onRequestClose={handleCloseEdgeModal}
         edge={edgeElement}
+      />
+
+      <ChangeAllSelectedEdgeModal
+        isOpen={isSelectedEdgesModal}
+        onRequestClose={handleCloseChangeAllSelectedEdgesModal}
+        edges={elementsSelected['edge']}
       />
     </Modal>
   );
