@@ -8,6 +8,7 @@ import { CytoscapeContext } from '../../CytoscapeContext';
 import { NodeModal } from '../NodeModal';
 import { EdgeModal } from '../EdgeModal';
 import { ChangeAllSelectedEdgeModal } from '../ChangeAllSelectedEdgeModal';
+import { ChangeAllSelectedNodeModal } from '../ChangeAllSelectedNodeModal';
 
 
 interface ElementModalProps {
@@ -38,18 +39,21 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   const [isNodeModal, setIsNodeModal] = useState(false);
   const [isEdgeModal, setIsEdgeModal] = useState(false);
   const [isSelectedEdgesModal, setIsSelectedEdgesModal] = useState(false);
+  const [isSelectedNodesModal, setIsSelectedNodesModal] = useState(false);
   const [elementsSelected, setElementsSelected] = useState({'node':[''],'edge':['']}); //elementsSelectedProps
   const elementsSelectedAux = {'node':[''],'edge':['']};
 
-  // console.log(cy.nodes()[3].data("weight")); // weight is the first ele's weight
+//Node Modal
   function handleOpenNodeModal(node:any){
     setNodeElement(node)
     setIsNodeModal(true)
   }
+
   function handleCloseNodeModal(){
     setIsNodeModal(false)
   }
 
+//Edge Modal  
   function handleOpenEdgeModal(edge:any){
     setEdgeElement(edge)
     setIsEdgeModal(true)
@@ -58,16 +62,25 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
     setIsEdgeModal(false)
   }
 
-  function handleOpenChangeAllSelectedElementsModal(){
+
+//SelectedsEdges Modal
+  function handleOpenChangeAllSelectedEdgesModal(){
     setElementsSelected(elementsSelectedAux)
-    console.log(elementsSelected);
-    console.log(elementsSelectedAux);
-    
     setIsSelectedEdgesModal(true)
   }
 
   function handleCloseChangeAllSelectedEdgesModal(){
     setIsSelectedEdgesModal(false)
+  }
+
+//SelectedNodes Modal  
+  function handleOpenChangeAllSelectedNodesModal(){
+    setElementsSelected(elementsSelectedAux)
+    setIsSelectedNodesModal(true)
+  }
+
+  function handleCloseChangeAllSelectedNodeModal(){
+    setIsSelectedNodesModal(false)
   }
 
   //  // Verefificando se foi apertado checkbox dos nos e
@@ -172,8 +185,12 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
           elementsSelectedAux[elementType].push(elementArray[j].data('id')) 
         }
       }
-      //envia para novo componente de mudança
-      handleOpenChangeAllSelectedElementsModal()
+      if(elementType==='node'){
+        handleOpenChangeAllSelectedNodesModal()
+      }
+      else{
+        handleOpenChangeAllSelectedEdgesModal()
+      }
   }
 
   function SaveChange(event:FormEvent) {
@@ -251,6 +268,12 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
         isOpen={isSelectedEdgesModal}
         onRequestClose={handleCloseChangeAllSelectedEdgesModal}
         edges={elementsSelected['edge']}
+      />
+
+      <ChangeAllSelectedNodeModal
+        isOpen={isSelectedNodesModal}
+        onRequestClose={handleCloseChangeAllSelectedNodeModal}
+        nodes={elementsSelected['node']}
       />
     </Modal>
   );

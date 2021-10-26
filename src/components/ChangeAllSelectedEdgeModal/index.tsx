@@ -85,7 +85,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
 
       <Container onSubmit={EditElements}>
         <VscChromeClose  onClick={onRequestClose} className='react-modal-close' />
-        <h2>Change Elements selectd</h2>
+        <h2>Change Edges selectd</h2>
 
         <div>
          
