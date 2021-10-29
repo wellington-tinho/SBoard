@@ -9,6 +9,7 @@ import { NodeModal } from '../NodeModal';
 import { EdgeModal } from '../EdgeModal';
 import { CytoscapeContext } from '../../CytoscapeContext';
 import { ElementModal } from '../ElementModal';
+import { ChartOptions } from '../ChartOptions';
 
 
 export interface propsGraphJson{
@@ -29,21 +30,17 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
   const [nodeElement,setNodeElement] = useState<any>()
   const [edgeElement,setEdgeElement] = useState<any>()
 
-
-
-  
-
-
-  Object.keys(grapJSON.edges).forEach(key=>{
-      (
+  Object.keys(grapJSON.edges).forEach(key=>{      
         (grapJSON.edges[key].data) = {
-          ...grapJSON.edges[key].data,   
+          ...grapJSON.edges[key].data,
           id:`e${key}`,
-          Bandwidth:(Math.floor(Math.random() * 100) + 1),
-          Delay:(Math.floor(Math.random() * 100) + 1),
-          Reliability:(Math.floor(Math.random() * 100) + 1)
+          delay:       `${grapJSON.edges[key].data.delay        ? grapJSON.edges[key].data.delay       : (Math.floor(Math.random() * 100) + 1)}`,
+          bandwidth:   `${grapJSON.edges[key].data.bandwidth    ? grapJSON.edges[key].data.bandwidth   : (Math.floor(Math.random() * 100) + 1)}`,
+          reliability: `${grapJSON.edges[key].data.reliability  ? grapJSON.edges[key].data.reliability : (Math.floor(Math.random() * 100) + 1)}`,
+          weight:      `${grapJSON.edges[key].data.weight       ? grapJSON.edges[key].data.weight      : (Math.floor(Math.random() * 100) + 1)}`,
+          negative:    `${grapJSON.edges[key].data.negative     ? grapJSON.edges[key].data.negative    : (Math.floor(Math.random() * 100) + 1)}`,
         }
-      );
+      
   })
 
   Object.keys(grapJSON.nodes).forEach(key=>{
@@ -90,43 +87,53 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
               content: ( ele:any )=>{ 
                 return (
                   ' id:'+ ele.data().id +
-                  ' negative:'+ ele.data().negative +
                   ' source:'+ ele.data().source +
-                  ' target:'+ ele.data().target +
+                  '\n target:'+ ele.data().target +
+                  ' delay:'+ ele.data().delay +
+                  ' bandwidth:'+ ele.data().bandwidth +
+                  '\n reliability:'+ ele.data().reliability +
                   ' weight:'+ ele.data().weight +
-                  ' Bandwidth:'+ ele.data().Bandwidth +
-                  ' Reliability:'+ ele.data().Reliability +
-                  ' Delay:'+ ele.data().Delay 
+                  ' negative:'+ ele.data().negative  
                   ) 
                 },
+                'textWrap': 'wrap',
             }
           },
 
           {
             selector: 'node:selected',
-           
             style: {
+              // classes: 'background',
               content: ( ele:any )=>{ 
                 return (
                  ' id:'+ ele.data().id +
                  ' label:'+ ele.data().label +
                  ' name:'+ ele.data().name +
-                 ' Country:'+ ele.data().Country +
+                 '\n Country:'+ ele.data().Country +
                  ' domain:'+ ele.data().domain +
-                 ' pos:'+ ele.data().pos +
-                 ' region:'+ ele.data().region +
                  ' type:'+ ele.data().type +
+                 '\n region:'+ ele.data().region +
+                 ' pos:'+ ele.data().pos +
                  ' value:'+ ele.data().value +
                  ' weight:'+ ele.data().weight
-              )},
-              // "text-max-width": "10px",
-              // "text-wrap": "wrap",
-              // "text-max-width": 100,
-              // "source-label": "",
-              // "target-label": "",
+              
+                 )},
+                 
+                // 'padding-top': '10px',
+                // 'padding-bottom': '30px',
+                'textWrap': 'wrap',
+                "text-background-padding": '10px',
+
+                // 'text-valign': 'center',
+                // 'text-halign': 'center',
+    
+                // 'font-size': '10',
+              // "text-max-width": "5px",
+            
               "border-width": 5,
               "border-color": "#2901d9",
-              'background-color':'#019cd9'
+              'background-color':'#019cd9',
+              
             }
           }
         ],
@@ -146,6 +153,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
     function CytoscapeFunctions(){
       var doubleClickDelayMs = 350;
       var previousTapStamp:any;
+      
       cy?.on('tap', function(e:any) {
         var currentTapStamp = e.timeStamp;
         var msFromLastTap = currentTapStamp - previousTapStamp;
@@ -170,6 +178,16 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
         setEdgeElement(evt.target.data())
         handleOpenEdgeModal()
         console.log('Edge:'+JSON.stringify((evt.target).data(), null, 4))
+      });
+
+      cy?.on('cxttap', function(evt:any){
+        // target holds a reference to the originator
+        // of the event (core or element)
+        var evtTarget = evt.target;
+        if( evtTarget === cy ){
+          console.log('tap on background');
+          handleOpenChartOptionsModal()
+        }
       });
     } 
     CytoscapeFunctions()
@@ -201,6 +219,15 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
     function handleCloseElementModal(){
       setIsElementModal(false)
     }
+    
+    const [isChartOptionsModal, setIsChartOptionsModal] = useState(false);
+    function handleOpenChartOptionsModal(){
+      document.addEventListener('contextmenu', event => event.preventDefault());
+      setIsChartOptionsModal(true)
+    }
+    function handleCloseChartOptionsModal(){
+      setIsChartOptionsModal(false)
+    }
   
 
   return (
@@ -223,6 +250,14 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
         isOpen={isElementModal}
         onRequestClose={handleCloseElementModal}
       />
+
+      <ChartOptions
+        isOpen={isChartOptionsModal}
+        onRequestClose={handleCloseChartOptionsModal}
+      />
     </div>
   );
 }
+
+
+
