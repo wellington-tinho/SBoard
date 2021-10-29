@@ -231,9 +231,9 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
           <div>
               <h3>Edges</h3>
               <div className='filtro'>
-                <input type="text" name="EdgeReliability" id="EdgeReliability" placeholder="Filtrar por Reliability" onChange={e => filterElements(e.target.value, 'Reliability', 'edge' )}/>
-                <input type="text" name="EdgeDelay" id="EdgeDelay" placeholder="Filtrar por Delay" onChange={e => filterElements(e.target.value, 'Delay', 'edge' )}/>
-                <input type="text" name="EdgeBandwidth" id="EdgeBandwidth" placeholder="Filtrar por Bandwidth" onChange={e => filterElements(e.target.value, 'Bandwidth', 'edge' )}/>
+                <input type="text" name="EdgeReliability" id="EdgeReliability" placeholder="Filtrar por Reliability" onChange={e => filterElements(e.target.value, 'reliability', 'edge' )}/>
+                <input type="text" name="EdgeDelay" id="EdgeDelay" placeholder="Filtrar por Delay" onChange={e => filterElements(e.target.value, 'delay', 'edge' )}/>
+                <input type="text" name="EdgeBandwidth" id="EdgeBandwidth" placeholder="Filtrar por Bandwidth" onChange={e => filterElements(e.target.value, 'weight', 'edge' )}/>
               </div>
               <button className="changeElement"
                 onClick={() => ChangeSelectedallElements('edge')} > 
