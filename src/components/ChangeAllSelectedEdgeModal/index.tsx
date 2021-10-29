@@ -54,7 +54,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
       source ${source} \n
       target ${target}  \n
       negative ${negative}  \n
-      weight ${weight}  \n
+      Bandwidth ${weight}  \n
       Reliability ${reliability}  \n
       Delay ${delay}  \n
     `)
@@ -118,7 +118,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
             />
           </div>
           <div>
-            <p>weight</p>
+            <p>Bandwidth</p>
             <input 
               onChange={
                 event =>setWeight(Number(event.target.value))  

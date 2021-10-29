@@ -56,7 +56,7 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
       source ${source} \n
       target ${target}  \n
       negative ${negative}  \n
-      weight ${weight}  \n
+      Bandwidth ${weight}  \n
       Reliability ${reliability}  \n
       Delay ${delay}  \n
     `)
@@ -130,7 +130,7 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
             />
           </div>
           <div>
-            <p>weight</p>
+            <p>Bandwidth</p>
             <input 
               onChange={
                 event =>setWeight(Number(event.target.value))  

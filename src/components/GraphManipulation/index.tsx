@@ -113,7 +113,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
                  '\n region:'+ ele.data().region +
                  ' pos:'+ ele.data().pos +
                  ' value:'+ ele.data().value +
-                 ' weight:'+ ele.data().weight
+                 ' bandwidth:'+ ele.data().weight
               
                  )},
                  
