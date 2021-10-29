@@ -22,9 +22,8 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
   const [target, setTarget ] = useState(String)
   const [negative, setNegative ] = useState(Number)
   const [weight, setWeight ] = useState(Number)
-  const [bandwidth, setBandwidth ] = useState(Number)
-  const [Reliability, setReliability ] = useState(Number)
-  const [Delay, setDelay ] = useState(Number)
+  const [reliability, setReliability ] = useState(Number)
+  const [delay, setDelay ] = useState(Number)
   
 
  
@@ -39,9 +38,8 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
       setTarget(edge.target)
       setNegative(edge.negative)
       setWeight(edge.weight)
-      setBandwidth(edge.Bandwidth)
-      setReliability(edge.Reliability)
-      setDelay(edge.Delay)
+      setReliability(edge.reliability)
+      setDelay(edge.delay)
     }
   },[edge])
 
@@ -59,9 +57,8 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
       target ${target}  \n
       negative ${negative}  \n
       weight ${weight}  \n
-      bandwidth ${bandwidth}  \n
-      Reliability ${Reliability}  \n
-      Delay ${Delay}  \n
+      Reliability ${reliability}  \n
+      Delay ${delay}  \n
     `)
 
     cy.$(`#${id}`)
@@ -69,9 +66,8 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
     .data('target', target)
     .data('negative', negative)
     .data('weight', weight)
-    .data('Bandwidth', bandwidth)
-    .data('Reliability', Reliability)
-    .data('Delay', Delay)
+    .data('Reliability', reliability)
+    .data('Delay', delay)
  
   }
 
@@ -145,23 +141,13 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
             />
           </div>
           <div>
-            <p>bandwidth</p>
-            <input 
-              onChange={
-                event =>setBandwidth(Number(event.target.value))  
-              } 
-              type="number" name="region" id='region' 
-              placeholder={String(bandwidth)}
-            />
-          </div>
-          <div>
             <p>Reliability</p>
             <input 
               onChange={
                 event =>setReliability(Number(event.target.value))  
               } 
               type="number" name="type" id='type' 
-              placeholder={String(Reliability)}
+              placeholder={String(reliability)}
             />
           </div>
           <div>
@@ -171,7 +157,7 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
                 event =>setDelay(Number(event.target.value))  
               } 
               type="number" name="value" id='value' 
-              placeholder={String(Delay)}
+              placeholder={String(delay)}
             />
           </div>
 

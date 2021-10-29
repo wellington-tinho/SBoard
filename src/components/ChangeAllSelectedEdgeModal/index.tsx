@@ -21,9 +21,8 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
   const [target, setTarget ] = useState(String)
   const [negative, setNegative ] = useState<Number>()
   const [weight, setWeight ] = useState<Number>()
-  const [bandwidth, setBandwidth ] = useState<Number>()
-  const [Reliability, setReliability ] = useState<Number>()
-  const [Delay, setDelay ] = useState<Number>()
+  const [reliability, setReliability ] = useState<Number>()
+  const [delay, setDelay ] = useState<Number>()
   
 
  
@@ -56,9 +55,8 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
       target ${target}  \n
       negative ${negative}  \n
       weight ${weight}  \n
-      bandwidth ${bandwidth}  \n
-      Reliability ${Reliability}  \n
-      Delay ${Delay}  \n
+      Reliability ${reliability}  \n
+      Delay ${delay}  \n
     `)
 
     for(var i=1; i<edges.length; i++) {    
@@ -67,9 +65,8 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
       .data('target',       target ?      target :       cy.$(`#${edges[i]}`).data('target') )
       .data('negative',     negative ?    negative :     cy.$(`#${edges[i]}`).data('negative') )
       .data('weight',       weight ?      weight :       cy.$(`#${edges[i]}`).data('weight') )
-      .data('Bandwidth',    bandwidth ?   bandwidth :    cy.$(`#${edges[i]}`).data('Bandwidth') )
-      .data('Reliability',  Reliability ? Reliability :  cy.$(`#${edges[i]}`).data('Reliability') )
-      .data('Delay',        Delay ?       Delay :        cy.$(`#${edges[i]}`).data('Delay') )
+      .data('Reliability',  reliability ? reliability :  cy.$(`#${edges[i]}`).data('Reliability') )
+      .data('Delay',        delay ?       delay :        cy.$(`#${edges[i]}`).data('Delay') )
     }
   }
 
@@ -129,16 +126,6 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
               type="number" name="name" id='name'
               placeholder={'Insira aqui um valor para alterar.'}
             
-            />
-          </div>
-          <div>
-            <p>bandwidth</p>
-            <input 
-              onChange={
-                event =>setBandwidth(Number(event.target.value))  
-              } 
-              type="number" name="region" id='region' 
-              placeholder={'Insira aqui um valor para alterar.'}
             />
           </div>
           <div>

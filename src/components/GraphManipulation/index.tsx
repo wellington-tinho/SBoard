@@ -35,7 +35,6 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
           ...grapJSON.edges[key].data,
           id:`e${key}`,
           delay:       `${grapJSON.edges[key].data.delay        ? grapJSON.edges[key].data.delay       : (Math.floor(Math.random() * 100) + 1)}`,
-          bandwidth:   `${grapJSON.edges[key].data.bandwidth    ? grapJSON.edges[key].data.bandwidth   : (Math.floor(Math.random() * 100) + 1)}`,
           reliability: `${grapJSON.edges[key].data.reliability  ? grapJSON.edges[key].data.reliability : (Math.floor(Math.random() * 100) + 1)}`,
           weight:      `${grapJSON.edges[key].data.weight       ? grapJSON.edges[key].data.weight      : (Math.floor(Math.random() * 100) + 1)}`,
           negative:    `${grapJSON.edges[key].data.negative     ? grapJSON.edges[key].data.negative    : (Math.floor(Math.random() * 100) + 1)}`,
@@ -90,7 +89,6 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
                   ' source:'+ ele.data().source +
                   '\n target:'+ ele.data().target +
                   ' delay:'+ ele.data().delay +
-                  ' bandwidth:'+ ele.data().bandwidth +
                   '\n reliability:'+ ele.data().reliability +
                   ' weight:'+ ele.data().weight +
                   ' negative:'+ ele.data().negative  

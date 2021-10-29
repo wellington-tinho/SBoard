@@ -171,8 +171,9 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
                 event => set_qtd_vnrs( Number(event.target.value) )
                 } 
                 type="number" name="qtd_vnrs" 
-                value={qtd_vnrs} id="qtd_vnrs" 
-                placeholder="default: 20" />
+                
+                 id="qtd_vnrs" 
+                placeholder={String(qtd_vnrs)} />
             {/* 
              <a href="http://" title='used in VNRs_Generator.generator()'>
              <img src="" alt="icon help" /> </a>
@@ -185,9 +186,10 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
               onChange={
                 event => set_lowBetter(event.target.value)
               }
-              value={String(lowBetter)} id="lowBetter" 
+             
+               id="lowBetter" 
               type="text"
-              placeholder="default: false" 
+              placeholder={String(lowBetter)} 
             />
             {/* <a href="/" title='in this case take with the greater Evaluation' >          
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -199,8 +201,9 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_alfa(Number(event.target.value))}
-              value={alfa} id="alfa" type="number"
-              placeholder="default: 0.5" 
+              
+               id="alfa" type="number"
+              placeholder={String(alfa)}
             />
             {/* <a href="/" title='used in Enviroment.__init__()' >          
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -212,8 +215,9 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_beta(Number(event.target.value))}
-              value={beta} id="beta" type="number"
-              placeholder="default: 0.5" 
+              
+               id="beta" type="number"
+              placeholder={String(beta)} 
             />
             {/* <a href="/" title='used in Enviroment.__init__()'>          
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -225,8 +229,9 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_qtd_nodes(Number(event.target.value))}
-              value={qtd_nodes} id="qtd_nodes" type="number"
-              placeholder="default: 200" 
+              
+               id="qtd_nodes" type="number"
+              placeholder={String(qtd_nodes)} 
             />
             {/* <a href="/" title='used in Environment.create() Barabási parameter'>          
               <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -238,8 +243,9 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_qtd_virtual_nodes(Number(event.target.value))}
-              value={qtd_virtual_nodes} id="qtd_virtual_nodes" type="number"
-              placeholder="default: 6" 
+              
+               id="qtd_virtual_nodes" type="number"
+              placeholder={String(qtd_virtual_nodes)} 
             />
             {/* <a href="/" title='used in VNRs_Generator'>          
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -251,8 +257,9 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_qtd_neighbours(Number(event.target.value))}
-              value={qtd_neighbours} id="qtd_neighbours" type="number"
-              placeholder="default: 5" />
+              
+               id="qtd_neighbours" type="number"
+              placeholder={String(qtd_neighbours)} />
             {/* <a href="/" title='used in Environment.create() Barabási parameter'>          
             <img src="/assets/icons/help.png" alt="icon Help" /> 
              </a> */}
@@ -264,10 +271,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
               onChange={
                 event => set_node_capacity_min(Number(event.target.value))
               }
-              value={node_capacity_min} 
+              
+             
               id="node_capacity_min" 
               type="number" 
-              placeholder="default: 10" />
+              placeholder={String(node_capacity_min)} />
               {/* <a href="/" title='used in Environment.create()' >
                 <img src="/assets/icons/help.png" alt="icon Help" /> 
               </a> */}
@@ -280,9 +288,10 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
                 onChange={
                 event => set_node_capacity_max(Number(event.target.value))
               }
-              value={node_capacity_max} 
+              
+             
               id="node_capacity_max" type="number" 
-              placeholder="default: 200" />
+              placeholder={String(node_capacity_max)} />
             {/* <a href="/" title='used in Enviroment.__init__()' >
             <img src="/assets/icons/help.png" alt="icon Help" />
             </a> */}
@@ -294,9 +303,10 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
               onChange={
                 event => set_edge_capacity_min(Number(event.target.value))
               }
-              value={edge_capacity_min} 
+              
+             
               id="edge_capacity_min" 
-              type="number" placeholder="default: 10" />
+              type="number" placeholder={String(edge_capacity_min)} />
               {/* <a href="/" title='used in Environment.create()' >
               <img src="/assets/icons/help.png" alt="icon Help" />
               </a> */}
@@ -309,10 +319,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
               onChange={
                 event => set_edge_capacity_max(Number(event.target.value))
               }
-              value={edge_capacity_max} 
+              
+             
               id="edge_capacity_max" 
               type="number" 
-              placeholder="default: 20" />
+              placeholder={String(edge_capacity_max)} />
             {/* <a href="/" title='used in Environment.create()' >
             <img src="/assets/icons/help.png" alt="icon Help" />
             </a> */}
@@ -324,10 +335,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
               onChange={
                 event => set_first_population_attempt(Number(event.target.value))
               }
-              value={first_population_attempt} 
+              
+             
               id="first_population_attempt" 
               type="number" 
-              placeholder="default: 4" />
+              placeholder={String(first_population_attempt)} />
             {/* <a href="/" title='used in Embedding_GA.first_population' >
             <img src="/assets/icons/help.png" alt="icon Help" />
             </a> */}
@@ -339,10 +351,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
               onChange={
                 event => set_core_bandwidth(Number(event.target.value))
               }
-              value={core_bandwidth} 
+              
+             
               id="core_bandwidth" 
               type="number" 
-              placeholder="default: 10000	= 10Gbps" />
+              placeholder={String(core_bandwidth)} />
             {/* <a href="/" title='core bandwidth ' >
           <img src="/assets/icons/help.png" alt="icon Help" />
            </a> */}
@@ -356,10 +369,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
                   (event.target.value)
                   )
               }
-              value={bandwidths} 
+              
+             
               id="bandwidths" 
               type="text" 
-              placeholder="default:  10,100,1000" />
+              placeholder={String(bandwidths)} />
             {/* <a href="/" title='used in VNRs_Generator.generator()' >
           <img src="/assets/icons/help.png" alt="icon Help" />
            </a> */}
@@ -371,10 +385,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
               onChange={
                 event => set_mutation_limit(Number(event.target.value))
               }
-              value={mutation_limit} 
+              
+             
               id="mutation_limit" 
               type="number" 
-              placeholder="default:	0.02" 
+              placeholder={String(mutation_limit)} 
             />
             {/* <a href="/" title='used in Embedding.__init__() - Estava 0.02' >
             <img src="/assets/icons/help.png" alt="icon Help" />
@@ -387,7 +402,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_approach(Number(event.target.value))}
-              value={approach} id="approach" type="number" placeholder="default:  2" />
+              
+               id="approach" type="number" placeholder={String(approach)} />
 
             {/* <a href="/" title='used in main.run()' >
           <img src="/assets/icons/help.png" alt="icon Help" />
@@ -399,7 +415,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_step(Number(event.target.value))}
-              value={step} id="step" type="number" placeholder="default:  1" />
+              
+               id="step" type="number" placeholder={String(step)} />
 
             {/* <a href="/" title='used in main.__main__()' >
           <img src="/assets/icons/help.png" alt="icon Help" />
@@ -411,7 +428,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_ga_repetition(Number(event.target.value))}
-              value={ga_repetition} id="ga_repetition" type="number" placeholder="default:  10" />
+              
+               id="ga_repetition" type="number" placeholder={String(ga_repetition)} />
 
             {/* <a href="/" title='used in Main.run()' >
           <img src="/assets/icons/help.png" alt="icon Help" />
@@ -425,7 +443,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_simulator_repetition(Number(event.target.value))}
-              value={simulator_repetition} id="simulator_repetition" type="number" placeholder="default:  5" />
+              
+               id="simulator_repetition" type="number" placeholder={String(simulator_repetition)} />
 
             {/* <a href="/" title='' >
           <img src="/assets/icons/help.png" alt="icon Help" />
@@ -438,7 +457,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_population_size(Number(event.target.value))}
-              value={population_size} id="population_size" type="number" placeholder="default:  5" />
+              
+               id="population_size" type="number" placeholder={String(population_size)} />
 
             {/* <a href="/" title='used in main.__main__()' >
           <img src="/assets/icons/help.png" alt="icon Help" />
@@ -450,7 +470,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_quantity_domains(Number(event.target.value))}
-              value={quantity_domains} id="quantity_domains" type="number" placeholder="default:  3" />
+              
+               id="quantity_domains" type="number" placeholder={String(quantity_domains)} />
 
             {/* <a href="/" title='used in VNRs_Generator.generator()' >
           <img src="/assets/icons/help.png" alt="icon Help" />
@@ -462,7 +483,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_vnr_durations(Number(event.target.value))}
-              value={vnr_durations} id="vnr_durations" type="number" placeholder="default:  500" />
+              
+               id="vnr_durations" type="number" placeholder={String(vnr_durations)} />
 
             {/* <a href="/" title='used in VNRs_Generator.generator()' >
           <img src="/assets/icons/help.png" alt="icon Help" />
@@ -477,10 +499,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
                   (event.target.value)
                 )
               }
-              value={amount_demanded} 
+              
+             
               id="amount_demanded" 
               type="text"  
-              placeholder="default:  10,50" 
+              placeholder={String(amount_demanded)} 
             />
             {/* <a href="/" title='(min max) - used in VNRs_Generator.generator()' >
             <img src="/assets/icons/help.png" alt="icon Help" />
@@ -493,10 +516,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
               onChange={
                 event => set_file_domain(event.target.value)
               }
-                value={file_domain} 
+                
+               
                 id="file_domain" 
                 type="text" 
-                placeholder="default:  config/domains.json" 
+                placeholder={String(file_domain)} 
             />
     
             {/* <a href="/" title='used in Environment.create()' >
@@ -511,7 +535,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_distribution_filename(event.target.value)}
-              value={distribution_filename} id="distribution_filename" type="text" placeholder="default:  config/distribution_services_nodes.json" />
+              
+               id="distribution_filename" type="text" placeholder={String(distribution_filename)} />
 
             {/* <a href="/" title='' >
           <img src="/assets/icons/help.png" alt="icon Help" />
@@ -524,7 +549,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_ga_prefix_files(event.target.value)}
-              value={ga_prefix_files} id="ga_prefix_files" type="text" placeholder="default:  results/ga_results" />
+              
+               id="ga_prefix_files" type="text" placeholder={String(ga_prefix_files)} />
 
             {/* <a href="/" title='used in Environment_GA' >
           <img src="/assets/icons/help.png" alt="icon Help" />
@@ -539,7 +565,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_ga_prefix_result_file(event.target.value)}
-              value={ga_prefix_result_file} id="ga_prefix_result_file" type="text" placeholder="default:  results/ga_results/Mapping_Results_" />
+              
+               id="ga_prefix_result_file" type="text" placeholder={String(ga_prefix_result_file)} />
 
             {/* <a href="/" title='used in Environment_GA save_results()' >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -552,7 +579,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_ga_file_vnr_not_created(event.target.value)}
-              value={ga_file_vnr_not_created} id="ga_file_vnr_not_created" type="text" placeholder="default:  results/ga_results/vnrs_not_created.json" />
+              
+               id="ga_file_vnr_not_created" type="text" placeholder={String(ga_file_vnr_not_created)} />
 
             {/* <a href="/" title='used in main.__main__()' >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -565,7 +593,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_de_prefix_files(event.target.value)}
-              value={de_prefix_files} id="de_prefix_files" type="text" placeholder="default:  results/de_results/" />
+              
+               id="de_prefix_files" type="text" placeholder={String(de_prefix_files)} />
 
             {/* <a href="/" title="used in Environment_DE" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -578,7 +607,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_de_prefix_result_file(event.target.value)}
-              value={de_prefix_result_file} id="de_prefix_result_file" type="text" placeholder="default:  results/de_results/Mapping_Results_" />
+              
+               id="de_prefix_result_file" type="text" placeholder={String(de_prefix_result_file)} />
 
             {/* <a href="/" title="used in Environment_DE" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -590,7 +620,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_de_file_vnr_not_created(event.target.value)}
-              value={de_file_vnr_not_created} id="de_file_vnr_not_created" type="text" placeholder="default: results/de_results/vnrs_not_created.json" />
+              
+               id="de_file_vnr_not_created" type="text" placeholder={String(de_file_vnr_not_created)} />
 
             {/* <a href="/" title="used in Environment_DE" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -603,7 +634,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_stress_prefix_files(event.target.value)}
-              value={stress_prefix_files} id="stress_prefix_files" type="text" placeholder="default: results/stress_results/" />
+              
+               id="stress_prefix_files" type="text" placeholder={String(stress_prefix_files)} />
 
             {/* <a href="/" title="used in Environment_Stress" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -616,7 +648,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_stress_prefix_result_file(event.target.value)}
-              value={stress_prefix_result_file} id="stress_prefix_result_file" type="text" placeholder="default: results/stress_nodes_results/Mapping_Results_" />
+              
+               id="stress_prefix_result_file" type="text" placeholder={String(stress_prefix_result_file)} />
 
             {/* <a href="/" title="used in Environment_Stress" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -628,7 +661,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_stress_file_vnr_not_created(event.target.value)}
-              value={stress_file_vnr_not_created} id="stress_file_vnr_not_created" type="text" placeholder="default:  results/stress_nodes_results/vnrs_not_created.json" />
+              
+               id="stress_file_vnr_not_created" type="text" placeholder={String(stress_file_vnr_not_created)} />
 
             {/* <a href="/" title="used in Environment_Stress" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -642,7 +676,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_greedy_prefix_files(event.target.value)}
-              value={greedy_prefix_files} id="greedy_prefix_files" type="text" placeholder="default:  results/greedy_results/" />
+              
+               id="greedy_prefix_files" type="text" placeholder={String(greedy_prefix_files)} />
 
             {/* <a href="/" title="used in Environment_Greedy" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -654,7 +689,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_greedy_prefix_result_file(event.target.value)}
-              value={greedy_prefix_result_file} id="greedy_prefix_result_file" type="text" placeholder="default:  results/greedy_edges_results/Mapping_Results_" />
+              
+               id="greedy_prefix_result_file" type="text" placeholder={String(greedy_prefix_result_file)} />
             {/* <a href="/" title="used in Environment_Greedy" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
           </a> */}
@@ -668,10 +704,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
               onChange={
                 event => set_greedy_file_vnr_not_created(event.target.value)
               }
-              value={greedy_file_vnr_not_created} 
+              
+             
               id="greedy_file_vnr_not_created" 
               type="text" 
-              placeholder="default:  results/greedy_edges_results/vnrs_not_created.json" />
+              placeholder={String(greedy_file_vnr_not_created)} />
 
             {/* <a href="/" title="used in Environment_Greedy" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -683,10 +720,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input onChange={
               event => set_time_to_create_a_slice(Number(event.target.value))
             }
-              value={time_to_create_a_slice} 
+              
+             
               id="time_to_create_a_slice" 
               type="number" 
-              placeholder="default: 1" />
+              placeholder={String(time_to_create_a_slice)} />
               {/* <a href="/" title="used in Domains by Domains_Generator" >
               <img src="/assets/icons/help.png" alt="icon Help" /> 
               </a> */}
@@ -699,7 +737,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_limit_max_bandwidth(Number(event.target.value))}
-              value={limit_max_bandwidth} id="limit_max_bandwidth" type="number" placeholder="default: 100000 " />
+              
+               id="limit_max_bandwidth" type="number" placeholder={String(limit_max_bandwidth)} />
 
             {/* <a href="/" title="it must be greater than core_bandwidth" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -712,7 +751,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_path_approach(Number(event.target.value))}
-              value={path_approach} id="path_approach" type="number" placeholder="default:  2" />
+              
+               id="path_approach" type="number" placeholder={String(path_approach)} />
 
             {/* <a href="/" title="" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -724,7 +764,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_quantity_services(Number(event.target.value))}
-              value={quantity_services} id="quantity_services" type="number" placeholder="default:  5" />
+              
+               id="quantity_services" type="number" placeholder={String(quantity_services)} />
 
             {/* <a href="/" title="used in Environment.py in create_services method" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -738,7 +779,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_quantity_max_functions(Number(event.target.value))}
-              value={quantity_max_functions} id="quantity_max_functions" type="number" placeholder="default:  10 " />
+              
+               id="quantity_max_functions" type="number" placeholder={String(quantity_max_functions)} />
 
             {/* <a href="/" title="used in Environment.py in create_services method" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -751,7 +793,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_quantity_max_pkts(Number(event.target.value))}
-              value={quantity_max_pkts} id="quantity_max_pkts" type="number" placeholder="default:  1000 " />
+              
+               id="quantity_max_pkts" type="number" placeholder={String(quantity_max_pkts)} />
 
             {/* <a href="/" title="a function can at must delay 100pkts/time_unit" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -763,7 +806,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_file_services(event.target.value)}
-              value={file_services} id="file_services" type="text" placeholder="default:  config/services.json" />
+              
+               id="file_services" type="text" placeholder={String(file_services)} />
 
             {/* <a href="/" title="" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -775,7 +819,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_file_functions(event.target.value)}
-              value={file_functions} id="file_functions" type="text" placeholder="default:  config/functions.json" />
+              
+               id="file_functions" type="text" placeholder={String(file_functions)} />
 
             {/* <a href="/" title="" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -787,7 +832,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_MTU(Number(event.target.value))}
-              value={MTU} id="MTU" type="number" placeholder="default:  1500" />
+              
+               id="MTU" type="number" placeholder={String(MTU)} />
 
             {/* <a href="/" title="" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -799,7 +845,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_DE_C(Number(event.target.value))}
-              value={DE_C} id="DE_C" type="number" placeholder="default:  1" />
+              
+               id="DE_C" type="number" placeholder={String(DE_C)} />
 
             {/* <a href="/" title="(0.9 valor usado nos testes) used in DE/Embedding_DE (it means the probability C see DE algorithm)" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -811,7 +858,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_DE_F(Number(event.target.value))}
-              value={DE_F} id="DE_F" type="number" placeholder="default: 0.25" />
+              
+               id="DE_F" type="number" placeholder={String(DE_F)} />
 
             {/* <a href="/" title="(0.85 valor usado nos testes)  # used in DE/Embedding_DE (it means the Factor C see DE algorithm)" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -825,7 +873,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_link_delay_min(Number(event.target.value))}
-              value={link_delay_min} id="link_delay_min" type="number" placeholder="default: 10" />
+              
+               id="link_delay_min" type="number" placeholder={String(link_delay_min)} />
 
             {/* <a href="/" title="Used in Environment.py to create the links by first time" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -837,7 +886,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_link_delay_max(Number(event.target.value))}
-              value={link_delay_max} id="link_delay_max" type="number" placeholder="default: 100" />
+              
+               id="link_delay_max" type="number" placeholder={String(link_delay_max)} />
 
             {/* <a href="/" title="Used in Environment.py to create the links by first time" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -849,7 +899,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_link_relibility_min(Number(event.target.value))}
-              value={link_relibility_min} id="link_relibility_min" type="number" placeholder="default: 90" />
+              
+               id="link_relibility_min" type="number" placeholder={String(link_relibility_min)} />
 
             {/* <a href="/" title="Used in Environment.py to create the links by first time" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -861,7 +912,8 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_link_relibility_max(Number(event.target.value))}
-              value={link_relibility_max} id="link_relibility_max" type="number" placeholder="default: 99" />
+              
+               id="link_relibility_max" type="number" placeholder={String(link_relibility_max)} />
 
              {/* <a href="/" title="Used in Environment.py to create the links by first time" >
                 <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -874,10 +926,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
               onChange={
                 event => set_types_slice((event.target.value).split(','))
               }
-              value={types_slice} 
+              
+             
               id="types_slice" 
               type="text" 
-              placeholder="default: mmtc,urllc,embb" 
+              placeholder={String(types_slice)} 
             />
             {/* <a href="/" title="" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -890,10 +943,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
               onChange={
                 event => set_de_coefficients(JSON.parse(event.target.value))
               }
-              value={JSON.stringify(de_coefficients)} 
+             
+             
               id="de_coefficients" 
               type="text" 
-              placeholder='default: {"mmtc": [1,0,0], "urllc": [1,0,0], "embb": [1,0,0]} ' 
+              placeholder={String(de_coefficients)} 
             />
             {/* <a href="/" title="" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -905,10 +959,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
             <input 
               onChange={
                 event => set_hop_coefficients(Number(event.target.value))}
-                value={hop_coefficients} 
+                
+               
                 id="hop_coefficients" 
                 type="number" 
-                placeholder="default: 1" 
+                placeholder={String(hop_coefficients)} 
               />
             {/* <a href="/" title="0: not regard; 1 regard" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
@@ -923,10 +978,11 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
                   event.target.value
                 )
               }
-              value={String(remove_vnr_not_mapped)} 
+            
+             
               id="remove_vnr_not_mapped" 
               type="text" 
-              placeholder="default: true" 
+              placeholder={String(remove_vnr_not_mapped)} 
             />
             {/* <a href="/" title="" >
             <img src="/assets/icons/help.png" alt="icon Help" /> 
