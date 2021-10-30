@@ -282,7 +282,9 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
 
   return (
     <div>
+      <div id='cy' >
       <div ref={containerRef} style={{ width: '80vw', height: '86vh' }} />
+      </div>
 
       <NodeModal 
         isOpen={isNodeModal}

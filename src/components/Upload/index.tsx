@@ -82,10 +82,7 @@ export function Upload() {
 
   else{
     return(
-      <div id='cy' >
         <GraphManipulation grapJSON={grapJSON} />
-      </div>
-     
     ); 
   }
 }
