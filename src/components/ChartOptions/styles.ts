@@ -26,6 +26,9 @@ export const Container = styled.div`
     margin-top: 1.5rem;
     transition: filter 0.2s;
     font-weight:600;
+    input{
+      display: none !important;
+    }
     
     :hover{
       background-color: var(--green);
