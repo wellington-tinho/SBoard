@@ -76,10 +76,39 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
             selector: 'node',
             style: {
               content: 'data(label)',
-              'background-color': "rgb(153,153,153)"
+              'background-color': "rgb(153,153,153)",
+              "border-width": 3,
+              "border-color": ( ele:any )=>{ 
+                if(ele.data().type==='t'){
+                  return ("#da42c5")
+                }
+                if(ele.data().type==='c'){
+                  return ("#3bd1d1")
+                }
+                if(ele.data().type==='s'){
+                  return ("#d1cf42")
+                }else{
+                  return ("rgb(153,153,153)")
+                }
+              
+              },
             }
           },
-
+          {
+            selector: 'edge',
+            style: {
+              // content: 'data(label)',
+              'line-style': 'solid',
+              'line-color': '#b3b3b3',
+              // 'control-point-step-size': 40,
+              // 'control-point-weights': 0.5,
+              // 'segment-weights': 0.5,
+              // 'segment-distances': 20,
+              // 'edge-distances': 'intersection',
+              'curve-style': 'unbundled-bezier ',
+            }
+          },
+          
           {
             selector: 'edge:selected',
             style: {
@@ -94,15 +123,29 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
                   ' negative:'+ ele.data().negative  
                   ) 
                 },
-                'textWrap': 'wrap',
-            }
-          },
+                'line-color': '#4a7aff',
 
-          {
-            selector: 'node:selected',
-            style: {
-              // classes: 'background',
-              content: ( ele:any )=>{ 
+                'textWrap': 'wrap',
+                'fontWeight':'bold',
+                'text-background-color': '#ffffff',
+                'text-background-opacity': 1,
+                'text-background-margin': 2,
+                'text-border-opacity': 1,
+                'text-border-width': 1,
+                // 'text-border-style': 'solid',
+                'text-border-color': '#33396e',
+                'textBackgroundShape': 'round-rectangle',
+                'opacity': 1,
+                'z-index': 99,
+
+              }
+            },
+            
+            {
+              selector: 'node:selected',
+              style: {
+                // classes: 'background',
+                content: ( ele:any )=>{ 
                 return (
                  ' id:'+ ele.data().id +
                  ' label:'+ ele.data().label +
@@ -114,23 +157,32 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
                  ' pos:'+ ele.data().pos +
                  ' value:'+ ele.data().value +
                  ' bandwidth:'+ ele.data().weight
-              
+                 
                  )},
                  
-                // 'padding-top': '10px',
-                // 'padding-bottom': '30px',
+        
+                'fontWeight':'bold',
                 'textWrap': 'wrap',
                 "text-background-padding": '10px',
+                "border-width": 5,
+                "border-color": "#2901d9",
+                'background-color':'#019cd9',
+                'text-background-color': '#ffffff',
+                'text-background-opacity': 1,
+                'text-background-margin': 1.5,
+                'text-border-opacity': 1,
+                'text-border-width': 1,
+                'text-border-color': '#33396e',
+                'textBackgroundShape': 'round-rectangle',
 
+                
+
+                
                 // 'text-valign': 'center',
                 // 'text-halign': 'center',
     
                 // 'font-size': '10',
               // "text-max-width": "5px",
-            
-              "border-width": 5,
-              "border-color": "#2901d9",
-              'background-color':'#019cd9',
               
             }
           }
