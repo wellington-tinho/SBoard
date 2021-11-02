@@ -179,13 +179,13 @@ export function Aside({request}:any) {
             </button>
 
             <div>
-              <input type="text" name="Topology-creation"        id="Topology-creation"     placeholder="Topology" />
-              <input type="text" name="Service-creation"         id="Service-creation"      placeholder="Service" />
-              <input type="text" name="Duration-creation"        id="Duration-creation"     placeholder="Duration" />
-              <input type="text" name="Band-creation"            id="Band-creation"         placeholder="Band" />
-              <input type="text" name="Delay-creation"           id="Delay-creation"        placeholder="Delay" />
-              <input type="text" name="KnotsQuantity-creation"  id="KnotsQuantity-creation"placeholder="Knots Quantity" />
-              <input type="text" name="Reliability-creation"     id="Reliability-creation"  placeholder="Reliability" />
+              <input type="text" name="Topology-creation"        id="Topology-creation"       placeholder="Topology" />
+              <input type="text" name="Service-creation"         id="Service-creation"        placeholder="Service" />
+              <input type="text" name="Duration-creation"        id="Duration-creation"       placeholder="Duration" />
+              <input type="text" name="Band-creation"            id="Band-creation"           placeholder="Band" />
+              <input type="text" name="Delay-creation"           id="Delay-creation"          placeholder="Delay" />
+              <input type="text" name="KnotsQuantity-creation"   id="KnotsQuantity-creation"  placeholder="Knots Quantity" />
+              <input type="text" name="Reliability-creation"     id="Reliability-creation"    placeholder="Reliability" />
              
               <select name="SliceTypes" id="SliceTypes" defaultValue={'DEFAULT'}>
                 <option value='DEFAULT' disabled hidden>Select Slice</option>

@@ -95,6 +95,7 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
 
 
   useEffect(()=>{
+    // console.log('displaro no cy = ',cy.$(''));   
     if(cy !== undefined){
 
       
@@ -152,7 +153,7 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
       
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[cy])
+  },[cy,isOpen])
 
   
   function filterElements(value:any,type:string,element:string){
@@ -208,8 +209,7 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
     >
 
       <Container onSubmit={SaveChange}>
-        <VscChromeClose  onClick={onRequestClose} className='re
-        act-modal-close' />
+        <VscChromeClose  onClick={onRequestClose} className='react-modal-close' />
         <h2>Elements</h2>
 
         <div className="elements">

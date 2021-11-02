@@ -24,7 +24,7 @@ Modal.setAppElement('#root')
 
 
 
-export function GraphManipulation({grapJSON}:propsGraphJson){
+export function GraphManipulation({grapJSON}:propsGraphJson){  
   const containerRef = useRef(null);
   const [cy,setCy] = useContext(CytoscapeContext)
   const [nodeElement,setNodeElement] = useState<any>()
@@ -39,14 +39,25 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
           weight:      `${grapJSON.edges[key].data.weight       ? grapJSON.edges[key].data.weight      : (Math.floor(Math.random() * 100) + 1)}`,
           negative:    `${grapJSON.edges[key].data.negative     ? grapJSON.edges[key].data.negative    : (Math.floor(Math.random() * 100) + 1)}`,
         }
+        
+      })
       
-  })
-
-  Object.keys(grapJSON.nodes).forEach(key=>{
-      (
-        (grapJSON.nodes[key].data) = {
-          ...grapJSON.nodes[key].data, 
-          // id:`n${key}`,
+      Object.keys(grapJSON.nodes).forEach(key=>{
+        (
+          (grapJSON.nodes[key].data) = {
+            ...grapJSON.nodes[key].data, 
+            // id:   `${key}`,
+            // label:       `${grapJSON.nodes[key].data.label        ? grapJSON.nodes[key].data.label      : (Math.floor(Math.random() * 100) + 1)}`,
+            // name:         `${grapJSON.nodes[key].data.name        ? grapJSON.nodes[key].data.name       : (Math.floor(Math.random() * 100) + 1)}`,
+            // Country:      `${grapJSON.nodes[key].data.Country     ? grapJSON.nodes[key].data.Country    : (Math.floor(Math.random() * 100) + 1)}`,
+            // domain:       `${grapJSON.nodes[key].data.domain      ? grapJSON.nodes[key].data.domain     : (Math.floor(Math.random() * 100) + 1)}`,
+            // type:         `${grapJSON.nodes[key].data.type        ? grapJSON.nodes[key].data.type       : (['a','c','t'])[Math.floor(Math.random()*(['a','c','t']).length)]}`,
+            // region:       `${grapJSON.nodes[key].data.region      ? grapJSON.nodes[key].data.region     : (Math.floor(Math.random() * 100) + 1)}`,
+            // pos:          `${grapJSON.nodes[key].data.pos         ? grapJSON.nodes[key].data.pos        : (Math.floor(Math.random() * 100) + 1)}`,
+            // value:        `${grapJSON.nodes[key].data.value       ? grapJSON.nodes[key].data.value      : (Math.floor(Math.random() * 100) + 1)}`,
+            // weight:       `${grapJSON.nodes[key].data.weight      ? grapJSON.nodes[key].data.weight     : (Math.floor(Math.random() * 100) + 1)}`,
+            
+            // id:`n${key}`,
           // Weight:(Math.floor(Math.random() * 100) + 1),
           // type: (['a','c','t'])[Math.floor(Math.random()*(['a','c','t']).length)],
         }

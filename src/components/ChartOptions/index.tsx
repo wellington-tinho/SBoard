@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import { VscChromeClose } from 'react-icons/vsc'
 import { Container } from './styles';
 import { CytoscapeContext } from '../../CytoscapeContext';
-// import { GraphManipulation } from '../Gra  phManipulation';
+import { api } from '../../services/api';
 
 
 
@@ -14,9 +14,16 @@ interface ChartOptionsProps {
   onRequestClose: () => void;
 }
 
+export interface iGraphJson{
+  edges:any,
+  nodes:any,
+}
+
 export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
   const [cy] = useContext(CytoscapeContext);
   const [graphInported, setGraphInported]= useState<any>()
+  // const [grapJSON, setGraphJSON] = useState<iGraphJson>({} as iGraphJson)
+
   const containerRef = useRef(null);
 
 
@@ -43,9 +50,18 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
   function InportGraph(file:any){ 
     const reader = new FileReader();
     reader.onload = function(e: any) {
-      setGraphInported(JSON.parse(e.target.result)) 
+
+     
+      if(file.target.files[0].type !== 'application/json'){
+        api.post('convert', {data: e.target.result})
+        .then(response => setGraphInported(response.data))        
+  
+      }else{
+        setGraphInported(JSON.parse(e.target.result)) 
+      }
     };
     reader.readAsText(file.target.files[0]);
+
   };
   
 
@@ -55,8 +71,20 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
   };
 
 
-  useEffect(() => { 
+  useEffect(() => {
+    
     if (graphInported) {
+      Object.keys((graphInported.elements).nodes).forEach(key=>{
+        graphInported.elements.nodes[key].data.id = ''+graphInported.elements.nodes[key].data.id
+      })
+
+      Object.keys((graphInported.elements).edges).forEach(key=>{
+        graphInported.elements.edges[key].data.id = `e${key}`
+        graphInported.elements.edges[key].data.source = ''+graphInported.elements.edges[key].data.source
+        graphInported.elements.edges[key].data.target = ''+graphInported.elements.edges[key].data.target
+      })
+
+      console.log(graphInported.elements);
       const config = {
         container: containerRef.current,
           layout:{
@@ -198,6 +226,7 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
     }
     
     
+    
   },[cy, graphInported])
   
   return (
@@ -212,10 +241,6 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
         <VscChromeClose  onClick={onRequestClose} className='react-modal-close' />
         <h2>Chart Options</h2>
         <h3>Em contruçao</h3>
-
-        
-          
-       
 
         <button  onClick={()=>{cy.destroy();}}>
           Clear graph
@@ -235,11 +260,6 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
           Others
         </button >
 
-        {/* {graphInported && (
-         
-            <GraphManipulation grapJSON={graphInported.elements} />
-        
-        )} */}
       </Container>
     </Modal>
   );
