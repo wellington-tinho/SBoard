@@ -224,9 +224,12 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
       cy.json(config)
       
     }
+    var layout = cy?.layout({
+      name: 'breadthfirst'
+    });
     
-    
-    
+    layout?.run();
+
   },[cy, graphInported])
   
   return (
