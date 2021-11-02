@@ -35,7 +35,7 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
     // a.style = "display: none";
     a.setAttribute('style', 'display: none;');
     a.href = url;
-    a.download = 'Sboard_Dataset.json';
+    a.download = 'NSboard_Dataset.json';
     a.click();
     window.URL.revokeObjectURL(url);
   }
@@ -57,8 +57,6 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
 
   useEffect(() => { 
     if (graphInported) {
-      
-      console.log('----->',graphInported);
       const config = {
         container: containerRef.current,
           layout:{

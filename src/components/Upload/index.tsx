@@ -21,13 +21,22 @@ export function Upload() {
     const reader = new FileReader();
     reader.onload = function(e: any) {
       
-      setGraphGML(e.target.result)      
+      // console.log('file[0].type \n',file[0]);
+      if(file[0].type === 'application/json'){
+        console.log('e.target.result \n',(JSON.parse(e.target.result).elements));
+        setGraphJSON(JSON.parse(e.target.result).elements);   
+      }else{
+        setGraphGML(e.target.result)      
+      }
     };
     reader.readAsText(file[0]);
   };
   
   useEffect(() => {
+    
     if(graphGML){
+      console.log('graphGML=>',graphGML);
+      
       api.post('convert', {data: graphGML})
       .then(response => setGraphJSON(response.data.elements))  
     }

@@ -119,7 +119,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
                   '\n target:'+ ele.data().target +
                   ' delay:'+ ele.data().delay +
                   '\n reliability:'+ ele.data().reliability +
-                  ' weight:'+ ele.data().weight +
+                  ' bandwidth:'+ ele.data().weight +
                   ' negative:'+ ele.data().negative  
                   ) 
                 },
