@@ -232,13 +232,13 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
       cy?.on('cxttap ', 'node', function(evt:any){
         setNodeElement(evt.target.data())
         handleOpenNodeModal()
-        console.log('Node:'+JSON.stringify((evt.target).data(), null, 4))
+        // console.log('Node:'+JSON.stringify((evt.target).data(), null, 4))
       });
 
       cy?.on('cxttap ', 'edge', function(evt:any){
         setEdgeElement(evt.target.data())
         handleOpenEdgeModal()
-        console.log('Edge:'+JSON.stringify((evt.target).data(), null, 4))
+        // console.log('Edge:'+JSON.stringify((evt.target).data(), null, 4))
       });
 
       cy?.on('cxttap', function(evt:any){
@@ -246,8 +246,8 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
         // of the event (core or element)
         var evtTarget = evt.target;
         if( evtTarget === cy ){
-          console.log('tap on background');
           handleOpenChartOptionsModal()
+          // console.log('tap on background');
         }
       });
     } 

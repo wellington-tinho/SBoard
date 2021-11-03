@@ -64,8 +64,30 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
   },[grapGML])
 
   function ExportGraph(){
-    console.log(cy.json());
-  
+    Object.keys(cy.json().elements.edges).forEach(key=>{
+
+      // cy.$(`#e${key}`)
+      // .data('source',  Number( cy.$(`#e${key}`).data('source') ))
+      // .data('target',  Number( cy.$(`#e${key}`).data('target') ))
+
+      // cy.json().elements.edges[key].data.source = Number(cy.json().elements.edges[key].data.source)
+      // cy.json().elements.edges[key].data.target = Number(cy.json().elements.edges[key].data.target)
+
+      // cy.$(`#e${key}`)
+      // .data('source',  999999)
+      // .data('target',  111111)
+
+      // console.log(cy.$(`#e${key}`).data('source') )
+      // console.log(cy.$(`#e${key}`).data('target') )
+
+      // cy.json().elements.edges[key].data.source = 33333
+      // cy.json().elements.edges[key].data.target = 44444
+
+      // console.log(cy.json().elements.edges[key].data.source);
+      // console.log(cy.json().elements.edges[key].data.target);
+    
+    })
+    
     api.post('convertGML', {data: cy.json()})
     .then(response => setGraphGML(response.data)) 
   }
@@ -106,14 +128,12 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
       // alert('entrou');
       Object.keys((graphInported.elements).nodes).forEach(key=>{
         graphInported.elements.nodes[key].data.id = ''+graphInported.elements.nodes[key].data.id
-        console.log(key);
-        
       })
 
       Object.keys((graphInported.elements).edges).forEach(key=>{
         graphInported.elements.edges[key].data.id = `e${key}`
-        graphInported.elements.edges[key].data.source = ''+graphInported.elements.edges[key].data.source
-        graphInported.elements.edges[key].data.target = ''+graphInported.elements.edges[key].data.target
+        graphInported.elements.edges[key].data.source = (''+graphInported.elements.edges[key].data.source)
+        graphInported.elements.edges[key].data.target = (''+graphInported.elements.edges[key].data.target)
       })
 
       // console.log(graphInported.elements);

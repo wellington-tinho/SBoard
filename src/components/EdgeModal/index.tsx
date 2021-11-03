@@ -104,8 +104,8 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
               onChange={
                 event =>setSource(event.target.value)
               }
-              type="string" name="Country" 
-              id="Country" 
+              type="string" name="source" 
+              id="source" 
               placeholder={source}
             />
           </div>
@@ -115,7 +115,7 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
               onChange={
                 event =>setTarget(event.target.value)
                 } 
-              type="string" name="domain" id="domain" 
+              type="string" name="target" id="target" 
               placeholder={target}
             />
           </div>
@@ -125,17 +125,17 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
               onChange={
                 event =>setNegative(Number(event.target.value))  
                 } 
-              type="number" name="label" id='label' 
+              type="number" name="negative" id='negative' 
               placeholder={String(negative)}
             />
           </div>
           <div>
-            <p>Bandwidth</p>
+            <p>weight</p>
             <input 
               onChange={
                 event =>setWeight(Number(event.target.value))  
               } 
-              type="number" name="name" id='name'
+              type="number" name="weight" id='weight'
               placeholder={String(weight)}
             
             />
@@ -146,7 +146,7 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
               onChange={
                 event =>setReliability(Number(event.target.value))  
               } 
-              type="number" name="type" id='type' 
+              type="number" name="Reliability" id='Reliability' 
               placeholder={String(reliability)}
             />
           </div>
@@ -156,7 +156,7 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
               onChange={
                 event =>setDelay(Number(event.target.value))  
               } 
-              type="number" name="value" id='value' 
+              type="number" name="Delay" id='Delay' 
               placeholder={String(delay)}
             />
           </div>
