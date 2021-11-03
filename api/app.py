@@ -17,6 +17,21 @@ def GML_JSON():
     df = nx.parse_gml(file, label='id')
     return nx.cytoscape_data(df)
 
+@app.route("/convertGML", methods=['POST'])
+def JSON_GML():
+  data= request.get_json()
+  if(data):
+    G = nx.cytoscape_graph(data['data'])
+
+    # Mostrar para o Rayner
+    for i in range(len(G.nodes()) //2 ):
+      G.remove_node(i)
+
+    print("\n".join(nx.generate_gml(G)))
+    return("\n".join(nx.generate_gml(G)))
+
+
+
 
 @app.route("/setup", methods=['POST'])
 def Create_Setup_Json():
@@ -34,7 +49,7 @@ def Create_Setup_Json():
 
 @app.route("/", methods=['GET'])
 def home():
-  return "Olá vc clicou na rota errada, dica: 😉 http://localhost:3000/ "
+  return "Olá vc clicou na rota errada, execulte yarn start e entre na rota http://localhost:3000/ "
 
 if __name__ == '__main__':
   app.run(debug=True)

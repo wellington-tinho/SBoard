@@ -14,15 +14,12 @@ interface ChartOptionsProps {
   onRequestClose: () => void;
 }
 
-export interface iGraphJson{
-  edges:any,
-  nodes:any,
-}
+
 
 export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
   const [cy] = useContext(CytoscapeContext);
   const [graphInported, setGraphInported]= useState<any>()
-  // const [grapJSON, setGraphJSON] = useState<iGraphJson>({} as iGraphJson)
+  const [grapGML, setGraphGML] = useState<string>()
 
   const containerRef = useRef(null);
 
@@ -32,20 +29,47 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
 
   // const [fileDownloadUrl,setFileDownloadUrl] = useState<any>(); // Step 4
 
+  // function ExportGraph(){
+  //   var a = document.createElement("a");
+  //   document.body.appendChild(a);  
+  //   var json = JSON.stringify(cy.json()),
+  //   blob = new Blob([json], {type: "octet/stream"}),
+  //   url = window.URL.createObjectURL(blob);
+  //   // a.style = "display: none";
+  //   a.setAttribute('style', 'display: none;');
+  //   a.href = url;
+  //   a.download = 'NSboard_Dataset.json';
+  //   a.click();
+  //   window.URL.revokeObjectURL(url);
+  // }
+
+  useEffect(() => {
+    if(grapGML){
+      
+      // grapGML.slice(1,-1)
+      var a = document.createElement("a");
+      document.body.appendChild(a);  
+      var json = (grapGML),
+      blob = new Blob([json], {type: "octet/stream"}),
+      url = window.URL.createObjectURL(blob);
+      // a.style = "display: none";
+      a.setAttribute('style', 'display: none;');
+      a.href = url;
+      a.download = 'NSboard_Dataset.gml';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[grapGML])
+
   function ExportGraph(){
-    var a = document.createElement("a");
-    document.body.appendChild(a);
-    
-    var json = JSON.stringify(cy.json()),
-    blob = new Blob([json], {type: "octet/stream"}),
-    url = window.URL.createObjectURL(blob);
-    // a.style = "display: none";
-    a.setAttribute('style', 'display: none;');
-    a.href = url;
-    a.download = 'NSboard_Dataset.json';
-    a.click();
-    window.URL.revokeObjectURL(url);
+    console.log(cy.json());
+  
+    api.post('convertGML', {data: cy.json()})
+    .then(response => setGraphGML(response.data)) 
   }
+  
 
   function InportGraph(file:any){ 
     const reader = new FileReader();
@@ -60,13 +84,18 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
         setGraphInported(JSON.parse(e.target.result)) 
       }
     };
-    reader.readAsText(file.target.files[0]);
+    try {
+      reader.readAsText(file.target.files[0]);
+    } catch (error) {
+      console.log(error,'\n Ou seja arquivo nao enviado');
+      
+    }
 
   };
   
 
   const hiddenFileInput = useRef<any>(null);
-  const handleClick = (event:any) => {
+  const handleClick = () => {
       hiddenFileInput.current.click();
   };
 
@@ -74,8 +103,11 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
   useEffect(() => {
     
     if (graphInported) {
+      // alert('entrou');
       Object.keys((graphInported.elements).nodes).forEach(key=>{
         graphInported.elements.nodes[key].data.id = ''+graphInported.elements.nodes[key].data.id
+        console.log(key);
+        
       })
 
       Object.keys((graphInported.elements).edges).forEach(key=>{
@@ -84,9 +116,10 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
         graphInported.elements.edges[key].data.target = ''+graphInported.elements.edges[key].data.target
       })
 
-      console.log(graphInported.elements);
+      // console.log(graphInported.elements);
       const config = {
         container: containerRef.current,
+        elements:graphInported.elements,
           layout:{
             name: "breadthfirst",
             fit: true,
@@ -202,20 +235,9 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
                   'text-border-width': 1,
                   'text-border-color': '#33396e',
                   'textBackgroundShape': 'round-rectangle',
-  
-                  
-  
-                  
-                  // 'text-valign': 'center',
-                  // 'text-halign': 'center',
-      
-                  // 'font-size': '10',
-                // "text-max-width": "5px",
-                
               }
             }
           ],
-          elements:graphInported.elements,
           minZoom: 0.1,
           maxZoom:3,
           zoomFactor: 0.05, // zoom factor per zoom tick

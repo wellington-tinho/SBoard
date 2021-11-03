@@ -73,7 +73,11 @@ export function GraphArea({setRequest}:any){
       setRequest(JSON.parse(e.target.result));
       
     };
-    reader.readAsText(file.target.files[0]);
+    try {
+      reader.readAsText(file.target.files[0]);
+    } catch (error) {
+      console.log(error,'reader');
+    }
   };
 
 
