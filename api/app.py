@@ -17,16 +17,6 @@ def GML_JSON():
     df = nx.parse_gml(file, label='id')
     return nx.cytoscape_data(df)
 
-@app.route("/convertGML", methods=['POST'])
-def JSON_GML():
-  data= request.get_json()
-  if(data):
-    G = nx.cytoscape_graph(data['data'])
-    # for i in range(len(G.nodes()) //2 ):
-    #   G.remove_node(str(i)) # => REMOVER ERRO DOS NÓS DUPLICADOS 
-    return("\n".join(nx.generate_gml(G)))
-
-
 
 
 @app.route("/setup", methods=['POST'])

@@ -19,7 +19,7 @@ interface ChartOptionsProps {
 export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
   const [cy] = useContext(CytoscapeContext);
   const [graphInported, setGraphInported]= useState<any>()
-  const [grapGML, setGraphGML] = useState<string>()
+  // const [grapGML, setGraphGML] = useState<string>()
 
   const containerRef = useRef(null);
 
@@ -29,68 +29,46 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
 
   // const [fileDownloadUrl,setFileDownloadUrl] = useState<any>(); // Step 4
 
-  // function ExportGraph(){
-  //   var a = document.createElement("a");
-  //   document.body.appendChild(a);  
-  //   var json = JSON.stringify(cy.json()),
-  //   blob = new Blob([json], {type: "octet/stream"}),
-  //   url = window.URL.createObjectURL(blob);
-  //   // a.style = "display: none";
-  //   a.setAttribute('style', 'display: none;');
-  //   a.href = url;
-  //   a.download = 'NSboard_Dataset.json';
-  //   a.click();
-  //   window.URL.revokeObjectURL(url);
-  // }
-
-  useEffect(() => {
-    if(grapGML){
-      
-      // grapGML.slice(1,-1)
-      var a = document.createElement("a");
-      document.body.appendChild(a);  
-      var json = (grapGML),
-      blob = new Blob([json], {type: "octet/stream"}),
-      url = window.URL.createObjectURL(blob);
-      // a.style = "display: none";
-      a.setAttribute('style', 'display: none;');
-      a.href = url;
-      a.download = 'NSboard_Dataset.gml';
-      a.click();
-      window.URL.revokeObjectURL(url);
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[grapGML])
-
   function ExportGraph(){
-    Object.keys(cy.json().elements.edges).forEach(key=>{
-
-      // cy.$(`#e${key}`)
-      // .data('source',  Number( cy.$(`#e${key}`).data('source') ))
-      // .data('target',  Number( cy.$(`#e${key}`).data('target') ))
-
-      // cy.json().elements.edges[key].data.source = Number(cy.json().elements.edges[key].data.source)
-      // cy.json().elements.edges[key].data.target = Number(cy.json().elements.edges[key].data.target)
-
-      // cy.$(`#e${key}`)
-      // .data('source',  999999)
-      // .data('target',  111111)
-
-      // console.log(cy.$(`#e${key}`).data('source') )
-      // console.log(cy.$(`#e${key}`).data('target') )
-
-      // cy.json().elements.edges[key].data.source = 33333
-      // cy.json().elements.edges[key].data.target = 44444
-
-      // console.log(cy.json().elements.edges[key].data.source);
-      // console.log(cy.json().elements.edges[key].data.target);
-    
-    })
-    
-    api.post('convertGML', {data: cy.json()})
-    .then(response => setGraphGML(response.data)) 
+    var a = document.createElement("a");
+    document.body.appendChild(a);  
+    var json = JSON.stringify(cy.json()),
+    blob = new Blob([json], {type: "octet/stream"}),
+    url = window.URL.createObjectURL(blob);
+    // a.style = "display: none";
+    a.setAttribute('style', 'display: none;');
+    a.href = url;
+    a.download = 'NSboard_Dataset.json';
+    a.click();
+    window.URL.revokeObjectURL(url);
   }
+
+  // useEffect(() => {
+  //   if(grapGML){
+      
+  //     // grapGML.slice(1,-1)
+  //     var a = document.createElement("a");
+  //     document.body.appendChild(a);  
+  //     var json = (grapGML),
+  //     blob = new Blob([json], {type: "octet/stream"}),
+  //     url = window.URL.createObjectURL(blob);
+  //     // a.style = "display: none";
+  //     a.setAttribute('style', 'display: none;');
+  //     a.href = url;
+  //     a.download = 'NSboard_Dataset.gml';
+  //     a.click();
+  //     window.URL.revokeObjectURL(url);
+  //   }
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // },[grapGML])
+
+  // function ExportGraph(){
+  //   console.log(cy.json());
+    
+  //   api.post('convertGML', {data: cy.json()})
+  //   .then(response => setGraphGML(response.data)) 
+  // }
   
 
   function InportGraph(file:any){ 
