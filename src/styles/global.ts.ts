@@ -58,8 +58,8 @@ h4,
 h5,
 h6,
 strong {
-  font-weight: 600;
-  font-family: 'Roboto Slab',serif; 
+  font-weight: 700;
+  font-family: 'Roboto Slab', serif; 
 }
 
 ul li{

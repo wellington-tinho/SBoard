@@ -25,128 +25,41 @@ export const Container = styled.div`
     }
   }
 
-    div{
-      ul{
-        padding: .5rem;
+  .Tabs {
+    margin: 1rem;
+    width: 15rem;
+    .TabList{
+      border-bottom: 1px solid #34D761;
+      margin-bottom: 1rem;
 
-        li{
-          margin: .5rem 0 ;
+      .Tab{
+        font: 0.9rem 'Roboto Slab';
+        font-weight: 600;
+        display: inline-block;
+        position: relative;
+        padding: 1rem 0.3rem;
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-bottom: none;
+        bottom: -1px;
 
-          padding: .5rem;
-          border-radius: .5rem;
-          border: 1px solid #d3d3d3;
+      }
 
-
-          button{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding:  0 .5rem 0 .5rem;
-            margin: 1rem 1rem 0.5rem;
-            width: 6rem;
-            background-color: transparent;
-            border: none;
-            border-bottom: 1px solid var(--green);
-
-            img {
-              height: 1rem;
-            }
-            h3{
-              padding-left: .5rem;
-            }
-          }
-
-          div {
-            display: grid;
-            grid-template-columns: 8rem 8rem;
-
-            input[type=text]{
-              margin: 0.5rem 0 0 0.5rem;
-              text-align: center;
-            	border: none;
-            	border-bottom: 1px solid black;
-            	cursor: pointer;
-              background-color: var(--background);
-                  
-              :hover{
-                transition: 0.2s;
-                border-bottom: 1px solid #34D761;
-              }
-            } 
-
-            select{
-              margin: 0.5rem 0 0 0.5rem;
-              text-align: center;
-            	border: none;
-            	border-bottom: 1px solid black;
-            	cursor: pointer;
-              background-color: var(--background);
-
-                  
-              :hover{
-                transition: 0.2s;
-                border-bottom: 1px solid #34D761;
-              }
-            }
-
-            input[type=submit]{
-              margin-top: 0.5rem;
-              margin-left: .5rem;
-              background: linear-gradient(45deg,#17A38E,#27A34A);
-              color: #fff;
-              border-radius: .25rem;
-              cursor: pointer;
-
-            }
-          }
-        }
-        li.request{
-          height: 15rem;
-          background: #fff;
-          
-
-          button{
-            margin: 1rem 1rem 0rem;
-            width:11rem;
-          }
-          ul{
-            height: 12rem;
-            overflow-y: scroll;
-            background-color: #fff;
-            li{
-              div{
-                  display: flex; 
-                  align-items: center; 
-                  justify-content: space-around; 
-                  width: 14rem;
-                  input{
-                  }
-                  h4{
-                    font-size: .8rem;
-                    margin-left: 1rem;
-
-                  }
-                  button{
-                    border: 1px solid #34D761; 
-                    border-radius:0.25rem; 
-                    font-size: .8rem;
-                    width: 7rem;
-                    margin: 0 auto;
-                  }
-              
-                }
-              
-                .visible{
-                  flex-direction: column; 
-                  font-size: .8rem;
-                }  
-            }
-          }
+      li.Tab[aria-selected="true"]{
+        background: #fff;
+        border-color: #34D761;
+        color: black;
+        border-radius: 5px 5px 0 0;
         }
       
-      }
     }
-  
+
+    .TabPanel{
+      
+    }
+
+
+  }
 
   @media (max-width: 1280px){
       main{

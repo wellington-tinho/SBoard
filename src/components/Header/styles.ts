@@ -15,7 +15,7 @@ background: var(--bg);
   }
 
   h1{ 
-    font: 5rem 'Roboto Slab', 600;
+    font: 5rem 'Roboto Slab', 700;
   }
 
 
