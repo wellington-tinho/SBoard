@@ -6,7 +6,7 @@ background: var(--bg);
   display: flex;
   align-items: center;
   border-radius: 0.25rem;
-  height: 8vh;
+  height: 4rem;
 
   
   img{ 

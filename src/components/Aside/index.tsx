@@ -70,6 +70,7 @@ export function Aside({ request }: any) {
       }
     }
     catch (e) {
+      alert('Crie ou importe um grafico para ver o resultado')
       console.log(e);
     }
   }
@@ -146,19 +147,11 @@ export function Aside({ request }: any) {
           </li>
         )
       })
-
-      console.log('entrou');
-      console.log({request}.request);
-      console.log(Object.keys({request}.request).length);
-      console.log(({request}.request) === {});
-      // console.log(typeof(request));
-    
-      
-      
+          
 
       setRequestMenu(
         <>
-          <ul>
+          <ul className="listRequest">
             {ele}
           </ul>
         </>
@@ -186,12 +179,15 @@ export function Aside({ request }: any) {
                 <Tab className='Tab'> VNR </Tab>
                 <Tab className='Tab'> Create </Tab>
                 <Tab className='Tab'> Edition </Tab>
-                <Tab className='Tab'> Preview </Tab>
+                <Tab className='Tab'> Salve </Tab>
                 {/* <Tab>Toad</Tab> */}
             </TabList>
 
+          <fieldset>
             <TabPanel className='TabPanel'>
-            {requestMenu}
+
+              {requestMenu}
+          
               {/* Informaçao sobre os requests, e exibir detalhado */}
             </TabPanel>
 
@@ -204,8 +200,9 @@ export function Aside({ request }: any) {
             </TabPanel>
 
             <TabPanel className='TabPanel'>
-              Excluir
+              Salvar em Json e etc.. 
             </TabPanel>
+          </fieldset>  
   
         </Tabs> 
 

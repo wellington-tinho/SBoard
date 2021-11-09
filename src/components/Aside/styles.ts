@@ -30,7 +30,7 @@ export const Container = styled.div`
     width: 15rem;
     .TabList{
       border-bottom: 1px solid #34D761;
-      margin-bottom: 1rem;
+      /* padding-bottom: 1rem; */
 
       .Tab{
         font: 0.9rem 'Roboto Slab';
@@ -53,11 +53,44 @@ export const Container = styled.div`
         }
       
     }
-
-    .TabPanel{
-      
-    }
-
+    fieldset{
+      border: 1px solid #34D761;
+      border-top: none;
+      height: 45rem;
+      overflow-y: scroll;
+      .TabPanel{
+        ul.listRequest{
+          display: flex;
+          flex-direction: column;
+          li{
+            
+            border-bottom: 1px solid #34D761;
+            
+            div{
+              /* width: 10rem;   */
+              display: flex;
+              justify-content:space-around;
+              border-radius: 0.25rem;
+              padding: 0.5rem;
+                            
+                h4{
+                  font-size: .8rem; 
+                  
+                }
+                button{
+                    border: 1px solid #34D761; 
+                    border-radius:0.25rem; 
+                    font-size: .8rem; 
+                    width: 7rem;
+                  }
+            }
+            .visible{
+              flex-direction: column;
+            }
+          }
+        }
+      }
+   } 
 
   }
 
@@ -69,97 +102,46 @@ export const Container = styled.div`
         h2{
           font-size: 1rem;
         }
-
-        button{         
-         img{ 
-           height: 1.5rem;
-          }
-        }
       }
 
-    div{
-      ul{
-        padding: 0 .25rem;
-
-        li{
-          margin: .25rem 0 ;
-          
-          button{
-            margin: 0 .8rem 0;
-            width: 4rem;
-
-            img {
-              height: 1rem;
-            }
-            h3{
-              font-size: 0.9rem;
-              padding-left: .25rem;
-            }
-          }
-
-          div {
-            grid-template-columns: 6rem 6rem;
-
-
-            input[type=text]{
-              font-size: .7rem;
-              :hover{
-                transition: 0.2s;
-                border-bottom: 1px solid #34D761;
-              }
-            } 
-
-            select{
-              font-size: .7rem;
-              margin: 0.25rem 0 0 0.25rem;
-
+      Fieldset{
+      border: 1px solid #34D761;
+      border-top: none;
+      height: 32rem;
+      overflow-y: scroll;
+    
+      .TabPanel{
+        ul.listRequest{
+          display: flex;
+          flex-direction: column;
+          li{
+            
+            border-bottom: 1px solid #34D761;
+            
+            div{
+              /* width: 10rem;   */
+              display: flex;
+              justify-content:space-around;
+              border-radius: 0.25rem;
+              padding: 0.25rem;
+                            
+                h4{
+                  font-size: .6rem; 
                   
-              :hover{
-                transition: 0.2s;
-                border-bottom: 1px solid #34D761;
-              }
-            }
-
-            input[type=submit]{
-              margin-top: 0.25rem;
-              margin-left: .25rem;
-              background: linear-gradient(45deg,#17A38E,#27A34A);
-              color: #fff;
-              border-radius: .25rem;
-              cursor: pointer;
-
-            }
-          }
-        }
-
-        li.request{
-          height: 10.2rem;
-          button{
-            margin: 0;
-          }
-          ul{
-            li{
-              div{
-                width: 10rem;                
-                  h4{
-                    font-size: .65rem;
-                    margin-left: .4rem;
+                }
+                button{
+                    border: 1px solid #34D761; 
+                    border-radius:0.25rem; 
+                    font-size: .6rem; 
+                    width: 6rem;
                   }
-                  button{
-                    font-size: .6rem;
-                    width: 5rem;
-                  }
-              }
-              .visible{
-                width: 7rem;
-                flex-direction: column; 
-                width: 10rem;
-                font-size: .7rem;
-              }
+            }
+            .visible{
+              flex-direction: column;
             }
           }
         }
       }
-    }
+   } 
   }
 `
