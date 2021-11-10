@@ -179,10 +179,8 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
     var elementArray = cy.$(`${elementType}`)
     for(var j=0; j<elementArray.length; j++){
         var eleInput:any= window.document.getElementsByName(`${elementType}ElementModalInput${elementArray[j].data('id')}`)
-        //pega todos os ids dos imputs checked = true
+        //pega todos os ids dos iputs checked = true
         if((eleInput[0].checked)===true){
-          // console.log(`${elementArray[j].data('id')}`);
-          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
           elementsSelectedAux[elementType].push(elementArray[j].data('id')) 
         }
       }

@@ -29,7 +29,7 @@ export const Container = styled.div`
     margin: 1rem;
     width: 15rem;
     .TabList{
-      border-bottom: 1px solid #34D761;
+      border-bottom: 1px solid #acdcb9;
       /* padding-bottom: 1rem; */
 
       .Tab{
@@ -47,14 +47,14 @@ export const Container = styled.div`
 
       li.Tab[aria-selected="true"]{
         background: #fff;
-        border-color: #34D761;
+        border-color: #acdcb9;
         color: black;
         border-radius: 5px 5px 0 0;
         }
       
     }
     fieldset{
-      border: 1px solid #34D761;
+      border: 1px solid #acdcb9;
       border-top: none;
       height: 45rem;
       overflow-y: scroll;
@@ -64,7 +64,7 @@ export const Container = styled.div`
           flex-direction: column;
           li{
             
-            border-bottom: 1px solid #34D761;
+            border-bottom: 1px solid #acdcb9;
             
             div{
               /* width: 10rem;   */
@@ -79,9 +79,16 @@ export const Container = styled.div`
                 }
                 button{
                     border: 1px solid #34D761; 
+                    background-color: var(--background);
                     border-radius:0.25rem; 
                     font-size: .8rem; 
                     width: 7rem;
+
+                    transition: filter 0.2s;
+
+                    :hover{
+                      filter: brightness(110%);
+                    }
                   }
             }
             .visible{
@@ -105,7 +112,7 @@ export const Container = styled.div`
       }
 
       Fieldset{
-      border: 1px solid #34D761;
+      border: 1px solid #acdcb9;
       border-top: none;
       height: 32rem;
       overflow-y: scroll;
@@ -116,7 +123,7 @@ export const Container = styled.div`
           flex-direction: column;
           li{
             
-            border-bottom: 1px solid #34D761;
+            border-bottom: 1px solid #acdcb9;
             
             div{
               /* width: 10rem;   */
@@ -130,7 +137,6 @@ export const Container = styled.div`
                   
                 }
                 button{
-                    border: 1px solid #34D761; 
                     border-radius:0.25rem; 
                     font-size: .6rem; 
                     width: 6rem;
