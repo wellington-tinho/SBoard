@@ -70,8 +70,7 @@ export function GraphArea({setRequest}:any){
     const reader = new FileReader();
     reader.onload = function(e: any) {
       // console.log(JSON.parse(e.target.result));
-      setRequest(JSON.parse(e.target.result));
-      
+      setRequest(JSON.parse(e.target.result)); 
     };
     try {
       reader.readAsText(file.target.files[0]);
@@ -79,10 +78,6 @@ export function GraphArea({setRequest}:any){
       console.log(error,'reader');
     }
   };
-
-
-
-  
 
   const hiddenFileInput = useRef<any>(null);
   const handleClick = (event:any) => {

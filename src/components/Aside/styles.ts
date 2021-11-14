@@ -58,7 +58,7 @@ export const Container = styled.div`
       border-top: none;
       height: 45rem;
       overflow-y: scroll;
-      .TabPanel{
+      .TabPanelHome{
         ul.listRequest{
           display: flex;
           flex-direction: column;
@@ -95,6 +95,12 @@ export const Container = styled.div`
               flex-direction: column;
             }
           }
+        }
+      }
+      .TabPanelHome{
+        input[type="submit"]{
+          padding:  .5rem 3rem;
+          border-radius: 0.5rem;
         }
       }
    } 

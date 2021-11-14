@@ -1,0 +1,54 @@
+{
+  "0": {
+    "id": 0,
+    "vnd": {
+      "2": {
+        "id": 2,
+        "requested": 1,
+        "vnr_id": 0,
+        "domain": 0,
+        "region": 0,
+        "type": "0",
+        "period": 5,
+        "sink": 0
+      },
+      "1": {
+        "id": 1,
+        "requested": 1,
+        "vnr_id": 0,
+        "domain": 0,
+        "region": 0,
+        "type": "0",
+        "period": 5,
+        "sink": null
+      },
+      "0": {
+        "id": 0,
+        "requested": 1,
+        "vnr_id": 0,
+        "domain": 0,
+        "region": 0,
+        "type": "0",
+        "period": 5,
+        "sink": null
+      }
+    },
+    "links": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "created": 0,
+    "duration": 5,
+    "period": 5,
+    "bandwidth": 100,
+    "delay": 100,
+    "reliability": 10,
+    "type_slice": "mmtc"
+  }
+ }
