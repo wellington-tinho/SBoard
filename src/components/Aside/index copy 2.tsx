@@ -44,14 +44,14 @@ var changeDicChecbox: { [index: string]: any; } = {};
 export function Aside({ request }: any) {
   const [cy] = useContext(CytoscapeContext);
 
-  const [requestList, setRequestList] = useState<[requestUnicInterface]>(request)
+  const [ requestList,     setRequestList  ]            = useState<any>(request)
   const [ requestElementsHTML, setRequestElementsHTML ] = useState<any>([])
-  const [requestMenuHTML, setRequestMenuHTML] = useState<any>('Não há requisições para exibir, considere importar ou criar algumas.')
-  const [qtdRequests, setQtdRequests ] = useState(0)
+  const [ requestMenuHTML,     setRequestMenuHTML  ]    = useState<any>('Não há requisições para exibir, considere inportar ou criar algumas.')
+  const [ qtdRequests,     setQtdRequests ]             = useState(0)
 
-  const [checboxState, setChecboxState] = useState( false )
+  const [ checboxState,   setChecboxState ]             = useState( false )
 
-  const colors = ['#6A5ACD', '#0000CD', '#4682B4', '#00FFFF', '#00FF7F', '#00FF7F', '#ADFF2F', '#ADFF2F', '#DAA520', '#8B4513', '#BC8F8F', '#7B68EE', '#4B0082', '#9400D3', '#800080', '#FF00FF', '#C71585', '#FF1493', '#DB7093', '#CD5C5C', '#DC143C', '#FF0000', '#FF4500', '#B22222', '#FF8C00', '#FF8C00']
+  const colors = ['#6A5ACD', '#0000CD', '#4682B4', '#00FFFF', '#00FF7F', '#00FF7F', '#ADFF2F', '#ADFF2F', '#DAA520', '#8B4513', '#BC8F8F', '#7B68EE', '#4B0082', '#9400D3', '#800080', '#FF00FF','#C71585', '#FF1493', '#DB7093', '#CD5C5C', '#DC143C', '#FF0000', '#FF4500', '#B22222', '#FF8C00', '#FF8C00']
 
 
 
@@ -108,7 +108,7 @@ export function Aside({ request }: any) {
   }
 
   // função para definir a visibilidade de informacoes da lista de requests
-  function visibleDiv(divVisible: string, buttonVerInfo: string){
+  function VisibleDiv(divVisible: string, buttonVerInfo: string){
 
     const dataButton = window.document.getElementById(buttonVerInfo)
     if (window.document.getElementById(divVisible)?.getAttribute('style') === 'display: none;') {
@@ -125,14 +125,14 @@ export function Aside({ request }: any) {
     }
   }
 
-  //funcao para criar lista de checkbox dos requests em html
-  function createElementHTMLRequest(requestList:any){
+
+  function CreateElementHTMLRequest(requestList:any){
 
     var divVisible = 'divVisible'
     var buttonVerInfo = 'buttonVerInfo'
     var auxRequestElementsHTML: any = []
     
-     Object.keys(requestList).forEach(key => {
+    Object.keys(requestList).forEach(key => {
 
       auxRequestElementsHTML.push(
         <li key={key}>
@@ -145,7 +145,7 @@ export function Aside({ request }: any) {
             <h4> Request {Number(key)+qtdRequests} </h4>
             <button
               id={buttonVerInfo + (Number(key)+qtdRequests)}
-              onClick={() => visibleDiv((divVisible + (Number(key)+qtdRequests)), (buttonVerInfo + (Number(key)+qtdRequests)))} >
+              onClick={() => VisibleDiv((divVisible + (Number(key)+qtdRequests)), (buttonVerInfo + (Number(key)+qtdRequests)))} >
               Ver Info
             </button>
           </div>
@@ -168,69 +168,36 @@ export function Aside({ request }: any) {
           </div>
         </li>
       )
+      setRequestElementsHTML([...requestElementsHTML, auxRequestElementsHTML ])
     }) 
-    setRequestElementsHTML(auxRequestElementsHTML)
-  }
 
-  //Adicionar novos Requests na lista de requisiçoes
-  function appendRequestList(file:any){ 
-    const reader = new FileReader();
-    reader.onload = function(e: any) {
-      setQtdRequests(Object.keys(requestList).length);
-
-      
-      var prevsElements: any = []
-      Object.keys(requestList).forEach(key => 
-        prevsElements.push(requestList[Number(key)])
-      )
-      
-      console.log('prevsElements \n',prevsElements);
-      console.log('\nJSON.parse(e.target.result) \n',JSON.parse(e.target.result));
-
-      //Adicionadno novos valores á lista de valores inseridos via menu bar
-      Object.keys([JSON.parse(e.target.result)][0]).forEach(key => 
-        prevsElements.push(JSON.parse(e.target.result)[key])
-      )
-      
-      setRequestList(prevsElements)
-    };
+    setRequestMenuHTML(
+      <>
+        <ul className="listRequest">
+          {requestElementsHTML}
+        </ul>
+      </>
+    );
     
-    try {
-      reader.readAsText(file.target.files[0]);
-    } catch (error) {
-      console.log(error,'reader');
-    }
-  };
-  
- 
+  }
+  // useEffect(() => {},[cy])
+         
 
   // Criacao da sessão VIRTUAL REQUESTS após o componete ser carregado com o json na variavel de requests
   useEffect(() => {
-    if (Object.keys(request).length !== 0) {
-      console.log(request);
-      setRequestList(request)
-    }
+    setRequestList(request)
   },[request])
 
-  //apos o carremento do JSON de resquests na variavel requestList, é criado uma lista de checkbox em html
-  useEffect( () => {
-    console.log('requestList:\n',requestList);
-    
-     createElementHTMLRequest(requestList)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  //apos o disparo RequestList acima, é iniciado a criaçao dos checkboxes requests
+  useEffect(() => {
+    if (Object.keys(requestList).length !== 0) { 
+      CreateElementHTMLRequest(requestList)
+      
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [requestList])
 
-  //apos criado uma lista de checkbox em html, é encapsulado tudo dentro de um <ul> </ul>
-  useEffect(() => {
-    if (Object.keys(requestElementsHTML).length !== 0) {
-      
-      setRequestMenuHTML(
-        <ul className="listRequest">      
-        {requestElementsHTML}
-      </ul>
-    )
-  }
-  },[requestElementsHTML])
 
 
   return (
@@ -315,9 +282,7 @@ export function Aside({ request }: any) {
             <TabPanel className='TabPanel'>
               Salvar
               Apagar tudo
-              <button >
-                <input type="file" name="UploadJSON" id="UploadJSON"  onChange={appendRequestList} />
-              </button>
+              Concatenar com um novo
             </TabPanel>
           </fieldset>  
   
