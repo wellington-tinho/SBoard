@@ -2,10 +2,11 @@ from flask import Flask, request
 import networkx as nx
 from flask_cors import CORS
 import json
+import os 
 
 
 app = Flask(__name__)
-cors = CORS(app)
+CORS(app)
 
 
 
@@ -24,8 +25,9 @@ def Create_Setup_Json():
   data= request.get_json()
   file=data['data']
   arq_json = json.dumps(file)
+  cwd = os.getcwd()
   # Write to file
-  fo = open("../src/data/setup.json", "w")
+  fo = open(cwd+"/src/data/setup.json", "w")
   fo.write(arq_json)
   fo.close()
   return ''

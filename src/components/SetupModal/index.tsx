@@ -1,6 +1,6 @@
 import arqSetupJson from '../../data/setup.json';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import Modal from 'react-modal';
 
 import { VscChromeClose } from 'react-icons/vsc'
@@ -17,7 +17,6 @@ interface SetupModalProps {
 
 export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
   const [data, setData] = useState(arqSetupJson)
-
 
   const [qtd_vnrs, set_qtd_vnrs] = useState(data.qtd_vnrs)
   const [lowBetter, set_lowBetter] = useState(String(data.lowBetter))
@@ -143,11 +142,15 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
     };
 
     setData(data);
-    
+
+    api.post('setup', {data: data})   
+
   }
-  useEffect(() => {
-    api.post('setup', {data: data})
-  },[data]);
+  // useEffect(() => {
+  //   console.log(data);
+    
+  //   api.post('setup', {data: data})
+  // },[data]);
 
  
 

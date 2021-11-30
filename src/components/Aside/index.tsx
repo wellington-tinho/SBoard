@@ -1,6 +1,6 @@
 import { Container } from "./styles";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useReducer } from "react";
 import { CytoscapeContext } from "../../CytoscapeContext";
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -36,6 +36,13 @@ interface requestUnicInterface {
 
 
 
+const formCreateRequest = (state:any, event:any) => {
+  return {
+    ...state,
+    [event.name]: event.value
+  }
+}
+
 
 // Variavel global responsavel por conter um dicinoario com o Id do request e quais nós/edges foram alterados com esse Id
 // Tentei deixar essa variavel global dentro de setColorGraph() mas sempre ele ficava sendo reecriada
@@ -44,17 +51,25 @@ var changeDicChecbox: { [index: string]: any; } = {};
 export function Aside({ request }: any) {
   const [cy] = useContext(CytoscapeContext);
 
-  const [requestList, setRequestList] = useState<[requestUnicInterface]>(request)
+  const [requestList, setRequestList] = useState<requestUnicInterface[]>(request)
   const [ requestElementsHTML, setRequestElementsHTML ] = useState<any>([])
   const [requestMenuHTML, setRequestMenuHTML] = useState<any>('Não há requisições para exibir, considere importar ou criar algumas.')
-  const [qtdRequests, setQtdRequests ] = useState(0)
-
+  const qtdRequests = (0)
+  
   const [checboxState, setChecboxState] = useState( false )
-
   const colors = ['#6A5ACD', '#0000CD', '#4682B4', '#00FFFF', '#00FF7F', '#00FF7F', '#ADFF2F', '#ADFF2F', '#DAA520', '#8B4513', '#BC8F8F', '#7B68EE', '#4B0082', '#9400D3', '#800080', '#FF00FF', '#C71585', '#FF1493', '#DB7093', '#CD5C5C', '#DC143C', '#FF0000', '#FF4500', '#B22222', '#FF8C00', '#FF8C00']
 
+  const [formData, setFormData] = useReducer(formCreateRequest, {});
 
 
+  const handleChange = (event: { target: { name: any; value: any; }; }) => {
+    setFormData({
+      name: event.target.name,
+      value: event.target.value,
+    });
+    console.log('formData',formData);
+  }
+  
   // Funcao principal para colorir o grafo
   function setColorGraph(checked: any, request: any) {
     try {
@@ -176,17 +191,14 @@ export function Aside({ request }: any) {
   function appendRequestList(file:any){ 
     const reader = new FileReader();
     reader.onload = function(e: any) {
-      setQtdRequests(Object.keys(requestList).length);
+      // setQtdRequests(Object.keys(requestList).length);
 
       
       var prevsElements: any = []
       Object.keys(requestList).forEach(key => 
         prevsElements.push(requestList[Number(key)])
       )
-      
-      console.log('prevsElements \n',prevsElements);
-      console.log('\nJSON.parse(e.target.result) \n',JSON.parse(e.target.result));
-
+  
       //Adicionadno novos valores á lista de valores inseridos via menu bar
       Object.keys([JSON.parse(e.target.result)][0]).forEach(key => 
         prevsElements.push(JSON.parse(e.target.result)[key])
@@ -198,24 +210,20 @@ export function Aside({ request }: any) {
     try {
       reader.readAsText(file.target.files[0]);
     } catch (error) {
-      console.log(error,'reader');
+      console.error('Erro de reader nao foi inserido um arquivo para ler');
     }
   };
   
  
-
   // Criacao da sessão VIRTUAL REQUESTS após o componete ser carregado com o json na variavel de requests
   useEffect(() => {
     if (Object.keys(request).length !== 0) {
-      console.log(request);
       setRequestList(request)
     }
   },[request])
 
   //apos o carremento do JSON de resquests na variavel requestList, é criado uma lista de checkbox em html
   useEffect( () => {
-    console.log('requestList:\n',requestList);
-    
      createElementHTMLRequest(requestList)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [requestList])
@@ -264,13 +272,13 @@ export function Aside({ request }: any) {
             <TabPanel className='TabPanelHome'>
             <div className='InfoRequest'>
               <h4>Informaçao geral da requiçao</h4>
-              <input type="text" name="created-vnd"           id="created-creation"     placeholder="created" />
-              <input type="text" name="duration-creation"     id="duration-creation"    placeholder="duration" />
-              <input type="text" name="period-creation"       id="period-creation"      placeholder="period" />
-              <input type="text" name="bandwidth-creation"    id="bandwidth-creation"   placeholder="bandwidth" />
-              <input type="text" name="delay-creation"        id="delay-creation"       placeholder="delay" />
-              <input type="text" name="type_slice-creation"   id="type_slice-creation"  placeholder="type_slice" />
-              <input type="text" name="reliability-creation"  id="reliability-creation" placeholder="reliability" />
+              <input type="text" name="created-vnd"           id="created-creation"     placeholder="created"      onChange={handleChange} />
+              <input type="text" name="duration-creation"     id="duration-creation"    placeholder="duration"     onChange={handleChange} />
+              <input type="text" name="period-creation"       id="period-creation"      placeholder="period"       onChange={handleChange} />
+              <input type="text" name="bandwidth-creation"    id="bandwidth-creation"   placeholder="bandwidth"    onChange={handleChange} />
+              <input type="text" name="delay-creation"        id="delay-creation"       placeholder="delay"        onChange={handleChange} />
+              <input type="text" name="type_slice-creation"   id="type_slice-creation"  placeholder="type_slice"   onChange={handleChange} />
+              <input type="text" name="reliability-creation"  id="reliability-creation" placeholder="reliability"  onChange={handleChange} />
             </div>
 
             <div className='InfoRequest'>
@@ -313,11 +321,13 @@ export function Aside({ request }: any) {
             </TabPanel>
 
             <TabPanel className='TabPanel'>
+              
               Salvar
               Apagar tudo
-              <button >
-                <input type="file" name="UploadJSON" id="UploadJSON"  onChange={appendRequestList} />
-              </button>
+              <div>
+                <input type="file" name="UploadJSON" id="UploadJSON"  onChange={appendRequestList}  accept=".json,.JSON" />
+                {/* <label className='UploadJSON' htmlFor="UploadJSON"> Concatenar nova requisiçao </label>   */}
+              </div>
             </TabPanel>
           </fieldset>  
   
