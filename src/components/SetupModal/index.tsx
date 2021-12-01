@@ -1,6 +1,6 @@
 import arqSetupJson from '../../data/setup.json';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal';
 
 import { VscChromeClose } from 'react-icons/vsc'
@@ -76,6 +76,9 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
   const [remove_vnr_not_mapped, set_remove_vnr_not_mapped] = useState(String(data.remove_vnr_not_mapped))
 
 
+  const initialRender = useRef(true);
+
+
   
 
 
@@ -142,15 +145,15 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
     };
 
     setData(data);
-
-    api.post('setup', {data: data})   
-
   }
-  // useEffect(() => {
-  //   console.log(data);
-    
-  //   api.post('setup', {data: data})
-  // },[data]);
+
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else {
+      api.post('setup', {data: data})
+    }
+  },[data]);
 
  
 
