@@ -14,7 +14,7 @@ interface virtualNodeDemandInterface{
   vnr_id: number;
   domain: number;
   region: number;
-  type: number;
+  type: number | string; 
   period: number;
   sink: number;
 }
@@ -43,9 +43,16 @@ const formCreateRequest = (state:any, event:any) => {
   }
 }
 
+const formCreateVND = (state:any, event:any) => {
+  return {
+    ...state,
+    [event.name]: event.value
+  }
+}
+
 
 // Variavel global responsavel por conter um dicinoario com o Id do request e quais nós/edges foram alterados com esse Id
-// Tentei deixar essa variavel global dentro de setColorGraph() mas sempre ele ficava sendo reecriada
+// Tentei deixar essa variavel dentro de setColorGraph() mas sempre ele ficava sendo reecriada
 var changeDicChecbox: { [index: string]: any; } = {};
 
 export function Aside({ request }: any) {
@@ -59,15 +66,33 @@ export function Aside({ request }: any) {
   const [checboxState, setChecboxState] = useState( false )
   const colors = ['#6A5ACD', '#0000CD', '#4682B4', '#00FFFF', '#00FF7F', '#00FF7F', '#ADFF2F', '#ADFF2F', '#DAA520', '#8B4513', '#BC8F8F', '#7B68EE', '#4B0082', '#9400D3', '#800080', '#FF00FF', '#C71585', '#FF1493', '#DB7093', '#CD5C5C', '#DC143C', '#FF0000', '#FF4500', '#B22222', '#FF8C00', '#FF8C00']
 
-  const [formData, setFormData] = useReducer(formCreateRequest, {});
+  const [formRequest, setFormRequest] = useReducer(formCreateRequest, {});
+  const [formVND,     setFormVND]     = useReducer(formCreateVND, {});
+  const [arrayResponseformVND,     setArrayResponseFormVND]     = useState<virtualNodeDemandInterface[]>([]);
 
+  
 
-  const handleChange = (event: { target: { name: any; value: any; }; }) => {
-    setFormData({
+  const handleSubmitVND = (event:any) => {
+    event.preventDefault();
+    formVND['vnr_id-vnd'] = arrayResponseformVND.length + 1
+    setArrayResponseFormVND(prevState => [...prevState, formVND]);
+  }
+
+  const handleChangeRequest = (event: { target: { name: string; value: any; }; }) => {
+    setFormRequest({
       name: event.target.name,
       value: event.target.value,
     });
-    console.log('formData',formData);
+    console.log('formRequest',formRequest);
+
+  }
+
+  const handleChangeVND = (event: { target: { name: any; value: any; }; }) => {
+    setFormVND({
+      name: event.target.name,
+      value: event.target.value,
+    });
+    console.log('formVND',formVND);
   }
   
   // Funcao principal para colorir o grafo
@@ -270,37 +295,43 @@ export function Aside({ request }: any) {
             </TabPanel>
 
             <TabPanel className='TabPanelHome'>
-            <div className='InfoRequest'>
-              <h4>Informaçao geral da requiçao</h4>
-              <input type="text" name="created-vnd"           id="created-creation"     placeholder="created"      onChange={handleChange} />
-              <input type="text" name="duration-creation"     id="duration-creation"    placeholder="duration"     onChange={handleChange} />
-              <input type="text" name="period-creation"       id="period-creation"      placeholder="period"       onChange={handleChange} />
-              <input type="text" name="bandwidth-creation"    id="bandwidth-creation"   placeholder="bandwidth"    onChange={handleChange} />
-              <input type="text" name="delay-creation"        id="delay-creation"       placeholder="delay"        onChange={handleChange} />
-              <input type="text" name="type_slice-creation"   id="type_slice-creation"  placeholder="type_slice"   onChange={handleChange} />
-              <input type="text" name="reliability-creation"  id="reliability-creation" placeholder="reliability"  onChange={handleChange} />
-            </div>
+              <div className='InfoRequest'>
+                <h4>Informaçao geral da requiçao</h4>
+                <input type="text" name="created-vnd"           id="created-creation"     placeholder="created"      onChange={handleChangeRequest} />
+                <input type="text" name="duration-creation"     id="duration-creation"    placeholder="duration"     onChange={handleChangeRequest} />
+                <input type="text" name="period-creation"       id="period-creation"      placeholder="period"       onChange={handleChangeRequest} />
+                <input type="text" name="bandwidth-creation"    id="bandwidth-creation"   placeholder="bandwidth"    onChange={handleChangeRequest} />
+                <input type="text" name="delay-creation"        id="delay-creation"       placeholder="delay"        onChange={handleChangeRequest} />
+                <input type="text" name="type_slice-creation"   id="type_slice-creation"  placeholder="type_slice"   onChange={handleChangeRequest} />
+                <input type="text" name="reliability-creation"  id="reliability-creation" placeholder="reliability"  onChange={handleChangeRequest} />
+              </div>
 
-            <div className='InfoRequest'>
-                <h4>Informaçao virtual node demand</h4>
-                <input type="text" name="requested-vnd" id="requested-vnd" placeholder="created" />
-                <input type="text" name="vnr_id-vnd"    id="vnr_id-vnd"    placeholder="duration" />
-                <input type="text" name="domain-vnd"    id="domain-vnd"    placeholder="period" />
-                <input type="text" name="region-vnd"    id="region-vnd"    placeholder="bandwidth" />
-                <input type="text" name="type-vnd"      id="type-vnd"      placeholder="delay" />
-                <input type="text" name="period-vnd"    id="period-vnd"    placeholder="reliability" />
-                <input type="text" name="sink-vnd"      id="sink-vnd"      placeholder="type_slice" />
-              <button>
-                Adcionar
-              </button>
-            </div>
+              <form onSubmit={handleSubmitVND}>
+                <div className='InfoRequest'>
+                  <h4>Informaçao virtual node demand</h4>
+                  <input type="text" name="requested-vnd" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} />
+                  <input type="text" name="vnr_id-vnd"    id="vnr_id-vnd"    placeholder="vnr_id-vnd"     onChange={handleChangeVND} />
+                  <input type="text" name="domain-vnd"    id="domain-vnd"    placeholder="domain-vnd"     onChange={handleChangeVND} />
+                  <input type="text" name="region-vnd"    id="region-vnd"    placeholder="region-vnd"     onChange={handleChangeVND} />
+                  <input type="text" name="type-vnd"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} />
+                  <input type="text" name="period-vnd"    id="period-vnd"    placeholder="period-vnd"     onChange={handleChangeVND} />
+                  <input type="text" name="sink-vnd"      id="sink-vnd"      placeholder="sink-vnd"       onChange={handleChangeVND} />
+                  <button>
+                    Adcionar
+                  </button>
+                </div>
+              </form>
 
-          
+            
               <h4>Link Source / Target</h4>
               <select name="linkSource" id="linkSource" defaultValue={'DEFAULT'}>
                 <option value='DEFAULT' disabled hidden>Select Slice</option>
-                <option value="Link_id_1"> Link_id_1 </option>
-                <option value="Link_id_2"> Link_id_2 </option>
+                {
+                  arrayResponseformVND.map((element, index) => 
+                    <option value="Link_id_1">{JSON.stringify(element, null, 2)} </option>
+                  )
+                }
+               
               </select>
 
               <select name="LinkTarget" id="LinkTarget" defaultValue={'DEFAULT'}>
@@ -313,7 +344,6 @@ export function Aside({ request }: any) {
               </button>
 
               <input type="submit" value="Create Request"/>
-
             </TabPanel>
 
             <TabPanel className='TabPanel'>
