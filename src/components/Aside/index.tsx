@@ -74,7 +74,11 @@ export function Aside({ request }: any) {
 
   const handleSubmitVND = (event:any) => {
     event.preventDefault();
+   
     formVND['vnr_id-vnd'] = arrayResponseformVND.length + 1
+    console.log('\n\nformVND =>',formVND);
+    console.log('formVND =>',formVND);
+    console.log('arrayResponseformVND =>',arrayResponseformVND);
     setArrayResponseFormVND(prevState => [...prevState, formVND]);
   }
 
@@ -83,8 +87,6 @@ export function Aside({ request }: any) {
       name: event.target.name,
       value: event.target.value,
     });
-    console.log('formRequest',formRequest);
-
   }
 
   const handleChangeVND = (event: { target: { name: any; value: any; }; }) => {
@@ -92,7 +94,6 @@ export function Aside({ request }: any) {
       name: event.target.name,
       value: event.target.value,
     });
-    console.log('formVND',formVND);
   }
   
   // Funcao principal para colorir o grafo
@@ -310,7 +311,7 @@ export function Aside({ request }: any) {
                 <div className='InfoRequest'>
                   <h4>Informaçao virtual node demand</h4>
                   <input type="text" name="requested-vnd" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} />
-                  <input type="text" name="vnr_id-vnd"    id="vnr_id-vnd"    placeholder="vnr_id-vnd"     onChange={handleChangeVND} />
+                  <input type="text" name="vnr_id-vnd"    id="vnr_id-vnd"    placeholder="vnr_id-vnd"     onChange={handleChangeVND} disabled/>
                   <input type="text" name="domain-vnd"    id="domain-vnd"    placeholder="domain-vnd"     onChange={handleChangeVND} />
                   <input type="text" name="region-vnd"    id="region-vnd"    placeholder="region-vnd"     onChange={handleChangeVND} />
                   <input type="text" name="type-vnd"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} />
