@@ -70,16 +70,18 @@ export function Aside({ request }: any) {
   const [formVND,     setFormVND]     = useReducer(formCreateVND, {});
   const [arrayResponseformVND,     setArrayResponseFormVND]     = useState<virtualNodeDemandInterface[]>([]);
 
+  // VARIAVEIS AUXILIARES
+  const LinkSource_id_ = 'LinkSource_id_'
+  const LinkTarget_id_ = 'LinkTarget_id_'
   
 
   const handleSubmitVND = (event:any) => {
     event.preventDefault();
-   
-    formVND['vnr_id-vnd'] = arrayResponseformVND.length + 1
-    console.log('\n\nformVND =>',formVND);
-    console.log('formVND =>',formVND);
-    console.log('arrayResponseformVND =>',arrayResponseformVND);
     setArrayResponseFormVND(prevState => [...prevState, formVND]);
+
+    arrayResponseformVND.map((__, index) => 
+      arrayResponseformVND[index]['vnr_id'] = index 
+    )
   }
 
   const handleChangeRequest = (event: { target: { name: string; value: any; }; }) => {
@@ -87,6 +89,8 @@ export function Aside({ request }: any) {
       name: event.target.name,
       value: event.target.value,
     });
+    console.log(formRequest);
+    
   }
 
   const handleChangeVND = (event: { target: { name: any; value: any; }; }) => {
@@ -240,7 +244,6 @@ export function Aside({ request }: any) {
     }
   };
   
- 
   // Criacao da sessão VIRTUAL REQUESTS após o componete ser carregado com o json na variavel de requests
   useEffect(() => {
     if (Object.keys(request).length !== 0) {
@@ -311,7 +314,7 @@ export function Aside({ request }: any) {
                 <div className='InfoRequest'>
                   <h4>Informaçao virtual node demand</h4>
                   <input type="text" name="requested-vnd" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} />
-                  <input type="text" name="vnr_id-vnd"    id="vnr_id-vnd"    placeholder="vnr_id-vnd"     onChange={handleChangeVND} disabled/>
+                  <input type="text" name="vnr_id"        id="vnr_id"         placeholder="vnr_id"        onChange={handleChangeVND} disabled/>
                   <input type="text" name="domain-vnd"    id="domain-vnd"    placeholder="domain-vnd"     onChange={handleChangeVND} />
                   <input type="text" name="region-vnd"    id="region-vnd"    placeholder="region-vnd"     onChange={handleChangeVND} />
                   <input type="text" name="type-vnd"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} />
@@ -325,20 +328,26 @@ export function Aside({ request }: any) {
 
             
               <h4>Link Source / Target</h4>
-              <select name="linkSource" id="linkSource" defaultValue={'DEFAULT'}>
-                <option value='DEFAULT' disabled hidden>Select Slice</option>
+              <select name="linkSource" id="linkSource" defaultValue={'DEFAULT_linkSource'}>
+                <option value='DEFAULT_linkSource' disabled hidden>Select Slice</option>
                 {
-                  arrayResponseformVND.map((element, index) => 
-                    <option value="Link_id_1">{JSON.stringify(element, null, 2)} </option>
+                  arrayResponseformVND.map((__, index) => {
+                      // arrayResponseformVND[index]['vnr_id'] = index
+                      return <option value={LinkSource_id_+index}> link {index} </option>
+                    } 
                   )
-                }
-               
+                }    
               </select>
 
-              <select name="LinkTarget" id="LinkTarget" defaultValue={'DEFAULT'}>
-                <option value='DEFAULT' disabled hidden>Select Slice</option>
-                <option value="Link_id_1"> Link_id_1 </option>
-                <option value="Link_id_2"> Link_id_2 </option>
+              <select name="LinkTarget" id="LinkTarget" defaultValue={'DEFAULT_LinkTarget'}>
+              <option value='DEFAULT_LinkTarget' disabled hidden>Select Slice</option>
+                {
+                  arrayResponseformVND.map((__, index) => {
+                      // arrayResponseformVND[index]['vnr_id'] = index
+                      return <option value={LinkTarget_id_+index}> link {index} </option>
+                    } 
+                  )
+                }
               </select>
               <button>
                 Adcionar Links
