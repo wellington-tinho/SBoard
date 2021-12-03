@@ -62,6 +62,7 @@ export function Aside({ request }: any) {
   const [ requestElementsHTML, setRequestElementsHTML ] = useState<any>([])
   const [requestMenuHTML, setRequestMenuHTML] = useState<any>('Não há requisições para exibir, considere importar ou criar algumas.')
   const qtdRequests = (0)
+ 
   
   const [checboxState, setChecboxState] = useState( false )
   const colors = ['#6A5ACD', '#0000CD', '#4682B4', '#00FFFF', '#00FF7F', '#00FF7F', '#ADFF2F', '#ADFF2F', '#DAA520', '#8B4513', '#BC8F8F', '#7B68EE', '#4B0082', '#9400D3', '#800080', '#FF00FF', '#C71585', '#FF1493', '#DB7093', '#CD5C5C', '#DC143C', '#FF0000', '#FF4500', '#B22222', '#FF8C00', '#FF8C00']
@@ -70,10 +71,10 @@ export function Aside({ request }: any) {
   const [formVND,     setFormVND]     = useReducer(formCreateVND, {});
   const [arrayResponseformVND,     setArrayResponseFormVND]     = useState<virtualNodeDemandInterface[]>([]);
 
-  // VARIAVEIS AUXILIARES
-  const LinkSource_id_ = 'LinkSource_id_'
-  const LinkTarget_id_ = 'LinkTarget_id_'
-  
+  const [createLinksSourceRequest, setCreateLinksSourceRequest] = useState<any>()
+  const [createLinksTargetRequest, setCreateLinksTargetRequest] = useState<any>()
+
+
 
   const handleSubmitVND = (event:any) => {
     event.preventDefault();
@@ -99,7 +100,33 @@ export function Aside({ request }: any) {
       value: event.target.value,
     });
   }
+
+  const handleChangeCreateLinksSourceRequest = (event: { target: { name: any; value: any; }; }) => {
+    console.log({
+      name: event.target.name,
+      value: event.target.value,
+    });
+    setCreateLinksSourceRequest({
+      name: event.target.name,
+      value: event.target.value,
+    });
+  }
+
+  const handleChangeCreateLinksTargetRequest = (event: { target: { name: any; value: any; }; }) => {
+    console.log({
+      name: event.target.name,
+      value: event.target.value,
+    });
+    setCreateLinksTargetRequest({
+      name: event.target.name,
+      value: event.target.value,
+    });
+  }
   
+  const handleSubmitCreateLinksRequest = (event:any) => {
+    event.preventDefault();
+    console.log([createLinksSourceRequest['value'],createLinksTargetRequest['value']]);
+  }
   // Funcao principal para colorir o grafo
   function setColorGraph(checked: any, request: any) {
     try {
@@ -320,38 +347,40 @@ export function Aside({ request }: any) {
                   <input type="text" name="type-vnd"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} />
                   <input type="text" name="period-vnd"    id="period-vnd"    placeholder="period-vnd"     onChange={handleChangeVND} />
                   <input type="text" name="sink-vnd"      id="sink-vnd"      placeholder="sink-vnd"       onChange={handleChangeVND} />
-                  <button>
+                  <button  type='submit'>
                     Adcionar
                   </button>
                 </div>
               </form>
 
-            
+            <form onSubmit={handleSubmitCreateLinksRequest}>
+
               <h4>Link Source / Target</h4>
-              <select name="linkSource" id="linkSource" defaultValue={'DEFAULT_linkSource'}>
-                <option value='DEFAULT_linkSource' disabled hidden>Select Slice</option>
+              <select name="linkSource" id="linkSource" defaultValue={'DEFAULT'} onChange={handleChangeCreateLinksSourceRequest}>
+                <option value='DEFAULT' disabled hidden>Select Slice</option>
                 {
                   arrayResponseformVND.map((__, index) => {
                       // arrayResponseformVND[index]['vnr_id'] = index
-                      return <option value={LinkSource_id_+index}> link {index} </option>
+                      return <option key={index} value={index}> link {index} </option>
                     } 
                   )
                 }    
               </select>
 
-              <select name="LinkTarget" id="LinkTarget" defaultValue={'DEFAULT_LinkTarget'}>
-              <option value='DEFAULT_LinkTarget' disabled hidden>Select Slice</option>
+              <select name="LinkTarget" id="LinkTarget" defaultValue={'DEFAULT'} onChange={handleChangeCreateLinksTargetRequest}>
+              <option value='DEFAULT' disabled hidden>Select Slice</option>
                 {
                   arrayResponseformVND.map((__, index) => {
                       // arrayResponseformVND[index]['vnr_id'] = index
-                      return <option value={LinkTarget_id_+index}> link {index} </option>
+                      return <option key={index} value={index}> link {index} </option>
                     } 
-                  )
+                    )
                 }
               </select>
-              <button>
+              <button type="submit">
                 Adcionar Links
               </button>
+            </form>
 
               <input type="submit" value="Create Request"/>
             </TabPanel>
