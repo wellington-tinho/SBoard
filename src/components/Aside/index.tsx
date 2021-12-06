@@ -74,6 +74,8 @@ export function Aside({ request }: any) {
   const [createLinksSourceRequest, setCreateLinksSourceRequest] = useState<any>()
   const [createLinksTargetRequest, setCreateLinksTargetRequest] = useState<any>()
 
+  const [createLinksRequest, setCreateLinksRequest] = useState<any>([])
+
 
 
   const handleSubmitVND = (event:any) => {
@@ -125,7 +127,11 @@ export function Aside({ request }: any) {
   
   const handleSubmitCreateLinksRequest = (event:any) => {
     event.preventDefault();
-    console.log([createLinksSourceRequest['value'],createLinksTargetRequest['value']]);
+  
+    var newState = [Number(createLinksSourceRequest['value']), Number(createLinksTargetRequest['value'])]
+
+    setCreateLinksRequest([...createLinksRequest ,newState] );
+
   }
   // Funcao principal para colorir o grafo
   function setColorGraph(checked: any, request: any) {
