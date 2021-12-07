@@ -77,17 +77,34 @@ export function Aside({ request }: any) {
   const [createLinksRequest, setCreateLinksRequest] = useState<any>([])
 
 
+  
+  const handleSubmitCreateRequest = (event:any) => {
+    event.preventDefault();
+    console.log('handleSubmitCreateRequest');
+    console.log(formRequest);
+    console.log(arrayResponseformVND);
+    console.log(createLinksRequest);
+  }
 
   const handleSubmitVND = (event:any) => {
     event.preventDefault();
+    console.log('handleSubmitVND');
     setArrayResponseFormVND(prevState => [...prevState, formVND]);
 
     arrayResponseformVND.map((__, index) => 
-      arrayResponseformVND[index]['vnr_id'] = index 
+      arrayResponseformVND[index]['id'] = index 
     )
   }
 
+  const handleSubmitCreateLinksRequest = (event:any) => {
+    event.preventDefault();
+    console.log('handleSubmitCreateLinksRequest');
+    var newState = [Number(createLinksSourceRequest['value']), Number(createLinksTargetRequest['value'])]
+    setCreateLinksRequest([...createLinksRequest ,newState] );
+  }
+
   const handleChangeRequest = (event: { target: { name: string; value: any; }; }) => {
+    console.log('handleChangeRequest');
     setFormRequest({
       name: event.target.name,
       value: event.target.value,
@@ -97,6 +114,7 @@ export function Aside({ request }: any) {
   }
 
   const handleChangeVND = (event: { target: { name: any; value: any; }; }) => {
+    console.log('handleChangeVND');
     setFormVND({
       name: event.target.name,
       value: event.target.value,
@@ -104,6 +122,7 @@ export function Aside({ request }: any) {
   }
 
   const handleChangeCreateLinksSourceRequest = (event: { target: { name: any; value: any; }; }) => {
+    console.log('handleChangeCreateLinksSourceRequest');
     console.log({
       name: event.target.name,
       value: event.target.value,
@@ -115,6 +134,7 @@ export function Aside({ request }: any) {
   }
 
   const handleChangeCreateLinksTargetRequest = (event: { target: { name: any; value: any; }; }) => {
+    console.log('handleChangeCreateLinksTargetRequest');
     console.log({
       name: event.target.name,
       value: event.target.value,
@@ -125,14 +145,6 @@ export function Aside({ request }: any) {
     });
   }
   
-  const handleSubmitCreateLinksRequest = (event:any) => {
-    event.preventDefault();
-  
-    var newState = [Number(createLinksSourceRequest['value']), Number(createLinksTargetRequest['value'])]
-
-    setCreateLinksRequest([...createLinksRequest ,newState] );
-
-  }
   // Funcao principal para colorir o grafo
   function setColorGraph(checked: any, request: any) {
     try {
@@ -332,63 +344,65 @@ export function Aside({ request }: any) {
             </TabPanel>
 
             <TabPanel className='TabPanelHome'>
-              <div className='InfoRequest'>
-                <h4>Informaçao geral da requiçao</h4>
-                <input type="text" name="created-vnd"           id="created-creation"     placeholder="created"      onChange={handleChangeRequest} />
-                <input type="text" name="duration-creation"     id="duration-creation"    placeholder="duration"     onChange={handleChangeRequest} />
-                <input type="text" name="period-creation"       id="period-creation"      placeholder="period"       onChange={handleChangeRequest} />
-                <input type="text" name="bandwidth-creation"    id="bandwidth-creation"   placeholder="bandwidth"    onChange={handleChangeRequest} />
-                <input type="text" name="delay-creation"        id="delay-creation"       placeholder="delay"        onChange={handleChangeRequest} />
-                <input type="text" name="type_slice-creation"   id="type_slice-creation"  placeholder="type_slice"   onChange={handleChangeRequest} />
-                <input type="text" name="reliability-creation"  id="reliability-creation" placeholder="reliability"  onChange={handleChangeRequest} />
-              </div>
 
-              <form onSubmit={handleSubmitVND}>
+              <form onSubmit={handleSubmitCreateRequest}>
+
+                <div className='InfoRequest'>
+                  <h4>Informaçao geral da requiçao</h4>
+                  <input type="text" name="created"      id="created-creation"     placeholder="created"      onChange={handleChangeRequest} required/>
+                  <input type="text" name="duration"     id="duration-creation"    placeholder="duration"     onChange={handleChangeRequest} required/>
+                  <input type="text" name="period"       id="period-creation"      placeholder="period"       onChange={handleChangeRequest} required/>
+                  <input type="text" name="bandwidth"    id="bandwidth-creation"   placeholder="bandwidth"    onChange={handleChangeRequest} required/>
+                  <input type="text" name="delay"        id="delay-creation"       placeholder="delay"        onChange={handleChangeRequest} required/>
+                  <input type="text" name="reliability"  id="reliability-creation" placeholder="reliability"  onChange={handleChangeRequest} required/>
+                  <input type="text" name="type_slice"   id="type_slice-creation"  placeholder="type_slice"   onChange={handleChangeRequest} required/>
+                </div>
+
                 <div className='InfoRequest'>
                   <h4>Informaçao virtual node demand</h4>
-                  <input type="text" name="requested-vnd" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} />
-                  <input type="text" name="vnr_id"        id="vnr_id"         placeholder="vnr_id"        onChange={handleChangeVND} disabled/>
-                  <input type="text" name="domain-vnd"    id="domain-vnd"    placeholder="domain-vnd"     onChange={handleChangeVND} />
-                  <input type="text" name="region-vnd"    id="region-vnd"    placeholder="region-vnd"     onChange={handleChangeVND} />
-                  <input type="text" name="type-vnd"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} />
-                  <input type="text" name="period-vnd"    id="period-vnd"    placeholder="period-vnd"     onChange={handleChangeVND} />
-                  <input type="text" name="sink-vnd"      id="sink-vnd"      placeholder="sink-vnd"       onChange={handleChangeVND} />
-                  <button  type='submit'>
+                  <input type="text" name="requested" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} required/>
+                  <input type="text" name="vnr_id"    id="vnr_id"        placeholder="vnr_id"         onChange={handleChangeVND} required/>
+                  <input type="text" name="domain"    id="domain-vnd"    placeholder="domain-vnd"     onChange={handleChangeVND} required/>
+                  <input type="text" name="region"    id="region-vnd"    placeholder="region-vnd"     onChange={handleChangeVND} required/>
+                  <input type="text" name="type"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} required/>
+                  <input type="text" name="period"    id="period-vnd"    placeholder="period-vnd"     onChange={handleChangeVND} required/>
+                  <input type="text" name="sink"      id="sink-vnd"      placeholder="sink-vnd"       onChange={handleChangeVND} required/>
+                  <button  onClick={handleSubmitVND}>
                     Adcionar
                   </button>
                 </div>
+              
+                  <h4>Link Source / Target</h4>
+                  <select name="linkSource" id="linkSource" defaultValue={'DEFAULT'} onChange={handleChangeCreateLinksSourceRequest} required>
+                    <option value='DEFAULT' disabled hidden>Select Slice</option>
+                    {
+                      arrayResponseformVND.map((__, index) => {
+                        // arrayResponseformVND[index]['vnr_id'] = index
+                          return <option key={index} value={index}> link {index} </option>
+                        } 
+                      )
+                    }    
+                  </select>
+
+                  <select name="LinkTarget" id="LinkTarget" defaultValue={'DEFAULT'} onChange={handleChangeCreateLinksTargetRequest} required>
+                  <option value='DEFAULT' disabled hidden>Select Slice</option>
+                    {
+                      arrayResponseformVND.map((__, index) => {
+                        // arrayResponseformVND[index]['vnr_id'] = index
+                        return <option key={index} value={index}> link {index} </option>
+                      } 
+                      )
+                    }
+                  </select>
+                  <button onClick={handleSubmitCreateLinksRequest}>
+                    Adcionar Links
+                  </button>
+              
+
+                <button type="submit">
+                  Create Request
+                </button>
               </form>
-
-            <form onSubmit={handleSubmitCreateLinksRequest}>
-
-              <h4>Link Source / Target</h4>
-              <select name="linkSource" id="linkSource" defaultValue={'DEFAULT'} onChange={handleChangeCreateLinksSourceRequest}>
-                <option value='DEFAULT' disabled hidden>Select Slice</option>
-                {
-                  arrayResponseformVND.map((__, index) => {
-                      // arrayResponseformVND[index]['vnr_id'] = index
-                      return <option key={index} value={index}> link {index} </option>
-                    } 
-                  )
-                }    
-              </select>
-
-              <select name="LinkTarget" id="LinkTarget" defaultValue={'DEFAULT'} onChange={handleChangeCreateLinksTargetRequest}>
-              <option value='DEFAULT' disabled hidden>Select Slice</option>
-                {
-                  arrayResponseformVND.map((__, index) => {
-                      // arrayResponseformVND[index]['vnr_id'] = index
-                      return <option key={index} value={index}> link {index} </option>
-                    } 
-                    )
-                }
-              </select>
-              <button type="submit">
-                Adcionar Links
-              </button>
-            </form>
-
-              <input type="submit" value="Create Request"/>
             </TabPanel>
 
             <TabPanel className='TabPanel'>
