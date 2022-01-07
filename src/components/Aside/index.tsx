@@ -19,8 +19,6 @@ interface virtualNodeDemandInterface{
   sink: number;
 }
 
-
-
 interface requestUnicInterface {
   id: number;
   vnd: virtualNodeDemandInterface[];
@@ -33,7 +31,6 @@ interface requestUnicInterface {
   reliability: number;
   type_slice: string;
 }
-
 
 
 const formCreateRequest = (state:any, event:any) => {
@@ -76,19 +73,23 @@ export function Aside({ request }: any) {
 
   const [createLinksRequest, setCreateLinksRequest] = useState<any>([])
 
-
   
   const handleSubmitCreateRequest = (event:any) => {
     event.preventDefault();
-    console.log('handleSubmitCreateRequest');
-    console.log(formRequest);
-    console.log(arrayResponseformVND);
-    console.log(createLinksRequest);
+    formRequest['id'] = (Object.keys(requestList).length !== 0) ? Object.keys(requestList).length + 1 :  Object.keys(requestList).length
+    const requestCreatedManually = {...formRequest} 
+    requestCreatedManually['vnd'] = {...arrayResponseformVND} 
+    requestCreatedManually['links'] = [...createLinksRequest]
+
+    setRequestList([requestCreatedManually])
+    // createElementHTMLRequest(requestList)
+
+    console.log([requestCreatedManually])
+    console.log(requestList)
   }
 
   const handleSubmitVND = (event:any) => {
     event.preventDefault();
-    console.log('handleSubmitVND');
     setArrayResponseFormVND(prevState => [...prevState, formVND]);
 
     arrayResponseformVND.map((__, index) => 
@@ -104,17 +105,14 @@ export function Aside({ request }: any) {
   }
 
   const handleChangeRequest = (event: { target: { name: string; value: any; }; }) => {
-    console.log('handleChangeRequest');
     setFormRequest({
       name: event.target.name,
       value: event.target.value,
     });
-    console.log(formRequest);
     
   }
 
   const handleChangeVND = (event: { target: { name: any; value: any; }; }) => {
-    console.log('handleChangeVND');
     setFormVND({
       name: event.target.name,
       value: event.target.value,
@@ -122,11 +120,6 @@ export function Aside({ request }: any) {
   }
 
   const handleChangeCreateLinksSourceRequest = (event: { target: { name: any; value: any; }; }) => {
-    console.log('handleChangeCreateLinksSourceRequest');
-    console.log({
-      name: event.target.name,
-      value: event.target.value,
-    });
     setCreateLinksSourceRequest({
       name: event.target.name,
       value: event.target.value,
@@ -134,11 +127,6 @@ export function Aside({ request }: any) {
   }
 
   const handleChangeCreateLinksTargetRequest = (event: { target: { name: any; value: any; }; }) => {
-    console.log('handleChangeCreateLinksTargetRequest');
-    console.log({
-      name: event.target.name,
-      value: event.target.value,
-    });
     setCreateLinksTargetRequest({
       name: event.target.name,
       value: event.target.value,
@@ -189,7 +177,7 @@ export function Aside({ request }: any) {
     }
   }
 
-  // Verefificando se foi apertado checkbox dos requests e enviando para funcao de colorir
+  // Verificando se foi apertado checkbox dos requests e enviando para funcao de colorir
   function toggleCheckBoxRequest(e: any, request: any) {
     const { checked } = e.target
     setChecboxState(checked)
@@ -349,31 +337,31 @@ export function Aside({ request }: any) {
 
                 <div className='InfoRequest'>
                   <h4>Informaçao geral da requiçao</h4>
-                  <input type="text" name="created"      id="created-creation"     placeholder="created"      onChange={handleChangeRequest} required/>
-                  <input type="text" name="duration"     id="duration-creation"    placeholder="duration"     onChange={handleChangeRequest} required/>
-                  <input type="text" name="period"       id="period-creation"      placeholder="period"       onChange={handleChangeRequest} required/>
-                  <input type="text" name="bandwidth"    id="bandwidth-creation"   placeholder="bandwidth"    onChange={handleChangeRequest} required/>
-                  <input type="text" name="delay"        id="delay-creation"       placeholder="delay"        onChange={handleChangeRequest} required/>
-                  <input type="text" name="reliability"  id="reliability-creation" placeholder="reliability"  onChange={handleChangeRequest} required/>
-                  <input type="text" name="type_slice"   id="type_slice-creation"  placeholder="type_slice"   onChange={handleChangeRequest} required/>
+                  <input type="text" name="created"      id="created-creation"     placeholder="created"      onChange={handleChangeRequest} />
+                  <input type="text" name="duration"     id="duration-creation"    placeholder="duration"     onChange={handleChangeRequest} />
+                  <input type="text" name="period"       id="period-creation"      placeholder="period"       onChange={handleChangeRequest} />
+                  <input type="text" name="bandwidth"    id="bandwidth-creation"   placeholder="bandwidth"    onChange={handleChangeRequest} />
+                  <input type="text" name="delay"        id="delay-creation"       placeholder="delay"        onChange={handleChangeRequest} />
+                  <input type="text" name="reliability"  id="reliability-creation" placeholder="reliability"  onChange={handleChangeRequest} />
+                  <input type="text" name="type_slice"   id="type_slice-creation"  placeholder="type_slice"   onChange={handleChangeRequest} />
                 </div>
 
                 <div className='InfoRequest'>
                   <h4>Informaçao virtual node demand</h4>
-                  <input type="text" name="requested" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} required/>
-                  <input type="text" name="vnr_id"    id="vnr_id"        placeholder="vnr_id"         onChange={handleChangeVND} required/>
-                  <input type="text" name="domain"    id="domain-vnd"    placeholder="domain-vnd"     onChange={handleChangeVND} required/>
-                  <input type="text" name="region"    id="region-vnd"    placeholder="region-vnd"     onChange={handleChangeVND} required/>
-                  <input type="text" name="type"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} required/>
-                  <input type="text" name="period"    id="period-vnd"    placeholder="period-vnd"     onChange={handleChangeVND} required/>
-                  <input type="text" name="sink"      id="sink-vnd"      placeholder="sink-vnd"       onChange={handleChangeVND} required/>
+                  <input type="text" name="requested" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} />
+                  <input type="text" name="vnr_id"    id="vnr_id"        placeholder="vnr_id"         onChange={handleChangeVND} />
+                  <input type="text" name="domain"    id="domain-vnd"    placeholder="domain-vnd"     onChange={handleChangeVND} />
+                  <input type="text" name="region"    id="region-vnd"    placeholder="region-vnd"     onChange={handleChangeVND} />
+                  <input type="text" name="type"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} />
+                  <input type="text" name="period"    id="period-vnd"    placeholder="period-vnd"     onChange={handleChangeVND} />
+                  <input type="text" name="sink"      id="sink-vnd"      placeholder="sink-vnd"       onChange={handleChangeVND} />
                   <button  onClick={handleSubmitVND}>
                     Adcionar
                   </button>
                 </div>
               
                   <h4>Link Source / Target</h4>
-                  <select name="linkSource" id="linkSource" defaultValue={'DEFAULT'} onChange={handleChangeCreateLinksSourceRequest} required>
+                  <select name="linkSource" id="linkSource" defaultValue={'DEFAULT'} onChange={handleChangeCreateLinksSourceRequest} >
                     <option value='DEFAULT' disabled hidden>Select Slice</option>
                     {
                       arrayResponseformVND.map((__, index) => {
@@ -384,7 +372,7 @@ export function Aside({ request }: any) {
                     }    
                   </select>
 
-                  <select name="LinkTarget" id="LinkTarget" defaultValue={'DEFAULT'} onChange={handleChangeCreateLinksTargetRequest} required>
+                  <select name="LinkTarget" id="LinkTarget" defaultValue={'DEFAULT'} onChange={handleChangeCreateLinksTargetRequest} >
                   <option value='DEFAULT' disabled hidden>Select Slice</option>
                     {
                       arrayResponseformVND.map((__, index) => {
@@ -398,7 +386,10 @@ export function Aside({ request }: any) {
                     Adcionar Links
                   </button>
               
-
+                <button onClick={()=>{console.log('shit');
+                }}>
+                  Limpar dados
+                </button>
                 <button type="submit">
                   Create Request
                 </button>
