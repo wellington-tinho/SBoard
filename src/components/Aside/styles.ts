@@ -46,7 +46,7 @@ export const Container = styled.div`
       }
 
       li.Tab[aria-selected="true"]{
-        background: #fff;
+        background: var(--bg);
         border-color: #acdcb9;
         color: black;
         border-radius: 5px 5px 0 0;
@@ -56,9 +56,10 @@ export const Container = styled.div`
     fieldset{
       border: 1px solid #acdcb9;
       border-top: none;
-      height: 45rem;
+      /* height: 45rem; */
       overflow-y: scroll;
-      .TabPanelHome{
+
+      .TabPanelVNR{
         ul.listRequest{
           display: flex;
           flex-direction: column;
@@ -97,11 +98,15 @@ export const Container = styled.div`
           }
         }
       }
-      .TabPanelHome{
-        input[type="submit"]{
+      
+      .TabPanelCreate{
+        form{
+          padding: 0.5rem  1rem ;
+        }
+        /* input[type="submit"]{
           padding:  .5rem 3rem;
           border-radius: 0.5rem;
-        }
+        } */
       }
    } 
 

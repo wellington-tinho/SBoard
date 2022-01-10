@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const NavOptions  = styled.nav`
-  border-radius: 0.25rem;
+  border: 1px solid var(--green);
+  border-right: 0;
   background-color: var(--bg);
-  border: 1px solid var(--background);
 
   border-left: 0;
  
@@ -47,12 +47,18 @@ export const GraphContainer = styled.div`
   display:flex;
   justify-content: center;
   align-items: center;
-    
 
   `
 
 export const Container = styled.div`
   width: 100%;
-
+  display: flex;
+  flex-direction: column;
+  nav{
+    flex-grow: 0;
+  }
+  div {
+    flex-grow: 1;
+  }
 
 `

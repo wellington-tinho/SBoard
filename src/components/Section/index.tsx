@@ -7,10 +7,14 @@ import { GraphArea } from "../GraphArea";
 const Content = styled.div `
   display: flex;
   align-items: stretch;
-  flex-grow: 1;
-  flex-basis: auto;
-  height: 88.5vh;
   border: 1px solid var(--background);
+  height: 100%;
+  
+
+  @media (max-width: 500px){
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 export function Section(){

@@ -33,7 +33,7 @@ export function Upload() {
   };
   
   useEffect(() => {
-    
+
     if(graphGML){
       api.post('convert', {data: graphGML})
       .then(response => setGraphJSON(response.data.elements))  

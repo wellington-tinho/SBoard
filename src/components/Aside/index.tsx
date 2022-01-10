@@ -324,18 +324,18 @@ export function Aside({ request }: any) {
             </TabList>
 
           <fieldset>
-            <TabPanel className='TabPanelHome'>
+            <TabPanel className='TabPanelVNR'>
 
               {requestMenuHTML}
           
               {/* Informaçao sobre os requests, e exibir detalhado */}
             </TabPanel>
 
-            <TabPanel className='TabPanelHome'>
+            <TabPanel className='TabPanelCreate'>
 
               <form onSubmit={handleSubmitCreateRequest}>
 
-                <div className='InfoRequest'>
+                <div className='InfoGeneralRequest'>
                   <h4>Informaçao geral da requiçao</h4>
                   <input type="text" name="created"      id="created-creation"     placeholder="created"      onChange={handleChangeRequest} />
                   <input type="text" name="duration"     id="duration-creation"    placeholder="duration"     onChange={handleChangeRequest} />
@@ -346,7 +346,7 @@ export function Aside({ request }: any) {
                   <input type="text" name="type_slice"   id="type_slice-creation"  placeholder="type_slice"   onChange={handleChangeRequest} />
                 </div>
 
-                <div className='InfoRequest'>
+                <div className='InfoVNDRequest'>
                   <h4>Informaçao virtual node demand</h4>
                   <input type="text" name="requested" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} />
                   <input type="text" name="vnr_id"    id="vnr_id"        placeholder="vnr_id"         onChange={handleChangeVND} />
@@ -366,9 +366,8 @@ export function Aside({ request }: any) {
                     {
                       arrayResponseformVND.map((__, index) => {
                         // arrayResponseformVND[index]['vnr_id'] = index
-                          return <option key={index} value={index}> link {index} </option>
-                        } 
-                      )
+                        return <option key={index} value={index}> link {index} </option>
+                      })
                     }    
                   </select>
 
@@ -378,8 +377,7 @@ export function Aside({ request }: any) {
                       arrayResponseformVND.map((__, index) => {
                         // arrayResponseformVND[index]['vnr_id'] = index
                         return <option key={index} value={index}> link {index} </option>
-                      } 
-                      )
+                      })
                     }
                   </select>
                   <button onClick={handleSubmitCreateLinksRequest}>

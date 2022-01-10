@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
 :root {
   --background: #eee;
   --green: #34D761;
-  --bg: #fff;
+  --bg: #E6E6E6;
   --text-tile: #63696E;
 }
 
@@ -39,7 +39,7 @@ body {
   
   display: flex;
   flex-flow: column;
-  height: 100vh;
+  height: 100%;
 }
 
 button {
@@ -96,7 +96,7 @@ ul li{
 .react-modal-close{
   color: var(--text-tile);
   position: absolute;
-  font-size: 1.5rem;
+  font-size: 1rem;
   right: 1.5rem;
   top:1.5rem;
   border: 0;

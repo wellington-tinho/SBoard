@@ -111,7 +111,7 @@ export function GraphArea({setRequest}:any){
             <BiGitPullRequest fontSize="1.5em"  cursor="pointer"  onClick={handleClick} /> 
           </li>
 
-          <li>  <BsGear fontSize="1.5em" cursor="pointer" onClick={handleOpenSetupModal}/> </li>
+          <li>   <BsGear fontSize="1.5em" cursor="pointer" onClick={handleOpenSetupModal}  /> </li>
           
           <li>  <FiPlayCircle color="#228f41" fontSize="1.5em" cursor="not-allowed"/> </li>
         

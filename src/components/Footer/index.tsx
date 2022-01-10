@@ -23,9 +23,9 @@ const Container = styled.div`
 export function Footer(){
   return(
     <Container>
-      <span>
+      {/* <span>
         Network Slice - UFPI
-      </span>
+      </span> */}
     </Container>
   );
 }
