@@ -1,5 +1,19 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  /* nav{
+    flex-grow: 0;
+  }
+  div {
+    flex-grow: 1;
+  } */
+
+`
+
 export const NavOptions  = styled.nav`
   border: 1px solid var(--green);
   border-right: 0;
@@ -50,15 +64,3 @@ export const GraphContainer = styled.div`
 
   `
 
-export const Container = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  nav{
-    flex-grow: 0;
-  }
-  div {
-    flex-grow: 1;
-  }
-
-`

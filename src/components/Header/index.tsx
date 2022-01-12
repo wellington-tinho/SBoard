@@ -12,6 +12,7 @@ export const Container = styled.header`
   border-radius: 0.25rem;
   border-top: 1px solid var(--green);
   height: 4rem;
+  flex-grow: 0;
  
 
   #tsparticles{
