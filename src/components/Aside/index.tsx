@@ -57,7 +57,7 @@ export function Aside({ request }: any) {
 
   const [requestList, setRequestList] = useState<requestUnicInterface[]>(request)
   const [ requestElementsHTML, setRequestElementsHTML ] = useState<any>([])
-  const [requestMenuHTML, setRequestMenuHTML] = useState<any>('Não há requisições para exibir, considere importar ou criar algumas.')
+  const [requestMenuHTML, setRequestMenuHTML] = useState<any>()
   const qtdRequests = (0)
  
   
@@ -325,10 +325,8 @@ export function Aside({ request }: any) {
 
           <fieldset>
             <TabPanel className='TabPanelVNR'>
-
-              {requestMenuHTML}
-          
               {/* Informaçao sobre os requests, e exibir detalhado */}
+              {requestMenuHTML||<p>Não há requisições para exibir, considere importar ou criar algumas.</p>}
             </TabPanel>
 
             <TabPanel className='TabPanelCreate'>
@@ -337,24 +335,82 @@ export function Aside({ request }: any) {
 
                 <div className='InfoGeneralRequest'>
                   <h4>Informaçao geral da requiçao</h4>
-                  <input type="text" name="created"      id="created-creation"     placeholder="created"      onChange={handleChangeRequest} />
-                  <input type="text" name="duration"     id="duration-creation"    placeholder="duration"     onChange={handleChangeRequest} />
-                  <input type="text" name="period"       id="period-creation"      placeholder="period"       onChange={handleChangeRequest} />
-                  <input type="text" name="bandwidth"    id="bandwidth-creation"   placeholder="bandwidth"    onChange={handleChangeRequest} />
-                  <input type="text" name="delay"        id="delay-creation"       placeholder="delay"        onChange={handleChangeRequest} />
-                  <input type="text" name="reliability"  id="reliability-creation" placeholder="reliability"  onChange={handleChangeRequest} />
-                  <input type="text" name="type_slice"   id="type_slice-creation"  placeholder="type_slice"   onChange={handleChangeRequest} />
+                  <div> 
+                    <p> created </p> 
+                    <input type="text" name="created"      id="created-creation"     placeholder="created"      onChange={handleChangeRequest} />
+                  </div> 
+
+                  <div> 
+                    <p> duration </p> 
+                    <input type="text" name="duration"     id="duration-creation"    placeholder="duration"     onChange={handleChangeRequest} />
+                  </div> 
+
+                  <div> 
+                    <p> period </p> 
+                    <input type="text" name="period"       id="period-creation"      placeholder="period"       onChange={handleChangeRequest} />
+                  </div> 
+
+                  <div> 
+                    <p> bandwidth </p> 
+                    <input type="text" name="bandwidth"    id="bandwidth-creation"   placeholder="bandwidth"    onChange={handleChangeRequest} />
+                  </div> 
+
+                  <div> 
+                    <p> delay </p> 
+                    <input type="text" name="delay"        id="delay-creation"       placeholder="delay"        onChange={handleChangeRequest} />
+                  </div> 
+
+                  <div> 
+                    <p> reliability </p> 
+                    <input type="text" name="reliability"  id="reliability-creation" placeholder="reliability"  onChange={handleChangeRequest} />
+                  </div> 
+
+                  <div> 
+                    <p> type_slice </p> 
+                    <input type="text" name="type_slice"   id="type_slice-creation"  placeholder="type_slice"   onChange={handleChangeRequest} />
+                  </div> 
+
                 </div>
 
                 <div className='InfoVNDRequest'>
+
                   <h4>Informaçao virtual node demand</h4>
-                  <input type="text" name="requested" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} />
-                  <input type="text" name="vnr_id"    id="vnr_id"        placeholder="vnr_id"         onChange={handleChangeVND} />
-                  <input type="text" name="domain"    id="domain-vnd"    placeholder="domain-vnd"     onChange={handleChangeVND} />
-                  <input type="text" name="region"    id="region-vnd"    placeholder="region-vnd"     onChange={handleChangeVND} />
-                  <input type="text" name="type"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} />
-                  <input type="text" name="period"    id="period-vnd"    placeholder="period-vnd"     onChange={handleChangeVND} />
-                  <input type="text" name="sink"      id="sink-vnd"      placeholder="sink-vnd"       onChange={handleChangeVND} />
+
+                  <div> 
+                    <p> requested </p> 
+                    <input type="text" name="requested" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} />
+                  </div> 
+
+                  <div> 
+                    <p> vnr_id </p> 
+                    <input type="text" name="vnr_id"    id="vnr_id"        placeholder="vnr_id"         onChange={handleChangeVND} />
+                  </div> 
+
+                  <div> 
+                    <p> domain </p> 
+                    <input type="text" name="domain"    id="domain-vnd"    placeholder="domain-vnd"     onChange={handleChangeVND} />
+                  </div> 
+
+                  <div> 
+                    <p> region </p> 
+                    <input type="text" name="region"    id="region-vnd"    placeholder="region-vnd"     onChange={handleChangeVND} />
+                  </div> 
+
+                  <div> 
+                    <p> type </p> 
+                    <input type="text" name="type"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} />
+                  </div> 
+
+                  <div> 
+                    <p> period </p> 
+                    <input type="text" name="period"    id="period-vnd"    placeholder="period-vnd"     onChange={handleChangeVND} />
+                  </div> 
+
+                  <div> 
+                    <p> sink </p> 
+                    <input type="text" name="sink"      id="sink-vnd"      placeholder="sink-vnd"       onChange={handleChangeVND} />
+                  </div> 
+
                   <button  onClick={handleSubmitVND}>
                     Adcionar
                   </button>

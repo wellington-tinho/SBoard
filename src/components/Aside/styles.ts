@@ -60,6 +60,12 @@ export const Container = styled.div`
       overflow-y: scroll;
 
       .TabPanelVNR{
+
+        p{
+          margin: 1rem;
+          font: .9rem 'Roboto Slab', bold;
+        }
+
         ul.listRequest{
           display: flex;
           flex-direction: column;
@@ -102,11 +108,48 @@ export const Container = styled.div`
       .TabPanelCreate{
         form{
           padding: 0.5rem  1rem ;
+
+          .InfoGeneralRequest h4{
+            font: 2rem 'Roboto Slab' bold;
+            margin-top: 1rem ;     
+          }
+          
+          .InfoVNDRequest h4{
+            font: 2rem 'Roboto Slab' bold;
+            margin-top: 2rem ;   
+          }
+
+          div{
+            div{
+              display: flex;
+
+              & + div{
+                margin-top: .5rem;
+              }
+
+              p{
+                width: 40%;
+                padding: 0 0.5rem;
+                height: 1.5rem;
+                border-radius: 0.25rem;
+                border: 1px solid #d7d7d7;
+                /* font-weight: 400; */
+                font-size: 1rem;
+                display: flex;
+                align-items: center;
+              }
+            input{
+              width: 100%;
+              padding: 0  0.5rem;
+              height: 1.5rem;
+              border-radius: 0.25rem;
+              background: #e7e9ee;
+              border: 1px solid #d7d7d7;
+              /* font-weight: 400; */
+              font-size: 1rem;
+            }
+          }
         }
-        /* input[type="submit"]{
-          padding:  .5rem 3rem;
-          border-radius: 0.5rem;
-        } */
       }
    } 
 
