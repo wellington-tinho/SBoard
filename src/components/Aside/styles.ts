@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: var(--bg);
-  border: 1px solid var(--background);
-  border-radius: 0.25rem;
+  background-color: var(--white-2);
+  border-left: 2px solid var(--background);
+  border-top: 1px solid var(--green);;
 
   main{
     margin-top: 0.5rem;
@@ -12,7 +12,7 @@ export const Container = styled.div`
   
     h2{
       font-size: 1.3rem;
-      border-bottom: 1px solid #34D761;
+      border-bottom: 1px solid var(--background);
 
     }
     button{
@@ -46,7 +46,7 @@ export const Container = styled.div`
       }
 
       li.Tab[aria-selected="true"]{
-        background: var(--bg);
+        background: var(--white-2);
         border-color: #acdcb9;
         color: black;
         border-radius: 5px 5px 0 0;

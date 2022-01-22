@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Container = styled.div` 
-  background-color: var(--bg);
+  background-color: var(--white-2);
   height: 1vh;
   width: 100%;
   /* position: absolute; */

@@ -93,7 +93,7 @@ export const Container = styled.form`
         padding: 0 1.5rem;
         height: 3.5rem;
         background: var(--green);
-        color: var(--bg);
+        color: var(--white-2);
         border-radius: 0.25rem;
         border: 0;
         font-size: 1rem;

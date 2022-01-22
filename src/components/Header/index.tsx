@@ -32,13 +32,13 @@ export const Container = styled.header`
   
     h1{ 
       font: 5rem 'Roboto Slab', 700;
-      /* color: var(--bg) */
+      /* color: var(--white-2) */
     }
   
     h3{
       padding: 0.5rem 2rem 0;  
       font: 3rem 'Roboto Slab', 700;
-      /* color: var(--bg) */
+      /* color: var(--white-2) */
     }
   
 
