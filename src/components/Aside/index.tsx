@@ -450,17 +450,27 @@ export function Aside({ request }: any) {
               </form>
             </TabPanel>
 
-            <TabPanel className='TabPanel'>
-              lista com request com opc para editar
+            <TabPanel className='TabPanelEdition'>
+              <p>Lista com requests com opção para editar cada uma das mesmas</p> 
             </TabPanel>
 
-            <TabPanel className='TabPanel'>
+            <TabPanel className='TabPanelOthers'>
+              <button disabled> Baixar Requests</button>
+              <button disabled> Limpar Todas Requests</button>
               
-              Salvar
-              Apagar tudo
-              <div>
-                <input type="file" name="UploadJSON" id="UploadJSON"  onChange={appendRequestList}  accept=".json,.JSON" />
-                {/* <label className='UploadJSON' htmlFor="UploadJSON"> Concatenar nova requisiçao </label>   */}
+              <div className='UploadJSON'>
+                <input 
+                  type="file" 
+                  name="UploadJSON" 
+                  id="UploadJSON"  
+                  onChange={appendRequestList} 
+                  hidden={true}  
+                  accept=".json,.JSON"
+                />
+                {/* <label htmlFor="UploadJSON">Append JSON</label> */}
+                <label htmlFor="UploadJSON"> 
+                  Concatenar nova requisiçao 
+                </label>  
               </div>
             </TabPanel>
           </fieldset>  
