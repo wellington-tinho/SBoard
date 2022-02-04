@@ -1,4 +1,5 @@
 import { Container } from "./styles";
+import {qtd_vnrs} from '../../data/setup.json';
 
 import { useContext, useEffect, useState, useReducer } from "react";
 import { CytoscapeContext } from "../../CytoscapeContext";
@@ -7,6 +8,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 import menu from '../../assets/icons/menu-vertical.png'
+import { CreateRequest } from "./createRequest";
 
 interface virtualNodeDemandInterface{
   id: number;
@@ -56,7 +58,7 @@ export function Aside({ request }: any) {
   const [cy] = useContext(CytoscapeContext);
 
   const [requestList, setRequestList] = useState<requestUnicInterface[]>(request)
-  const [ requestElementsHTML, setRequestElementsHTML ] = useState<any>([])
+  const [requestElementsHTML, setRequestElementsHTML] = useState<any>([])
   const [requestMenuHTML, setRequestMenuHTML] = useState<any>()
   const qtdRequests = (0)
  
@@ -83,10 +85,10 @@ export function Aside({ request }: any) {
 
     setRequestList([requestCreatedManually])
     // createElementHTMLRequest(requestList)
-
-    console.log([requestCreatedManually])
-    console.log(requestList)
+    console.log("requestCreatedManually",[requestCreatedManually])
+    console.log("requestList",requestList)
   }
+
 
   const handleSubmitVND = (event:any) => {
     event.preventDefault();
@@ -329,6 +331,7 @@ export function Aside({ request }: any) {
               {requestMenuHTML||<p>Não há requisições para exibir, considere importar ou criar algumas.</p>}
             </TabPanel>
 
+          <CreateRequest />
             <TabPanel className='TabPanelCreate'>
               <Tabs forceRenderTabPanel>
 
@@ -341,7 +344,7 @@ export function Aside({ request }: any) {
                 <TabPanel>
                   <form onSubmit={handleSubmitCreateRequest}>
                     <div className='InfoGeneralRequest'>
-                      <h4>Informaçao geral da requiçao</h4>
+                      <h4>Informação geral da requição</h4>
                       <div> 
                         <p> created </p> 
                         <input type="text" name="created"      id="created-creation"     placeholder="created"      onChange={handleChangeRequest} />
@@ -460,7 +463,7 @@ export function Aside({ request }: any) {
                 <TabPanel>
                    <form onSubmit={handleSubmitCreateRequest}>
                     <div className='InfoGeneralRequest'>
-                      <h4>Informação geral da requição</h4>
+                      <h4>Informação geral das requições</h4>
                       <div> 
                         <p> created </p> 
                         <input type="text" name="created"      id="created-creation"     placeholder="created"      onChange={handleChangeRequest} />
@@ -570,6 +573,14 @@ export function Aside({ request }: any) {
                     }}>
                       Limpar dados
                     </button>
+                    <input 
+                      onChange={
+                        event => console.log("create_qtd_vnrs",( Number(event.target.value) ))
+                      } 
+                      type="number" name="create_qtd_vnrs" 
+                      id="create_qtd_vnrs" 
+                      placeholder={String(qtd_vnrs)} 
+                    />
                     <button type="submit">
                       Create Request
                     </button>
