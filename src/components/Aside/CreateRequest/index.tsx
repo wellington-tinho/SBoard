@@ -54,10 +54,12 @@ export function CreateRequest (
       setCreateLinksSourceRequest: React.Dispatch<React.SetStateAction<any>>,
       createLinksTargetRequest: any,
       setCreateLinksTargetRequest: React.Dispatch<React.SetStateAction<any>>
-    
     )
   {
- 
+
+    // const arrayResponseformVND:virtualNodeDemandInterface[] = arrayResponseformVND
+    
+  
   const handleSubmitCreateRequest = (event:any) => {
     event.preventDefault();
     formRequest['id'] = (Object.keys(requestList).length !== 0) ? Object.keys(requestList).length + 1 :  Object.keys(requestList).length
@@ -141,7 +143,19 @@ export function CreateRequest (
       </TabList>
 
       <TabPanel>
-        <CreateOne/>  
+      {console.log('aside/CreateRequet/index=',arrayResponseformVND)
+        }
+        <CreateOne
+          arrayResponseformVND={arrayResponseformVND}
+          
+          handleSubmitCreateRequest={handleSubmitCreateRequest}
+          handleChangeRequest={handleChangeRequest}
+          handleChangeVND={handleChangeVND}
+          handleSubmitVND={handleSubmitVND}
+          handleChangeCreateLinksSourceRequest={handleChangeCreateLinksSourceRequest}
+          handleChangeCreateLinksTargetRequest={handleChangeCreateLinksTargetRequest}
+          handleSubmitCreateLinksRequest={handleSubmitCreateLinksRequest}
+        />  
       </TabPanel>
 
       <TabPanel>
