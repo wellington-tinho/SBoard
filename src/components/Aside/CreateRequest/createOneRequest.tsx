@@ -38,7 +38,7 @@ export function CreateOne({
  
 ) {
 
-  console.log('aside/CreateRequest/createOne=',arrayResponseformVND)
+ 
   
   return (
  

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useReducer } from "react";
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import { CreateOne } from "./createOneRequest";
@@ -39,21 +39,40 @@ interface requestUnicInterface {
 }
 
 
+interface CreateRequestProps{
+  requestList: requestUnicInterface[] | any,
+  setRequestList: React.Dispatch<React.SetStateAction<requestUnicInterface[]>>,
+  formRequest: any,
+  setFormRequest: React.Dispatch<React.SetStateAction<any>>,
+  formVND: any, 
+  setFormVND: React.Dispatch<React.SetStateAction<any>>, 
+  arrayResponseformVND: virtualNodeDemandInterface[], 
+  setArrayResponseFormVND: React.Dispatch<React.SetStateAction<virtualNodeDemandInterface[]>>,
+  createLinksRequest: any,
+  setCreateLinksRequest: React.Dispatch<React.SetStateAction<any>>,
+  createLinksSourceRequest: any,
+  setCreateLinksSourceRequest: React.Dispatch<React.SetStateAction<any>>,
+  createLinksTargetRequest: any,
+  setCreateLinksTargetRequest: React.Dispatch<React.SetStateAction<any>> 
+}
+
 export function CreateRequest (
-      requestList: requestUnicInterface[] | any,
-      setRequestList: React.Dispatch<React.SetStateAction<requestUnicInterface[]>>,
-      formRequest: any,
-      setFormRequest: React.Dispatch<React.SetStateAction<any>>,
-      formVND: any, 
-      setFormVND: React.Dispatch<React.SetStateAction<any>>, 
-      arrayResponseformVND: virtualNodeDemandInterface[], 
-      setArrayResponseFormVND: React.Dispatch<React.SetStateAction<virtualNodeDemandInterface[]>>,
-      createLinksRequest: any,
-      setCreateLinksRequest: React.Dispatch<React.SetStateAction<any>>,
-      createLinksSourceRequest: any,
-      setCreateLinksSourceRequest: React.Dispatch<React.SetStateAction<any>>,
-      createLinksTargetRequest: any,
-      setCreateLinksTargetRequest: React.Dispatch<React.SetStateAction<any>>
+      {
+        requestList,
+        setRequestList,
+        formRequest,
+        setFormRequest,
+        formVND,
+        setFormVND,
+        arrayResponseformVND,
+        setArrayResponseFormVND,
+        createLinksRequest,
+        setCreateLinksRequest,
+        createLinksSourceRequest,
+        setCreateLinksSourceRequest,
+        createLinksTargetRequest,
+        setCreateLinksTargetRequest
+      }:CreateRequestProps
     )
   {
 
@@ -73,18 +92,18 @@ export function CreateRequest (
     console.log("requestList",requestList)
   }
 
-  const handleSubmitCreateLotRequests = (event:any) => {
-    event.preventDefault();
-    formRequest['id'] = (Object.keys(requestList).length !== 0) ? Object.keys(requestList).length + 1 :  Object.keys(requestList).length
-    const requestCreatedManually = {...formRequest} 
-    requestCreatedManually['vnd'] = {...arrayResponseformVND} 
-    requestCreatedManually['links'] = [...createLinksRequest]
+  // const handleSubmitCreateLotRequests = (event:any) => {
+  //   event.preventDefault();
+  //   formRequest['id'] = (Object.keys(requestList).length !== 0) ? Object.keys(requestList).length + 1 :  Object.keys(requestList).length
+  //   const requestCreatedManually = {...formRequest} 
+  //   requestCreatedManually['vnd'] = {...arrayResponseformVND} 
+  //   requestCreatedManually['links'] = [...createLinksRequest]
 
-    setRequestList([requestCreatedManually])
-    // createElementHTMLRequest(requestList)
-    console.log([requestCreatedManually])
-    console.log(requestList)
-  }
+  //   setRequestList([requestCreatedManually])
+  //   // createElementHTMLRequest(requestList)
+  //   console.log([requestCreatedManually])
+  //   console.log(requestList)
+  // }
 
   const handleSubmitVND = (event:any) => {
     event.preventDefault();
@@ -143,8 +162,7 @@ export function CreateRequest (
       </TabList>
 
       <TabPanel>
-      {console.log('aside/CreateRequet/index=',arrayResponseformVND)
-        }
+
         <CreateOne
           arrayResponseformVND={arrayResponseformVND}
           

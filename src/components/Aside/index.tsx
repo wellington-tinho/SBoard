@@ -274,8 +274,7 @@ export function Aside({ request }: any) {
 
           
             <TabPanel className='TabPanelCreate'>
-              {console.log('aside/index=',arrayResponseformVND)
-              }
+              {console.log('aside/index=',arrayResponseformVND)}
               <CreateRequest 
                   requestList={requestList}                              setRequestList = {setRequestList}
                   formRequest={formRequest}                              setFormRequest = {setFormRequest}
