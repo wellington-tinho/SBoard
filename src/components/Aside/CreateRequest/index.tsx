@@ -4,6 +4,8 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { CreateOne } from "./createOneRequest";
 import { CreateSeveral } from "./createSeveralRequest";
 import { Generate } from "./generateRequest";
+import { Container } from "./styles";
+
 
 
 
@@ -76,9 +78,40 @@ export function CreateRequest (
     )
   {
 
-    // const arrayResponseformVND:virtualNodeDemandInterface[] = arrayResponseformVND
     
+
+// criado um dict de InfoGeneralRequest com name do input e value informado
+  const handleChangeRequest = (event: { target: { name: string; value: any; }; }) => {
+    console.log('event.target.value',event.target.value);
+    setFormRequest({
+      name: event.target.name,
+      value: event.target.value,
+    });
+    
+  }
   
+  // criado um dict de InfoVNDRequest com name do input e value informado
+  const handleChangeVND = (event: { target: { name: any; value: any; }; }) => {
+    setFormVND({
+      name: event.target.name,
+      value: event.target.value,
+    });
+  }
+
+  const handleChangeCreateLinksSourceRequest = (event: { target: { name: any; value: any; }; }) => {
+    setCreateLinksSourceRequest({
+      name: event.target.name,
+      value: event.target.value,
+    });
+  }
+
+  const handleChangeCreateLinksTargetRequest = (event: { target: { name: any; value: any; }; }) => {
+    setCreateLinksTargetRequest({
+      name: event.target.name,
+      value: event.target.value,
+    });
+  }
+  // dict InfoGeneralRequest
   const handleSubmitCreateRequest = (event:any) => {
     event.preventDefault();
     formRequest['id'] = (Object.keys(requestList).length !== 0) ? Object.keys(requestList).length + 1 :  Object.keys(requestList).length
@@ -105,6 +138,7 @@ export function CreateRequest (
   //   console.log(requestList)
   // }
 
+  //concatena 
   const handleSubmitVND = (event:any) => {
     event.preventDefault();
     setArrayResponseFormVND(prevState => [...prevState, formVND]);
@@ -121,77 +155,52 @@ export function CreateRequest (
     setCreateLinksRequest([...createLinksRequest ,newState] );
   }
 
-  const handleChangeRequest = (event: { target: { name: string; value: any; }; }) => {
-    setFormRequest({
-      name: event.target.name,
-      value: event.target.value,
-    });
-    
-  }
-
-  const handleChangeVND = (event: { target: { name: any; value: any; }; }) => {
-    setFormVND({
-      name: event.target.name,
-      value: event.target.value,
-    });
-  }
-
-  const handleChangeCreateLinksSourceRequest = (event: { target: { name: any; value: any; }; }) => {
-    setCreateLinksSourceRequest({
-      name: event.target.name,
-      value: event.target.value,
-    });
-  }
-
-  const handleChangeCreateLinksTargetRequest = (event: { target: { name: any; value: any; }; }) => {
-    setCreateLinksTargetRequest({
-      name: event.target.name,
-      value: event.target.value,
-    });
-  }
+  
 
   return (
-    
-    <Tabs forceRenderTabPanel>
+    <Container >
 
-    
-      <TabList>
-        <Tab>Create a Request</Tab>
-        <Tab>Create Requests Set</Tab>
-        <Tab>Generate Requests</Tab>
-      </TabList>
+      <Tabs forceRenderTabPanel>
 
-      <TabPanel>
+        <TabList className='SubTabList'>
+          <Tab className="SubTab">Create a Request</Tab>
+          <Tab className="SubTab">Create Requests Set</Tab>
+          <Tab className="SubTab">Generate Requests</Tab>
+        </TabList>
 
-        <CreateOne
-          arrayResponseformVND={arrayResponseformVND}
-          
-          handleSubmitCreateRequest={handleSubmitCreateRequest}
-          handleChangeRequest={handleChangeRequest}
-          handleChangeVND={handleChangeVND}
-          handleSubmitVND={handleSubmitVND}
-          handleChangeCreateLinksSourceRequest={handleChangeCreateLinksSourceRequest}
-          handleChangeCreateLinksTargetRequest={handleChangeCreateLinksTargetRequest}
-          handleSubmitCreateLinksRequest={handleSubmitCreateLinksRequest}
-        />  
-      </TabPanel>
+        <TabPanel>
 
-      <TabPanel>
-     
-
-        <CreateSeveral
-        
+          <CreateOne
+            arrayResponseformVND={arrayResponseformVND}
+            
+            handleSubmitCreateRequest={handleSubmitCreateRequest}
+            handleChangeRequest={handleChangeRequest}
+            handleChangeVND={handleChangeVND}
+            handleSubmitVND={handleSubmitVND}
+            handleChangeCreateLinksSourceRequest={handleChangeCreateLinksSourceRequest}
+            handleChangeCreateLinksTargetRequest={handleChangeCreateLinksTargetRequest}
+            handleSubmitCreateLinksRequest={handleSubmitCreateLinksRequest}
           />  
-      </TabPanel>
-      
-      <TabPanel>
- 
+        </TabPanel>
 
-        <Generate
-           
-            /> 
-      </TabPanel>
-    </Tabs> 
+        <TabPanel>
+      
+
+          <CreateSeveral
+          
+            />  
+        </TabPanel>
+        
+        <TabPanel>
+  
+
+          <Generate
+            
+              /> 
+        </TabPanel>
+      </Tabs> 
+
+    </Container>
   )
 }
 

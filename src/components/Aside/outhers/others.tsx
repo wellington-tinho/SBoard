@@ -1,9 +1,24 @@
-import React from 'react';
 
-// import { Container } from './styles';
+import { Container } from './styles';
 
-const AsideOthers: React.FC = () => {
-  return <h4>outros</h4>;
+export function AsideOthers({appendRequestList}:any) {
+  return <Container>
+    <button disabled> Baixar Requests</button>
+    <button disabled> Limpar Todas Requests</button>
+
+    <div className='UploadJSON'>
+      <input 
+        type="file" 
+        name="UploadJSON" 
+        id="UploadJSON"  
+        onChange={appendRequestList} 
+        hidden={true}  
+        accept=".json,.JSON"
+      />
+      {/* <label htmlFor="UploadJSON">Append JSON</label> */}
+      <label htmlFor="UploadJSON"> 
+        Concatenar nova requisiçao 
+      </label>  
+    </div>
+  </Container>;
 }
-
-export default AsideOthers;

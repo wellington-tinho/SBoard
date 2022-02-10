@@ -8,6 +8,9 @@ import 'react-tabs/style/react-tabs.css';
 
 import menu from '../../assets/icons/menu-vertical.png'
 import { CreateRequest } from "./CreateRequest";
+import { ShowVND } from "./showVND/showVND";
+import EditionRequest from "./EditionRequest/editionRequest";
+import { AsideOthers } from "./outhers/others";
 
 
 interface virtualNodeDemandInterface{
@@ -269,45 +272,28 @@ export function Aside({ request }: any) {
           <fieldset>
             <TabPanel className='TabPanelVNR'>
               {/* Informaçao sobre os requests, e exibir detalhado */}
-              {requestMenuHTML||<p>Não há requisições para exibir, considere importar ou criar algumas.</p>}
+              <ShowVND requestMenuHTML={requestMenuHTML}/>
             </TabPanel>
 
           
             <TabPanel className='TabPanelCreate'>
-              {console.log('aside/index=',arrayResponseformVND)}
               <CreateRequest 
-                  requestList={requestList}                              setRequestList = {setRequestList}
-                  formRequest={formRequest}                              setFormRequest = {setFormRequest}
-                  formVND = {formVND}                                    setFormVND = {setFormVND}
-                  arrayResponseformVND = {arrayResponseformVND}          setArrayResponseFormVND = {setArrayResponseFormVND}  
-                  createLinksRequest = {createLinksRequest}              setCreateLinksRequest = {setCreateLinksRequest}
-                  createLinksSourceRequest = {createLinksSourceRequest}  setCreateLinksSourceRequest = {setCreateLinksSourceRequest}
-                  createLinksTargetRequest = {createLinksTargetRequest}  setCreateLinksTargetRequest = {setCreateLinksTargetRequest}
+                requestList={requestList}                              setRequestList = {setRequestList}
+                formRequest={formRequest}                              setFormRequest = {setFormRequest}
+                formVND = {formVND}                                    setFormVND = {setFormVND}
+                arrayResponseformVND = {arrayResponseformVND}          setArrayResponseFormVND = {setArrayResponseFormVND}  
+                createLinksRequest = {createLinksRequest}              setCreateLinksRequest = {setCreateLinksRequest}
+                createLinksSourceRequest = {createLinksSourceRequest}  setCreateLinksSourceRequest = {setCreateLinksSourceRequest}
+                createLinksTargetRequest = {createLinksTargetRequest}  setCreateLinksTargetRequest = {setCreateLinksTargetRequest}
               />
             </TabPanel>
 
             <TabPanel className='TabPanelEdition'>
-              <p>Lista com requests com opção para editar cada uma das mesmas</p> 
+              <EditionRequest />
             </TabPanel>
 
             <TabPanel className='TabPanelOthers'>
-              <button disabled> Baixar Requests</button>
-              <button disabled> Limpar Todas Requests</button>
-              
-              <div className='UploadJSON'>
-                <input 
-                  type="file" 
-                  name="UploadJSON" 
-                  id="UploadJSON"  
-                  onChange={appendRequestList} 
-                  hidden={true}  
-                  accept=".json,.JSON"
-                />
-                {/* <label htmlFor="UploadJSON">Append JSON</label> */}
-                <label htmlFor="UploadJSON"> 
-                  Concatenar nova requisiçao 
-                </label>  
-              </div>
+              <AsideOthers appendRequestList={appendRequestList} />
             </TabPanel>
           </fieldset>  
   

@@ -1,9 +1,11 @@
-import React from 'react';
 
-// import { Container } from './styles';
+import { Container } from './styles';
 
-const ShowVND: React.FC = () => {
-  return <div />;
+export function ShowVND({requestMenuHTML}:any){
+  return ( 
+    <Container>
+      {requestMenuHTML||<p>Não há requisições para exibir, considere importar ou criar algumas.</p>}
+    </Container>
+  );
 }
 
-export default ShowVND;

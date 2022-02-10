@@ -32,10 +32,7 @@ export function CreateOne({
     handleChangeCreateLinksSourceRequest,
     handleChangeCreateLinksTargetRequest,
     handleSubmitCreateLinksRequest
-  }:propsCreateOne
-  
-
- 
+  }:propsCreateOne 
 ) {
 
  
@@ -47,32 +44,32 @@ export function CreateOne({
         <h4>Informação geral da requição</h4>
         <div> 
           <p> created </p> 
-          <input type="text" name="created"      id="created-creation"     placeholder="created"      onChange={handleChangeRequest} />
+          <input type="number" name="created"      id="created-creation"     placeholder="created"      onChange={handleChangeRequest} />
         </div> 
 
         <div> 
           <p> duration </p> 
-          <input type="text" name="duration"     id="duration-creation"    placeholder="duration"     onChange={handleChangeRequest} />
+          <input type="number" name="duration"     id="duration-creation"    placeholder="duration"     onChange={handleChangeRequest} />
         </div> 
 
         <div> 
           <p> period </p> 
-          <input type="text" name="period"       id="period-creation"      placeholder="period"       onChange={handleChangeRequest} />
+          <input type="number" name="period"       id="period-creation"      placeholder="period"       onChange={handleChangeRequest} />
         </div> 
 
         <div> 
           <p> bandwidth </p> 
-          <input type="text" name="bandwidth"    id="bandwidth-creation"   placeholder="bandwidth"    onChange={handleChangeRequest} />
+          <input type="number" name="bandwidth"    id="bandwidth-creation"   placeholder="bandwidth"    onChange={handleChangeRequest} />
         </div> 
 
         <div> 
           <p> delay </p> 
-          <input type="text" name="delay"        id="delay-creation"       placeholder="delay"        onChange={handleChangeRequest} />
+          <input type="number" name="delay"        id="delay-creation"       placeholder="delay"        onChange={handleChangeRequest} />
         </div> 
 
         <div> 
           <p> reliability </p> 
-          <input type="text" name="reliability"  id="reliability-creation" placeholder="reliability"  onChange={handleChangeRequest} />
+          <input type="number" name="reliability"  id="reliability-creation" placeholder="reliability"  onChange={handleChangeRequest} />
         </div> 
 
         <div> 
@@ -92,33 +89,33 @@ export function CreateOne({
 
         <div> 
           <p> requested </p> 
-          <input type="text" name="requested" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} />
+          <input type="text" name="requested" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} required/>
         </div> 
 
 
         <div> 
           <p> domain </p> 
-          <input type="text" name="domain"    id="domain-vnd"    placeholder="domain-vnd"     onChange={handleChangeVND} />
+          <input type="text" name="domain"    id="domain-vnd"    placeholder="domain-vnd"     onChange={handleChangeVND} required/>
         </div> 
 
         <div> 
           <p> region </p> 
-          <input type="text" name="region"    id="region-vnd"    placeholder="region-vnd"     onChange={handleChangeVND} />
+          <input type="text" name="region"    id="region-vnd"    placeholder="region-vnd"     onChange={handleChangeVND} required/>
         </div> 
 
         <div> 
           <p> type </p> 
-          <input type="text" name="type"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} />
+          <input type="text" name="type"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} required/>
         </div> 
 
         <div> 
           <p> period </p> 
-          <input type="text" name="period"    id="period-vnd"    placeholder="period-vnd"     onChange={handleChangeVND} />
+          <input type="text" name="period"    id="period-vnd"    placeholder="period-vnd"     onChange={handleChangeVND} required/>
         </div> 
 
         <div> 
           <p> sink </p> 
-          <input type="text" name="sink"      id="sink-vnd"      placeholder="sink-vnd"       onChange={handleChangeVND} />
+          <input type="text" name="sink"      id="sink-vnd"      placeholder="sink-vnd"       onChange={handleChangeVND} required/>
         </div> 
 
         <button  onClick={handleSubmitVND}>
