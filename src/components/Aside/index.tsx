@@ -186,8 +186,8 @@ export function Aside({ request }: any) {
             <p>   delay : {requestList[key].delay}            </p>
             <p>   reliability : {requestList[key].reliability}</p>
             {/* <br />
-                <p>   vnd: {JSON.stringify(request[key].vnd, null, 4)} </p>  */}
-            <br />
+                <p>   vnd: {JSON.stringify(request[key].vnd, null, 4)} </p> 
+            <br /> */}
             <p>links: {JSON.stringify(requestList[key].links, null, 2)}</p>
           </div>
         </li>

@@ -147,10 +147,6 @@ export function CreateOne({
         Adcionar Links
       </button>
       
-      <button onClick={()=>{console.log('shit');
-      }}>
-        Limpar dados
-      </button>
       <button type="submit">
         Create Request
       </button>

@@ -11,7 +11,6 @@ import { Container } from "./styles";
 
 
 
-// import {qtd_vnrs} from '../../data/setup.json';
 
 // import { Container } from "./styles";
 // import 'react-tabs/style/react-tabs.css';
@@ -121,8 +120,16 @@ export function CreateRequest (
 
     setRequestList([requestCreatedManually])
     // createElementHTMLRequest(requestList)
-    console.log("requestCreatedManually",[requestCreatedManually])
-    console.log("requestList",requestList)
+    ClearDataRequet()
+  }
+
+  const ClearDataRequet = () =>{
+    console.log("Limpando variaveis");
+    setArrayResponseFormVND([])
+    // setFormRequest({})
+    // setFormVND({})
+    // handleChangeVND
+    // handleChangeRequest
   }
 
   // const handleSubmitCreateLotRequests = (event:any) => {
@@ -187,8 +194,17 @@ export function CreateRequest (
       
 
           <CreateSeveral
-          
-            />  
+            arrayResponseformVND={arrayResponseformVND}
+            
+            handleSubmitCreateRequest={handleSubmitCreateRequest}
+            handleChangeRequest={handleChangeRequest}
+            handleChangeVND={handleChangeVND}
+            handleSubmitVND={handleSubmitVND}
+            handleChangeCreateLinksSourceRequest={handleChangeCreateLinksSourceRequest}
+            handleChangeCreateLinksTargetRequest={handleChangeCreateLinksTargetRequest}
+            handleSubmitCreateLinksRequest={handleSubmitCreateLinksRequest}
+          />  
+            
         </TabPanel>
         
         <TabPanel>
