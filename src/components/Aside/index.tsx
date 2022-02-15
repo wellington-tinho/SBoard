@@ -133,6 +133,7 @@ export function Aside({ request }: any) {
 
   //Adicionar novos Requests na lista de requisiçoes
   function appendRequestList(file:any){ 
+    
     const reader = new FileReader();
     reader.onload = function(e: any) {
       // setQtdRequests(Object.keys(requestList).length);
@@ -146,6 +147,7 @@ export function Aside({ request }: any) {
       Object.keys([JSON.parse(e.target.result)][0]).forEach(key => 
         prevsElements.push(JSON.parse(e.target.result)[key])
       )
+      
       setRequestList(prevsElements)
     };
     
@@ -212,7 +214,9 @@ export function Aside({ request }: any) {
             </TabPanel>
 
             <TabPanel className='TabPanelOthers'>
-              <AsideOthers appendRequestList={appendRequestList} />
+              <AsideOthers 
+                appendRequestList={appendRequestList} 
+              />
             </TabPanel>
           </fieldset>  
   

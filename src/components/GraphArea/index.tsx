@@ -80,7 +80,7 @@ export function GraphArea({setRequest}:any){
   };
 
   const hiddenFileInput = useRef<any>(null);
-  const handleClick = (event:any) => {
+  const handleClick = () => {
     hiddenFileInput.current.click();
   };
 
