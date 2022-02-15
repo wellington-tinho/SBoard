@@ -1,14 +1,9 @@
-
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-
+import { useState } from 'react';
 import { CreateOne } from "./createOneRequest";
 import { CreateSeveral } from "./createSeveralRequest";
 import { Generate } from "./generateRequest";
 import { Container } from "./styles";
-
-
-
-
 
 
 
@@ -76,8 +71,8 @@ export function CreateRequest (
       }:CreateRequestProps
     )
   {
-
     
+    const  [numberOfRequest, setNumberOfRequest] = useState(1)
 
 // criado um dict de InfoGeneralRequest com name do input e value informado
   const handleChangeRequest = (event: { target: { name: string; value: any; }; }) => {
@@ -116,7 +111,7 @@ export function CreateRequest (
     const requestCreatedManually = {...formRequest} 
     requestCreatedManually['vnd'] = {...arrayResponseformVND} 
     requestCreatedManually['links'] = [...createLinksRequest]
-
+    
     setRequestList({...requestCreatedManually})
     // createElementHTMLRequest(requestList)
     ClearDataRequet()
@@ -131,18 +126,22 @@ export function CreateRequest (
     // handleChangeRequest
   }
 
-  // const handleSubmitCreateLotRequests = (event:any) => {
-  //   event.preventDefault();
-  //   formRequest['id'] = (Object.keys(requestList).length !== 0) ? Object.keys(requestList).length + 1 :  Object.keys(requestList).length
-  //   const requestCreatedManually = {...formRequest} 
-  //   requestCreatedManually['vnd'] = {...arrayResponseformVND} 
-  //   requestCreatedManually['links'] = [...createLinksRequest]
-
-  //   setRequestList([requestCreatedManually])
-  //   // createElementHTMLRequest(requestList)
-  //   console.log([requestCreatedManually])
-  //   console.log(requestList)
-  // }
+  const handleSubmitCreateSeveralRequest = (event:any) => {
+    event.preventDefault();
+    formRequest['id'] = (Object.keys(requestList).length !== 0) ? Object.keys(requestList).length + 1 :  Object.keys(requestList).length
+    const requestCreatedManually = {...formRequest} 
+    requestCreatedManually['vnd'] = {...arrayResponseformVND} 
+    requestCreatedManually['links'] = [...createLinksRequest]
+    console.log(numberOfRequest);
+    
+    let ReqAUX = []
+    for(let i = 0; i<numberOfRequest; i++){
+      ReqAUX.push({...requestCreatedManually})
+    }
+    setRequestList(ReqAUX)
+    // createElementHTMLRequest(requestList)
+    ClearDataRequet()
+  }
 
   //concatena 
   const handleSubmitVND = (event:any) => {
@@ -192,9 +191,12 @@ export function CreateRequest (
       
 
           <CreateSeveral
+          
+    
+            setNumberOfRequest = {setNumberOfRequest}
             arrayResponseformVND={arrayResponseformVND}
             
-            handleSubmitCreateRequest={handleSubmitCreateRequest}
+            handleSubmitCreateSeveralRequest={handleSubmitCreateSeveralRequest}
             handleChangeRequest={handleChangeRequest}
             handleChangeVND={handleChangeVND}
             handleSubmitVND={handleSubmitVND}

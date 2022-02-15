@@ -1,6 +1,6 @@
 
 // import { Container } from './styles';
-import {qtd_vnrs} from '../../../data/setup.json';
+
 
 
 interface virtualNodeDemandInterface{
@@ -17,41 +17,63 @@ interface virtualNodeDemandInterface{
 interface propsCreateOne{
   arrayResponseformVND: virtualNodeDemandInterface[],
   
-  handleSubmitCreateRequest: any,
+  handleSubmitCreateSeveralRequest: any,
   handleChangeRequest: any,
   handleChangeVND: any,
   handleSubmitVND: any,
   handleChangeCreateLinksSourceRequest: any,
   handleChangeCreateLinksTargetRequest: any,
   handleSubmitCreateLinksRequest: any,
+  setNumberOfRequest:React.Dispatch<React.SetStateAction<any>>, 
 }
+
 
 export function CreateSeveral({
     arrayResponseformVND,
-    handleSubmitCreateRequest,
+    handleSubmitCreateSeveralRequest,
     handleChangeRequest,
     handleChangeVND,
     handleSubmitVND,
     handleChangeCreateLinksSourceRequest,
     handleChangeCreateLinksTargetRequest,
-    handleSubmitCreateLinksRequest
+    handleSubmitCreateLinksRequest,
+    setNumberOfRequest
   }:propsCreateOne 
 ) {
 
   return(
     
-    <form onSubmit={handleSubmitCreateRequest}>
+    <form onSubmit={handleSubmitCreateSeveralRequest}>
       <div className='InfoGeneralRequest'>
         <h4>Informação geral para todas requisições</h4>
-        <input 
-          onChange={
-            event => console.log("create_qtd_vnrs",( Number(event.target.value) ))
-          } 
-          type="number" name="create_qtd_vnrs" 
-          id="create_qtd_vnrs" 
-          placeholder={String(qtd_vnrs)} 
-        />
+     
         <div> 
+          <input 
+            onChange={
+              event => (setNumberOfRequest( Number(event.target.value) ))
+            } 
+            type="number" name="create_qtd_vnrs" 
+            id="create_qtd_vnrs" 
+            placeholder={'quantity requests: '} 
+          />
+          <input type="text" name="type_slice"   id="type_slice-creation"  placeholder="type_slice"   onChange={handleChangeRequest} />
+        </div> 
+        <div> 
+          <input type="number" name="created"      id="created-creation"     placeholder="created"      onChange={handleChangeRequest} />
+          <input type="number" name="duration"     id="duration-creation"    placeholder="duration"     onChange={handleChangeRequest} />
+        </div> 
+
+        <div> 
+          <input type="number" name="period"       id="period-creation"      placeholder="period"       onChange={handleChangeRequest} />
+          <input type="number" name="bandwidth"    id="bandwidth-creation"   placeholder="bandwidth"    onChange={handleChangeRequest} />
+        </div> 
+
+        <div> 
+          <input type="number" name="delay"        id="delay-creation"       placeholder="delay"        onChange={handleChangeRequest} />
+          <input type="number" name="reliability"  id="reliability-creation" placeholder="reliability"  onChange={handleChangeRequest} />
+        </div> 
+
+        {/* <div> 
           <p> created </p> 
           <input type="text" name="created"      id="created-creation"     placeholder="created"      onChange={handleChangeRequest} />
         </div> 
@@ -84,11 +106,38 @@ export function CreateSeveral({
         <div> 
           <p> type_slice </p> 
           <input type="text" name="type_slice"   id="type_slice-creation"  placeholder="type_slice"   onChange={handleChangeRequest} />
-        </div> 
+        </div>  */}
 
       </div>
 
       <div className='InfoVNDRequest'>
+
+        <h4>Informaçao virtual node demand</h4>
+        {/* <div> 
+          <p> vnr_id </p> 
+          <input type="text" name="vnr_id"    id="vnr_id"        placeholder="vnr_id"       onChange={handleChangeVND} disabled/>
+        </div>  */}
+
+        <div> 
+          <input type="text" name="requested" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} />
+          <input type="text" name="domain"    id="domain-vnd"    placeholder="domain-vnd"     onChange={handleChangeVND} />
+        </div> 
+
+        <div> 
+          <input type="text" name="region"    id="region-vnd"    placeholder="region-vnd"     onChange={handleChangeVND} />
+          <input type="text" name="type"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} />
+        </div> 
+
+        <div> 
+          <input type="text" name="period"    id="period-vnd"    placeholder="period-vnd"     onChange={handleChangeVND} />
+          <input type="text" name="sink"      id="sink-vnd"      placeholder="sink-vnd"       onChange={handleChangeVND} />
+        </div> 
+
+        <button  onClick={handleSubmitVND}>
+          Adcionar
+        </button>
+      </div>
+      {/* <div className='InfoVNDRequest'>
 
         <h4>Informaçao virtual node demand</h4>
         <div> 
@@ -130,7 +179,7 @@ export function CreateSeveral({
         <button  onClick={handleSubmitVND}>
           Adcionar
         </button>
-      </div>
+      </div> */}
     
       <h4>Link Source / Target</h4>
       <select name="linkSource" id="linkSource" defaultValue={'DEFAULT'} onChange={handleChangeCreateLinksSourceRequest} >

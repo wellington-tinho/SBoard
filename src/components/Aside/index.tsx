@@ -75,8 +75,6 @@ export function Aside({ request }: any) {
   const [createLinksTargetRequest, setCreateLinksTargetRequest] = useState<any>()
 
   const [createLinksRequest, setCreateLinksRequest] = useState<any>([])
-
-  
   // Funcao principal para colorir o grafo
   function setColorGraph(checked: any, request: any) {
     try {
