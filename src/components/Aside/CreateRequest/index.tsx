@@ -81,7 +81,6 @@ export function CreateRequest (
 
 // criado um dict de InfoGeneralRequest com name do input e value informado
   const handleChangeRequest = (event: { target: { name: string; value: any; }; }) => {
-    console.log('event.target.value',event.target.value);
     setFormRequest({
       name: event.target.name,
       value: event.target.value,
@@ -118,14 +117,14 @@ export function CreateRequest (
     requestCreatedManually['vnd'] = {...arrayResponseformVND} 
     requestCreatedManually['links'] = [...createLinksRequest]
 
-    setRequestList([requestCreatedManually])
+    setRequestList({...requestCreatedManually})
     // createElementHTMLRequest(requestList)
     ClearDataRequet()
   }
 
   const ClearDataRequet = () =>{
-    console.log("Limpando variaveis");
     setArrayResponseFormVND([])
+    setCreateLinksRequest([])
     // setFormRequest({})
     // setFormVND({})
     // handleChangeVND
@@ -157,7 +156,6 @@ export function CreateRequest (
 
   const handleSubmitCreateLinksRequest = (event:any) => {
     event.preventDefault();
-    console.log('handleSubmitCreateLinksRequest');
     var newState = [Number(createLinksSourceRequest['value']), Number(createLinksTargetRequest['value'])]
     setCreateLinksRequest([...createLinksRequest ,newState] );
   }

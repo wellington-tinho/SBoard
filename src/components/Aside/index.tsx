@@ -61,8 +61,6 @@ export function Aside({ request }: any) {
   const [cy] = useContext(CytoscapeContext);
 
   const [requestList, setRequestList] = useState<requestUnicInterface[]>(request)
-  const [requestElementsHTML, setRequestElementsHTML] = useState<any>([])
-  const [requestMenuHTML, setRequestMenuHTML] = useState<any>()
   const qtdRequests = (0)
  
   
@@ -131,70 +129,7 @@ export function Aside({ request }: any) {
     setColorGraph(checked, request)
   }
 
-  // função para definir a visibilidade de informacoes da lista de requests
-  function visibleDiv(divVisible: string, buttonVerInfo: string){
 
-    const dataButton = window.document.getElementById(buttonVerInfo)
-    if (window.document.getElementById(divVisible)?.getAttribute('style') === 'display: none;') {
-      window.document.getElementById(divVisible)?.setAttribute('style', 'display: flex;')
-      if (dataButton !== null) {
-        dataButton.innerText = 'Enconder Info'
-      }
-
-    } else {
-      window.document.getElementById(divVisible)?.setAttribute('style', 'display: none;')
-      if (dataButton !== null) {
-        dataButton.innerText = 'Ver Info'
-      }
-    }
-  }
-
-  //funcao para criar lista de checkbox dos requests em html
-  function createElementHTMLRequest(requestList:any){
-
-    var divVisible = 'divVisible'
-    var buttonVerInfo = 'buttonVerInfo'
-    var auxRequestElementsHTML: any = []
-    
-     Object.keys(requestList).forEach(key => {
-
-      auxRequestElementsHTML.push(
-        <li key={key}>
-          <div>
-            <input
-              onChange={e => toggleCheckBoxRequest(e, requestList[key])}
-              defaultChecked={checboxState}
-              type="checkbox" name={key} id={key}
-            />
-            <h4> Request {Number(key)+qtdRequests} </h4>
-            <button
-              id={buttonVerInfo + (Number(key)+qtdRequests)}
-              onClick={() => visibleDiv((divVisible + (Number(key)+qtdRequests)), (buttonVerInfo + (Number(key)+qtdRequests)))} >
-              Ver Info
-            </button>
-          </div>
-
-          <div id={divVisible + (Number(key)+qtdRequests)} className='visible' style={{ display: 'none' }}>
-      
-            <strong>Mudar visualização</strong>
-            <p>   Id : {Number(key)+qtdRequests}              </p>
-            <p>   type_slice : {requestList[key].type_slice}  </p>
-            <p>   created : {requestList[key].created}        </p>
-            <p>   duration : {requestList[key].duration}      </p>
-            <p>   period : {requestList[key].period}          </p>
-            <p>   bandwidth : {requestList[key].bandwidth}    </p>
-            <p>   delay : {requestList[key].delay}            </p>
-            <p>   reliability : {requestList[key].reliability}</p>
-            {/* <br />
-                <p>   vnd: {JSON.stringify(request[key].vnd, null, 4)} </p> 
-            <br /> */}
-            <p>links: {JSON.stringify(requestList[key].links, null, 2)}</p>
-          </div>
-        </li>
-      )
-    }) 
-    setRequestElementsHTML(auxRequestElementsHTML)
-  }
 
   //Adicionar novos Requests na lista de requisiçoes
   function appendRequestList(file:any){ 
@@ -202,7 +137,6 @@ export function Aside({ request }: any) {
     reader.onload = function(e: any) {
       // setQtdRequests(Object.keys(requestList).length);
 
-      
       var prevsElements: any = []
       Object.keys(requestList).forEach(key => 
         prevsElements.push(requestList[Number(key)])
@@ -212,7 +146,6 @@ export function Aside({ request }: any) {
       Object.keys([JSON.parse(e.target.result)][0]).forEach(key => 
         prevsElements.push(JSON.parse(e.target.result)[key])
       )
-      
       setRequestList(prevsElements)
     };
     
@@ -229,25 +162,6 @@ export function Aside({ request }: any) {
       setRequestList(request)
     }
   },[request])
-
-  //apos o carremento do JSON de resquests na variavel requestList, é criado uma lista de checkbox em html
-  useEffect( () => {
-     createElementHTMLRequest(requestList)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [requestList])
-
-  //apos criado uma lista de checkbox em html, é encapsulado tudo dentro de um <ul> </ul>
-  useEffect(() => {
-    if (Object.keys(requestElementsHTML).length !== 0) {
-      
-      setRequestMenuHTML(
-        <ul className="listRequest">      
-        {requestElementsHTML}
-      </ul>
-    )
-  }
-  },[requestElementsHTML])
-
 
   return (
     <Container>
@@ -272,14 +186,19 @@ export function Aside({ request }: any) {
           <fieldset>
             <TabPanel className='TabPanelVNR'>
               {/* Informaçao sobre os requests, e exibir detalhado */}
-              <ShowVND requestMenuHTML={requestMenuHTML}/>
+              <ShowVND 
+                requestList = {requestList}
+                checboxState = {checboxState}
+                toggleCheckBoxRequest = {toggleCheckBoxRequest}
+                qtdRequests = {qtdRequests}
+              />
             </TabPanel>
 
           
             <TabPanel className='TabPanelCreate'>
               <CreateRequest 
-                requestList={requestList}                              setRequestList = {setRequestList}
-                formRequest={formRequest}                              setFormRequest = {setFormRequest}
+                requestList = {requestList}                              setRequestList = {setRequestList}
+                formRequest = {formRequest}                              setFormRequest = {setFormRequest}
                 formVND = {formVND}                                    setFormVND = {setFormVND}
                 arrayResponseformVND = {arrayResponseformVND}          setArrayResponseFormVND = {setArrayResponseFormVND}  
                 createLinksRequest = {createLinksRequest}              setCreateLinksRequest = {setCreateLinksRequest}
