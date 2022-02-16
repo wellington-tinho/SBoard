@@ -213,7 +213,9 @@ export function Aside({ request }: any) {
 
             <TabPanel className='TabPanelOthers'>
               <AsideOthers 
-                appendRequestList={appendRequestList} 
+                appendRequestList={appendRequestList}
+                requestList = {requestList}
+                setRequestList = {setRequestList}   
               />
             </TabPanel>
           </fieldset>  
