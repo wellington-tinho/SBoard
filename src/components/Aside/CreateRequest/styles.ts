@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+      height: 45.4rem;
       ul.SubTabList{
         margin: 1rem;
         

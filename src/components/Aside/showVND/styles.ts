@@ -10,6 +10,8 @@ export const Container = styled.div`
   ul.listRequest{
     display: flex;
     flex-direction: column;
+    height: 45rem;
+
     li{
       
       border-bottom: 1px solid #acdcb9;
