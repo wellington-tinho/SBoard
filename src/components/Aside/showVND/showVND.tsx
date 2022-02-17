@@ -120,7 +120,9 @@ export function ShowVND({
           {auxRequestElementsHTML}
         </ul>
         ) : (
-          <p>Não há requisições para exibir, considere importar ou criar algumas</p>
+          <p className="paragraph">
+            Não há requisições para exibir, considere importar ou criar algumas
+          </p>
         )}  
     </Container>
   );

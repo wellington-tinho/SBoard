@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
  
-  p{
+  p.paragraph{
     margin: 1rem;
     font: .9rem 'Roboto Slab', bold;
   }

@@ -134,8 +134,10 @@ export function CreateRequest (
     requestCreatedManually['links'] = [...createLinksRequest]
     console.log(numberOfRequest);
     
+    console.log(requestCreatedManually);
     let ReqAUX = []
     for(let i = 0; i<numberOfRequest; i++){
+      requestCreatedManually['id']=i
       ReqAUX.push({...requestCreatedManually})
     }
     setRequestList(ReqAUX)
