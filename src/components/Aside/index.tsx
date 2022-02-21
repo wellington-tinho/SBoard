@@ -9,7 +9,7 @@ import 'react-tabs/style/react-tabs.css';
 import menu from '../../assets/icons/menu-vertical.png'
 import { CreateRequest } from "./CreateRequest";
 import { ShowVND } from "./showVND/showVND";
-import EditionRequest from "./EditionRequest/editionRequest";
+import {EditionRequest} from "./EditionRequest/editionRequest";
 import { AsideOthers } from "./outhers/others";
 
 
@@ -208,7 +208,11 @@ export function Aside({ request }: any) {
             </TabPanel>
 
             <TabPanel className='TabPanelEdition'>
-              <EditionRequest />
+              <EditionRequest 
+                qtdRequests={qtdRequests}
+                requestList={requestList}
+                setRequestList={setRequestList}
+              />
             </TabPanel>
 
             <TabPanel className='TabPanelOthers'>

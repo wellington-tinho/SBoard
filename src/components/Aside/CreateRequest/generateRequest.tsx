@@ -4,7 +4,7 @@ import React from 'react';
 export function Generate(){
 
   return (
-    <p>Generate</p>
+    <p className="paragraph">Funcionalidade em Construção</p>
     // <form onSubmit={handleSubmitCreateRequest}>
     //   <div className='InfoGeneralRequest'>
     //     <h4>Informe quantas requisições deseja Gerar</h4>

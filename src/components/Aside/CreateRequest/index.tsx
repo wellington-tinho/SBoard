@@ -36,7 +36,7 @@ interface requestUnicInterface {
 
 
 interface CreateRequestProps{
-  requestList: requestUnicInterface[] | any,
+  requestList: requestUnicInterface[] | any, //Lembrar de testar sem o ``any``
   setRequestList: React.Dispatch<React.SetStateAction<requestUnicInterface[]>>,
   formRequest: any,
   setFormRequest: React.Dispatch<React.SetStateAction<any>>,
@@ -132,9 +132,7 @@ export function CreateRequest (
     const requestCreatedManually = {...formRequest} 
     requestCreatedManually['vnd'] = {...arrayResponseformVND} 
     requestCreatedManually['links'] = [...createLinksRequest]
-    console.log(numberOfRequest);
     
-    console.log(requestCreatedManually);
     let ReqAUX = []
     for(let i = 0; i<numberOfRequest; i++){
       requestCreatedManually['id']=i
