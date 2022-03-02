@@ -136,11 +136,11 @@ export function EditionRequest (
             </div>
           ) : (
             <p className="paragraph">
-              Não há requisições para Editar, considere importar ou criar algumas
+              Não há requisições para Editar, considere importar ou criar algumas.
             </p>
           )} 
 
-      </Container>;
+      </Container>
     </>
   );
 }

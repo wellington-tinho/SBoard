@@ -11,6 +11,58 @@ export const Container = styled.form`
     font-size: 1.5rem;
     margin-bottom: 2rem;
   }
+
+  div{
+    /* border: 1px solid var(--background); */
+
+    div{
+      display: flex;
+
+      & + div{
+        margin-top: 1rem;
+      }
+
+      p{
+        width: 62%;
+        padding: 0 1rem;
+        height: 3rem;
+        border-radius: 0.25rem;
+        border: 1px solid #d7d7d7;
+        /* font-weight: 400; */
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+      }
+      input{
+        width: 100%;
+        padding: 0 1rem;
+        height: 3rem;
+        border-radius: 0.25rem;
+        background: #e7e9ee;
+        border: 1px solid #d7d7d7;
+        /* font-weight: 400; */
+        font-size: 1rem;
+      }
+    }
+
+    button[type='submit']{
+      width: 100%;
+      padding: 0 1.5rem;
+      height: 3.5rem;
+      background: var(--green);
+      color: var(--white-2);
+      border-radius: 0.25rem;
+      border: 0;
+      font-size: 1rem;
+      margin-top: 1.5rem;
+      transition: filter 0.2s;
+      font-weight:600;
+      
+      :hover{
+        filter: brightness(0.9);
+      }
+    }
+  }
 `;
 
 interface virtualNodeDemandInterface{
@@ -47,7 +99,7 @@ interface ChangeRequestsModalProps{
 
 export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setRequestUnic}: ChangeRequestsModalProps){
 
-  const [bandwidth , setbandwidth] =    useState<requestUnicInterface["bandwidth"]>     ({} as requestUnicInterface["bandwidth"])
+  const [bandwidth , setBandwidth] =    useState<requestUnicInterface["bandwidth"]>     ({} as requestUnicInterface["bandwidth"])
   const [created , setCreated] =        useState<requestUnicInterface["created"]>       ({} as requestUnicInterface["created"])
   const [delay , setDelay] =            useState<requestUnicInterface["delay"]>         ({} as requestUnicInterface["delay"])
   const [duration , setDuration] =      useState<requestUnicInterface["duration"]>      ({} as requestUnicInterface["duration"])
@@ -59,7 +111,7 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
 
 
   useEffect(() => {
-    setbandwidth(requestUnic["bandwidth"] )
+    setBandwidth(requestUnic["bandwidth"] )
     setCreated(requestUnic["created"] )
     setDelay(requestUnic["delay"] )
     setDuration(requestUnic["duration"] )
@@ -70,6 +122,10 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
     setVnd(requestUnic["vnd"] )
   },[requestUnic])
   
+
+  // vnd.map((index)=>{console.log(index)})
+
+
   return (
     <Modal
       isOpen={isOpen}
@@ -86,10 +142,10 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
         <div>
          
           <div>
-            <p>Bandwidth</p>
+            <p>bandwidth</p>
             <input 
               onChange={
-                event =>setbandwidth(+event.target.value)
+                event =>setBandwidth(+event.target.value)
               }
               type="number" name="Bandwidth" 
               id="Bandwidth" 
@@ -97,17 +153,103 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
             />
           </div>
          
-          {/* <div>
-            <p>Delay</p>
+          <div>
+            <p>created</p>
             <input 
               onChange={
-                event =>setDelay(Number(event.target.value))  
-              } 
-              type="number" name="Delay" id='Delay' 
+                event =>setBandwidth(+event.target.value)
+              }
+              type="number" name="Bandwidth" 
+              id="Bandwidth" 
+              placeholder={String(created)}
+            />
+          </div>
+         
+          <div>
+            <p>delay</p>
+            <input 
+              onChange={
+                event =>setBandwidth(+event.target.value)
+              }
+              type="number" name="Bandwidth" 
+              id="Bandwidth" 
               placeholder={String(delay)}
             />
-          </div> */}
-
+          </div>
+         
+          <div>
+            <p>duration</p>
+            <input 
+              onChange={
+                event =>setBandwidth(+event.target.value)
+              }
+              type="number" name="Bandwidth" 
+              id="Bandwidth" 
+              placeholder={String(duration)}
+            />
+          </div>
+         
+          <div>
+            <p>links</p>
+            <input 
+              onChange={
+                event =>setBandwidth(+event.target.value)
+              }
+              type="number" name="Bandwidth" 
+              id="Bandwidth" 
+              placeholder={String(links)}
+            />
+          </div>
+         
+          <div>
+            <p>period</p>
+            <input 
+              onChange={
+                event =>setBandwidth(+event.target.value)
+              }
+              type="number" name="Bandwidth" 
+              id="Bandwidth" 
+              placeholder={String(period)}
+            />
+          </div>
+         
+          <div>
+            <p>reliability</p>
+            <input 
+              onChange={
+                event =>setBandwidth(+event.target.value)
+              }
+              type="number" name="Bandwidth" 
+              id="Bandwidth" 
+              placeholder={String(reliability)}
+            />
+          </div>
+         
+          <div>
+            <p>type_slice</p>
+            <input 
+              onChange={
+                event =>setBandwidth(+event.target.value)
+              }
+              type="number" name="Bandwidth" 
+              id="Bandwidth" 
+              placeholder={String(type_slice)}
+            />
+          </div>
+         
+          <div className="vnd">
+            <p>vnd</p>
+            <input 
+              onChange={
+                event =>setBandwidth(+event.target.value)
+              }
+              type="number" name="Bandwidth" 
+              id="Bandwidth" 
+              placeholder={String(vnd)}
+            />
+          </div>
+        
+             
          
       
           <button  type="submit">
