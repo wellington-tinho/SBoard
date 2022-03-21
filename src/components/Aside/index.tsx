@@ -6,7 +6,6 @@ import { CytoscapeContext } from "../../CytoscapeContext";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
-import menu from '../../assets/icons/menu-vertical.png'
 import { CreateRequest } from "./CreateRequest";
 import { ShowVND } from "./showVND/showVND";
 import {EditionRequest} from "./EditionRequest/index";
@@ -167,9 +166,6 @@ export function Aside({ request }: any) {
     <Container>
       <main>
         <h2> Requests</h2>
-        <button>
-          <img src={menu} alt="Menu toggle Requests" />
-        </button>
       </main>
 
       <div>

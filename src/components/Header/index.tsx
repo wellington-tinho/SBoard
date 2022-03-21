@@ -63,7 +63,7 @@ export function Header(){
 
   return (
       <Container>
-        <img src={logoImg} alt="Logo" />
+        <img src={logoImg} alt="Logo" height={'37px'} width={'37px'}/>
         <h1>NSBoard</h1>
         <h3>Painel para gerenciamento de redes em fatias</h3>
 
