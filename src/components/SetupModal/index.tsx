@@ -15,7 +15,7 @@ interface SetupModalProps {
 }
 
 
-export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
+function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
   const [data, setData] = useState(arqSetupJson)
 
   const [qtd_vnrs, set_qtd_vnrs] = useState(data.qtd_vnrs)
@@ -1007,3 +1007,5 @@ export function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
     </Modal>
   );
 }
+
+export default SetupModal

@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
 
-
+import { lazy, Suspense } from 'react';
 import { AiOutlineZoomIn, AiOutlineZoomOut } from 'react-icons/ai'; 
 import { BiUndo, BiRedo, BiGitPullRequest } from 'react-icons/bi'; 
 import { HiOutlineViewGridAdd } from 'react-icons/hi'; 
@@ -12,8 +12,10 @@ import { Upload } from "../Upload"
 
 import { NavOptions, GraphContainer, Container } from "./styles"
 import { useContext, useEffect, useRef, useState } from 'react';
-import { SetupModal } from '../SetupModal';
 import { CytoscapeContext } from '../../CytoscapeContext';
+// import { SetupModal } from '../SetupModal';
+const SetupModal = lazy((): Promise<any> =>  import('../SetupModal'));
+
 
   
 
@@ -84,7 +86,7 @@ export function GraphArea({setRequest}:any){
     hiddenFileInput.current.click();
   };
 
-
+  
 
   return(
     <Container>
@@ -123,10 +125,14 @@ export function GraphArea({setRequest}:any){
           <Upload />
       </GraphContainer>
 
-      < SetupModal 
-        isOpen={isSetupModal}
-        onRequestClose={handleCloseSetupModal}
-      />
+    
+
+      <Suspense fallback={<div>Loading...</div>}>
+        < SetupModal 
+          isOpen={isSetupModal}
+          onRequestClose={handleCloseSetupModal}
+          />
+      </Suspense>
       
     </Container>
   )
