@@ -32,7 +32,7 @@ export const DropContainer = styled.form<IDropContainer>`
  `;
 
 const messageColors = {
-  default: "#7A7A8C",
+  default: "#5f5f6e",
   error: "#e57878",
   success: "#17A38E",
 };
@@ -47,5 +47,5 @@ export const UploadMessage = styled.p<ITypeMessageColor>`
    justify-content: center;
    align-items: center;
    padding: 15px 0;
-   font-size: 1.5rem;
+   font-weight: 500;
  `;
