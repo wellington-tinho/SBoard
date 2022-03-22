@@ -47,4 +47,5 @@ export const UploadMessage = styled.p<ITypeMessageColor>`
    justify-content: center;
    align-items: center;
    padding: 15px 0;
+   font-size: 1.5rem;
  `;
