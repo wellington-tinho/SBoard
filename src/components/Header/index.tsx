@@ -35,7 +35,7 @@ export const Container = styled.header`
       /* color: var(--white-2) */
     }
   
-    h3{
+    h2{
       padding: 0.5rem 2rem 0;  
       font: 3rem 'Roboto Slab', 700;
       /* color: var(--white-2) */
@@ -52,7 +52,7 @@ export const Container = styled.header`
    h1{ 
      font-size: 1.5rem;
    }
-   h3{ 
+   h2{ 
      font-size: .8rem;
    }
   }
@@ -65,7 +65,7 @@ export function Header(){
       <Container>
         <img src={logoImg} alt="Logo" height={'37px'} width={'37px'}/>
         <h1>NSBoard</h1>
-        <h3>Painel para gerenciamento de redes em fatias</h3>
+        <h2>Painel para gerenciamento de redes em fatias</h2>
 
        {/* <Particles 
           id="tsparticles"
