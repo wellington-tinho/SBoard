@@ -4,7 +4,7 @@ import logoImg from '../../assets/Logo.png'
 import styled from "styled-components";
 
 
-// import Particles from "react-tsparticles";
+import Particles from "react-tsparticles";
 export const Container = styled.header`
 
   display: flex;
@@ -67,7 +67,7 @@ export function Header(){
         <h1>NSBoard</h1>
         <h2>Painel para gerenciamento de redes em fatias</h2>
 
-       {/* <Particles 
+       <Particles 
           id="tsparticles"
           options={{
             fpsLimit: 60,
@@ -141,7 +141,7 @@ export function Header(){
             },
             detectRetina: true,
           }}
-        /> */}
+        />
 
       </Container>
   )
