@@ -11,6 +11,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 export const api = axios.create({
   baseURL: API,
-  
 })
+
+api.get('/')
+.then(response => console.info(response.data))
+.catch((err) => console.warn('Não foi possivel se conectar com a API, \n\n',err)
+)
 

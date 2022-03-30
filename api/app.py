@@ -37,7 +37,7 @@ def Create_Setup_Json():
 
 @app.route("/", methods=['GET'])
 def home():
-  return "Olá vc clicou na rota errada, execulte yarn start e entre na rota http://localhost:3000/ "
+  return "connected api"
 
 if __name__ == '__main__':
   app.run(debug=True)

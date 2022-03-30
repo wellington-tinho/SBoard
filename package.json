@@ -31,7 +31,6 @@
     "@types/react-modal": "^3.12.1",
     "@types/styled-components": "^5.1.12",
     "@vitejs/plugin-react": "^1.0.7",
-    "react-tsparticles": "^1.42.4",
     "typescript": "^4.5.4",
     "vite": "^2.8.0"
   },
