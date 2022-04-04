@@ -1,7 +1,7 @@
 // import { Container } from "./styles";
-import logoImg from '../../assets/Logo.png'
-
 import styled from "styled-components";
+import logoImg from '../../assets/Logo.png';
+
 
 
 // import Particles from "react-tsparticles";
@@ -10,24 +10,18 @@ export const Container = styled.header`
   display: flex;
   align-items: center;
   border-radius: 0.25rem;
-  border-top: 1px solid var(--green);
+  border-top: 1px solid var(--green-3);
   height: 4rem;
   flex-grow: 0;
- 
-
-  #tsparticles{
-    z-index: -1 ;
-  }
+  background-color: var(--white-1);
   
   img{ 
-    /* background-color: white; */
     /* border-radius: 50%; */
     padding: 0.10rem;
 
     height: 2.5rem;
     margin: 0 2rem;
 
-    background-color: ;
   }
   
     h1{ 
@@ -63,7 +57,7 @@ export function Header(){
 
   return (
       <Container>
-        <img src={logoImg} alt="Logo" height={'37px'} width={'37px'}/>
+        <img loading="lazy" src={logoImg} alt="Logo" height={'37px'} width={'37px'}/>
         <h1>NSBoard</h1>
         <h2>Painel para gerenciamento de redes em fatias</h2>
 

@@ -43,6 +43,37 @@ export const Container = styled.div`
       }
       .visible{
         flex-direction: column;
+
+
+        .styleInfosRequests{
+
+          display: grid;
+          grid-template-columns: 1fr;
+          border: 1px solid var(--text-tile);
+          
+          div{
+            border-bottom: 1px solid #acdcb9;
+            display: grid;
+            grid-template-columns: 3fr 1fr 3fr;
+            
+            >:nth-child(3){
+              border: 2px solid #acdcb9 ;
+              width: 6rem;
+              word-wrap: break-word;
+              text-align: center;
+
+              :hover{
+              border: 2px solid #34D761 ;
+              font-weight: bold;
+              }
+            }
+            >:nth-child(1){
+              word-wrap: break-word;
+            }
+            
+          }
+        }
+
       }
     }
   }

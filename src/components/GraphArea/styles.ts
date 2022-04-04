@@ -6,6 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100%;
 
+
   /* nav{
     flex-grow: 0;
   }
@@ -16,10 +17,9 @@ export const Container = styled.div`
 `
 
 export const NavOptions  = styled.nav`
-  border: 1px solid var(--green);
-  border-right: 0;
+  border: 1px solid var(--green-3);
   background-color: var(--white-2);
-
+  border-right: 0;
   border-left: 0;
  
   ul {
@@ -46,7 +46,7 @@ export const NavOptions  = styled.nav`
        
         :hover{
           transition: 0.2s;
-          border-bottom: 1px solid #34D761;
+          border-bottom: 1px solid var(--green-3);
                  
         }
       }
@@ -57,7 +57,7 @@ export const NavOptions  = styled.nav`
 
 export const GraphContainer = styled.div`
   border-radius: 0.25rem;
-  background-color: var(--white-2);
+  background-color: var(--white-3);
   height: 100%;  
   display:flex;
   justify-content: center;

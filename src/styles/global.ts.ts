@@ -10,10 +10,17 @@ export const GlobalStyle = createGlobalStyle`
 
 /*==== GLOBAL ==== */
 :root {
-  --background: #eee;
-  --green: #34D761;
-  --white-2: #E6E6e2;
-  --text-tile: #63696E;
+  --white-1: #FFFAFA;
+  --white-2: #eee;
+  --white-3: #E6E6e2;
+  
+  --gray-1: #D3D3D3;
+  --gray-2: #A9A9A9;
+  --gray-3: #63696E;
+  
+  --green-1: #82EAC3;
+  --green-2: #00FA9A;
+  --green-3: #34D761;
 }
 
 * {

@@ -17,10 +17,11 @@ export const DropContainer = styled.form<IDropContainer>`
   width: 100%;
   max-width: 25rem;
   margin: 1rem auto;
-  background-color: var(--background);
+  color: var(--white-1);
+  background-color: var(--gray-1);
   border-radius: .25rem;
   padding: .5rem;
-  border: 1px dashed #818C7E;
+  border: 1px dashed var(--gray-3);
   border-radius: 4px;
   cursor: pointer;
   
@@ -32,7 +33,7 @@ export const DropContainer = styled.form<IDropContainer>`
  `;
 
 const messageColors = {
-  default: "#5f5f6e",
+  default: "#4F4F4F",
   error: "#e57878",
   success: "#17A38E",
 };

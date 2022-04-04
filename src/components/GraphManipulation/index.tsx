@@ -1,15 +1,15 @@
-import Modal from 'react-modal';
-
-
 import cytoscape from 'cytoscape';
 import { useContext, useEffect, useRef, useState } from 'react';
 import CytoscapeComponent from 'react-cytoscapejs';
-
-import { NodeModal } from '../NodeModal';
-import { EdgeModal } from '../EdgeModal';
+import Modal from 'react-modal';
 import { CytoscapeContext } from '../../CytoscapeContext';
-import { ElementModal } from '../ElementModal';
 import { ChartOptions } from '../ChartOptions';
+import { EdgeModal } from '../EdgeModal';
+import { ElementModal } from '../ElementModal';
+import { NodeModal } from '../NodeModal';
+
+
+
 
 
 export interface propsGraphJson{
@@ -75,7 +75,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
           fit: true,
           // circle: true,
           directed: true,
-          padding: 50,
+          // padding: 50,
           // spacingFactor: 1.5,
           animate: true,
           animationDuration: 1000,
@@ -294,7 +294,7 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
   return (
     <div>
       <div id='cy' >
-      <div ref={containerRef} style={{ width: '80vw', height: '86vh' }} />
+      <div ref={containerRef} style={{ width: 'calc(100vw - 18rem)', height: '86vh' }} />
       </div>
 
       <NodeModal 

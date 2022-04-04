@@ -1,5 +1,5 @@
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useState } from 'react';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import { CreateOne } from "./createOneRequest";
 import { CreateSeveral } from "./createSeveralRequest";
 import { Generate } from "./generateRequest";

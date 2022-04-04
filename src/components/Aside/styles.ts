@@ -2,8 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: var(--white-2);
-  border-left: 2px solid var(--background);
-  border-top: 1px solid var(--green);;
+  border-top: 1px solid var(--green-3);
+  border-left: 2px solid var(--gray-1);
+ 
+  
+  
 
   main{
     margin-top: 0.5rem;
@@ -12,12 +15,12 @@ export const Container = styled.div`
   
     h2{
       font-size: 1.3rem;
-      border-bottom: 1px solid var(--background);
+      border-bottom: 1px solid var(--gray-1);
 
     }
     button{
       border-radius: .5rem;
-      border: 1px solid var(--background);
+      border: 1px solid var(--gray-1);
       background-color: transparent;
       img{
         height:1.5rem;
@@ -56,20 +59,18 @@ export const Container = styled.div`
     fieldset{
       border: 1px solid #acdcb9;
       border-top: none;
-      /* height: 45rem; */
+      height: calc(100vh - 12rem);
       overflow-y: scroll;      
     }
     
     @media (max-width: 1024px){
       main{
-
         display: none;
   
         h2{
           font-size: 12rem;
         }
       }
-
    } 
   }
 `

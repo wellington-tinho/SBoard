@@ -88,20 +88,65 @@ export function ShowVND({
         </div>
 
         <div id={'divVisible' + (Number(key)+qtdRequests)} className='visible' style={{ display: 'none' }}>
-    
-          <strong>Mudar visualização</strong>
-          <p>   Id : {Number(key)+qtdRequests}              </p>
-          <p>   type_slice : {requestList[key].type_slice}  </p>
-          <p>   created : {requestList[key].created}        </p>
-          <p>   duration : {requestList[key].duration}      </p>
-          <p>   period : {requestList[key].period}          </p>
-          <p>   bandwidth : {requestList[key].bandwidth}    </p>
-          <p>   delay : {requestList[key].delay}            </p>
-          <p>   reliability : {requestList[key].reliability}</p>
-          <br />
-              <p>   vnd: {JSON.stringify(requestList[key].vnd, null, 4)} </p> 
-          <br />
-          <p>links: {JSON.stringify(requestList[key].links, null, 2)}</p>
+
+          <div className='styleInfosRequests'>
+  
+            <div>
+              <p>   Id  </p>
+              <p> - </p>
+              <p>   {Number(key)+qtdRequests}              </p>
+            </div>
+            
+            <div>
+              <p>   type_slice  </p>
+              <p> - </p>
+              <p>   {requestList[key].type_slice}  </p>
+            </div>
+            
+            <div>
+              <p>   created   </p>
+              <p> - </p>
+              <p>   {requestList[key].created}        </p>
+            </div>
+            
+            <div>
+              <p>   duration  </p>
+              <p> - </p>
+              <p>   {requestList[key].duration}      </p>
+            </div>
+            
+            <div>
+              <p>   period  </p>
+              <p> - </p>
+              <p>   {requestList[key].period}          </p>
+            </div>
+            
+            <div>
+              <p>   bandwidth   </p>
+              <p> - </p>
+              <p>   {requestList[key].bandwidth}    </p>
+            </div>
+            
+            <div>
+              <p>   delay</p>
+              <p> - </p>
+              <p>   {requestList[key].delay}            </p>
+            </div>
+            
+            <div>
+              <p>   reliability </p>
+              <p> - </p>
+              <p>   {requestList[key].reliability}</p>
+            </div>
+
+            <details >
+              <summary>Virtual Network Requests</summary>
+                <p>   vnd: {JSON.stringify(requestList[key].vnd, null, 4)} </p> 
+            </details>
+                {console.log(requestList[key].vnd)}
+            <br />
+            <p>links: {JSON.stringify(requestList[key].links, null, 2)}</p>
+          </div>
         </div>
       </li>
     )
