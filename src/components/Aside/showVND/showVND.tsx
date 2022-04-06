@@ -139,13 +139,54 @@ export function ShowVND({
               <p>   {requestList[key].reliability}</p>
             </div>
 
+            <p>links: {JSON.stringify(requestList[key].links, null, 2)}</p>
             <details >
               <summary>Virtual Network Requests</summary>
-                <p>   vnd: {JSON.stringify(requestList[key].vnd, null, 4)} </p> 
+             
+                  {
+                    Object.keys(requestList[key].vnd).map((__, index:number) => {
+                   
+                      return ( 
+                        <div key={index}>
+                          <p className="vndIndex">VND {index} </p>
+                          <div>
+                            <p> id</p>  
+                            <p> {requestList[key].vnd[index].id}</p>  
+                          </div>
+                          <div>
+                            <p> requested</p>  
+                            <p> {requestList[key].vnd[index].requested}</p>  
+                          </div>
+                          <div>
+                            <p> vnr_id</p>  
+                            <p> {requestList[key].vnd[index].vnr_id}</p>  
+                          </div>
+                          <div>
+                            <p> domain</p>  
+                            <p> {requestList[key].vnd[index].domain}</p>  
+                          </div>
+                          <div>
+                            <p> region</p>  
+                            <p> {requestList[key].vnd[index].region}</p>  
+                          </div>
+                          <div>
+                            <p> type</p>  
+                            <p> {requestList[key].vnd[index].type}</p>  
+                          </div>
+                          <div>
+                            <p> period</p>  
+                            <p> {requestList[key].vnd[index].period}</p>  
+                          </div>
+                          <div>
+                            <p> sink</p>  
+                            <p> {requestList[key].vnd[index].sink}</p>  
+                          </div>
+                        </div>
+                      )
+                    })
+                  } 
+                
             </details>
-                {console.log(requestList[key].vnd)}
-            <br />
-            <p>links: {JSON.stringify(requestList[key].links, null, 2)}</p>
           </div>
         </div>
       </li>

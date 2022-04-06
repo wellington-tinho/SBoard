@@ -38,7 +38,7 @@ export const Container = styled.form`
         height: 2rem;
         border-radius: 0.25rem;
         background: #e7e9ee;
-        border: 1px solid var(--green);
+        border: 1px solid var(--green-3);
         font-size: 1rem;
         cursor: pointer;
         margin: 1rem 0;
@@ -46,7 +46,7 @@ export const Container = styled.form`
 
 
         :hover{
-          background-color: var(--green);
+          background-color: var(--green-3);
           color: white;
           border: 1px solid black;
         }
@@ -92,7 +92,7 @@ export const Container = styled.form`
         width: 100%;
         padding: 0 1.5rem;
         height: 3.5rem;
-        background: var(--green);
+        background: var(--green-3);
         color: var(--white-2);
         border-radius: 0.25rem;
         border: 0;

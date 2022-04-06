@@ -31,8 +31,8 @@ export const Container = styled.div`
           padding: 0 1rem;
           height: 2rem;
           border-radius: 0.25rem;
-          background: #e7e9ee;
-          border: 1px solid #d7d7d7;
+          background: var(--white-3);
+          border: 1px solid var(--gray-3);
           font-size: 1rem;
         }
         margin: 0 0 1rem 0;
@@ -44,56 +44,55 @@ export const Container = styled.div`
         padding: 0 1rem;
         height: 2.4rem;
         border-radius: 0.25rem;
-        background: #e7e9ee;
-        border: 1px solid var(--green);
+        background: var(--white-2);
+        border: 1px solid var(--green-3);
         cursor: pointer;
         margin: 1rem 0;
         transition: background-color 0.3s;
 
 
         :hover{
-          background-color: var(--green);
+          background-color: var(--green-3);
           color: white;
           border: 1px solid black;
         }
       }
     }
     ul.listRequest{
+      display: flex;
+      flex-direction: column;
+      li{
+        border-bottom: 1px solid var(--green-1);
         display: flex;
-        flex-direction: column;
-        li{
-          border-bottom: 1px solid #acdcb9;
+        align-items: center;
+        justify-content: space-around;
+        
+        div{
+          /* width: 10rem;   */
           display: flex;
           align-items: center;
-          justify-content: space-around;
-          
-          div{
-            /* width: 10rem;   */
-            display: flex;
-            align-items: center;
-            justify-content: space-between
-            border-radius: 0.25rem;
-            padding: 0.5rem;
-                        
-            h4{
-              font-size: .8rem;
-              margin: 0 .5rem ;
-            }
-            button{
-              border: 1px solid #34D761; 
-              background-color: var(--background);
-              border-radius:0.25rem; 
-              font-size: .8rem; 
-              width: 5rem;
+          justify-content: space-between;
+          border-radius: 0.25rem;
+          padding: 0.5rem;
+                      
+          h4{
+            font-size: .8rem;
+            margin: 0 .5rem ;
+          }
+          button{
+            border: 1px solid var(--green-3); 
+            background-color: var(--white-2);
+            border-radius:0.25rem; 
+            font-size: .8rem; 
+            width: 5rem;
 
-              transition: filter 0.2s;
+            transition: filter 0.1s;
 
-              :hover{
-                filter: brightness(110%);
-              }
+            :hover{
+              filter: brightness(110%);
             }
-          } 
-        }
+          }
+        } 
       }
     }
   }

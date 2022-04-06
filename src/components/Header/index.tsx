@@ -17,7 +17,7 @@ export const Container = styled.header`
   
   img{ 
     /* border-radius: 50%; */
-    padding: 0.10rem;
+    /* padding: 0.10rem; */
 
     height: 2.5rem;
     margin: 0 2rem;
@@ -30,7 +30,7 @@ export const Container = styled.header`
     }
   
     h2{
-      padding: 0.5rem 2rem 0;  
+      margin-left:  2rem ;  
       font: 3rem 'Roboto Slab', 700;
       /* color: var(--white-2) */
     }

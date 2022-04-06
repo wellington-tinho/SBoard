@@ -1,12 +1,14 @@
-import { VscChromeClose } from 'react-icons/vsc'
+import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
-
-
 import styled from 'styled-components';
 
+
+
 export const Container = styled.form`
+  background-color: var(--white-2);
+  
   h2 {
-    color: var(--text-tile);
+    color: var(--gray-3);
     font-size: 1.5rem;
     margin-bottom: 2rem;
   }
@@ -26,7 +28,7 @@ export const Container = styled.form`
           padding: 0 1rem;
           height: 3rem;
           border-radius: 0.25rem;
-          border: 1px solid #d7d7d7;
+          border: 1px solid var(--white-3);
           /* font-weight: 400; */
           font-size: 1rem;
           display: flex;
@@ -37,8 +39,8 @@ export const Container = styled.form`
          padding: 0 1rem;
          height: 3rem;
          border-radius: 0.25rem;
-         background: #e7e9ee;
-         border: 1px solid #d7d7d7;
+         background: var(--white-1);
+         border: 1px solid var(--white-3);
          /* font-weight: 400; */
          font-size: 1rem;
        }
@@ -48,8 +50,8 @@ export const Container = styled.form`
         width: 100%;
         padding: 0 1.5rem;
         height: 3.5rem;
-        background: var(--green);
-        color: var(--white-2);
+        background: var(--green-3);
+        color: var(--white-1);
         border-radius: 0.25rem;
         border: 0;
         font-size: 1rem;

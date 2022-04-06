@@ -1,9 +1,10 @@
-var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnPropertyDescriptors;var Q=Object.getOwnPropertySymbols;var ge=Object.prototype.hasOwnProperty,be=Object.prototype.propertyIsEnumerable;var Y=(n,o,t)=>o in n?pe(n,o,{enumerable:!0,configurable:!0,writable:!0,value:t}):n[o]=t,T=(n,o)=>{for(var t in o||(o={}))ge.call(o,t)&&Y(n,t,o[t]);if(Q)for(var t of Q(o))be.call(o,t)&&Y(n,t,o[t]);return n},P=(n,o)=>he(n,me(o));import{s as F,j as r,a as e,r as fe,b as a,T as te,c as re,d as V,e as G,M as A,V as B,F as ne,C as ae,f as ve,g as ye,h as xe,u as Ce,A as we,i as Se,B as Ee,k as ke,H as Ne,R as $e,l as Re,m as Me,n as De,W as Fe,o as ze,p as Oe}from"./vendor.ad6f32a0.js";const Ie=function(){const o=document.createElement("link").relList;if(o&&o.supports&&o.supports("modulepreload"))return;for(const l of document.querySelectorAll('link[rel="modulepreload"]'))i(l);new MutationObserver(l=>{for(const d of l)if(d.type==="childList")for(const c of d.addedNodes)c.tagName==="LINK"&&c.rel==="modulepreload"&&i(c)}).observe(document,{childList:!0,subtree:!0});function t(l){const d={};return l.integrity&&(d.integrity=l.integrity),l.referrerpolicy&&(d.referrerPolicy=l.referrerpolicy),l.crossorigin==="use-credentials"?d.credentials="include":l.crossorigin==="anonymous"?d.credentials="omit":d.credentials="same-origin",d}function i(l){if(l.ep)return;l.ep=!0;const d=t(l);fetch(l.href,d)}};Ie();var Te="/assets/Logo.fe6b5af1.png";const Ae=F.header`
+var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnPropertyDescriptors;var Q=Object.getOwnPropertySymbols;var ge=Object.prototype.hasOwnProperty,be=Object.prototype.propertyIsEnumerable;var Y=(n,o,t)=>o in n?pe(n,o,{enumerable:!0,configurable:!0,writable:!0,value:t}):n[o]=t,T=(n,o)=>{for(var t in o||(o={}))ge.call(o,t)&&Y(n,t,o[t]);if(Q)for(var t of Q(o))be.call(o,t)&&Y(n,t,o[t]);return n},P=(n,o)=>he(n,me(o));import { a as e, A as we, b as a, B as Ee, C as ae, c as re, d as V, e as G, F as ne, f as ve, g as ye, H as Ne, h as xe, i as Se, j as r, k as ke, l as Re, M as A, m as Me, n as De, o as ze, p as Oe, R as $e, r as fe, s as F, T as te, u as Ce, V as B, W as Fe } from "./vendor.ad6f32a0.js";
+const Ie=function(){const o=document.createElement("link").relList;if(o&&o.supports&&o.supports("modulepreload"))return;for(const l of document.querySelectorAll('link[rel="modulepreload"]'))i(l);new MutationObserver(l=>{for(const d of l)if(d.type==="childList")for(const c of d.addedNodes)c.tagName==="LINK"&&c.rel==="modulepreload"&&i(c)}).observe(document,{childList:!0,subtree:!0});function t(l){const d={};return l.integrity&&(d.integrity=l.integrity),l.referrerpolicy&&(d.referrerPolicy=l.referrerpolicy),l.crossorigin==="use-credentials"?d.credentials="include":l.crossorigin==="anonymous"?d.credentials="omit":d.credentials="same-origin",d}function i(l){if(l.ep)return;l.ep=!0;const d=t(l);fetch(l.href,d)}};Ie();var Te="/assets/Logo.fe6b5af1.png";const Ae=F.header`
 
   display: flex;
   align-items: center;
   border-radius: 0.25rem;
-  border-top: 1px solid var(--green);
+  border-top: 1px solid var(--green-3);
   height: 4rem;
   flex-grow: 0;
  
@@ -52,7 +53,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
 `;function qe(){return r(Ae,{children:[e("img",{src:Te,alt:"Logo",height:"37px",width:"37px"}),e("h1",{children:"NSBoard"}),e("h2",{children:"Painel para gerenciamento de redes em fatias"}),e(fe,{id:"tsparticles",options:{fpsLimit:60,interactivity:{events:{onClick:{enable:!0,mode:"push"},onHover:{enable:!0,mode:"repulse"},resize:!0},modes:{bubble:{distance:600,duration:2,opacity:.8,size:40},push:{quantity:4},repulse:{distance:100,duration:.2}}},particles:{color:{value:"#00000060"},links:{color:"#00000065",distance:150,enable:!0,opacity:.3,width:1},collisions:{enable:!1},move:{direction:"top",enable:!0,outMode:"bounce",random:!1,speed:2,straight:!1},number:{density:{enable:!0,area:800},value:80},opacity:{value:.1},shape:{type:"circle"},size:{random:!0,value:4}},detectRetina:!0}})]})}const q=a.exports.createContext({}),_e=F.div`
   background-color: var(--white-2);
   border-left: 2px solid var(--background);
-  border-top: 1px solid var(--green);;
+  border-top: 1px solid var(--green-3);;
 
   main{
     margin-top: 0.5rem;
@@ -296,14 +297,14 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
         height: 2.4rem;
         border-radius: 0.25rem;
         background: #e7e9ee;
-        border: 1px solid var(--green);
+        border: 1px solid var(--green-3);
         cursor: pointer;
         margin: 1rem 0;
         transition: background-color 0.3s;
 
 
         :hover{
-          background-color: var(--green);
+          background-color: var(--green-3);
           color: white;
           border: 1px solid black;
         }
@@ -392,7 +393,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
       width: 100%;
       padding: 0 1.5rem;
       height: 3.5rem;
-      background: var(--green);
+      background: var(--green-3);
       color: var(--white-2);
       border-radius: 0.25rem;
       border: 0;
@@ -450,7 +451,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
         width: 100%;
         padding: 0 1.5rem;
         height: 3.5rem;
-        background: var(--green);
+        background: var(--green-3);
         color: var(--white-2);
         border-radius: 0.25rem;
         border: 0;
@@ -552,7 +553,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
         width: 100%;
         padding: 0 1.5rem;
         height: 3.5rem;
-        background: var(--green);
+        background: var(--green-3);
         color: var(--white-2);
         border-radius: 0.25rem;
         border: 0;
@@ -634,7 +635,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
         width: 100%;
         padding: 0 1.5rem;
         height: 3.5rem;
-        background: var(--green);
+        background: var(--green-3);
         color: var(--white-2);
         border-radius: 0.25rem;
         border: 0;
@@ -702,7 +703,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
         height: 2rem;
         border-radius: 0.25rem;
         background: #e7e9ee;
-        border: 1px solid var(--green);
+        border: 1px solid var(--green-3);
         font-size: 1rem;
         cursor: pointer;
         margin: 1rem 0;
@@ -710,7 +711,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
 
 
         :hover{
-          background-color: var(--green);
+          background-color: var(--green-3);
           color: white;
           border: 1px solid black;
         }
@@ -756,7 +757,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
         width: 100%;
         padding: 0 1.5rem;
         height: 3.5rem;
-        background: var(--green);
+        background: var(--green-3);
         color: var(--white-2);
         border-radius: 0.25rem;
         border: 0;
@@ -818,7 +819,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
         width: 100%;
         padding: 0 1.5rem;
         height: 3.5rem;
-        background: var(--green);
+        background: var(--green-3);
         color: var(--white-2);
         border-radius: 0.25rem;
         border: 0;
@@ -893,7 +894,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
         width: 100%;
         padding: 0 1.5rem;
         height: 3.5rem;
-        background: var(--green);
+        background: var(--green-3);
         color: var(--white-2);
         border-radius: 0.25rem;
         border: 0;
@@ -945,7 +946,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
     padding: 0 1.5rem;
     height: 3.5rem;
     background: #e7e9ee;
-    border: 1px solid var(--green);
+    border: 1px solid var(--green-3);
     border-radius: 0.25rem;
     /* border: 1; */
     border-radius: 0.25rem;
@@ -958,7 +959,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
     }
     
     :hover{
-      background-color: var(--green);
+      background-color: var(--green-3);
       color: white;
       border: 1px solid black;
       filter: brightness(0.9);
@@ -990,7 +991,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
   } */
 
 `,Et=F.nav`
-  border: 1px solid var(--green);
+  border: 1px solid var(--green-3);
   border-right: 0;
   background-color: var(--white-2);
 
@@ -1060,7 +1061,7 @@ var pe=Object.defineProperty,he=Object.defineProperties;var me=Object.getOwnProp
 /*==== GLOBAL ==== */
 :root {
   --background: #eee;
-  --green: #34D761;
+  --green-3: #34D761;
   --white-2: #E6E6e2;
   --text-tile: #63696E;
 }
@@ -1156,4 +1157,5 @@ ul li{
     filter: brightness(0.7);
   }
 }
-`;function Ft(){return r(ne,{children:[e(Dt,{}),e(qe,{}),e(Mt,{})]})}ze.render(e(Oe.StrictMode,{children:e(Ft,{})}),document.getElementById("root"));export{oe as a};
+`;function Ft(){return r(ne,{children:[e(Dt,{}),e(qe,{}),e(Mt,{})]})}ze.render(e(Oe.StrictMode,{children:e(Ft,{})}),document.getElementById("root"));export { oe as a };
+

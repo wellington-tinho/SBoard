@@ -41,7 +41,7 @@ html {
 
 body {
   font-size: 93.75%;
-  background: var(--background);
+  background: var(--white-2);
   -webkit-font-smooth: antialiased;
   
   display: flex;
@@ -91,7 +91,7 @@ ul li{
 .react-modal-content{
   width: 100%;
   max-width: 50rem;
-  background: var(--background);
+  background: var(--white-2);
   padding: 3rem;
   position: relative;
   border-radius:  0.25rem;
@@ -101,7 +101,7 @@ ul li{
 }
 
 .react-modal-close{
-  color: var(--text-tile);
+  color: var(--gray-3);
   position: absolute;
   font-size: 1rem;
   right: 1.5rem;

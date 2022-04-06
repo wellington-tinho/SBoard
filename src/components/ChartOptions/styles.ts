@@ -18,7 +18,7 @@ export const Container = styled.div`
     padding: 0 1.5rem;
     height: 3.5rem;
     background: #e7e9ee;
-    border: 1px solid var(--green);
+    border: 1px solid var(--green-3);
     border-radius: 0.25rem;
     /* border: 1; */
     border-radius: 0.25rem;
@@ -31,7 +31,7 @@ export const Container = styled.div`
     }
     
     :hover{
-      background-color: var(--green);
+      background-color: var(--green-3);
       color: white;
       border: 1px solid black;
       filter: brightness(0.9);
