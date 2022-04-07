@@ -139,7 +139,6 @@ export function ShowVND({
               <p>   {requestList[key].reliability}</p>
             </div>
 
-            <p>links: {JSON.stringify(requestList[key].links, null, 2)}</p>
             <details >
               <summary>Virtual Network Requests</summary>
              
@@ -147,38 +146,46 @@ export function ShowVND({
                     Object.keys(requestList[key].vnd).map((__, index:number) => {
                    
                       return ( 
-                        <div key={index}>
+                        <div className='virtualNetworkRequests' key={index}>
                           <p className="vndIndex">VND {index} </p>
                           <div>
-                            <p> id</p>  
+                            <p> id</p>
+                            <p> - </p>  
                             <p> {requestList[key].vnd[index].id}</p>  
                           </div>
                           <div>
                             <p> requested</p>  
+                            <p> - </p>
                             <p> {requestList[key].vnd[index].requested}</p>  
                           </div>
                           <div>
                             <p> vnr_id</p>  
+                            <p> - </p>  
                             <p> {requestList[key].vnd[index].vnr_id}</p>  
                           </div>
                           <div>
-                            <p> domain</p>  
+                            <p> domain</p>
+                            <p> - </p>   
                             <p> {requestList[key].vnd[index].domain}</p>  
                           </div>
                           <div>
-                            <p> region</p>  
+                            <p> region</p>
+                            <p> - </p>   
                             <p> {requestList[key].vnd[index].region}</p>  
                           </div>
                           <div>
-                            <p> type</p>  
+                            <p> type</p>
+                            <p> - </p>   
                             <p> {requestList[key].vnd[index].type}</p>  
                           </div>
                           <div>
-                            <p> period</p>  
+                            <p> period</p>
+                            <p> - </p>   
                             <p> {requestList[key].vnd[index].period}</p>  
                           </div>
                           <div>
-                            <p> sink</p>  
+                            <p> sink</p>
+                            <p> - </p>   
                             <p> {requestList[key].vnd[index].sink}</p>  
                           </div>
                         </div>
@@ -187,6 +194,23 @@ export function ShowVND({
                   } 
                 
             </details>
+
+            <details>
+              <summary>Links</summary>
+              {Object.keys(requestList[key].links).map((__, index:number) => { 
+            
+                return (
+                  <div className='links virtualNetworkRequests' key={index}>
+                      <p className="linkIndex">Link {index} </p>
+                    <div>
+                      <p> {requestList[key].links[index][0]}</p>
+                      <p> - </p>
+                      <p> {requestList[key].links[index][1]}</p>
+                    </div>
+                  </div>
+                )
+              })} 
+            </details>     
           </div>
         </div>
       </li>

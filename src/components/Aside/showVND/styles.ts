@@ -46,19 +46,23 @@ export const Container = styled.div`
 
 
         .styleInfosRequests{
-
           display: grid;
           grid-template-columns: 1fr;
-          border: 1px solid var(--text-tile);
+          border: 1px solid var(--gray-2);
+          box-shadow: 2px 2px 1px 1px var(--gray-1);
+          margin-bottom: 1rem;
           
-          div{
+          >div{
             border-bottom: 1px solid var(--green-1);
             display: grid;
             grid-template-columns: 3fr 1fr 3fr;
             font-size: .9rem; 
 
+            p:first-of-type{
+              word-wrap: break-word;
+            }
             
-            >:nth-child(3){
+            p:last-of-type{
               border: 2px solid var(--gray-1) ;
               width: 6rem;
               word-wrap: break-word;
@@ -69,13 +73,68 @@ export const Container = styled.div`
                 font-weight: 600;
               }
             }
-            >:nth-child(1){
-              word-wrap: break-word;
+          }
+          div.virtualNetworkRequests{
+            display: grid;
+            grid-template-columns: 1fr;
+            border: 1px solid var(--gray-1);
+            box-shadow: 1px 1px 0px 0px var(--gray-1);
+            margin: 1rem 0 2rem 0;
+            div{
+              border-bottom: 1px solid var(--green-1);
+              display: grid;
+              grid-template-columns: 3fr 1fr 3fr;
+              font-size: .9rem; 
+
+              p:first-of-type{
+                word-wrap: break-word;
+              }
+              
+              p:last-of-type{
+                border: 2px solid var(--white-3) ;
+                width: 5rem;
+                word-wrap: break-word;
+                text-align: center;
+
+                :hover{
+                  border: 2px solid var(--green-1);
+                  font-weight: 600;
+                }
+              }
             }
+            >p{
+              justify-content: center;
+              border-bottom: 2px solid var(--gray-1) ;
+              text-align: center;
+              font-weight: 600;
+            }
+          }
+
+          div.links{
             
+            div{
+              p:first-of-type{ 
+                border: 2px solid var(--white-3) ;
+                width: 5rem;
+                word-wrap: break-word;
+                text-align: center;
+                :hover{
+                  border: 2px solid var(--green-1);
+                  font-weight: 600;
+                }
+              }
+            }
+
+          }
+
+          details{
+            margin-top: 0.8rem ;
+            summary{
+              font-weight: 600;
+              font-size: 0.9rem;  
+            }
           }
         }
-
       }
     }
   }
