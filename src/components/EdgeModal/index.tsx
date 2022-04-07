@@ -1,10 +1,10 @@
 
-import {FormEvent, useContext, useEffect, useState } from 'react';
+import { FormEvent, useContext, useEffect, useState } from 'react';
+import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
-
-import { VscChromeClose } from 'react-icons/vsc'
-import { Container } from './styles';
+import { toast } from 'react-toastify';
 import { CytoscapeContext } from '../../CytoscapeContext';
+import { Container } from './styles';
 
 
 
@@ -51,15 +51,6 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
     console.log('EditElements');
 
 
-    alert(`
-      id ${id}  \n
-      source ${source} \n
-      target ${target}  \n
-      negative ${negative}  \n
-      Bandwidth ${weight}  \n
-      Reliability ${reliability}  \n
-      Delay ${delay}  \n
-    `)
 
     cy.$(`#${id}`)
     .data('source', source)
@@ -68,6 +59,8 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
     .data('weight', weight)
     .data('Reliability', reliability)
     .data('Delay', delay)
+
+    toast.success('Edge modified with success!');
  
   }
 

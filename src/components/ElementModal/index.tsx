@@ -1,14 +1,14 @@
 import { FormEvent, useContext, useEffect, useState } from 'react';
+import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
-
-import { VscChromeClose } from 'react-icons/vsc'
-import { Container } from './styles';
 import { CytoscapeContext } from '../../CytoscapeContext';
-
-import { NodeModal } from '../NodeModal';
-import { EdgeModal } from '../EdgeModal';
 import { ChangeAllSelectedEdgeModal } from '../ChangeAllSelectedEdgeModal';
 import { ChangeAllSelectedNodeModal } from '../ChangeAllSelectedNodeModal';
+import { EdgeModal } from '../EdgeModal';
+import { NodeModal } from '../NodeModal';
+import { Container } from './styles';
+
+
 
 
 interface ElementModalProps {
@@ -190,7 +190,7 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
       else{
         handleOpenChangeAllSelectedEdgesModal()
       }
-  }
+  } 
 
   function SaveChange(event:FormEvent) {
     event.preventDefault();
@@ -241,13 +241,6 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
               {arrayEdges}
           </div>
         </div>
-
-
-          <button  type="submit">
-            Salvar alterações
-          </button >
-
-
       </Container>
 
       <NodeModal 

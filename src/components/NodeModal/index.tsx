@@ -1,10 +1,11 @@
 
-import {FormEvent, useContext, useEffect, useState } from 'react';
+import { FormEvent, useContext, useEffect, useState } from 'react';
+import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
-
-import { VscChromeClose } from 'react-icons/vsc'
-import { Container } from './styles';
+import { toast } from 'react-toastify';
 import { CytoscapeContext } from '../../CytoscapeContext';
+import { Container } from './styles';
+
 
 
 
@@ -54,19 +55,6 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
   function EditElements(event:FormEvent) {
     event.preventDefault();
 
-    alert(`
-      id ${id}  \n
-      country ${(country)} \n
-      domain ${domain}  \n
-      label ${label}  \n
-      name ${name}  \n
-      region ${region}  \n
-      type ${type}  \n
-      value ${value}  \n
-      pos ${pos}  \n
-      weight ${weight} 
-    `)
-
     cy.$(`#${id}`)
     .data('Country', country)
     .data('domain', domain)
@@ -77,6 +65,8 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
     .data('value', value)
     .data('pos', pos)
     .data('weight', weight)
+
+    toast.success('Node modified with success!');
   }
 
  

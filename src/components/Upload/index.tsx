@@ -1,10 +1,11 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-
-import { DropContainer, UploadMessage } from './style';
-
+import { toast } from 'react-toastify';
 import { api } from '../../services/api';
 import { GraphManipulation } from '../GraphManipulation';
+import { DropContainer, UploadMessage } from './style';
+
+
 
 
 
@@ -20,10 +21,12 @@ export function Upload() {
   function onDrop(file:any){ 
     const reader = new FileReader();
     reader.onload = function(e: any) {
+
       
-      // console.log('file[0].type \n',file[0]);
       if(file[0].type === 'application/json'){
-        console.log('e.target.result \n',(JSON.parse(e.target.result).elements));
+        if((JSON.parse(e.target.result).elements)==undefined){
+          toast.error('Invalid JSON file!')
+        } 
         setGraphJSON(JSON.parse(e.target.result).elements);   
       }else{
         setGraphGML(e.target.result)      
@@ -36,7 +39,15 @@ export function Upload() {
 
     if(graphGML){
       api.post('convert', {data: graphGML})
-      .then(response => setGraphJSON(response.data.elements))  
+      .then(response => {
+
+        if(response.data.elements === undefined){
+          toast.error('Invalid GML file!')
+          setGraphGML(undefined)
+        }else{
+          setGraphJSON(response.data.elements)
+        }
+      })  
     }
   },[graphGML]);
 

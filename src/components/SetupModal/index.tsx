@@ -1,11 +1,12 @@
-import arqSetupJson from '../../data/setup.json';
-
-import { FormEvent, useState, useEffect, useRef } from 'react';
+import { FormEvent, useRef, useState } from 'react';
+import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
-
-import { VscChromeClose } from 'react-icons/vsc'
-import { Container } from './styles';
+import { toast } from 'react-toastify';
+import arqSetupJson from '../../data/setup.json';
 import { api } from '../../services/api';
+import { Container } from './styles';
+
+
 
 
 
@@ -145,15 +146,25 @@ function SetupModal({ isOpen, onRequestClose }: SetupModalProps) {
     };
 
     setData(data);
+    toast.success('Setup created successfully!');
+    updateSetup(data)
+    
   }
 
-  useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-    } else {
-      api.post('setup', {data: data})
-    }
-  },[data]);
+  async function updateSetup(data:any){
+    await api.post('setup', {data: data})
+  }
+
+ 
+  // useEffect(() => {
+  //   if (initialRender.current) {
+  //     initialRender.current = false;
+  //   } else {
+  //     api.post('setup', {data: data})
+  //   }
+  //   console.log('loop');
+    
+  // },[data]); //esta em loop esse useEffect
 
  
 
