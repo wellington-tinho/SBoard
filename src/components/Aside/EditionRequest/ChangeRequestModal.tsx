@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 
@@ -115,15 +116,38 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
     setCreated(requestUnic["created"] )
     setDelay(requestUnic["delay"] )
     setDuration(requestUnic["duration"] )
-    setLinks(requestUnic["links"] )
     setPeriod(requestUnic["period"] )
     setReliability(requestUnic["reliability"] )
     setType_slice(requestUnic["type_slice"] )
+    setLinks(requestUnic["links"] )
     setVnd(requestUnic["vnd"] )
   },[requestUnic])
   
 
   // vnd.map((index)=>{console.log(index)})
+
+  function SalveChange(event:FormEvent){
+    event.preventDefault();
+
+    const newRequestUnicModified : requestUnicInterface = {  
+      id: requestUnic.id,   
+      vnd: vnd,
+      links: links,
+      created: created,
+      duration: duration,
+      period: period,
+      bandwidth: bandwidth,
+      delay: delay,
+      reliability: reliability,
+      type_slice: type_slice 
+    }
+
+    setRequestUnic(newRequestUnicModified)
+
+
+    toast.success('Request modified with success!')
+    
+  }
 
 
   return (
@@ -134,9 +158,9 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
       className={'react-modal-content'}
     >
 
-      <Container onSubmit={()=>{}}>
+      <Container onSubmit={SalveChange}>
         <VscChromeClose  onClick={onRequestClose} className='react-modal-close' />
-        <h2>ChangeRequestsModalProps</h2>
+        <h2>Change Requests ModalProps</h2>
 
       
         <div>
@@ -147,8 +171,8 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
               onChange={
                 event =>setBandwidth(+event.target.value)
               }
-              type="number" name="Bandwidth" 
-              id="Bandwidth" 
+              type="number" name='bandwidth'
+              id='bandwidth'
               placeholder={String(bandwidth)}
             />
           </div>
@@ -157,10 +181,10 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
             <p>created</p>
             <input 
               onChange={
-                event =>setBandwidth(+event.target.value)
+                event =>setCreated(+event.target.value)
               }
-              type="number" name="Bandwidth" 
-              id="Bandwidth" 
+              type="number" name='created'
+              id='created'
               placeholder={String(created)}
             />
           </div>
@@ -169,10 +193,10 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
             <p>delay</p>
             <input 
               onChange={
-                event =>setBandwidth(+event.target.value)
+                event =>setDelay(+event.target.value)
               }
-              type="number" name="Bandwidth" 
-              id="Bandwidth" 
+              type="number" name='delay'
+              id='delay'
               placeholder={String(delay)}
             />
           </div>
@@ -181,34 +205,22 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
             <p>duration</p>
             <input 
               onChange={
-                event =>setBandwidth(+event.target.value)
+                event =>setDuration(+event.target.value)
               }
-              type="number" name="Bandwidth" 
-              id="Bandwidth" 
+              type="number" name='duration'
+              id='duration'
               placeholder={String(duration)}
             />
           </div>
-         
-          <div>
-            <p>links</p>
-            <input 
-              onChange={
-                event =>setBandwidth(+event.target.value)
-              }
-              type="number" name="Bandwidth" 
-              id="Bandwidth" 
-              placeholder={String(links)}
-            />
-          </div>
-         
+
           <div>
             <p>period</p>
             <input 
               onChange={
-                event =>setBandwidth(+event.target.value)
+                event =>setPeriod(+event.target.value)
               }
-              type="number" name="Bandwidth" 
-              id="Bandwidth" 
+              type="number" name='period'
+              id='period'
               placeholder={String(period)}
             />
           </div>
@@ -217,10 +229,10 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
             <p>reliability</p>
             <input 
               onChange={
-                event =>setBandwidth(+event.target.value)
+                event =>setReliability(+event.target.value)
               }
-              type="number" name="Bandwidth" 
-              id="Bandwidth" 
+              type="number" name='reliability'
+              id='reliability'
               placeholder={String(reliability)}
             />
           </div>
@@ -229,22 +241,34 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
             <p>type_slice</p>
             <input 
               onChange={
-                event =>setBandwidth(+event.target.value)
+                event =>setType_slice(event.target.value)
               }
-              type="number" name="Bandwidth" 
-              id="Bandwidth" 
+              type="string" name='type_slice'
+              id='type_slice'
               placeholder={String(type_slice)}
+            />
+          </div>
+
+          <div>
+            <p>links</p>
+            <input 
+              // onChange={
+              //   event =>setLinks(event.target.value)
+              // }
+              type="number" name='links'
+              id='links'
+              placeholder={String(links)}
             />
           </div>
          
           <div className="vnd">
             <p>vnd</p>
             <input 
-              onChange={
-                event =>setBandwidth(+event.target.value)
-              }
-              type="number" name="Bandwidth" 
-              id="Bandwidth" 
+              // onChange={
+              //   event =>setVnd(event.target.value)
+              // }
+              type="string" name='vnd'
+              id='vnd'
               placeholder={String(vnd)}
             />
           </div>
@@ -264,7 +288,8 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
         delay: 82
         duration: 5
         id: 3
-        links: (10) [Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
+        links: (10) [Array(2)
+          , Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
         period: 1
         reliability: 97
         type_slice: "urllc"

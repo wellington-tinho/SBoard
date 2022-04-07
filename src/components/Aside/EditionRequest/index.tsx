@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import { useState } from 'react';
-import { Container } from './styles';
-import { ChangeRequestsModal } from './ChangeRequestModal';
 import { ChangeAllRequestsModal } from './ChangeAllRequestsModal';
+import { ChangeRequestsModal } from './ChangeRequestModal';
+import { Container } from './styles';
 
 interface virtualNodeDemandInterface{
   id: number;
@@ -44,6 +44,7 @@ export function EditionRequest (
     qtdRequests
   }:EditionRequestProps) {
     const [requestUnic, setRequestUnic] = useState<requestUnicInterface>({} as requestUnicInterface)
+    const [indexRequest, setIndexRequest] = useState<number>(-1)
 
   var auxRequestElementsHTML:any = []
   Object.keys(requestList).forEach(key => {
@@ -70,8 +71,8 @@ export function EditionRequest (
   const [isChangeRequestModal, setIsChangeRequestModal] = useState(false);
   
   function handleOpenChangeRequestModal(idRequest: number){
-    setRequestUnic(requestList[idRequest])
-    
+    setIndexRequest(idRequest)
+    setRequestUnic(requestList[idRequest])   
     document.addEventListener('contextmenu', event => event.preventDefault());
     setIsChangeRequestModal(true)
   }
@@ -89,6 +90,17 @@ export function EditionRequest (
     setIsChangeAllRequestModal(false)
   } 
   
+  useEffect(() => {
+    if((!(requestUnic['id'] == undefined)) && (requestList[indexRequest] !== requestUnic)){
+      console.log('requestUnic -> ',requestUnic)
+
+      var updatedRequestList = {...requestList}
+      updatedRequestList[indexRequest] = requestUnic
+      console.log('updatedRequestList -> ',updatedRequestList)
+      setRequestList(updatedRequestList);
+    }
+
+  } , [requestUnic])
 
   return (
     <>
