@@ -13,10 +13,14 @@ CORS(app)
 @app.route("/convert", methods=['POST'])
 def GML_JSON():
   data= request.get_json()
+
   if(data):
-    file=data['data']
-    df = nx.parse_gml(file, label='id')
-    return nx.cytoscape_data(df)
+    try:
+      file=data['data']
+      df = nx.parse_gml(file, label='id')
+      return nx.cytoscape_data(df)
+    except:
+      return json.dumps({"error": "Error in converting GML to JSON"})
 
 
 
