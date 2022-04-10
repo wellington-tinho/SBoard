@@ -1,10 +1,12 @@
 
-import {FormEvent, useContext, useState} from 'react';
+import { FormEvent, useContext, useState } from 'react';
+import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
-
-import { VscChromeClose } from 'react-icons/vsc'
-import { Container } from './styles';
+import { toast } from 'react-toastify';
 import { CytoscapeContext } from '../../CytoscapeContext';
+import { generatesRandomBetweenRange } from '../../util/randomNumber';
+import { Container } from './styles';
+
 
 
 
@@ -26,7 +28,9 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
   const [domain,  setDomain ]  = useState<Number>()
   const [value,   setValue  ]  = useState<Number>()
   const [pos,     setPos    ]  = useState<Number[]>()
-  const [weight,  setWeight ]  = useState<Number>()
+
+  const [weightStart, setWeightStart] = useState(Number)
+  const [weightEnd, setWeightEnd ] = useState(Number)
   
 
  
@@ -54,19 +58,9 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
     event.preventDefault();
 
 
-    alert(`
-      country ${country} \n
-      domain ${domain}  \n
-      label ${label}  \n
-      name ${name}  \n
-      region ${region}  \n
-      type ${type}  \n
-      value ${value}  \n
-      pos ${pos}  \n
-      weight ${weight}  \n
-    `)
-
-    for(var i=1; i<nodes.length; i++) {    
+    for(var i=1; i<nodes.length; i++) {  
+      var weight = generatesRandomBetweenRange(weightStart, weightEnd)
+      
       cy.$(`#${nodes[i]}`)
       .data('Country',   country  ?   country :     cy.$(`#${nodes[i]}`).data('Country') )
       .data('domain',    domain   ?   domain  :     cy.$(`#${nodes[i]}`).data('domain') )
@@ -78,6 +72,7 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
       .data('pos',       pos      ?   pos     :     cy.$(`#${nodes[i]}`).data('pos') )
       .data('weight',    weight   ?   weight  :     cy.$(`#${nodes[i]}`).data('weight') )
     }
+    toast.success('Nodes modified with success!');
   }
 
  
@@ -186,14 +181,31 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
             />
           </div>
           <div>
-            <p>weight</p>
-            <input 
-              onChange={
-                event =>setWeight(Number(event.target.value))  
-              } 
-              type="number" name="weight" id='weight' 
-              placeholder={'Insira aqui um valor para alterar.'}
-            />
+            <p>Weight</p>
+
+            <div className="tooltip">
+
+              <input 
+                onChange={
+                  event =>{setWeightStart(Number(event.target.value))
+                    }
+                  } 
+                type="number" name="weightStart" 
+                id="weightStart"	 
+                placeholder={'Insira aqui um valor para alterar.'}
+              />
+            
+              <input 
+                onChange={
+                  event =>{setWeightEnd(Number(event.target.value))
+                    }
+                  } 
+                type="number" name="weightEnd"
+                id="weightEnd"
+                placeholder={'Insira aqui um valor para alterar.'}
+              />
+              <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
+            </div>
           </div>
 
          

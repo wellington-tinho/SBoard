@@ -1,10 +1,12 @@
 
-import {FormEvent, useContext, useState} from 'react';
+import { FormEvent, useContext, useState } from 'react';
+import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
-
-import { VscChromeClose } from 'react-icons/vsc'
-import { Container } from './styles';
+import { toast } from 'react-toastify';
 import { CytoscapeContext } from '../../CytoscapeContext';
+import { generatesRandomBetweenRange } from '../../util/randomNumber';
+import { Container } from './styles';
+
 
 
 
@@ -15,14 +17,21 @@ interface ChangeAllSelectedEdgeModalProps {
 }
 
 export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: ChangeAllSelectedEdgeModalProps) {
+  
   const [cy] = useContext(CytoscapeContext);
 
   const [source, setSource ] = useState(String)
   const [target, setTarget ] = useState(String)
-  const [negative, setNegative ] = useState<Number>()
-  const [weight, setWeight ] = useState<Number>()
-  const [reliability, setReliability ] = useState<Number>()
-  const [delay, setDelay ] = useState<Number>()
+  const [negative, setNegative ] = useState<number>()
+  
+  const [weightStart, setWeightStart ] = useState<number>()
+  const [weightEnd, setWeightEnd ] =  useState<number>()
+  
+  const [reliabilityStart, setReliabilityStart ] =  useState<number>()
+  const [reliabilityEnd, setReliabilityEnd ] =  useState<number>()
+  
+  const [delayStart, setDelayStart ] =  useState<number>()
+  const [delayEnd, setDelayEnd ] =  useState<number>()
   
 
  
@@ -49,25 +58,27 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
   function EditElements(event:FormEvent) {
     event.preventDefault();
 
+    
+    for(var i=1; i<edges.length; i++) {   
+      
+    
+      var weight =      generatesRandomBetweenRange(weightStart, weightEnd)
+      var reliability = generatesRandomBetweenRange(reliabilityStart, reliabilityEnd)
+      var delay =       generatesRandomBetweenRange(delayStart, delayEnd)
 
-    alert(`
-      source ${source} \n
-      target ${target}  \n
-      negative ${negative}  \n
-      Bandwidth ${weight}  \n
-      Reliability ${reliability}  \n
-      Delay ${delay}  \n
-    `)
+  
 
-    for(var i=1; i<edges.length; i++) {    
       cy.$(`#${edges[i]}`)
       .data('source',       source ?      source :       cy.$(`#${edges[i]}`).data('source') )
       .data('target',       target ?      target :       cy.$(`#${edges[i]}`).data('target') )
       .data('negative',     negative ?    negative :     cy.$(`#${edges[i]}`).data('negative') )
       .data('weight',       weight ?      weight :       cy.$(`#${edges[i]}`).data('weight') )
-      .data('Reliability',  reliability ? reliability :  cy.$(`#${edges[i]}`).data('Reliability') )
-      .data('Delay',        delay ?       delay :        cy.$(`#${edges[i]}`).data('Delay') )
+      .data('reliability',  reliability ? reliability :  cy.$(`#${edges[i]}`).data('reliability') )
+      .data('delay',        delay ?       delay :        cy.$(`#${edges[i]}`).data('delay') )
+      
     }
+
+    toast.success('Edges modified with success!');
   }
 
  
@@ -119,34 +130,86 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
           </div>
           <div>
             <p>Bandwidth</p>
-            <input 
-              onChange={
-                event =>setWeight(Number(event.target.value))  
-              } 
-              type="number" name="name" id='name'
-              placeholder={'Insira aqui um valor para alterar.'}
+
+            <div className="tooltip">
+
+              <input 
+                onChange={
+                  event =>{setWeightStart(Number(event.target.value))
+                    }
+                  } 
+                type="number" name="weightStart" 
+                id="weightStart"	 
+                placeholder={'Insira aqui um valor para alterar.'}
+              />
             
-            />
+              <input 
+                onChange={
+                  event =>{setWeightEnd(Number(event.target.value))
+                    }
+                  } 
+                type="number" name="weightEnd"
+                id="weightEnd"
+                placeholder={'Insira aqui um valor para alterar.'}
+              />
+              <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
+            </div>
           </div>
+          
           <div>
             <p>Reliability</p>
-            <input 
-              onChange={
-                event =>setReliability(Number(event.target.value))  
-              } 
-              type="number" name="type" id='type' 
-              placeholder={'Insira aqui um valor para alterar.'}
-            />
+                  
+            <div className="tooltip">
+
+              <input 
+                onChange={
+                  event =>{setReliabilityStart(Number(event.target.value))
+                    }
+                  } 
+                type="number" name="ReliabilityStart" 
+                id="RealityStart"	 
+                placeholder={'Insira aqui um valor para alterar.'}
+              />
+
+              <input 
+                onChange={
+                  event =>{setReliabilityEnd(Number(event.target.value))
+                    }
+                  } 
+                type="number" name="ReliabilityEnd" 
+                id="RealityEnd"	 
+                placeholder={'Insira aqui um valor para alterar.'}
+              />
+            <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
+
+            </div>
           </div>
           <div>
             <p>Delay</p>
-            <input 
-              onChange={
-                event =>setDelay(Number(event.target.value))  
-              } 
-              type="number" name="value" id='value' 
-              placeholder={'Insira aqui um valor para alterar.'}
-            />
+            <div className="tooltip">
+
+              <input 
+                onChange={
+                  event =>{setDelayStart(Number(event.target.value))
+                    }
+                  } 
+                type="number" name="DelayStart" 
+                id="RealityStart"	 
+                placeholder={'Insira aqui um valor para alterar.'}
+              />
+
+              <input 
+                onChange={
+                  event =>{setDelayEnd(Number(event.target.value))
+                    }
+                  } 
+                type="number" name="DelayEnd" 
+                id="RealityEnd"	 
+                placeholder={'Insira aqui um valor para alterar.'}
+              />
+              <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
+
+            </div>
           </div>
 
          

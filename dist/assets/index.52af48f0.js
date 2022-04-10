@@ -23,7 +23,7 @@ const xt=20,yt=!1,bt=.5,St=.5,Ct=200,qt=6,kt=5,Nt=10,wt=200,Et=10,Dt=20,Mt=4,zt=
           padding: 0 1rem;
           height: 3rem;
           border-radius: 0.25rem;
-          border: 1px solid #d7d7d7;
+          border: 1px solid var(--gray-1);
           /* font-weight: 400; */
           font-size: 1rem;
           display: flex;
@@ -34,8 +34,8 @@ const xt=20,yt=!1,bt=.5,St=.5,Ct=200,qt=6,kt=5,Nt=10,wt=200,Et=10,Dt=20,Mt=4,zt=
          padding: 0 1rem;
          height: 3rem;
          border-radius: 0.25rem;
-         background: #e7e9ee;
-         border: 1px solid #d7d7d7;
+         background: var(--white-2-1);
+         border: 1px solid var(--gray-1);
          /* font-weight: 400; */
          font-size: 1rem;
 

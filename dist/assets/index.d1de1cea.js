@@ -172,7 +172,7 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
             padding: 0 0.5rem;
             height: 1.5rem;
             border-radius: 0.25rem;
-            border: 1px solid #d7d7d7;
+            border: 1px solid var(--gray-1);
             /* font-weight: 400; */
             font-size: 1rem;
             display: flex;
@@ -183,8 +183,8 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
             padding: 0  0.5rem;
             height: 1.5rem;
             border-radius: 0.25rem;
-            background: #e7e9ee;
-            border: 1px solid #d7d7d7;
+            background: var(--white-2-1);
+            border: 1px solid var(--gray-1);
             /* font-weight: 400; */
             font-size: 1rem;
           }
@@ -283,8 +283,8 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
           padding: 0 1rem;
           height: 2rem;
           border-radius: 0.25rem;
-          background: #e7e9ee;
-          border: 1px solid #d7d7d7;
+          background: var(--white-2-1);
+          border: 1px solid var(--gray-1);
           font-size: 1rem;
         }
         margin: 0 0 1rem 0;
@@ -296,7 +296,7 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
         padding: 0 1rem;
         height: 2.4rem;
         border-radius: 0.25rem;
-        background: #e7e9ee;
+        background: var(--white-2-1);
         border: 1px solid var(--green-3);
         cursor: pointer;
         margin: 1rem 0;
@@ -371,7 +371,7 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
         padding: 0 1rem;
         height: 3rem;
         border-radius: 0.25rem;
-        border: 1px solid #d7d7d7;
+        border: 1px solid var(--gray-1);
         /* font-weight: 400; */
         font-size: 1rem;
         display: flex;
@@ -382,8 +382,8 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
         padding: 0 1rem;
         height: 3rem;
         border-radius: 0.25rem;
-        background: #e7e9ee;
-        border: 1px solid #d7d7d7;
+        background: var(--white-2-1);
+        border: 1px solid var(--gray-1);
         /* font-weight: 400; */
         font-size: 1rem;
       }
@@ -429,7 +429,7 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
           padding: 0 1rem;
           height: 3rem;
           border-radius: 0.25rem;
-          border: 1px solid #d7d7d7;
+          border: 1px solid var(--gray-1);
           /* font-weight: 400; */
           font-size: 1rem;
           display: flex;
@@ -440,8 +440,8 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
          padding: 0 1rem;
          height: 3rem;
          border-radius: 0.25rem;
-         background: #e7e9ee;
-         border: 1px solid #d7d7d7;
+         background: var(--white-2-1);
+         border: 1px solid var(--gray-1);
          /* font-weight: 400; */
          font-size: 1rem;
        }
@@ -531,7 +531,7 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
           padding: 0 1rem;
           height: 3rem;
           border-radius: 0.25rem;
-          border: 1px solid #d7d7d7;
+          border: 1px solid var(--gray-1);
           /* font-weight: 400; */
           font-size: 1rem;
           display: flex;
@@ -542,8 +542,8 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
          padding: 0 1rem;
          height: 3rem;
          border-radius: 0.25rem;
-         background: #e7e9ee;
-         border: 1px solid #d7d7d7;
+         background: var(--white-2-1);
+         border: 1px solid var(--gray-1);
          /* font-weight: 400; */
          font-size: 1rem;
        }
@@ -611,7 +611,7 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
           padding: 0 1rem;
           height: 3rem;
           border-radius: 0.25rem;
-          border: 1px solid #d7d7d7;
+          border: 1px solid var(--gray-1);
           /* font-weight: 400; */
           font-size: 1rem;
           display: flex;
@@ -622,8 +622,8 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
          padding: 0 1rem;
          height: 3rem;
          border-radius: 0.25rem;
-         background: #e7e9ee;
-         border: 1px solid #d7d7d7;
+         background: var(--white-2-1);
+         border: 1px solid var(--gray-1);
          /* font-weight: 400; */
          font-size: 1rem;
 
@@ -691,8 +691,8 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
           padding: 0 1rem;
           height: 2rem;
           border-radius: 0.25rem;
-          background: #e7e9ee;
-          border: 1px solid #d7d7d7;
+          background: var(--white-2-1);
+          border: 1px solid var(--gray-1);
           font-size: 1rem;
         }
         margin: 0 0 1rem 0;
@@ -702,7 +702,7 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
         padding: 0 1rem;
         height: 2rem;
         border-radius: 0.25rem;
-        background: #e7e9ee;
+        background: var(--white-2-1);
         border: 1px solid var(--green-3);
         font-size: 1rem;
         cursor: pointer;
@@ -725,8 +725,8 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
           padding: 0 1rem;
           height: 2rem;
           border-radius: 0.25rem;
-          background: #e7e9ee;
-          border: 1px solid #d7d7d7;
+          background: var(--white-2-1);
+          border: 1px solid var(--gray-1);
           font-size: 1rem;
           input{
             cursor: pointer;
@@ -734,7 +734,7 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
           h4{}
           button{
               padding: 0.25rem 0.5rem;
-              border: 1px solid #d7d7d7;
+              border: 1px solid var(--gray-1);
               border-radius: .25rem;
               cursor: pointer;
               transition:  background-color .3s;
@@ -795,7 +795,7 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
           padding: 0 1rem;
           height: 3rem;
           border-radius: 0.25rem;
-          border: 1px solid #d7d7d7;
+          border: 1px solid var(--gray-1);
           /* font-weight: 400; */
           font-size: 1rem;
           display: flex;
@@ -806,8 +806,8 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
          padding: 0 1rem;
          height: 3rem;
          border-radius: 0.25rem;
-         background: #e7e9ee;
-         border: 1px solid #d7d7d7;
+         background: var(--white-2-1);
+         border: 1px solid var(--gray-1);
          /* font-weight: 400; */
          font-size: 1rem;
 
@@ -870,7 +870,7 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
           padding: 0 1rem;
           height: 3rem;
           border-radius: 0.25rem;
-          border: 1px solid #d7d7d7;
+          border: 1px solid var(--gray-1);
           /* font-weight: 400; */
           font-size: 1rem;
           display: flex;
@@ -881,8 +881,8 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
          padding: 0 1rem;
          height: 3rem;
          border-radius: 0.25rem;
-         background: #e7e9ee;
-         border: 1px solid #d7d7d7;
+         background: var(--white-2-1);
+         border: 1px solid var(--gray-1);
          /* font-weight: 400; */
          font-size: 1rem;
 
@@ -945,7 +945,7 @@ const Ie=function(){const o=document.createElement("link").relList;if(o&&o.suppo
     width: 100%;
     padding: 0 1.5rem;
     height: 3.5rem;
-    background: #e7e9ee;
+    background: var(--white-2-1);
     border: 1px solid var(--green-3);
     border-radius: 0.25rem;
     /* border: 1; */

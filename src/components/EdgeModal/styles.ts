@@ -34,11 +34,24 @@ export const Container = styled.form`
          padding: 0 1rem;
          height: 3rem;
          border-radius: 0.25rem;
-         background: var(--white-3);
-         border: 1px solid #d7d7d7;
+         background: var(--white-2-1);
+         border: 1px solid var(--gray-1);
          font-size: 1rem;
+       }
+       div{
+         width: 100%;
 
+         input{
 
+          width: 100%;
+          padding: 0 1rem;
+          height: 3rem;
+          border-radius: 0.25rem;
+          background: var(--white-2-1);
+          border: 1px solid var(--gray-1);
+          /* font-weight: 400; */
+          font-size: 1rem;
+        }
        }
       }
     

@@ -50,7 +50,7 @@ export const Container = styled.div`
             padding: 0 0.5rem;
             height: 1.5rem;
             border-radius: 0.25rem;
-            border: 1px solid #d7d7d7;
+            border: 1px solid var(--gray-1);
             /* font-weight: 400; */
             font-size: 1rem;
             display: flex;
@@ -61,8 +61,8 @@ export const Container = styled.div`
             padding: 0  0.5rem;
             height: 1.5rem;
             border-radius: 0.25rem;
-            background: #e7e9ee;
-            border: 1px solid #d7d7d7;
+            background: var(--white-2-1);
+            border: 1px solid var(--gray-1);
             /* font-weight: 400; */
             font-size: 1rem;
           }

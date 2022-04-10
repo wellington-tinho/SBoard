@@ -4,6 +4,7 @@ import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import { CytoscapeContext } from '../../CytoscapeContext';
+import { generatesRandomBetweenRange } from '../../util/randomNumber';
 import { Container } from './styles';
 
 
@@ -27,7 +28,11 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
   const [type, setType ] = useState(String)
   const [value, setValue ] = useState(Number)
   const [pos, setPos ] = useState<number[]>()
-  const [weight, setWeight ] = useState(Number)
+  const [weightStart, setWeightStart] = useState(Number)
+  const [weightEnd, setWeightEnd ] = useState(Number)
+
+
+
     
   useEffect(() => {
 
@@ -43,13 +48,16 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
       setType(node.type)
       setValue(node.value)
       setPos(node.pos)
-      setWeight(node.weight)
+      setWeightStart(node.weight)
+      setWeightEnd(node.weight)
       
     }
 
   },[node])
 
   
+
+   
 
 
   function EditElements(event:FormEvent) {
@@ -64,7 +72,8 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
     .data('type', type)
     .data('value', value)
     .data('pos', pos)
-    .data('weight', weight)
+    .data('weight', generatesRandomBetweenRange(weightStart, weightEnd)) // returns a random number between the ranges
+
 
     toast.success('Node modified with success!');
   }
@@ -162,6 +171,7 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
               placeholder={type}
             />
           </div>
+          
           <div>
             <p>value</p>
             <input 
@@ -188,20 +198,35 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
 
           <div>
             <p>Weight</p>
-            <input 
-              onChange={
-                event =>{setWeight(Number(event.target.value))
-                  }
-                } 
-              type="number" name="weight" 
-              id="weight" 
-              placeholder={String(weight)}
-            />
+
+            <div className="tooltip" >
+
+              <input 
+                onChange={
+                  event =>{setWeightStart(Number(event.target.value))
+                    }
+                  } 
+                type="number" name="weightStart" 
+                id="weightStart"	 
+                placeholder={String(weightStart)}
+              />
+              <input 
+                onChange={
+                  event =>{setWeightEnd(Number(event.target.value))
+                    }
+                  } 
+                type="number" name="weightEnd"
+                id="weightEnd"
+                placeholder={String(weightEnd)}
+              />
+
+            <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
+            </div>
           </div>
        
 
           <button  type="submit">
-            Salvar alterações
+              Save editions
           </button >
 
 
