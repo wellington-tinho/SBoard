@@ -1,18 +1,17 @@
+import { lazy, Suspense, useContext, useEffect, useRef, useState } from 'react';
+import { AiOutlineZoomIn, AiOutlineZoomOut } from 'react-icons/ai';
+import { BiGitPullRequest, BiRedo, BiUndo } from 'react-icons/bi';
+import { BsGear } from 'react-icons/bs';
+import { FiPlayCircle } from 'react-icons/fi';
+import { HiOutlineViewGridAdd } from 'react-icons/hi';
+import { RiChatDeleteLine } from 'react-icons/ri';
 import Modal from 'react-modal';
-
-import { lazy, Suspense } from 'react';
-import { AiOutlineZoomIn, AiOutlineZoomOut } from 'react-icons/ai'; 
-import { BiUndo, BiRedo, BiGitPullRequest } from 'react-icons/bi'; 
-import { HiOutlineViewGridAdd } from 'react-icons/hi'; 
-import { BsGear } from 'react-icons/bs'  
-import { FiPlayCircle } from 'react-icons/fi'  
-import { RiChatDeleteLine } from 'react-icons/ri'  
-
-import { Upload } from "../Upload"
-
-import { NavOptions, GraphContainer, Container } from "./styles"
-import { useContext, useEffect, useRef, useState } from 'react';
 import { CytoscapeContext } from '../../CytoscapeContext';
+import { Upload } from "../Upload";
+import { Container, GraphContainer, NavOptions } from "./styles";
+
+
+
 // import { SetupModal } from '../SetupModal';
 const SetupModal = lazy((): Promise<any> =>  import('../SetupModal'));
 
@@ -22,7 +21,7 @@ const SetupModal = lazy((): Promise<any> =>  import('../SetupModal'));
 Modal.setAppElement('#root')
 
 export function GraphArea({setRequest}:any){
-  const [cy] = useContext(CytoscapeContext);
+  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
 
 
   const [node, setNode] = useState({} as any)

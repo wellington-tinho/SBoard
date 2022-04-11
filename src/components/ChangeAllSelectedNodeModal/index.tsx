@@ -17,7 +17,7 @@ interface ChangeAllSelectedNodeModalProps {
 }
 
 export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: ChangeAllSelectedNodeModalProps) {
-  const [cy] = useContext(CytoscapeContext);
+  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
 
 
   const [country, setCountry]  = useState(String)
@@ -29,38 +29,21 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
   const [value,   setValue  ]  = useState<Number>()
   const [pos,     setPos    ]  = useState<Number[]>()
 
-  const [weightStart, setWeightStart] = useState(Number)
-  const [weightEnd, setWeightEnd ] = useState(Number)
+  const [weightStart, setWeightStart] = useState<number>()
+  const [weightEnd, setWeightEnd ] = useState<number>()
   
-
- 
     
-  // useEffect(() => {
-  //   if(edge){
-  //     console.log('edge',edge);
-      
-    
-  //     setId(edge.id)
-  //     setSource(edge.source)
-  //     setTarget(edge.target)
-  //     setNegative(edge.negative)
-  //     setWeight(edge.weight)
-  //     setBandwidth(edge.Bandwidth)
-  //     setReliability(edge.Reliability)
-  //     setDelay(edge.Delay)
-  //   }
-  // },[edge])
 
-  
 
 
   function EditElements(event:FormEvent) {
     event.preventDefault();
 
-
     for(var i=1; i<nodes.length; i++) {  
+      
       var weight = generatesRandomBetweenRange(weightStart, weightEnd)
       
+      /// Descobrir como chamar esta funçao apenas quando cada valor for alterado
       cy.$(`#${nodes[i]}`)
       .data('Country',   country  ?   country :     cy.$(`#${nodes[i]}`).data('Country') )
       .data('domain',    domain   ?   domain  :     cy.$(`#${nodes[i]}`).data('domain') )
@@ -187,9 +170,11 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
 
               <input 
                 onChange={
-                  event =>{setWeightStart(Number(event.target.value))
+                  event =>{
+                    event.target.value === '' ? setWeightStart(undefined) : setWeightStart(Number(event.target.value))
                     }
-                  } 
+                  }
+                max={weightEnd}   
                 type="number" name="weightStart" 
                 id="weightStart"	 
                 placeholder={'Insira aqui um valor para alterar.'}
@@ -197,9 +182,11 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
             
               <input 
                 onChange={
-                  event =>{setWeightEnd(Number(event.target.value))
-                    }
-                  } 
+                  event =>{
+                    event.target.value === '' ? setWeightEnd(undefined) : setWeightEnd(Number(event.target.value))
+                  }
+                }
+                min={weightStart} 
                 type="number" name="weightEnd"
                 id="weightEnd"
                 placeholder={'Insira aqui um valor para alterar.'}

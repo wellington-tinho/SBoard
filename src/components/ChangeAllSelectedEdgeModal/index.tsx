@@ -18,7 +18,7 @@ interface ChangeAllSelectedEdgeModalProps {
 
 export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: ChangeAllSelectedEdgeModalProps) {
   
-  const [cy] = useContext(CytoscapeContext);
+  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
 
   const [source, setSource ] = useState(String)
   const [target, setTarget ] = useState(String)
@@ -32,27 +32,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
   
   const [delayStart, setDelayStart ] =  useState<number>()
   const [delayEnd, setDelayEnd ] =  useState<number>()
-  
 
- 
-    
-  // useEffect(() => {
-  //   if(edge){
-  //     console.log('edge',edge);
-      
-    
-  //     setId(edge.id)
-  //     setSource(edge.source)
-  //     setTarget(edge.target)
-  //     setNegative(edge.negative)
-  //     setWeight(edge.weight)
-  //     setBandwidth(edge.Bandwidth)
-  //     setReliability(edge.Reliability)
-  //     setDelay(edge.Delay)
-  //   }
-  // },[edge])
-
-  
 
 
   function EditElements(event:FormEvent) {
@@ -61,16 +41,15 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
     
     for(var i=1; i<edges.length; i++) {   
       
-    
-      var weight =      generatesRandomBetweenRange(weightStart, weightEnd)
+      var weight =           generatesRandomBetweenRange(weightStart, weightEnd)
       var reliability = generatesRandomBetweenRange(reliabilityStart, reliabilityEnd)
-      var delay =       generatesRandomBetweenRange(delayStart, delayEnd)
+      var delay =             generatesRandomBetweenRange(delayStart, delayEnd)
 
   
 
       cy.$(`#${edges[i]}`)
-      .data('source',       source ?      source :       cy.$(`#${edges[i]}`).data('source') )
-      .data('target',       target ?      target :       cy.$(`#${edges[i]}`).data('target') )
+      // .data('source',       source ?      source :       cy.$(`#${edges[i]}`).data('source') )
+      // .data('target',       target ?      target :       cy.$(`#${edges[i]}`).data('target') )
       .data('negative',     negative ?    negative :     cy.$(`#${edges[i]}`).data('negative') )
       .data('weight',       weight ?      weight :       cy.$(`#${edges[i]}`).data('weight') )
       .data('reliability',  reliability ? reliability :  cy.$(`#${edges[i]}`).data('reliability') )
@@ -106,6 +85,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
               type="string" name="Country" 
               id="Country" 
               placeholder={'Insira aqui um valor para alterar'}
+              disabled
             />
           </div>
           <div>
@@ -116,6 +96,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
                 } 
               type="string" name="domain" id="domain" 
               placeholder={'Insira aqui um valor para alterar'}
+              disabled
             />
           </div>
           <div>
@@ -135,9 +116,11 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
 
               <input 
                 onChange={
-                  event =>{setWeightStart(Number(event.target.value))
-                    }
-                  } 
+                  event =>{
+                    event.target.value === '' ? setWeightStart(undefined) : setWeightStart(Number(event.target.value))
+                  }
+                }
+                max={weightEnd}
                 type="number" name="weightStart" 
                 id="weightStart"	 
                 placeholder={'Insira aqui um valor para alterar.'}
@@ -145,9 +128,11 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
             
               <input 
                 onChange={
-                  event =>{setWeightEnd(Number(event.target.value))
-                    }
-                  } 
+                  event =>{
+                    event.target.value === '' ? setWeightEnd(undefined) : setWeightEnd(Number(event.target.value))
+                  }
+                }
+                min={weightStart}
                 type="number" name="weightEnd"
                 id="weightEnd"
                 placeholder={'Insira aqui um valor para alterar.'}
@@ -163,9 +148,11 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
 
               <input 
                 onChange={
-                  event =>{setReliabilityStart(Number(event.target.value))
-                    }
-                  } 
+                  event =>{
+                    event.target.value === '' ? setReliabilityStart(undefined) : setReliabilityStart(Number(event.target.value))
+                  }
+                }
+                max={reliabilityEnd} 
                 type="number" name="ReliabilityStart" 
                 id="RealityStart"	 
                 placeholder={'Insira aqui um valor para alterar.'}
@@ -173,9 +160,11 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
 
               <input 
                 onChange={
-                  event =>{setReliabilityEnd(Number(event.target.value))
-                    }
-                  } 
+                  event =>{
+                    event.target.value === '' ? setReliabilityEnd(undefined) : setReliabilityEnd(Number(event.target.value))
+                  }
+                } 
+                min={reliabilityStart}
                 type="number" name="ReliabilityEnd" 
                 id="RealityEnd"	 
                 placeholder={'Insira aqui um valor para alterar.'}
@@ -190,21 +179,25 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
 
               <input 
                 onChange={
-                  event =>{setDelayStart(Number(event.target.value))
-                    }
-                  } 
+                  event =>{
+                    event.target.value === '' ? setDelayStart(undefined) : setDelayStart(Number(event.target.value))
+                  }
+                }
+                max={delayEnd} 
                 type="number" name="DelayStart" 
-                id="RealityStart"	 
+                id="DelayStart"	 
                 placeholder={'Insira aqui um valor para alterar.'}
               />
 
               <input 
                 onChange={
-                  event =>{setDelayEnd(Number(event.target.value))
-                    }
-                  } 
+                  event =>{
+                    setDelayEnd(Number(event.target.value))
+                  }
+                } 
+                min={delayStart}
                 type="number" name="DelayEnd" 
-                id="RealityEnd"	 
+                id="DelayEnd"	 
                 placeholder={'Insira aqui um valor para alterar.'}
               />
               <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>

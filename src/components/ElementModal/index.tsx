@@ -32,7 +32,7 @@ interface ElementModalProps {
 
 export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   
-  const [cy] = useContext(CytoscapeContext);
+  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
   const [arrayNodes, setArrayNodes] = useState<any>()
   const [arrayEdges, setArrayEdges] = useState<any>()
   const [nodeElement,setNodeElement] = useState<any>()

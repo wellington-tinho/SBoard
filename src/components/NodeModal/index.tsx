@@ -7,17 +7,28 @@ import { CytoscapeContext } from '../../CytoscapeContext';
 import { generatesRandomBetweenRange } from '../../util/randomNumber';
 import { Container } from './styles';
 
-
+interface INodeElement{
+    id: string;
+    Country:string
+    domain: number
+    label: string;
+    name: string;
+    region: number;
+    type: string
+    value: number
+    pos: number[];
+    weight: number
+}
 
 
 interface NodeModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  node: any
+  node: INodeElement
 }
 
 export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
-  const [cy] = useContext(CytoscapeContext);
+  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
 
   const [country, setCountry ] = useState(String)
   const [domain, setDomain ] = useState(Number)
@@ -63,6 +74,8 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
   function EditElements(event:FormEvent) {
     event.preventDefault();
 
+    
+    /// Descobrir como chamar esta funçao apenas quando cada valor for alterado
     cy.$(`#${id}`)
     .data('Country', country)
     .data('domain', domain)
@@ -72,7 +85,11 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
     .data('type', type)
     .data('value', value)
     .data('pos', pos)
-    .data('weight', generatesRandomBetweenRange(weightStart, weightEnd)) // returns a random number between the ranges
+
+    if((weightStart && weightEnd) !== node.weight ){
+      cy.$(`#${id}`)
+      .data('weight', generatesRandomBetweenRange(weightStart, weightEnd)) // returns a random number between the ranges
+    }
 
 
     toast.success('Node modified with success!');
@@ -203,18 +220,22 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
 
               <input 
                 onChange={
-                  event =>{setWeightStart(Number(event.target.value))
-                    }
-                  } 
+                  event =>{ 
+                    event.target.value === '' ? setWeightStart(Number(node.weight)) : setWeightStart(Number(event.target.value))
+                  }
+                }
+                max={weightEnd}
                 type="number" name="weightStart" 
                 id="weightStart"	 
                 placeholder={String(weightStart)}
               />
               <input 
-                onChange={
-                  event =>{setWeightEnd(Number(event.target.value))
-                    }
-                  } 
+               onChange={
+                  event =>{ 
+                    event.target.value === '' ? setWeightEnd(Number(node.weight)) : setWeightEnd(Number(event.target.value))
+                  }
+                }
+                min={weightStart} 
                 type="number" name="weightEnd"
                 id="weightEnd"
                 placeholder={String(weightEnd)}

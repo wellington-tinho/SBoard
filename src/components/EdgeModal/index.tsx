@@ -8,32 +8,41 @@ import { generatesRandomBetweenRange } from '../../util/randomNumber';
 import { Container } from './styles';
 
 
+interface IEdgeElement {
+  id: string;
+  source: string;
+  target: string;
+  weight: number;
+  color: string;
+  label: string;
+  negative: number;
+  reliability: number;
+  delay: number; 
+}
 
 interface EdgeModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  edge: any
+  edge: IEdgeElement;
 }
 
 export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
-  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext); //////////////////////////////////////////////// testeeeeeee
+  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext); 
 
   const [id, setId ] = useState(String)
   const [source, setSource ] = useState(String)
   const [target, setTarget ] = useState(String)
   const [negative, setNegative ] = useState(Number)
 
-  const [weightStart, setWeightStart] = useState(Number)
-  const [weightEnd, setWeightEnd ] = useState(Number)
+  const [weightStart, setWeightStart] = useState<number>()
+  const [weightEnd, setWeightEnd ] = useState<number>()
 
-  const [reliabilityStart, setReliabilityStart] = useState(Number)
-  const [reliabilityEnd, setReliabilityEnd ] = useState(Number)
+  const [reliabilityStart, setReliabilityStart] = useState<number>()
+  const [reliabilityEnd, setReliabilityEnd ] = useState<number>()
 
-  const [delayStart, setDelayStart] = useState(Number)
-  const [delayEnd, setDelayEnd] = useState(Number)
-  
+  const [delayStart, setDelayStart] = useState<number>()
+  const [delayEnd, setDelayEnd] = useState<number>()
 
- 
     
   useEffect(() => {
     if(edge){ 
@@ -57,17 +66,28 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
 
   function EditElements(event:FormEvent) {
     event.preventDefault();
-    console.log('EditElements');
 
 
-  
+    /// Descobrir como chamar esta funçao apenas quando cada valor for alterado
     cy.$(`#${id}`)
     .data('source', source)
     .data('target', target)
     .data('negative', negative)
-    .data('weight', generatesRandomBetweenRange(weightStart, weightEnd)) // returns a random number between the ranges
-    .data('reliability', generatesRandomBetweenRange(reliabilityStart, reliabilityEnd)) // returns a random number between the ranges
-    .data('delay', generatesRandomBetweenRange(delayStart, delayEnd)) // returns a random number between the ranges
+    
+    if((weightStart && weightEnd) !== edge.weight ){
+      cy.$(`#${id}`)
+      .data('weight', generatesRandomBetweenRange(weightStart, weightEnd)) // returns a random number between the ranges
+    }
+    
+    if((reliabilityStart && reliabilityEnd) !== edge.reliability ){
+      cy.$(`#${id}`)
+      .data('reliability', generatesRandomBetweenRange(reliabilityStart, reliabilityEnd)) // returns a random number between the ranges
+    }
+
+    if((delayStart && delayEnd) !== edge.delay ){
+      cy.$(`#${id}`)
+      .data('delay', generatesRandomBetweenRange(delayStart, delayEnd)) // returns a random number between the ranges
+    }
 
     toast.success('Edge modified with success!'); 
  
@@ -109,8 +129,10 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
               type="string" name="source" 
               id="source" 
               placeholder={source}
+              disabled
             />
           </div>
+
           <div>
             <p>target</p>
             <input 
@@ -119,8 +141,10 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
                 } 
               type="string" name="target" id="target" 
               placeholder={target}
+              disabled
             />
           </div>
+
           <div>
             <p>negative</p>
             <input 
@@ -138,9 +162,11 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
 
               <input 
                 onChange={
-                  event =>{setWeightStart(Number(event.target.value))
-                    }
-                  } 
+                  event => {
+                    event.target.value === '' ?  setWeightStart(edge.weight) : setWeightStart(Number(event.target.value))  
+                  }
+                }
+                max={weightEnd} 
                 type="number" name="weightStart" 
                 id="weightStart"	 
                 placeholder={String(weightStart)}
@@ -148,9 +174,10 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
             
               <input 
                 onChange={
-                  event =>{setWeightEnd(Number(event.target.value))
-                    }
-                  } 
+                  event => { 
+                    event.target.value === '' ?  setWeightEnd(edge.weight) : setWeightEnd(Number(event.target.value))}
+                  }
+                min={weightStart}  
                 type="number" name="weightEnd"
                 id="weightEnd"
                 placeholder={String(weightEnd)}
@@ -168,19 +195,19 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
 
               <input 
                 onChange={
-                  event =>{setReliabilityStart(Number(event.target.value))
-                    }
-                  } 
+                  event =>{ event.target.value === '' ?  setReliabilityStart(edge.reliability) : setReliabilityStart(Number(event.target.value))}
+                  }
+                max={reliabilityEnd} 
                 type="number" name="ReliabilityStart" 
                 id="RealityStart"	 
                 placeholder={String(reliabilityStart)}
               />
-
+ 
               <input 
                 onChange={
-                  event =>{setReliabilityEnd(Number(event.target.value))
-                    }
+                  event => event.target.value === '' ? setReliabilityEnd(edge.reliability) : setReliabilityEnd(Number(event.target.value))
                   } 
+                min={reliabilityStart}
                 type="number" name="ReliabilityEnd" 
                 id="RealityEnd"	 
                 placeholder={String(reliabilityEnd)}
@@ -195,10 +222,10 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
             <div className="tooltip">
 
               <input 
-                onChange={
-                  event =>{setDelayStart(Number(event.target.value))
-                    }
-                  } 
+                onChange={ 
+                  event => event.target.value === '' ? setDelayStart(edge.delay): setDelayStart(Number(event.target.value))
+                  }
+                max={delayEnd} 
                 type="number" name="DelayStart" 
                 id="RealityStart"	 
                 placeholder={String(delayStart)}
@@ -206,9 +233,9 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
 
               <input 
                 onChange={
-                  event =>{setDelayEnd(Number(event.target.value))
-                    }
-                  } 
+                  event => event.target.value === '' ?setDelayEnd(edge.delay) : setDelayEnd(Number(event.target.value))
+                  }
+                min={delayStart} 
                 type="number" name="DelayEnd" 
                 id="RealityEnd"	 
                 placeholder={String(delayEnd)}

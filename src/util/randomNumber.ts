@@ -11,7 +11,7 @@ export const generatesRandomBetweenRange = (min: number| undefined, max: number|
   }
   if(min === 0 && max === 1){
     return Math.random();
-  }
+  }  
   return Math.floor(Math.random() * (max - min + 1)) + min;
 } 
 

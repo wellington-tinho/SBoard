@@ -1,15 +1,15 @@
+import { useContext, useEffect, useReducer, useState } from "react";
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import { CytoscapeContext } from "../../CytoscapeContext";
+import { CreateRequest } from "./CreateRequest";
+import { EditionRequest } from "./EditionRequest/index";
+import { AsideOthers } from "./outhers/others";
+import { ShowVND } from "./showVND/showVND";
 import { Container } from "./styles";
 
-import { useContext, useEffect, useState, useReducer } from "react";
-import { CytoscapeContext } from "../../CytoscapeContext";
 
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
 
-import { CreateRequest } from "./CreateRequest";
-import { ShowVND } from "./showVND/showVND";
-import {EditionRequest} from "./EditionRequest/index";
-import { AsideOthers } from "./outhers/others";
 
 
 interface virtualNodeDemandInterface{
@@ -57,7 +57,7 @@ const formCreateVND = (state:any, event:any) => {
 var changeDicChecbox: { [index: string]: any; } = {};
 
 export function Aside({ request }: any) {
-  const [cy] = useContext(CytoscapeContext);
+  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
 
   const [requestList, setRequestList] = useState<requestUnicInterface[]>(request)
   const qtdRequests = (0)

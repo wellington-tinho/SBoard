@@ -1,11 +1,11 @@
 
-import {useContext, useEffect, useRef, useState   } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
-
-import { VscChromeClose } from 'react-icons/vsc'
-import { Container } from './styles';
 import { CytoscapeContext } from '../../CytoscapeContext';
 import { api } from '../../services/api';
+import { Container } from './styles';
+
 
 
 
@@ -17,7 +17,7 @@ interface ChartOptionsProps {
 
 
 export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
-  const [cy] = useContext(CytoscapeContext);
+  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
   const [graphInported, setGraphInported]= useState<any>()
   // const [grapGML, setGraphGML] = useState<string>()
 
