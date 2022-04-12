@@ -125,16 +125,15 @@ ul li{
     }
     @keyframes cssAnimation {
       0%   {opacity: 1;}
-      90%  {opacity: 1;}
+      90%  {opacity: 0.8;}
       100% {opacity: 0;}
     }
     @-webkit-keyframes cssAnimation {
       0%   {opacity: 1;}
-      90%  {opacity: 1;}
+      90%  {opacity: 0.8;}
       100% {opacity: 0;}
     }
   .tooltiptext {
-    visibility: hidden;
     width: auto;
     background-color: var(--gray-3);
     color: var(--white-1);

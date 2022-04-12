@@ -191,7 +191,9 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
                 id="weightEnd"
                 placeholder={'Insira aqui um valor para alterar.'}
               />
-              <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
+              <span className="tooltiptext">
+                Insert a number from start to end, to generate a random number between them.
+              </span>
             </div>
           </div>
 

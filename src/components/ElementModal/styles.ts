@@ -30,6 +30,12 @@ export const Container = styled.form`
           border: 1px solid var(--gray-1);
           font-size: 1rem;
         }
+        .typeIntersection{
+          width: 100%;
+          input{
+            width: 50%;
+          }
+        }
         margin: 0 0 1rem 0;
       }
       button.changeElement{
@@ -66,7 +72,6 @@ export const Container = styled.form`
           input{
             cursor: pointer;
           }
-          h4{}
           button{
               padding: 0.25rem 0.5rem;
               border: 1px solid var(--gray-1);

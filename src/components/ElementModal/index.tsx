@@ -43,85 +43,38 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   const [isSelectedNodesModal, setIsSelectedNodesModal] = useState(false);
   const [elementsSelected, setElementsSelected] = useState({'node':[''],'edge':['']}); //elementsSelectedProps
   const elementsSelectedAux = {'node':[''],'edge':['']};
-
-//Node Modal
-  function handleOpenNodeModal(node:any){
-    setNodeElement(node)
-    setIsNodeModal(true)
-  }
-
-  function handleCloseNodeModal(){
-    setIsNodeModal(false)
-  }
-
-//Edge Modal  
-  function handleOpenEdgeModal(edge:any){
-    setEdgeElement(edge)
-    setIsEdgeModal(true)
-  }
-  function handleCloseEdgeModal(){
-    setIsEdgeModal(false)
-  }
+  const [typeIntersectionStart, setTypeIntersectionStart] = useState<string>();
+  const [typeIntersectionEnd,   setTypeIntersectionEnd] =   useState<string>();
 
 
-//SelectedsEdges Modal
-  function handleOpenChangeAllSelectedEdgesModal(){
-    setElementsSelected(elementsSelectedAux)
-    setIsSelectedEdgesModal(true)
-  }
-
-  function handleCloseChangeAllSelectedEdgesModal(){
-    setIsSelectedEdgesModal(false)
-  }
-
-//SelectedNodes Modal  
-  function handleOpenChangeAllSelectedNodesModal(){
-    setElementsSelected(elementsSelectedAux)
-    setIsSelectedNodesModal(true)
-  }
-
-  function handleCloseChangeAllSelectedNodeModal(){
-    setIsSelectedNodesModal(false)
-  }
-
-  //  // Verefificando se foi apertado checkbox dos nos e
-  //  function toggleCheckBox (e:any, element:any) {
-  //   // const { checked } = e.target
-  //   // console.log('checked:',checked);
-  //   // setChecked(!checked)    
-
-  //   // console.log('element:',element);
-  //   // console.log('e.target.id:',e.target.id);  
-  // }
-
-
-  useEffect(()=>{
+  //criaçao dos inputs Nodes e edges
+  useEffect(function CreateInputsNodesAndEdges(){
     // console.log('displaro no cy = ',cy.$(''));   
     if(cy !== undefined){
 
-      
-        var eleNodes:any = []
-        for (let key = 0; key < cy.nodes().length; key++) {
+    
+      var eleNodes:any = []
+      for (let key = 0; key < cy.nodes().length; key++) {
 
-          eleNodes.push(
-            <li key={key}> 
-                  <input 
-                    // onChange={e => toggleCheckBox(e, cy.nodes()[key])}     //{/* lembrar de refatorar cy.edges() aki */}
-                    type="checkbox"
-                    id={'nodeElementModalInput'+cy.nodes()[key].data("id")}  
-                    name={'nodeElementModalInput'+cy.nodes()[key].data("id")} 
-                    // checked={false}
-                    /> 
-                    <h4> Node {cy.nodes()[key].data("id")} </h4> 
+        eleNodes.push(
+          <li key={key}> 
+                <input 
+                  // onChange={e => toggleCheckBox(e, cy.nodes()[key])}     //{/* lembrar de refatorar cy.edges() aki */}
+                  type="checkbox"
+                  id={'nodeElementModalInput'+cy.nodes()[key].data("id")}  
+                  name={'nodeElementModalInput'+cy.nodes()[key].data("id")} 
+                  // checked={false}
+                  /> 
+                  <h4> Node {cy.nodes()[key].data("id")} </h4> 
 
-                    <button 
-                      onClick={() =>  handleOpenNodeModal(cy.nodes()[key].data())} > 
-                      {/* onClick={() =>  {}} >  */}
-                      Change Element
-                    </button>
-              </li>
-          )
-        }
+                  <button 
+                    onClick={() =>  handleOpenNodeModal(cy.nodes()[key].data())} > 
+                    {/* onClick={() =>  {}} >  */}
+                    Change Element
+                  </button>
+            </li>
+        )
+      }
 
       var eleEdges:any = []
       for (let key = 0; key < cy.edges().length; key++) {
@@ -156,7 +109,80 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[cy,isOpen])
 
-  
+  //se os dois typeIntersection estiverem preenchidos
+  useEffect(function filterEdgesForNodeType(){
+
+    if(cy !== undefined){
+
+      if((typeIntersectionStart && typeIntersectionEnd)!== undefined){
+        
+        const Edges = cy.filter(`edge`)
+        const Nodes = cy.filter(`node`)
+        
+        for(var j=0; j<Edges.length; j++){
+          var eleInput:any= window.document.getElementsByName(`edgeElementModalInput${Edges[j].data('id')}`)
+          eleInput[0].checked = false;    
+        }
+      
+      for(var j=0; j<Edges.length; j++){
+        var eleInput:any= window.document.getElementsByName(`edgeElementModalInput${Edges[j].data('id')}`)
+        
+        var edgeSource = Edges.$id(`e${j}`).data('source');
+        var edgeTarget = Edges.$id(`e${j}`).data('target');
+        
+        if((typeIntersectionStart == Nodes.$id(edgeSource).data('type')) && (typeIntersectionEnd == Nodes.$id(edgeTarget).data('type'))){
+          eleInput[0].checked = true;
+        }   
+      }
+    }
+    else{
+      const Edges = cy.filter(`edge`)
+      
+      for(var j=0; j<Edges.length; j++){
+        var eleInput:any= window.document.getElementsByName(`edgeElementModalInput${Edges[j].data('id')}`)
+        eleInput[0].checked = false;    
+      }
+    }
+  }
+  },[typeIntersectionStart,typeIntersectionEnd])
+
+//Node Modal
+  function handleOpenNodeModal(node:any){
+    setNodeElement(node)
+    setIsNodeModal(true)
+  }
+  function handleCloseNodeModal(){
+    setIsNodeModal(false)
+  }
+
+//Edge Modal  
+  function handleOpenEdgeModal(edge:any){
+    setEdgeElement(edge)
+    setIsEdgeModal(true)
+  }
+  function handleCloseEdgeModal(){
+    setIsEdgeModal(false)
+  }
+
+
+//SelectedsEdges Modal
+  function handleOpenChangeAllSelectedEdgesModal(){
+    setElementsSelected(elementsSelectedAux)
+    setIsSelectedEdgesModal(true)
+  }
+  function handleCloseChangeAllSelectedEdgesModal(){
+    setIsSelectedEdgesModal(false)
+  }
+
+//SelectedNodes Modal  
+  function handleOpenChangeAllSelectedNodesModal(){
+    setElementsSelected(elementsSelectedAux)
+    setIsSelectedNodesModal(true)
+  }
+  function handleCloseChangeAllSelectedNodeModal(){
+    setIsSelectedNodesModal(false)
+  }
+
   function filterElements(value:any,type:string,element:string){
     var elemento = cy.$(`${element}`)
     for(var j=0; j<elemento.length; j++){
@@ -213,26 +239,59 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
 
         <div className="elements">
           <div>
-              <h3>Nodes</h3>
-              <div className='filtro'>
-                <input type="text" name="NodeType" id="NodeType" placeholder="Filtrar por Type" onChange={e => filterElements(e.target.value, 'type', 'node' )}/>
-                <input type="text" name="NodeValue" id="NodeValue" placeholder="Filtrar por Value" onChange={e => filterElements(e.target.value, 'value', 'node' )}/>
-                <input type="text" name="NodeWeight" id="NodeWeight" placeholder="Filtrar por Weight" onChange={e => filterElements(e.target.value, 'weight', 'node' )}/>
-              </div>
-              <button className="changeElement"
-                onClick={()=>ChangeSelectedallElements('node')} > 
-                {/* onClick={() =>  {}} >  */}
-                Change all Nodes Selecionados 
-              </button>
-              {arrayNodes}
+            <h3>Nodes</h3>
+            <div className='filtro'>
+              <input type="text" name="NodeType" id="NodeType" placeholder="Filtrar por Type" onChange={e => filterElements(e.target.value, 'type', 'node')} />
+              <input type="text" name="NodeValue" id="NodeValue" placeholder="Filtrar por Value" onChange={e => filterElements(e.target.value, 'value', 'node')} />
+              <input type="text" name="NodeWeight" id="NodeWeight" placeholder="Filtrar por Weight" onChange={e => filterElements(e.target.value, 'weight', 'node')} />
+            </div>
+            <button className="changeElement"
+              onClick={()=>ChangeSelectedallElements('node')} > 
+              {/* onClick={() =>  {}} >  */}
+              Change all Nodes Selecionados 
+            </button>
+            {arrayNodes}
               
           </div>
           <div>
               <h3>Edges</h3>
               <div className='filtro'>
-                <input type="text" name="EdgeReliability" id="EdgeReliability" placeholder="Filtrar por Reliability" onChange={e => filterElements(e.target.value, 'reliability', 'edge' )}/>
-                <input type="text" name="EdgeDelay" id="EdgeDelay" placeholder="Filtrar por Delay" onChange={e => filterElements(e.target.value, 'delay', 'edge' )}/>
-                <input type="text" name="EdgeBandwidth" id="EdgeBandwidth" placeholder="Filtrar por Bandwidth" onChange={e => filterElements(e.target.value, 'weight', 'edge' )}/>
+
+
+                <input type="text" name="EdgeReliability" id="EdgeReliability" 
+                  placeholder="Filtrar por Reliability" 
+                  onChange={e => filterElements(e.target.value, 'reliability', 'edge' )}
+                />
+                <input type="text" name="EdgeDelay" id="EdgeDelay" 
+                  placeholder="Filtrar por Delay" 
+                  onChange={e => filterElements(e.target.value, 'delay', 'edge' )}
+                />
+                <input type="text" name="EdgeBandwidth" id="EdgeBandwidth" 
+                  placeholder="Filtrar por Bandwidth" 
+                  onChange={e => filterElements(e.target.value, 'weight', 'edge' )}
+                />
+
+                <div className='typeIntersection tooltip'>
+
+                  <input alt='Type of intersection of edges' type="text" 
+                    name="typeIntersectionStart" id="typeIntersectionStart" placeholder="Type intersection" 
+                    onChange={event =>
+                      event.target.value === '' ? setTypeIntersectionStart(undefined) : setTypeIntersectionStart(event.target.value)
+                    }
+                  />
+                  <input alt='Type of intersection of edges' type="text" 
+                    name="typeIntersectionEnd" id="typeIntersectionEnd" placeholder="Type intersection" 
+                    onChange={event =>
+                      event.target.value === '' ? setTypeIntersectionEnd(undefined) : setTypeIntersectionEnd(event.target.value)
+                    }
+                  />
+                  <span className="tooltiptext">
+                    Enter a node type value, to filter edges that intersect them.
+                  </span>
+
+                </div>
+
+
               </div>
               <button className="changeElement"
                 onClick={() => ChangeSelectedallElements('edge')} > 
