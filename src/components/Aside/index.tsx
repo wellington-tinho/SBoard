@@ -57,7 +57,7 @@ const formCreateVND = (state:any, event:any) => {
 var changeDicChecbox: { [index: string]: any; } = {};
 
 export function Aside({ request }: any) {
-  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
+  const [cy] = useContext(CytoscapeContext);
 
   const [requestList, setRequestList] = useState<requestUnicInterface[]>(request)
   const qtdRequests = (0)
