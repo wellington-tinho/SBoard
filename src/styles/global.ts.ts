@@ -134,6 +134,7 @@ ul li{
       100% {opacity: 0;}
     }
   .tooltiptext {
+    visibility: hidden;
     width: auto;
     background-color: var(--gray-3);
     color: var(--white-1);
