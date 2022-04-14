@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
 import styled from 'styled-components';
@@ -8,7 +9,6 @@ export const Container = styled.form`
   background-color: var(--white-2);
   
   h2 {
-    color: var(--gray-3);
     font-size: 1.5rem;
     margin-bottom: 2rem;
   }
@@ -28,7 +28,7 @@ export const Container = styled.form`
           padding: 0 1rem;
           height: 3rem;
           border-radius: 0.25rem;
-          border: 1px solid var(--white-3);
+          border: 1px solid var(--gray-1);
           /* font-weight: 400; */
           font-size: 1rem;
           display: flex;
@@ -39,10 +39,25 @@ export const Container = styled.form`
          padding: 0 1rem;
          height: 3rem;
          border-radius: 0.25rem;
-         background: var(--white-1);
-         border: 1px solid var(--white-3);
+         background: var(--white-2-1);
+         border: 1px solid var(--gray-1);
          /* font-weight: 400; */
          font-size: 1rem;
+       }
+       div{
+         width: 100%;
+
+         input{
+
+          width: 100%;
+          padding: 0 1rem;
+          height: 3rem;
+          border-radius: 0.25rem;
+          background: var(--white-2-1);
+          border: 1px solid var(--gray-1);
+          /* font-weight: 400; */
+          font-size: 1rem;
+        }
        }
       }
     
@@ -51,7 +66,7 @@ export const Container = styled.form`
         padding: 0 1.5rem;
         height: 3.5rem;
         background: var(--green-3);
-        color: var(--white-1);
+        color: var(--white-2);
         border-radius: 0.25rem;
         border: 0;
         font-size: 1rem;
@@ -66,12 +81,53 @@ export const Container = styled.form`
     }
 `;
 
+interface virtualNodeDemandInterface{
+  id: number;
+  requested: number;
+  vnr_id: number;
+  domain: number;
+  region: number;
+  type: number | string; 
+  period: number;
+  sink: number;
+}
+
+interface requestUnicInterface {
+  id: number;
+  vnd: virtualNodeDemandInterface[];
+  links: [[number]];
+  created: number;  
+  duration: number;
+  period: number;
+  bandwidth: number;
+  delay: number;
+  reliability: number;
+  type_slice: string;
+}
 interface ChangeAllRequestsModalProps{
   isOpen: boolean;
   onRequestClose: () => void;
 }
 
 export function ChangeAllRequestsModal({isOpen, onRequestClose}: ChangeAllRequestsModalProps){
+  
+  const [created , setCreated] =        useState<requestUnicInterface["created"]>       ()
+  const [duration , setDuration] =      useState<requestUnicInterface["duration"]>      ()
+  const [period , setPeriod] =          useState<requestUnicInterface["period"]>        ()
+  const [type_slice , setType_slice] =  useState<requestUnicInterface["type_slice"]>    ()
+  
+  const [links , setLinks] =            useState<requestUnicInterface["links"]>         ()
+  const [vnd , setVnd] =                useState<requestUnicInterface["vnd"]>           ()
+  
+  const [delayStart, setDelayStart] =        useState<requestUnicInterface["delay"]>         ()
+  const [delayEnd , setDelayEnd] =           useState<requestUnicInterface["delay"]>         ()
+  
+  const [bandwidthStart, setBandwidthStart]= useState<requestUnicInterface["bandwidth"]>     ()
+  const [bandwidthEnd, setBandwidthEnd] =    useState<requestUnicInterface["bandwidth"]>     ()
+  
+  const [reliabilityStart, setReliabilityStart]=useState<requestUnicInterface["reliability"]>()
+  const [reliabilityEnd, setReliabilityEnd ] =  useState<requestUnicInterface["reliability"]>()
+
 
   return (
     <Modal
@@ -83,11 +139,180 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose}: ChangeAllReques
 
       <Container onSubmit={()=>{}}>
         <VscChromeClose  onClick={onRequestClose} className='react-modal-close' />
-        <h2>ChangeAllRequestsModal</h2>
+        <h2>Change All Requests Modal</h2>
 
         <div>
          
+          <div>
+            <p>ID</p>
+            <input 
+              onChange={
+                ()=>{}
+              }
+              type="number" name='ID'
+              id='ID'
+              placeholder={"Insira aqui um valor para todos requests"}
+              disabled
+            />
+          </div>
+         
+          <div>
+            <p>created</p>
+            <input 
+              onChange={
+                event => event.target.value === '' ? setCreated(undefined) : setCreated(Number(event.target.value))
+              }
+              type="number" name='created'
+              id='created'
+              placeholder={"Insira aqui um valor para todos requests"}
+            />
+          </div>
+         
+          <div>
+            <p>duration</p>
+            <input 
+              onChange={
+                event => event.target.value === '' ? setDuration(undefined) : setDuration(+event.target.value)
+              }
+              type="number" name='duration'
+              id='duration'
+              placeholder={"Insira aqui um valor para todos requests"}
+            />
+          </div>
 
+          <div>
+            <p>period</p>
+            <input 
+              onChange={
+                event => event.target.value === '' ? setPeriod(undefined) : setPeriod(+event.target.value)
+              }
+              type="number" name='period'
+              id='period'
+              placeholder={"Insira aqui um valor para todos requests"}
+            />
+          </div>
+
+          <div>
+            <p>type_slice</p>
+            <input 
+              onChange={
+                event => event.target.value === '' ? setType_slice(undefined) : setType_slice(event.target.value)
+              }
+              type="string" name='type_slice'
+              id='type_slice'
+              placeholder={"Insira aqui um valor para todos requests"}
+            />
+          </div>
+
+          <div>
+            <p>delay</p>
+            <div className="tooltip">
+              <input
+                onChange={
+                  event =>{ event.target.value === '' ?  setDelayStart(undefined) : setDelayStart(+event.target.value) }
+                }
+                max={delayEnd}
+                type="number" name='delayStart'
+                id='delayStart'
+                placeholder={"Insira aqui um valor para todos requests"}
+              />
+             <input 
+                onChange={
+                  event =>{ event.target.value === '' ?  setDelayEnd(undefined) : setDelayEnd(+event.target.value) }
+                }
+                min={delayStart}
+                type="number" name='delayEnd'
+                id='delayEnd'
+                placeholder={"Insira aqui um valor para todos requests"}
+              />
+              <span className="tooltiptext"> Insert a number from start to end, to generate a random number between them.</span>
+            </div>
+          </div>
+                
+        
+
+          <div>
+            <p>Reliability</p>
+            <div className="tooltip">
+              <input 
+                onChange={
+                  event =>{ event.target.value === '' ?  setReliabilityStart(undefined) : setReliabilityStart(Number(event.target.value))}
+                  }
+                max={reliabilityEnd} 
+                type="number" name="ReliabilityStart" 
+                id="RealityStart"	 
+                placeholder={"Insira aqui um valor para todos requests"}
+              />
+ 
+              <input 
+                onChange={
+                  event => event.target.value === '' ? setReliabilityEnd(undefined) : setReliabilityEnd(Number(event.target.value))
+                  } 
+                min={reliabilityStart}
+                type="number" name="ReliabilityEnd" 
+                id="RealityEnd"	 
+                placeholder={"Insira aqui um valor para todos requests"}
+              />
+              <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
+
+            </div>
+          </div>
+
+          <div>
+            <p>Bandwidth</p>
+            <div className="tooltip">
+              <input onChange={ 
+                  event=> event.target.value === '' ? setBandwidthStart(undefined) : setBandwidthStart(Number(event.target.value))
+                }
+                max={bandwidthEnd}
+                type="number" name="BandwidthStart"
+                id="BandwidthStart"
+                placeholder={"Insira aqui um valor para todos requests"}
+              />
+
+              <input onChange={
+                  event=> event.target.value === '' ? setBandwidthEnd(undefined) : setBandwidthEnd(Number(event.target.value))
+                }
+                min={bandwidthStart}
+                type="number" name="BandwidthEnd"
+                id="BandwidthEnd"
+                placeholder={"Insira aqui um valor para todos requests"}
+              />
+            <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
+            </div>
+          </div>
+
+
+          {/* <div>
+            <p>links</p>
+            <input 
+              // onChange={
+              //   event =>setLinks(event.target.value)
+              // }
+              type="number" name='links'
+              id='links'
+              placeholder={String(links)}
+            />
+          </div> */}
+         
+          {/* <div className="vnd">
+            <p>vnd</p>
+            <input 
+              // onChange={
+              //   event =>setVnd(event.target.value)
+              // }
+              type="string" name='vnd'
+              id='vnd'
+              placeholder={String(vnd)}
+            />
+          </div> */}
+        
+             
+         
+      
+          <button  type="submit">
+            Salvar alterações
+          </button >
 
 
         </div>

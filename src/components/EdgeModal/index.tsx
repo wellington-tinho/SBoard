@@ -113,7 +113,6 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
             <input 
               onChange={
                 event =>setId(event.target.value)
-              
                 } 
               type="string" name="id" id='id' 
               placeholder={id}
@@ -149,7 +148,7 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
             <p>negative</p>
             <input 
               onChange={
-                event =>setNegative(Number(event.target.value))  
+                event => event.target.value === '' ? setNegative(edge.negative) : setNegative(Number(event.target.value))
                 } 
               type="number" name="negative" id='negative' 
               placeholder={String(negative)}

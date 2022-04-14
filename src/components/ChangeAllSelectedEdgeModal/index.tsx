@@ -20,8 +20,9 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
   
   const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
 
-  const [source, setSource ] = useState(String)
-  const [target, setTarget ] = useState(String)
+  const [source, setSource ] = useState<number|string>()
+  const [target, setTarget ] = useState<number|string>()
+
   const [negative, setNegative ] = useState<number>()
   
   const [weightStart, setWeightStart ] = useState<number>()
@@ -80,7 +81,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
             <p>source</p>
             <input 
               onChange={
-                event =>setSource(event.target.value)
+                event => event.target.value === '' ? setSource(undefined) : setSource(event.target.value)
               }
               type="string" name="Country" 
               id="Country" 
@@ -92,7 +93,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
             <p>target</p>
             <input 
               onChange={
-                event =>setTarget(event.target.value)
+                event =>  event.target.value === '' ? setTarget(undefined) : setTarget(event.target.value)
                 } 
               type="string" name="domain" id="domain" 
               placeholder={'Insira aqui um valor para alterar'}
@@ -103,7 +104,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
             <p>negative</p>
             <input 
               onChange={
-                event =>setNegative(Number(event.target.value))  
+                event =>  event.target.value === '' ? setNegative(undefined) : setNegative(Number(event.target.value))
                 } 
               type="number" name="label" id='label' 
               placeholder={'Insira aqui um valor para alterar.'}

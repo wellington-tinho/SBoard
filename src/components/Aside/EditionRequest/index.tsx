@@ -46,77 +46,93 @@ export function EditionRequest (
     const [requestUnic, setRequestUnic] = useState<requestUnicInterface>({} as requestUnicInterface)
     const [indexRequest, setIndexRequest] = useState<number>(-1)
 
-  var auxRequestElementsHTML:any = []
-  Object.keys(requestList).forEach(key => {
+    const [isChangeAllRequestModal, setIsChangeAllRequestModal] = useState(false);
+    const [isChangeRequestModal, setIsChangeRequestModal] = useState(false);
+
+
+    //Criação dos inputs para alteração de todos os requests
+    var auxRequestElementsHTML:any = []
+    Object.keys(requestList).forEach(key => {
+      
+      auxRequestElementsHTML.push(
+        <li key={key}>
+          <div>
+            <input
+              onChange={e => {}}
+              defaultChecked={false}
+              type="checkbox" name={'changeRequestElement'+key} id={'changeRequestElement'+key}
+            />
+            <h4> Request {Number(key)+qtdRequests} </h4>
+            <button
+              id={'buttonVerInfo' + (Number(key)+qtdRequests)}
+              onClick={()=>handleOpenChangeRequestModal((Number(key)+qtdRequests))} >
+              Change Element
+            </button>
+          </div>
+        </li>
+      )
+    })
+
+    function handleOpenChangeRequestModal(idRequest: number){
+      setIndexRequest(idRequest)
+      setRequestUnic(requestList[idRequest])   
+      document.addEventListener('contextmenu', event => event.preventDefault());
+      setIsChangeRequestModal(true)
+    }
+    function handleCloseChangeRequestModal(){
+      setIsChangeRequestModal(false)
+    } 
     
-    auxRequestElementsHTML.push(
-      <li key={key}>
-        <div>
-          <input
-            onChange={e => {}}
-            defaultChecked={false}
-            type="checkbox" name={'changeRequestElement'+key} id={'changeRequestElement'+key}
-          />
-          <h4> Request {Number(key)+qtdRequests} </h4>
-          <button
-            id={'buttonVerInfo' + (Number(key)+qtdRequests)}
-            onClick={()=>handleOpenChangeRequestModal((Number(key)+qtdRequests))} >
-            Change Element
-          </button>
-        </div>
-      </li>
-    )
-  })
+    
+    function handleOpenChangeAllRequestModal(){
+      var requestsSelected = []
+      
+      for(var j in requestList ){
+        var eleInput:any= window.document.getElementsByName(`changeRequestElement${j}`)
+        //pega todos os ids dos iputs checked = true
+        if((eleInput[0].checked)===true){
+          requestsSelected.push(requestList[j]);
+        }
+      }
+      console.log(requestsSelected); // array de elementos selecionados para alteração
+      
+      for(var i in requestsSelected ){
+        console.log(requestsSelected[i].id);
+      }
+      // document.addEventListener('contextmenu', event => event.preventDefault());
 
-  const [isChangeRequestModal, setIsChangeRequestModal] = useState(false);
-  
-  function handleOpenChangeRequestModal(idRequest: number){
-    setIndexRequest(idRequest)
-    setRequestUnic(requestList[idRequest])   
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    setIsChangeRequestModal(true)
-  }
-  function handleCloseChangeRequestModal(){
-    setIsChangeRequestModal(false)
-  } 
-  
-  const [isChangeAllRequestModal, setIsChangeAllRequestModal] = useState(false);
-  
-  function handleOpenChangeAllRequestModal(){
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    setIsChangeAllRequestModal(true)
-  }
-  function handleCloseChangeAllRequestModal(){
-    setIsChangeAllRequestModal(false)
-  } 
-  
-  useEffect(() => {
-    if((!(requestUnic['id'] == undefined)) && (requestList[indexRequest] !== requestUnic)){
-      console.log('requestUnic -> ',requestUnic)
-
-      var updatedRequestList = {...requestList}
-      updatedRequestList[indexRequest] = requestUnic
-      console.log('updatedRequestList -> ',updatedRequestList)
-      setRequestList(updatedRequestList);
+      setIsChangeAllRequestModal(true)
     }
 
-  } , [requestUnic])
+    function handleCloseChangeAllRequestModal(){
+      setIsChangeAllRequestModal(false)
+    } 
+    
+    useEffect(() => {
+      if((!(requestUnic['id'] == undefined)) && (requestList[indexRequest] !== requestUnic)){
+        var updatedRequestList = {...requestList}
+        
+        updatedRequestList[indexRequest] = requestUnic
+        console.log('updatedRequestList -> ',updatedRequestList)
+        setRequestList(updatedRequestList);
+      }
+    } , [requestUnic])
 
-  return (
-    <>
-      <ChangeRequestsModal
-        isOpen={isChangeRequestModal}
-        onRequestClose={handleCloseChangeRequestModal}
-        requestUnic={requestUnic}
-        setRequestUnic={setRequestUnic}
-      />
+    return (
+      <>
+        <ChangeRequestsModal
+          isOpen={isChangeRequestModal}
+          onRequestClose={handleCloseChangeRequestModal}
+          requestUnic={requestUnic}
+          setRequestUnic={setRequestUnic}
+        />
 
-      <ChangeAllRequestsModal 
-        isOpen={isChangeAllRequestModal}
-        onRequestClose={handleCloseChangeAllRequestModal}
-      />
-      <Container >
-        {requestList[0] ? (
+        <ChangeAllRequestsModal 
+          isOpen={isChangeAllRequestModal}
+          onRequestClose={handleCloseChangeAllRequestModal}
+        />
+        <Container >
+          {requestList[0] ? (
             <div className="elements">
               <div>
                 <h3>Elementes Request List</h3>
@@ -137,7 +153,7 @@ export function EditionRequest (
                   <input type="number" name="VND_sink"      id="VND_sink"       placeholder="Filtrar por VND_sink"      onChange={e => {}}/>
                 </div>
                 <button className="changeElementList"
-                  onClick={handleOpenChangeAllRequestModal} > 
+                  onClick={()=>handleOpenChangeAllRequestModal()} > 
                   {/* onClick={() =>  {}} >  */}
                   Change all Elementes Selecionados 
                 </button> 

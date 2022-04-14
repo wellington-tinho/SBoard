@@ -30,14 +30,14 @@ interface NodeModalProps {
 export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
   const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
 
-  const [country, setCountry ] = useState(String)
-  const [domain, setDomain ] = useState(Number)
-  const [id, setId ] = useState(String)
-  const [label, setLabel ] = useState(String)
-  const [name, setName ] = useState(String)
-  const [region, setRegion ] = useState(Number)
-  const [type, setType ] = useState(String)
-  const [value, setValue ] = useState(Number)
+  const [country, setCountry ] = useState<string>()
+  const [domain, setDomain ] = useState<number>()
+  const [id, setId ] = useState<string>()
+  const [label, setLabel ] = useState<string>()
+  const [name, setName ] = useState<string>()
+  const [region, setRegion ] = useState<number>()
+  const [type, setType ] = useState<string>()
+  const [value, setValue ] = useState<number>()
   const [pos, setPos ] = useState<number[]>()
   const [weightStart, setWeightStart] = useState(Number)
   const [weightEnd, setWeightEnd ] = useState(Number)
@@ -126,7 +126,8 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
             <p>Country</p>
             <input 
               onChange={
-                event => setCountry(event.target.value)}      
+                event => event.target.value === '' ? setCountry(node.Country) : setCountry(event.target.value)
+              }
               type="string" name="Country" 
               id="Country" 
               placeholder={country}
@@ -136,7 +137,8 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
             <p>domain</p>
             <input 
               onChange={
-                event =>{setDomain(Number(event.target.value))
+                event =>{
+                  event.target.value === '' ? setDomain(node.domain) : setDomain(Number(event.target.value))
                   }
                 } 
               type="number" name="domain" id="domain" 
@@ -147,7 +149,8 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
             <p>label</p>
             <input 
               onChange={
-                event =>{setLabel(event.target.value)
+                event =>{
+                  event.target.value === '' ? setLabel(node.label) : setLabel(event.target.value)
                   }
                 } 
               type="string" name="label" id='label' 
@@ -158,7 +161,8 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
             <p>name</p>
             <input 
               onChange={
-                event =>{setName(event.target.value)
+                event =>{
+                  event.target.value === '' ? setName(node.name) : setName(event.target.value)
                   }
                 } 
               type="string" name="name" id='name'
@@ -170,7 +174,7 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
             <p>region</p>
             <input 
               onChange={
-                event =>{setRegion(Number(event.target.value))
+                event =>{ event.target.value === '' ? setRegion(node.region) : setRegion(+event.target.value)
                   }
                 } 
               type="number" name="region" id='region' 
@@ -181,7 +185,7 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
             <p>type</p>
             <input 
               onChange={
-                event =>{setType(event.target.value)
+                event =>{ event.target.value === '' ? setType(node.type) : setType(event.target.value)
                   }
                 } 
               type="string" name="type" id='type' 
@@ -193,7 +197,7 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
             <p>value</p>
             <input 
               onChange={
-                event =>{setValue(Number(event.target.value))
+                event =>{ event.target.value === '' ? setValue(node.value) : setValue(Number(event.target.value))
                   }
                 } 
               type="number" name="value" id='value' 

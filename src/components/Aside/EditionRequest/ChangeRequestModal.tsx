@@ -210,8 +210,9 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
             <p>created</p>
             <input 
               onChange={
-                event =>setCreated(+event.target.value)
+                event => event.target.value === '' ?  setCreated(requestUnic['created']) : setCreated(+event.target.value)
               }
+              
               type="number" name='created'
               id='created'
               placeholder={String(created)}
@@ -222,7 +223,7 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
             <p>duration</p>
             <input 
               onChange={
-                event =>setDuration(+event.target.value)
+                event => event.target.value === '' ? setDuration(requestUnic['duration']) : setDuration(+event.target.value)
               }
               type="number" name='duration'
               id='duration'
@@ -234,7 +235,7 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
             <p>period</p>
             <input 
               onChange={
-                event =>setPeriod(+event.target.value)
+                event => event.target.value === '' ? setPeriod(requestUnic['period']) : setPeriod(+event.target.value)
               }
               type="number" name='period'
               id='period'
@@ -246,7 +247,7 @@ export function ChangeRequestsModal({isOpen, onRequestClose, requestUnic, setReq
             <p>type_slice</p>
             <input 
               onChange={
-                event =>setType_slice(event.target.value)
+                event => event.target.value === '' ? setType_slice(requestUnic['type_slice']) : setType_slice(event.target.value)
               }
               type="string" name='type_slice'
               id='type_slice'
