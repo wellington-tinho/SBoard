@@ -1,7 +1,7 @@
 import { lazy, Suspense, useContext, useEffect, useRef, useState } from 'react';
 import { AiOutlineZoomIn, AiOutlineZoomOut } from 'react-icons/ai';
 import { BiGitPullRequest, BiRedo, BiUndo } from 'react-icons/bi';
-import { BsGear } from 'react-icons/bs';
+import { BsGear, BsLayoutWtf } from 'react-icons/bs';
 import { FiPlayCircle } from 'react-icons/fi';
 import { HiOutlineViewGridAdd } from 'react-icons/hi';
 import { RiChatDeleteLine } from 'react-icons/ri';
@@ -65,8 +65,6 @@ export function GraphArea({setRequest}:any){
     }
   }
 
-
-  
   function handleChange(file:any){ 
     const reader = new FileReader();
     reader.onload = function(e: any) {
@@ -85,36 +83,57 @@ export function GraphArea({setRequest}:any){
     hiddenFileInput.current.click();
   };
 
-  
+  function handleRun() {
+    var layout = cy?.layout({
+      name: 'circle',
+    });
+    
+    layout?.run();
+    alert('run');
+  }
 
   return(
     <Container>
       <NavOptions>
         <ul>
-          <li>Zoom</li>
-          <li>   
+          <li className="tooltip">   
              <AiOutlineZoomIn fontSize="1.5em" cursor="not-allowed"  /> 
              <AiOutlineZoomOut fontSize="1.5em" cursor="not-allowed" /> 
+          <span className="tooltiptext">Drag zoom in or zoom out</span> 
           </li>
 
-          <li>
+          <li className="tooltip">
              <BiUndo fontSize="1.5em" cursor="not-allowed"/>   
              <BiRedo fontSize="1.5em" cursor="not-allowed"/>   
+            <span className="tooltiptext">Undo and Redo in elements Graph</span> 
           </li>
 
-          <li> 
+          <li className="tooltip"> 
              <HiOutlineViewGridAdd fontSize="1.5em" cursor="pointer" onClick={AddEle}/>
              <RiChatDeleteLine fontSize="1.5em" cursor="pointer" onClick={DelEle} />  
+            <span className="tooltiptext">Add or remove element graph</span> 
           </li>
           
-          <li> 
+          <li className="tooltip"> 
             <input type="file" name="UploadJSON" id="UploadJSON" ref={hiddenFileInput} onChange={handleChange} />
-            <BiGitPullRequest fontSize="1.5em"  cursor="pointer"  onClick={handleClick} /> 
+            <BiGitPullRequest fontSize="1.5em"  cursor="pointer"  onClick={handleClick} />
+            <span className="tooltiptext">Upload archive json from requests</span> 
           </li>
 
-          <li>   <BsGear fontSize="1.5em" cursor="pointer" onClick={handleOpenSetupModal}  /> </li>
+          <li className="tooltip">   
+            <BsGear fontSize="1.5em" cursor="pointer" onClick={handleOpenSetupModal}  /> 
+          <span className="tooltiptext">Open setup modal</span> 
+          </li>
+        
+          <li className="tooltip">   
+            <BsLayoutWtf fontSize="1.5em" cursor="pointer" onClick={handleRun}  /> 
+          <span className="tooltiptext">Change layout</span> 
+          </li>
           
-          <li>  <FiPlayCircle color="#228f41" fontSize="1.5em" cursor="not-allowed"/> </li>
+          <li className="tooltip">  
+            <FiPlayCircle color="#228f41" fontSize="1.5em" cursor="not-allowed" /> 
+          <span className="tooltiptext">Run ??</span> 
+          </li>
         
         </ul>
       </NavOptions>

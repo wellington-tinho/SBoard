@@ -50,6 +50,10 @@ export const NavOptions  = styled.nav`
                  
         }
       }
+      span{
+        margin-left: -4rem !important;
+        width: 8rem !important;
+      }
     }
   };
 
