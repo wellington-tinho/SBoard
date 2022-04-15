@@ -49,6 +49,8 @@ export function EditionRequest (
     const [isChangeAllRequestModal, setIsChangeAllRequestModal] = useState(false);
     const [isChangeRequestModal, setIsChangeRequestModal] = useState(false);
 
+    const [changedRequests, setChangedRequests] = useState<requestUnicInterface[]>([{} as requestUnicInterface]);
+
 
     //Criação dos inputs para alteração de todos os requests
     var auxRequestElementsHTML:any = []
@@ -94,11 +96,9 @@ export function EditionRequest (
           requestsSelected.push(requestList[j]);
         }
       }
-      console.log(requestsSelected); // array de elementos selecionados para alteração
+      setChangedRequests(requestsSelected); // array de elementos selecionados para alteração
+   
       
-      for(var i in requestsSelected ){
-        console.log(requestsSelected[i].id);
-      }
       // document.addEventListener('contextmenu', event => event.preventDefault());
 
       setIsChangeAllRequestModal(true)
@@ -130,6 +130,9 @@ export function EditionRequest (
         <ChangeAllRequestsModal 
           isOpen={isChangeAllRequestModal}
           onRequestClose={handleCloseChangeAllRequestModal}
+          changedRequests={changedRequests}
+          requestList={requestList}
+          setRequestList= {setRequestList}
         />
         <Container >
           {requestList[0] ? (
@@ -164,7 +167,7 @@ export function EditionRequest (
             </div>
           ) : (
             <p className="paragraph">
-              Não há requisições para Editar, considere importar ou criar algumas.
+              There are no Edit requests, consider importing or creating some.
             </p>
           )} 
 

@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import { generatesRandomBetweenRange } from '../../../util/randomNumber';
 
 
 
@@ -107,9 +109,12 @@ interface requestUnicInterface {
 interface ChangeAllRequestsModalProps{
   isOpen: boolean;
   onRequestClose: () => void;
+  changedRequests: requestUnicInterface[];
+  requestList: requestUnicInterface[] | any,
+  setRequestList: React.Dispatch<React.SetStateAction<requestUnicInterface[]>>,
 }
 
-export function ChangeAllRequestsModal({isOpen, onRequestClose}: ChangeAllRequestsModalProps){
+export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,requestList,setRequestList}: ChangeAllRequestsModalProps){
   
   const [created , setCreated] =        useState<requestUnicInterface["created"]>       ()
   const [duration , setDuration] =      useState<requestUnicInterface["duration"]>      ()
@@ -127,7 +132,38 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose}: ChangeAllReques
   
   const [reliabilityStart, setReliabilityStart]=useState<requestUnicInterface["reliability"]>()
   const [reliabilityEnd, setReliabilityEnd ] =  useState<requestUnicInterface["reliability"]>()
+ 
 
+  function SalveChange(event:FormEvent){
+    event.preventDefault();
+
+
+    var updatedRequestList = {...requestList}
+    
+  
+      
+    for  (var i in changedRequests){
+      var request = changedRequests[i]
+    
+       created ?  updatedRequestList[request.id].created = created: console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
+       duration ?  updatedRequestList[request.id].duration = duration: console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
+       period ?  updatedRequestList[request.id].period = period: console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
+       type_slice ?  updatedRequestList[request.id].type_slice = type_slice: console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
+       links ?  updatedRequestList[request.id].links = links: console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
+       vnd ?  updatedRequestList[request.id].vnd = vnd: console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
+       (reliabilityStart && reliabilityEnd) ?  updatedRequestList[request.id].delay = Number(generatesRandomBetweenRange(reliabilityStart, reliabilityEnd)) : console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
+       (bandwidthStart && bandwidthEnd) ?  updatedRequestList[request.id].bandwidth = Number(generatesRandomBetweenRange(bandwidthStart, bandwidthEnd)) : console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
+       (delayStart && delayEnd) ?  updatedRequestList[request.id].reliability = Number(generatesRandomBetweenRange(delayStart, delayEnd)) : console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
+    }
+    
+    
+    setRequestList(updatedRequestList)
+
+
+    toast.success('Request modified with success!')
+    
+  }
+;
 
   return (
     <Modal
@@ -137,9 +173,11 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose}: ChangeAllReques
       className={'react-modal-content'}
     >
 
-      <Container onSubmit={()=>{}}>
+      <Container onSubmit={SalveChange}>
         <VscChromeClose  onClick={onRequestClose} className='react-modal-close' />
-        <h2>Change All Requests Modal</h2>
+        <h2>Change All Requests Modal </h2>
+
+        <h3>Altered elements {Object.keys(changedRequests).length}</h3>
 
         <div>
          
