@@ -70,7 +70,7 @@ export function Upload() {
     if (!isDragActive) {
       // console.log('isDragActive',isDragActive);
 
-      return <UploadMessage> Clique ou arraste arquivos aqui...</UploadMessage>;
+      return <UploadMessage> Click or drag files here...</UploadMessage>;
     }
 
     if (isDragReject) {
@@ -83,7 +83,7 @@ export function Upload() {
       );
     }
 
-    return <UploadMessage type="success">Solte os arquivos aqui</UploadMessage>;
+    return <UploadMessage type="success">Release the files here</UploadMessage>;
   }, [isDragActive, isDragReject]);
 
 

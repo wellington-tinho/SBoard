@@ -70,7 +70,7 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
 
       <Container onSubmit={EditElements}>
         <VscChromeClose  onClick={onRequestClose} className='react-modal-close' />
-        <h2>Change Nodes selectd</h2>
+        <h2>Change Nodes selected</h2>
 
         <div>
          

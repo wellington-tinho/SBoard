@@ -41,13 +41,13 @@ function visibleDiv(divVisible: string, buttonVerInfo: string){
   if (window.document.getElementById(divVisible)?.getAttribute('style') === 'display: none;') {
     window.document.getElementById(divVisible)?.setAttribute('style', 'display: flex;')
     if (dataButton !== null) {
-      dataButton.innerText = 'Enconder Info'
+      dataButton.innerText = 'Hide Info'
     }
 
   } else {
     window.document.getElementById(divVisible)?.setAttribute('style', 'display: none;')
     if (dataButton !== null) {
-      dataButton.innerText = 'Ver Info'
+      dataButton.innerText = 'View info'
     }
   }
 }
@@ -83,7 +83,7 @@ export function ShowVND({
           <button
             id={'buttonVerInfo' + (Number(key)+qtdRequests)}
             onClick={() => visibleDiv(('divVisible' + (Number(key)+qtdRequests)), ('buttonVerInfo' + (Number(key)+qtdRequests)))} >
-            Ver Info
+            View more
           </button>
         </div>
 
@@ -231,7 +231,7 @@ export function ShowVND({
         </ul>
         ) : (
           <p className="paragraph">
-            Não há requisições para exibir, considere importar ou criar algumas
+            There are no request to view, consider importing or creating some requests.
           </p>
         )}  
     </Container>
