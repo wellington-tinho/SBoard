@@ -114,7 +114,6 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
         graphInported.elements.edges[key].data.target = (''+graphInported.elements.edges[key].data.target)
       })
 
-      // console.log(graphInported.elements);
       const config = {
         container: containerRef.current,
         elements:graphInported.elements,
@@ -156,15 +155,15 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
             {
               selector: 'edge',
               style: {
-                // content: 'data(label)',
                 'line-style': 'solid',
                 'line-color': '#b3b3b3',
+                'curve-style': 'unbundled-bezier ',
+                // content: 'data(label)',
                 // 'control-point-step-size': 40,
                 // 'control-point-weights': 0.5,
                 // 'segment-weights': 0.5,
                 // 'segment-distances': 20,
                 // 'edge-distances': 'intersection',
-                'curve-style': 'unbundled-bezier ',
               }
             },
             
@@ -244,11 +243,11 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
       cy.json(config)
       
     }
-    var layout = cy?.layout({
-      name: 'breadthfirst'
-    });
+    // var layout = cy?.layout({
+    //   name: 'fcose'
+    // });
     
-    layout?.run();
+    // layout?.run();
 
   },[cy, graphInported])
   

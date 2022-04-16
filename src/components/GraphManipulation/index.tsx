@@ -53,7 +53,8 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
             // domain:       `${grapJSON.nodes[key].data.domain      ? grapJSON.nodes[key].data.domain     : (Math.floor(Math.random() * 100) + 1)}`,
             // type:         `${grapJSON.nodes[key].data.type        ? grapJSON.nodes[key].data.type       : (['a','c','t'])[Math.floor(Math.random()*(['a','c','t']).length)]}`,
             // region:       `${grapJSON.nodes[key].data.region      ? grapJSON.nodes[key].data.region     : (Math.floor(Math.random() * 100) + 1)}`,
-            // pos:          `${grapJSON.nodes[key].data.pos         ? grapJSON.nodes[key].data.pos        : (Math.floor(Math.random() * 100) + 1)}`,
+            // x:          grapJSON.nodes[key].data.pos[0]         ? grapJSON.nodes[key].data.pos[0]        : (Math.floor(Math.random() * 100) + 1),
+            // y:          grapJSON.nodes[key].data.pos[1]         ? grapJSON.nodes[key].data.pos[1]        : (Math.floor(Math.random() * 100) + 1),
             // value:        `${grapJSON.nodes[key].data.value       ? grapJSON.nodes[key].data.value      : (Math.floor(Math.random() * 100) + 1)}`,
             // weight:       `${grapJSON.nodes[key].data.weight      ? grapJSON.nodes[key].data.weight     : (Math.floor(Math.random() * 100) + 1)}`,
             
@@ -66,21 +67,23 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
 
   const elementos = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges});
 
+  
   //configuraçoes e inicializaçao do cytoscape graph
   useEffect(() => {
     const config = {
       container: containerRef.current,
         layout:{
-          name: "breadthfirst",
-          fit: true,
-          // circle: true,
+          name: 'breadthfirst',
+          fit: true, //centraliza
           directed: true,
-          // padding: 50,
-          // spacingFactor: 1.5,
           animate: true,
           animationDuration: 1000,
           avoidOverlap: true,
-          nodeDimensionsIncludeLabels: false
+          nodeDimensionsIncludeLabels: false,
+          // padding: 50,
+          // circle: true,
+          // spacingFactor: 2,
+
         },
         style: [
           {
@@ -108,15 +111,15 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
           {
             selector: 'edge',
             style: {
-              // content: 'data(label)',
               'line-style': 'solid',
               'line-color': '#b3b3b3',
+              'curve-style': 'unbundled-bezier ',
+              // content: 'data(label)',
               // 'control-point-step-size': 40,
               // 'control-point-weights': 0.5,
               // 'segment-weights': 0.5,
               // 'segment-distances': 20,
               // 'edge-distances': 'intersection',
-              'curve-style': 'unbundled-bezier ',
             }
           },
           
@@ -157,21 +160,20 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
               style: {
                 // classes: 'background',
                 content: ( ele:any )=>{ 
-                return (
-                 ' id:'+ ele.data().id +
-                 ' label:'+ ele.data().label +
-                 ' name:'+ ele.data().name +
-                 '\n Country:'+ ele.data().Country +
-                 ' domain:'+ ele.data().domain +
-                 ' type:'+ ele.data().type +
-                 '\n region:'+ ele.data().region +
-                 ' pos:'+ ele.data().pos +
-                 ' value:'+ ele.data().value +
-                 ' bandwidth:'+ ele.data().weight
+                  return (
+                    ' id:'+ ele.data().id +
+                    ' label:'+ ele.data().label +
+                    ' name:'+ ele.data().name +
+                    '\n Country:'+ ele.data().Country +
+                    ' domain:'+ ele.data().domain +
+                    ' type:'+ ele.data().type +
+                    '\n region:'+ ele.data().region +
+                    ' pos:'+ ele.data().pos +
+                    ' value:'+ ele.data().value +
+                    ' bandwidth:'+ ele.data().weight
+                  )
+                },
                  
-                 )},
-                 
-        
                 'fontWeight':'bold',
                 'textWrap': 'wrap',
                 "text-background-padding": '10px',
@@ -180,23 +182,18 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
                 'background-color':'#019cd9',
                 'text-background-color': '#ffffff',
                 'text-background-opacity': 1,
-                // 'text-background-margin': 1,
                 'text-border-opacity': 1,
                 'text-border-width': 1,
                 'text-border-color': '#33396e',
                 'textBackgroundShape': 'round-rectangle',
-
-                
-
-                
+                // 'text-background-margin': 1,
                 // 'text-valign': 'center',
                 // 'text-halign': 'center',
-    
                 // 'font-size': '10',
-              // "text-max-width": "5px",
-              
+                // "text-max-width": "5px",
+               
+              }
             }
-          }
         ],
         elements:elementos,
         minZoom: 0.1,

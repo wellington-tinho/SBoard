@@ -58,7 +58,7 @@ export function Header(){
   return (
       <Container>
         <img loading="lazy" src={logoImg} alt="Logo" height={'37px'} width={'37px'}/>
-        <h1>NSBoard</h1>
+        <h1>SBoard</h1>
         <h2>Dashboard for managing sliced networks</h2>
 
        {/* <Particles 

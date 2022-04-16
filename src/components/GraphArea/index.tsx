@@ -26,6 +26,8 @@ export function GraphArea({setRequest}:any){
 
   const [node, setNode] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
+  const layouts = ['circle','random','grid','cose','concentric','breadthfirst','cose']
+  var count = 0
 
   function handleOpenSetupModal(){
     setIsSetupModal(true)
@@ -84,13 +86,14 @@ export function GraphArea({setRequest}:any){
   };
 
   function handleRun() {
-    var layout = cy?.layout({
-      name: 'circle',
-    });
-    
-    layout?.run();
-    alert('run');
+    cy?.layout(
+      {
+        name: layouts[count],
+      }
+    ).run();
+    count = (count+1)%layouts.length
   }
+   
 
   return(
     <Container>
