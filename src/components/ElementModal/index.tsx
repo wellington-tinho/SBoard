@@ -1,6 +1,7 @@
 import { FormEvent, useContext, useEffect, useState } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
+import { toast } from 'react-toastify';
 import { CytoscapeContext } from '../../CytoscapeContext';
 import { ChangeAllSelectedEdgeModal } from '../ChangeAllSelectedEdgeModal';
 import { ChangeAllSelectedNodeModal } from '../ChangeAllSelectedNodeModal';
@@ -45,6 +46,11 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   const elementsSelectedAux = {'node':[''],'edge':['']};
   const [typeIntersectionStart, setTypeIntersectionStart] = useState<string>();
   const [typeIntersectionEnd,   setTypeIntersectionEnd] =   useState<string>();
+ 
+
+
+
+
 
 
   //criaçao dos inputs Nodes e edges
@@ -183,7 +189,11 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
     setIsSelectedNodesModal(false)
   }
 
+  
+  
   function filterElements(value:any,type:string,element:string){
+    
+
     var elemento = cy.$(`${element}`)
     for(var j=0; j<elemento.length; j++){
         var eleInput:any= window.document.getElementsByName(`${element}ElementModalInput${elemento[j].data('id')}`)
@@ -192,9 +202,30 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
     
     
     if (value!==''){
-      let elements=(cy.$(`${element}[${type} ${value}]`));
-      console.log('qtd elements filtes > ',elements.length);
+
+
+     /// Filter input value 
+      var operation = ''
+      if(value[0] == '<'|| value[0] ==  '='|| value[0] ==  '>'){
+        if(value[1] == ('=')){
+          operation = String(value).substring(2,operation.length);
+        }else{
+          operation = String(value).substring(1,operation.length);
+        }
+      }else{
+        toast.warn(`The selector ${element}[${type} ${value}] is invalid`)
+      }	
+      let operationForValue = value.split(operation)[1]
+      operationForValue = operationForValue.replace(' ','');  
+      if((type != 'type') && (type != 'Country')){
+        operationForValue = operationForValue.replace(/[^0-9]/g,'');  
+        operationForValue = parseInt(operationForValue);  
+      }
+      /// End Filter input value 
+       
       
+      let elements=(cy.$(`${element}[${type} ${operation} ${operationForValue}]`));        
+      console.log('qtd elements filtes > ',elements.length);
       for(var i=0; i<elements.length; i++){
         var ele:any= window.document.getElementsByName(`${element}ElementModalInput${elements[i].data('id')}`)
         ele[0].checked = true;
@@ -241,6 +272,8 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
           <div>
             <h3>Nodes</h3>
             <div className='filtro'>
+              <input type="text" name="NodeCountry" id="NodeCountry" placeholder="Filtrar por Country" onChange={e => filterElements(e.target.value, 'Country', 'node')} />
+              <input type="text" name="NodeDomain" id="NodeDomain" placeholder="Filtrar por Domain" onChange={e => filterElements(e.target.value, 'domain', 'node')} />
               <input type="text" name="NodeType" id="NodeType" placeholder="Filtrar por Type" onChange={e => filterElements(e.target.value, 'type', 'node')} />
               <input type="text" name="NodeValue" id="NodeValue" placeholder="Filtrar por Value" onChange={e => filterElements(e.target.value, 'value', 'node')} />
               <input type="text" name="NodeWeight" id="NodeWeight" placeholder="Filtrar por Weight" onChange={e => filterElements(e.target.value, 'weight', 'node')} />
@@ -261,6 +294,10 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
                 <input type="text" name="EdgeReliability" id="EdgeReliability" 
                   placeholder="Filtrar por Reliability" 
                   onChange={e => filterElements(e.target.value, 'reliability', 'edge' )}
+                />
+                <input type="text" name="EdgeNegative" id="EdgeNegative" 
+                  placeholder="Filtrar por Negative" 
+                  onChange={e => filterElements(e.target.value, 'negative', 'edge' )}
                 />
                 <input type="text" name="EdgeDelay" id="EdgeDelay" 
                   placeholder="Filtrar por Delay" 

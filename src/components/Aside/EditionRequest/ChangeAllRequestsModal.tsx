@@ -145,16 +145,36 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
     for  (var i in changedRequests){
       var request = changedRequests[i]
     
-       created ?  updatedRequestList[request.id].created = created: console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
-       duration ?  updatedRequestList[request.id].duration = duration: console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
-       period ?  updatedRequestList[request.id].period = period: console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
-       type_slice ?  updatedRequestList[request.id].type_slice = type_slice: console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
-       links ?  updatedRequestList[request.id].links = links: console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
-       vnd ?  updatedRequestList[request.id].vnd = vnd: console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
-       (reliabilityStart && reliabilityEnd) ?  updatedRequestList[request.id].delay = Number(generatesRandomBetweenRange(reliabilityStart, reliabilityEnd)) : console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
-       (bandwidthStart && bandwidthEnd) ?  updatedRequestList[request.id].bandwidth = Number(generatesRandomBetweenRange(bandwidthStart, bandwidthEnd)) : console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
-       (delayStart && delayEnd) ?  updatedRequestList[request.id].reliability = Number(generatesRandomBetweenRange(delayStart, delayEnd)) : console.log(); //tirar console/log e colocar alguma condiçao igual ao "pass" em python
+      created && (updatedRequestList[request.id].created = created); 
+      duration &&  (updatedRequestList[request.id].duration = duration) 
+      
+      period &&  (updatedRequestList[request.id].period = period) 
+
+      type_slice &&  (updatedRequestList[request.id].type_slice = type_slice) 
+
+      links &&  (updatedRequestList[request.id].links = links) 
+
+      vnd &&  (updatedRequestList[request.id].vnd = vnd);
+
+      (reliabilityStart && reliabilityEnd) && (
+        updatedRequestList[request.id].reliability = Number(
+          generatesRandomBetweenRange(reliabilityStart, reliabilityEnd)
+        )
+      );
+
+      (bandwidthStart && bandwidthEnd) && (
+        updatedRequestList[request.id].bandwidth = Number(
+          generatesRandomBetweenRange(bandwidthStart, bandwidthEnd)
+        )
+      ); 
+     
+      (delayStart && delayEnd) && (
+        updatedRequestList[request.id].delay = Number(
+          generatesRandomBetweenRange(delayStart, delayEnd)
+        )
+      )  
     }
+ 
     
     
     setRequestList(updatedRequestList)

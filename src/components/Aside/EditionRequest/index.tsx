@@ -75,6 +75,7 @@ export function EditionRequest (
       )
     })
 
+    //Modal Unic Request
     function handleOpenChangeRequestModal(idRequest: number){
       setIndexRequest(idRequest)
       setRequestUnic(requestList[idRequest])   
@@ -85,7 +86,7 @@ export function EditionRequest (
       setIsChangeRequestModal(false)
     } 
     
-    
+    //Modal All Requests
     function handleOpenChangeAllRequestModal(){
       var requestsSelected = []
       
@@ -103,11 +104,11 @@ export function EditionRequest (
 
       setIsChangeAllRequestModal(true)
     }
-
     function handleCloseChangeAllRequestModal(){
       setIsChangeAllRequestModal(false)
     } 
     
+    //Se o requestUnic for alterado, perpetuar essas alteraçoes em RequestList
     useEffect(() => {
       if((!(requestUnic['id'] == undefined)) && (requestList[indexRequest] !== requestUnic)){
         var updatedRequestList = {...requestList}
