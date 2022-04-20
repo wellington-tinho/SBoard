@@ -249,12 +249,12 @@ export function EditionRequest (
                   <input type="text" name="reliability" id="reliability"  placeholder="Filtrar por reliability" onChange={e => filterRequests(e)}/>
                   <input type="text" name="type_slice"  id="type_slice"   placeholder="Filtrar por type_slice " onChange={e => filterRequests(e)}/>
                   
-                  <input type="text" name="VND_requested" id="VND_requested"  placeholder="Filtrar por VND_requested" onChange={e => filterRequests(e)}/>
+                  {/* <input type="text" name="VND_requested" id="VND_requested"  placeholder="Filtrar por VND_requested" onChange={e => filterRequests(e)}/>
                   <input type="text" name="VND_domain"    id="VND_domain"     placeholder="Filtrar por VND_domain"    onChange={e => filterRequests(e)}/>
                   <input type="text" name="VND_region"    id="VND_region"     placeholder="Filtrar por VND_region"    onChange={e => filterRequests(e)}/>
                   <input type="text" name="VND_type"      id="VND_type"       placeholder="Filtrar por VND_type"      onChange={e => filterRequests(e)}/>
                   <input type="text" name="VND_period"    id="VND_period"     placeholder="Filtrar por VND_period"    onChange={e => filterRequests(e)}/>
-                  <input type="text" name="VND_sink"      id="VND_sink"       placeholder="Filtrar por VND_sink"      onChange={e => filterRequests(e)}/>
+                  <input type="text" name="VND_sink"      id="VND_sink"       placeholder="Filtrar por VND_sink"      onChange={e => filterRequests(e)}/> */}
                 </div>
                 <button className="changeElementList"
                   onClick={()=>handleOpenChangeAllRequestModal()} > 

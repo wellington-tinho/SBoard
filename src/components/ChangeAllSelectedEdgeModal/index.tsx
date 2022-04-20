@@ -85,7 +85,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
               }
               type="string" name="Country" 
               id="Country" 
-              placeholder={'Insira aqui um valor para alterar'}
+              placeholder={'Enter a value to change here'}
               disabled
             />
           </div>
@@ -96,7 +96,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
                 event =>  event.target.value === '' ? setTarget(undefined) : setTarget(event.target.value)
                 } 
               type="string" name="domain" id="domain" 
-              placeholder={'Insira aqui um valor para alterar'}
+              placeholder={'Enter a value to change here'}
               disabled
             />
           </div>
@@ -107,7 +107,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
                 event =>  event.target.value === '' ? setNegative(undefined) : setNegative(Number(event.target.value))
                 } 
               type="number" name="label" id='label' 
-              placeholder={'Insira aqui um valor para alterar.'}
+              placeholder={'Enter a value to change here.'}
             />
           </div>
           <div>
@@ -124,7 +124,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
                 max={weightEnd}
                 type="number" name="weightStart" 
                 id="weightStart"	 
-                placeholder={'Insira aqui um valor para alterar.'}
+                placeholder={'Enter a value to change here.'}
               />
             
               <input 
@@ -136,7 +136,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
                 min={weightStart}
                 type="number" name="weightEnd"
                 id="weightEnd"
-                placeholder={'Insira aqui um valor para alterar.'}
+                placeholder={'Enter a value to change here.'}
               />
               <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
             </div>
@@ -156,7 +156,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
                 max={reliabilityEnd} 
                 type="number" name="ReliabilityStart" 
                 id="RealityStart"	 
-                placeholder={'Insira aqui um valor para alterar.'}
+                placeholder={'Enter a value to change here.'}
               />
 
               <input 
@@ -168,7 +168,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
                 min={reliabilityStart}
                 type="number" name="ReliabilityEnd" 
                 id="RealityEnd"	 
-                placeholder={'Insira aqui um valor para alterar.'}
+                placeholder={'Enter a value to change here.'}
               />
             <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
 
@@ -187,7 +187,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
                 max={delayEnd} 
                 type="number" name="DelayStart" 
                 id="DelayStart"	 
-                placeholder={'Insira aqui um valor para alterar.'}
+                placeholder={'Enter a value to change here.'}
               />
 
               <input 
@@ -199,7 +199,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
                 min={delayStart}
                 type="number" name="DelayEnd" 
                 id="DelayEnd"	 
-                placeholder={'Insira aqui um valor para alterar.'}
+                placeholder={'Enter a value to change here.'}
               />
               <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
 

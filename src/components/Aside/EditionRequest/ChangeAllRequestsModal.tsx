@@ -209,7 +209,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
               }
               type="number" name='ID'
               id='ID'
-              placeholder={"Insira aqui um valor para todos requests"}
+              placeholder={"Enter a value for all requests here"}
               disabled
             />
           </div>
@@ -222,7 +222,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
               }
               type="number" name='created'
               id='created'
-              placeholder={"Insira aqui um valor para todos requests"}
+              placeholder={"Enter a value for all requests here"}
             />
           </div>
          
@@ -234,7 +234,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
               }
               type="number" name='duration'
               id='duration'
-              placeholder={"Insira aqui um valor para todos requests"}
+              placeholder={"Enter a value for all requests here"}
             />
           </div>
 
@@ -246,7 +246,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
               }
               type="number" name='period'
               id='period'
-              placeholder={"Insira aqui um valor para todos requests"}
+              placeholder={"Enter a value for all requests here"}
             />
           </div>
 
@@ -258,7 +258,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
               }
               type="string" name='type_slice'
               id='type_slice'
-              placeholder={"Insira aqui um valor para todos requests"}
+              placeholder={"Enter a value for all requests here"}
             />
           </div>
 
@@ -272,7 +272,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
                 max={delayEnd}
                 type="number" name='delayStart'
                 id='delayStart'
-                placeholder={"Insira aqui um valor para todos requests"}
+                placeholder={"Enter a value for all requests here"}
               />
              <input 
                 onChange={
@@ -281,7 +281,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
                 min={delayStart}
                 type="number" name='delayEnd'
                 id='delayEnd'
-                placeholder={"Insira aqui um valor para todos requests"}
+                placeholder={"Enter a value for all requests here"}
               />
               <span className="tooltiptext"> Insert a number from start to end, to generate a random number between them.</span>
             </div>
@@ -299,7 +299,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
                 max={reliabilityEnd} 
                 type="number" name="ReliabilityStart" 
                 id="RealityStart"	 
-                placeholder={"Insira aqui um valor para todos requests"}
+                placeholder={"Enter a value for all requests here"}
               />
  
               <input 
@@ -309,7 +309,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
                 min={reliabilityStart}
                 type="number" name="ReliabilityEnd" 
                 id="RealityEnd"	 
-                placeholder={"Insira aqui um valor para todos requests"}
+                placeholder={"Enter a value for all requests here"}
               />
               <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
 
@@ -325,7 +325,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
                 max={bandwidthEnd}
                 type="number" name="BandwidthStart"
                 id="BandwidthStart"
-                placeholder={"Insira aqui um valor para todos requests"}
+                placeholder={"Enter a value for all requests here"}
               />
 
               <input onChange={
@@ -334,7 +334,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
                 min={bandwidthStart}
                 type="number" name="BandwidthEnd"
                 id="BandwidthEnd"
-                placeholder={"Insira aqui um valor para todos requests"}
+                placeholder={"Enter a value for all requests here"}
               />
             <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
             </div>

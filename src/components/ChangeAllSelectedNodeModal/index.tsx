@@ -82,7 +82,7 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
               }
               type="string" name="country" 
               id="country" 
-              placeholder={'Insira aqui um valor para alterar'}
+              placeholder={'Enter a value to change here'}
             />
           </div>
           <div>
@@ -93,7 +93,7 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
               }
               type="string" name="domain" 
               id="domain" 
-              placeholder={'Insira aqui um valor para alterar'}
+              placeholder={'Enter a value to change here'}
             />
           </div>
           <div>
@@ -104,7 +104,7 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
               }
               type="string" name="label" 
               id="label" 
-              placeholder={'Insira aqui um valor para alterar'}
+              placeholder={'Enter a value to change here'}
             />
           </div>
           <div>
@@ -114,7 +114,7 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
                 event =>setName(event.target.value)
                 } 
               type="string" name="name" id="name" 
-              placeholder={'Insira aqui um valor para alterar'}
+              placeholder={'Enter a value to change here'}
             />
           </div>
           <div>
@@ -124,7 +124,7 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
                 event =>setRegion(Number(event.target.value))  
                 } 
               type="number" name="region" id='region' 
-              placeholder={'Insira aqui um valor para alterar.'}
+              placeholder={'Enter a value to change here.'}
             />
           </div>
           <div>
@@ -134,7 +134,7 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
                 event =>setType(event.target.value)
               } 
               type="string" name="type" id='type'
-              placeholder={'Insira aqui um valor para alterar.'}
+              placeholder={'Enter a value to change here.'}
             
             />
           </div>
@@ -145,7 +145,7 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
                 event =>setValue(Number(event.target.value))  
               } 
               type="number" name="value" id='value' 
-              placeholder={'Insira aqui um valor para alterar.'}
+              placeholder={'Enter a value to change here.'}
             />
           </div>
           <div>
@@ -160,7 +160,7 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
                   }
               } 
               type="string" name="pos" id='pos' 
-              placeholder={'Insira aqui um valor para alterar.'}
+              placeholder={'Enter a value to change here.'}
             />
           </div>
           <div>
@@ -177,7 +177,7 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
                 max={weightEnd}   
                 type="number" name="weightStart" 
                 id="weightStart"	 
-                placeholder={'Insira aqui um valor para alterar.'}
+                placeholder={'Enter a value to change here.'}
               />
             
               <input 
@@ -189,7 +189,7 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
                 min={weightStart} 
                 type="number" name="weightEnd"
                 id="weightEnd"
-                placeholder={'Insira aqui um valor para alterar.'}
+                placeholder={'Enter a value to change here.'}
               />
               <span className="tooltiptext">
                 Insert a number from start to end, to generate a random number between them.
