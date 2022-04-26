@@ -55,7 +55,8 @@ Após instalado ambos execulte o codigo abaixo no terminal para baixar seu geren
 ```bash
 $ npm install --global yarn
 ```
-Baixado as ferramentas agora é necessario baixar os pacotes e bibliotecas necessarios para execultar á aplicação, para isso:
+
+Baixado as ferramentas agora é necessário baixar os pacotes e bibliotecas necessárias para executar á aplicação, para isso:
 
 ```bash
 # Clone o Repositorio
@@ -66,12 +67,12 @@ $ cd SBoard/
 ```
 Abra um novo terminal dentro da pasta. 
 
-Em um terminal execulte o comando,
+Em um terminal execute o comando,
 ```bash
 # Seu_pah\SBoard>
 $ yarn
 ```
-Este comando irá baixar todas dependencias para execultar o projeto ReactJS
+Este comando irá baixar todas dependências para executar o projeto ReactJS
 
 No outro terminal:
 ```bash
@@ -81,15 +82,15 @@ $ cd api
 # Seu_pah\SBoard\api>
 $ pip install -r requirements.txt
 ```
-Este comando irá Baixar todos os pacotes necessarios para execultar o script .py
+Este comando irá Baixar todos os pacotes necessários para executar o script .py
 
-Apos isso neste mesmo terminal execulte o arquivo
+Após isso neste mesmo terminal execute o arquivo
 ```bash
 # Seu_pah\SBoard\api>
 $ python app.py
 ```
 
-E por ultimo no terminal anterior, da raiz do projeto execulte 
+E por ultimo no terminal anterior, da raiz do projeto execute 
 ```bash
 # Seu_pah\SBoard>
 $ yarn start
