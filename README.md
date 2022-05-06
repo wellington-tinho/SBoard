@@ -14,7 +14,7 @@
 <p align="center">
    <h1>SBoard</h1>
 
-   <img src="https://github.com/wrtinho/SBoard/blob/main/src/assets/ScreenExemple.png" alt="Tela da Aplicação" width="720"/>
+   <img src="https://github.com/wellington-tinho/SBoard/blob/main/src/assets/ScreenExemple.png" alt="Tela da Aplicação" width="720"/>
 
 </p>
 
@@ -25,7 +25,7 @@ Painel de gerenciamento de virtual de redes virtuais seguindo o modelo 5G/NaaS
 
 <div align="center">
    <sub>Desenvolvido por 
-    <a href="https://github.com/wrtinho">Wellington Rodrigues</a> 
+    <a href="https://github.com/wellington-tinho">Wellington Rodrigues</a> 
   </sub>
 </div>
 
@@ -60,7 +60,7 @@ Baixado as ferramentas agora é necessário baixar os pacotes e bibliotecas nece
 
 ```bash
 # Clone o Repositorio
-$ git clone https://github.com/wrtinho/SBoard.git
+$ git clone https://github.com/wellington-tinho/SBoard.git
 
 # Entre na pasta do projeto
 $ cd SBoard/
@@ -113,7 +113,7 @@ Recebido a mensagem basta abrir em seu navegador o endereço: http://localhost:3
 
 # :bug: Problemas
 
-Fique a vontade para criar uma nova issue com o respectivo titulo e descrição na página de issues do [SBoard](https://github.com/wrtinho/SBoard/issues)
+Fique a vontade para criar uma nova issue com o respectivo titulo e descrição na página de issues do [SBoard](https://github.com/wellington-tinho/SBoard/issues)
 
 
 <br>
