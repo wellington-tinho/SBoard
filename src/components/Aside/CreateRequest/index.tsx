@@ -108,11 +108,15 @@ export function CreateRequest (
   const handleSubmitCreateRequest = (event:any) => {
     event.preventDefault();
     formRequest['id'] = (Object.keys(requestList).length !== 0) ? Object.keys(requestList).length + 1 :  Object.keys(requestList).length
-    const requestCreatedManually = {...formRequest} 
+    let requestCreatedManually = {...formRequest} 
     requestCreatedManually['vnd'] = {...arrayResponseformVND} 
     requestCreatedManually['links'] = [...createLinksRequest]
     
-    setRequestList({...requestCreatedManually})
+    setRequestList([{ ...requestCreatedManually}]) // Para sobrescrever
+    // setRequestList(  [{ ...requestCreatedManually}].concat(requestList))  // Para concatenar em pilha
+    // setRequestList(  ([{ ...requestCreatedManually}].concat(requestList)).reverse())  // Para concatenar em pilha
+ 
+    
     // createElementHTMLRequest(requestList)
     ClearDataRequet()
   }

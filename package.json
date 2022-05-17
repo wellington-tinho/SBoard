@@ -36,7 +36,7 @@
     "vite": "^2.8.0"
   },
   "scripts": {
-    "api": "py api/app.py",
+    "api": "python api/app.py",
     "dev": "vite",
     "start": "vite",
     "build": "tsc && vite build",

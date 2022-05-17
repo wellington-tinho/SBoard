@@ -83,7 +83,7 @@ export function CreateOne({
         <h4>Informaçao virtual node demand</h4>
         <div> 
           <p> vnr_id </p> 
-          <input type="text" name="vnr_id"    id="vnr_id"        placeholder="vnr_id"       onChange={handleChangeVND} disabled/>
+          <input type="text" name="vnr_id"    id="vnr_id"        placeholder="vnr_id"       onChange={handleChangeVND} />
         </div> 
 
         <div> 

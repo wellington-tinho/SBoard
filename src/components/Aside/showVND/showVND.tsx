@@ -65,7 +65,7 @@ export function ShowVND({
   // const [requestVisualization, setRequestVisualization] =  useState<JSX.Element>({} as JSX.Element)
   var auxRequestElementsHTML:any = [] 
 
-  // console.log(requestVisualization);
+
 
 
   
