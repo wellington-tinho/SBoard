@@ -6,14 +6,14 @@ import { FiPlayCircle } from 'react-icons/fi';
 import { HiOutlineViewGridAdd } from 'react-icons/hi';
 import { RiChatDeleteLine } from 'react-icons/ri';
 import Modal from 'react-modal';
-import { CytoscapeContext } from '../../CytoscapeContext';
-import { Upload } from "../Upload";
+import { Upload } from "../../../../components/Upload";
+import { CytoscapeContext } from '../../../../CytoscapeContext';
 import { Container, GraphContainer, NavOptions } from "./styles";
 
 
 
 // import { SetupModal } from '../SetupModal';
-const SetupModal = lazy((): Promise<any> =>  import('../SetupModal'));
+const SetupModal = lazy((): Promise<any> =>  import('../../../../components/SetupModal'));
 
 
   

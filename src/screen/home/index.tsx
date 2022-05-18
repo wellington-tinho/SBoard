@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { CytoscapeContext } from "../../CytoscapeContext";
-import { Aside } from "../Aside";
-import { GraphArea } from "../GraphArea";
+import { Aside } from "./Section/Aside";
+import { GraphArea } from "./Section/GraphArea";
 
 const Content = styled.div `
   display: flex;
@@ -21,7 +21,7 @@ const Content = styled.div `
   }
 `
 
-export function Section(){
+export function Home(){
   const [cy, setCy] = useState<cytoscape.Core>()
   const [request, setRequest]= useState({})
   
@@ -30,6 +30,7 @@ export function Section(){
       <Content>
         <GraphArea setRequest={setRequest}/>
         <Aside request={request}/>
+        {/* <Footer /> */}
       </Content>
     </CytoscapeContext.Provider>
 

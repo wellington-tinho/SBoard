@@ -3,7 +3,7 @@ import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
-import { generatesRandomBetweenRange } from '../../../util/randomNumber';
+import { generatesRandomBetweenRange } from '../../../../../util/randomNumber';
 
 
 

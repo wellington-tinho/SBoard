@@ -1,7 +1,7 @@
 // import { Footer } from "./components/Footer";
 import { ToastContainer } from 'react-toastify';
-import { Header } from "./components/Header";
-import { Section } from "./components/Section";
+import { Home } from './screen/home';
+import { Header } from './screen/home/Section/Header';
 import { GlobalStyle } from "./styles/global.ts";
 
 
@@ -10,7 +10,7 @@ function App() {
     <>
      <GlobalStyle />
      <Header />
-     <Section />
+     <Home />
      <ToastContainer autoClose={3000} />
     </>
   );
