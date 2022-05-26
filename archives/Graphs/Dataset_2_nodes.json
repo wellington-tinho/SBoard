@@ -1,0 +1,160 @@
+{
+  "elements": {
+    "nodes": [
+      {
+        "data": {
+          "Country": "Hungary",
+          "domain": 0,
+          "id": "0",
+          "label": "0",
+          "name": "0",
+          "pos": [
+            19.03991,
+            47.49801
+          ],
+          "region": 0,
+          "type": "t",
+          "value": 0,
+          "weight": 0
+        },
+        "position": {
+          "x": 728.5,
+          "y": 305.09375
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": false,
+        "classes": ""
+      },
+      {
+        "data": {
+          "Country": "Hungary",
+          "domain": 0,
+          "id": "1",
+          "label": "10000",
+          "name": "1",
+          "pos": [
+            20.03991,
+            47.49801
+          ],
+          "region": 0,
+          "type": "c",
+          "value": 1,
+          "weight": 50
+        },
+        "position": {
+          "x": 91.0625,
+          "y": 633.65625
+        },
+        "group": "nodes",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": false,
+        "classes": ""
+      }
+    ],
+    "edges": [
+      {
+        "data": {
+          "negative": "99990",
+          "source": "0",
+          "target": "1",
+          "weight": "10",
+          "id": "e0",
+          "delay": "62",
+          "reliability": "50"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "group": "edges",
+        "removed": false,
+        "selected": false,
+        "selectable": true,
+        "locked": false,
+        "grabbable": true,
+        "pannable": true,
+        "classes": ""
+      }
+    ]
+  },
+  
+  "style": [
+    {
+      "selector": "node",
+      "style": {
+        "label": "data(label)",
+        "background-color": "rgb(153,153,153)",
+        "border-width": "3px",
+        "border-color": "fn"
+      }
+    },
+    {
+      "selector": "edge",
+      "style": {
+        "line-style": "solid",
+        "line-color": "rgb(179,179,179)",
+        "curve-style": "unbundled-bezier"
+      }
+    },
+    {
+      "selector": "edge:selected",
+      "style": {
+        "label": "fn",
+        "line-color": "rgb(74,122,255)",
+        "text-wrap": "wrap",
+        "font-weight": "bold",
+        "text-background-color": "rgb(255,255,255)",
+        "text-background-opacity": "1",
+        "text-border-opacity": "1",
+        "text-border-width": "1px",
+        "text-border-color": "rgb(51,57,110)",
+        "text-background-shape": "round-rectangle",
+        "opacity": "1",
+        "z-index": "99"
+      }
+    },
+    {
+      "selector": "node:selected",
+      "style": {
+        "label": "fn",
+        "font-weight": "bold",
+        "text-wrap": "wrap",
+        "text-background-padding": "10px",
+        "border-width": "5px",
+        "border-color": "rgb(41,1,217)",
+        "background-color": "rgb(1,156,217)",
+        "text-background-color": "rgb(255,255,255)",
+        "text-background-opacity": "1",
+        "text-border-opacity": "1",
+        "text-border-width": "1px",
+        "text-border-color": "rgb(51,57,110)",
+        "text-background-shape": "round-rectangle"
+      }
+    }
+  ],
+  "data": {},
+  "zoomingEnabled": true,
+  "userZoomingEnabled": true,
+  "zoom": 1.0536438201187894,
+  "minZoom": 0.1,
+  "maxZoom": 3,
+  "panningEnabled": true,
+  "userPanningEnabled": true,
+  "pan": {
+    "x": -39.079522956538085,
+    "y": -110.36150655227675
+  },
+  "boxSelectionEnabled": true,
+  "renderer": {
+    "name": "canvas"
+  }
+}

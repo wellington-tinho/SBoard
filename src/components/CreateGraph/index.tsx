@@ -1,8 +1,18 @@
+import { defaultGraph } from "../../util/defaulGraphJson";
 import { Container } from "./styles";
 
-export default function CreateGraph() {
+
+
+interface CreateGraphProps{
+  setGraph:React.Dispatch<React.SetStateAction<any>>,
+}
+
+
+
+export function CreateGraph({setGraph}:CreateGraphProps){
+  
   return (
-    <Container onClick={()=>console.log('a')}>
+    <Container onClick={()=>setGraph(defaultGraph)}>
       <p>CreateGraph</p> 
     </Container>
   )

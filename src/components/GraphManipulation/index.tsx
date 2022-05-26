@@ -25,6 +25,8 @@ Modal.setAppElement('#root')
 
 
 export function GraphManipulation({grapJSON}:propsGraphJson){  
+  console.log(grapJSON)
+
   const containerRef = useRef(null);
   const [cy,setCy] = useContext(CytoscapeContext)
   const [nodeElement,setNodeElement] = useState<any>()

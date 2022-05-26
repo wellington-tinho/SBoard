@@ -6,10 +6,9 @@ import { FiPlayCircle } from 'react-icons/fi';
 import { HiOutlineViewGridAdd } from 'react-icons/hi';
 import { RiChatDeleteLine } from 'react-icons/ri';
 import Modal from 'react-modal';
-import { Upload } from "../../../../components/Upload";
+import { StartGraph } from '../../../../components/startGraph';
 import { CytoscapeContext } from '../../../../CytoscapeContext';
 import { Container, GraphContainer, NavOptions } from "./styles";
-
 
 
 // import { SetupModal } from '../SetupModal';
@@ -22,12 +21,11 @@ Modal.setAppElement('#root')
 
 export function GraphArea({setRequest}:any){
   const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
-
-
   const [node, setNode] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
   const layouts = ['circle','random','grid','cose','concentric','breadthfirst','cose']
   var count = 0
+
 
   function handleOpenSetupModal(){
     setIsSetupModal(true)
@@ -37,6 +35,7 @@ export function GraphArea({setRequest}:any){
     setIsSetupModal(false)
   }
   
+
   function AddEle(){
     try {
       cy.add({
@@ -66,6 +65,7 @@ export function GraphArea({setRequest}:any){
       console.log('error');
     }
   }
+
 
   function handleChange(file:any){ 
     const reader = new FileReader();
@@ -97,6 +97,7 @@ export function GraphArea({setRequest}:any){
 
   return(
     <Container>
+      {/*------ uper options graph buttons --------- */}
       <NavOptions>
         <ul>
           <li className="tooltip">   
@@ -141,13 +142,12 @@ export function GraphArea({setRequest}:any){
         </ul>
       </NavOptions>
       
-
+      {/*------ StartGraph (GraphContainer / UploadGraph) --------- */}
       <GraphContainer>
-          <Upload />
+        <StartGraph />
       </GraphContainer>
-
     
-
+      {/*------ SetupModal --------- */}
       <Suspense fallback={<div>Loading...</div>}>
         < SetupModal 
           isOpen={isSetupModal}

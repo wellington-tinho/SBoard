@@ -5,15 +5,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-
-
-  /* nav{
-    flex-grow: 0;
-  }
-  div {
-    flex-grow: 1;
-  } */
-
 `
 
 export const NavOptions  = styled.nav`
@@ -63,6 +54,7 @@ export const GraphContainer = styled.div`
   border-radius: 0.25rem;
   background-color: var(--white-3);
   height: 100%;  
+  width: 100%;
   display:flex;
   justify-content: center;
   align-items: center;

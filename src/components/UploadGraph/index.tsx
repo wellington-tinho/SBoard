@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { FiUpload } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { api } from '../../services/api';
-import { GraphManipulation } from '../GraphManipulation';
 import { DropContainer, UploadMessage } from './style';
+
 
 
 
@@ -14,7 +15,11 @@ export interface iGraphJson{
   nodes:any,
 }
 
-export function Upload() {
+interface UploadGraphProps{
+  setGraph:React.Dispatch<React.SetStateAction<any>>,
+}
+
+export function UploadGraph({setGraph}:UploadGraphProps){
   const [graphGML, setGraphGML] = useState()
   const [grapJSON, setGraphJSON] = useState<iGraphJson>()
   
@@ -36,7 +41,6 @@ export function Upload() {
   };
   
   useEffect(() => {
-
     if(graphGML){
       api.post('convert', {data: graphGML})
       .then(response => {
@@ -57,7 +61,6 @@ export function Upload() {
     getInputProps,
     isDragActive,
     isDragReject,
-
   } = useDropzone({
     accept: ["application/gml", ".gml", ".GML", "application/GML", "application/json"],
     maxFiles: 1,
@@ -70,7 +73,11 @@ export function Upload() {
     if (!isDragActive) {
       // console.log('isDragActive',isDragActive);
 
-      return <UploadMessage> Click or drag files here...</UploadMessage>;
+      return <UploadMessage> 
+        <FiUpload color="#228f41" fontSize="2em" style={{marginRight: '1rem'}} />   
+         Click or drag files here, for starts in file done... 
+        </UploadMessage>;
+      
     }
 
     if (isDragReject) {
@@ -78,7 +85,7 @@ export function Upload() {
 
       return (
         <UploadMessage type="error">
-          Tipo de arquivo não suportado
+          Not suport file. 
         </UploadMessage>
       );
     }
@@ -99,8 +106,7 @@ export function Upload() {
   }
 
   else{
-    return(
-        <GraphManipulation grapJSON={grapJSON} />
-    ); 
+    setGraph(grapJSON)
+    return null
   }
 }
