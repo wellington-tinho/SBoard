@@ -39,6 +39,7 @@
     "api": "python api/app.py",
     "dev": "vite",
     "start": "vite",
+    "host": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
