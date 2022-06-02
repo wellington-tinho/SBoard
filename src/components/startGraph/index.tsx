@@ -9,8 +9,7 @@ import { UploadGraph } from "../UploadGraph";
 
 export function StartGraph() {
   const [graph, setGraph] = useState()
-
-  console.log('graph', graph);
+ 
   
   if (!graph) {
     return (

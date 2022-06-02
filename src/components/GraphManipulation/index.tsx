@@ -1,6 +1,5 @@
-import cytoscape from 'cytoscape';
+import cytoscape, { ElementsDefinition } from 'cytoscape';
 import { useContext, useEffect, useRef, useState } from 'react';
-import CytoscapeComponent from 'react-cytoscapejs';
 import Modal from 'react-modal';
 import { CytoscapeContext } from '../../CytoscapeContext';
 import { ChartOptions } from '../ChartOptions';
@@ -11,71 +10,94 @@ import { NodeModal } from '../NodeModal';
 
 
 
-
 export interface propsGraphJson{
-  grapJSON:iGraphJson,
+  grapJSON:ElementsDefinition,
 }
-export interface iGraphJson{
-  edges:any,
-  nodes:any,
-}
+
 
 Modal.setAppElement('#root')
 
 
 
 export function GraphManipulation({grapJSON}:propsGraphJson){  
-  console.log(grapJSON)
 
   const containerRef = useRef(null);
   const [cy,setCy] = useContext(CytoscapeContext)
   const [nodeElement,setNodeElement] = useState<any>()
   const [edgeElement,setEdgeElement] = useState<any>()
 
-  Object.keys(grapJSON.edges).forEach(key=>{      
-        (grapJSON.edges[key].data) = {
-          ...grapJSON.edges[key].data,
-          id:`e${key}`,
-          delay:       `${grapJSON.edges[key].data.delay        ? grapJSON.edges[key].data.delay       : (Math.floor(Math.random() * 100) + 1)}`,
-          reliability: `${grapJSON.edges[key].data.reliability  ? grapJSON.edges[key].data.reliability : (Math.floor(Math.random() * 100) + 1)}`,
-          weight:      `${grapJSON.edges[key].data.weight       ? grapJSON.edges[key].data.weight      : (Math.floor(Math.random() * 100) + 1)}`,
-          negative:    `${grapJSON.edges[key].data.negative     ? grapJSON.edges[key].data.negative    : (Math.floor(Math.random() * 100) + 1)}`,
-        }
-        
-      })
-      
-      Object.keys(grapJSON.nodes).forEach(key=>{
-        (
-          (grapJSON.nodes[key].data) = {
-            ...grapJSON.nodes[key].data, 
-            // id:   `${key}`,
-            // label:       `${grapJSON.nodes[key].data.label        ? grapJSON.nodes[key].data.label      : (Math.floor(Math.random() * 100) + 1)}`,
-            // name:         `${grapJSON.nodes[key].data.name        ? grapJSON.nodes[key].data.name       : (Math.floor(Math.random() * 100) + 1)}`,
-            // Country:      `${grapJSON.nodes[key].data.Country     ? grapJSON.nodes[key].data.Country    : (Math.floor(Math.random() * 100) + 1)}`,
-            // domain:       `${grapJSON.nodes[key].data.domain      ? grapJSON.nodes[key].data.domain     : (Math.floor(Math.random() * 100) + 1)}`,
-            // type:         `${grapJSON.nodes[key].data.type        ? grapJSON.nodes[key].data.type       : (['a','c','t'])[Math.floor(Math.random()*(['a','c','t']).length)]}`,
-            // region:       `${grapJSON.nodes[key].data.region      ? grapJSON.nodes[key].data.region     : (Math.floor(Math.random() * 100) + 1)}`,
-            // x:          grapJSON.nodes[key].data.pos[0]         ? grapJSON.nodes[key].data.pos[0]        : (Math.floor(Math.random() * 100) + 1),
-            // y:          grapJSON.nodes[key].data.pos[1]         ? grapJSON.nodes[key].data.pos[1]        : (Math.floor(Math.random() * 100) + 1),
-            // value:        `${grapJSON.nodes[key].data.value       ? grapJSON.nodes[key].data.value      : (Math.floor(Math.random() * 100) + 1)}`,
-            // weight:       `${grapJSON.nodes[key].data.weight      ? grapJSON.nodes[key].data.weight     : (Math.floor(Math.random() * 100) + 1)}`,
-            
-            // id:`n${key}`,
-          // Weight:(Math.floor(Math.random() * 100) + 1),
-          // type: (['a','c','t'])[Math.floor(Math.random()*(['a','c','t']).length)],
-        }
-      );
-  })
+  console.log(grapJSON);
+  
 
-  const elementos = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges});
+  Object.keys(grapJSON.edges).forEach(key=>{      
+    (grapJSON.edges[Number(key)].data) = {
+      ...grapJSON.edges[Number(key)].data,
+
+      id:`e${Number(key)}`,
+      delay:       `${grapJSON.edges[Number(key)].data.delay        ? grapJSON.edges[Number(key)].data.delay       : (Math.floor(Math.random() * 100) + 1)}`,
+      reliability: `${grapJSON.edges[Number(key)].data.reliability  ? grapJSON.edges[Number(key)].data.reliability : (Math.floor(Math.random() * 100) + 1)}`,
+      weight:      `${grapJSON.edges[Number(key)].data.weight       ? grapJSON.edges[Number(key)].data.weight      : (Math.floor(Math.random() * 100) + 1)}`,
+      negative:    `${grapJSON.edges[Number(key)].data.negative     ? grapJSON.edges[Number(key)].data.negative    : (Math.floor(Math.random() * 100) + 1)}`,
+    }
+  })
+  //se o primeiro node não tem position entao os outros tambem nao terá, (diferença de envio via GML e JSON)
+  var notHasPositionInGraph = !grapJSON.nodes[0].position
+
+  // encontrei um erro de um graph que tinha longitude e latitude em um node, mas não tinha position
+  var nothasPosInGraph = !grapJSON.nodes[0].data.pos
+
+  //caso nao tiver latitude e longitude, então não tem posição no graph, (gero no random)
+  var nothasLongLatInGraph = !grapJSON.nodes[0].data.Longitude && !grapJSON.nodes[0].data.Latitude
+
+
+
+  if (notHasPositionInGraph){
+
+    if(!nothasPosInGraph){
+      Object.keys(grapJSON.nodes).forEach((key)=>{
+        (
+          grapJSON.nodes[Number(key)].data = {
+            ...grapJSON.nodes[Number(key)].data,
+          },
+          grapJSON.nodes[Number(key)].position  = {
+            x: Number(`${grapJSON.nodes[Number(key)].data.pos[0]}`),
+            y: Number(`${grapJSON.nodes[Number(key)].data.pos[1]}`),
+          }
+        )
+      })
+    }
+    else if(!nothasLongLatInGraph){
+      Object.keys(grapJSON.nodes).forEach((key)=>{
+        (
+          grapJSON.nodes[Number(key)].data = {
+            ...grapJSON.nodes[Number(key)].data,
+          },
+          grapJSON.nodes[Number(key)].position  = {
+            x: Number(`${grapJSON.nodes[Number(key)].data.Longitude}`),
+            y: Number(`${grapJSON.nodes[Number(key)].data.Latitude}`),
+          }
+        )
+      })
+    }
+  }else{
+    Object.keys(grapJSON.nodes).forEach(key=>{
+      (grapJSON.nodes[Number(key)].data = { ...grapJSON.nodes[Number(key)].data })
+    })
+  }
+     
+  // const elementos = CytoscapeComponent.normalizeElements({nodes: grapJSON.nodes, edges: grapJSON.edges});
+  const elementos =({nodes: grapJSON.nodes, edges: grapJSON.edges} as ElementsDefinition);
+
+
+
 
   
   //configuraçoes e inicializaçao do cytoscape graph
   useEffect(() => {
     const config = {
       container: containerRef.current,
-        layout:{
-          name: 'breadthfirst',
+        layout:{ 
+          name: 'preset',
           fit: true, //centraliza
           directed: true,
           animate: true,
