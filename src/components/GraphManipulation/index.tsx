@@ -1,4 +1,5 @@
 import cytoscape, { ElementsDefinition } from 'cytoscape';
+import edgehandles from 'cytoscape-edgehandles';
 import { useContext, useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { CytoscapeContext } from '../../CytoscapeContext';
@@ -99,15 +100,15 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
         layout:{ 
           name: 'preset',
           fit: true, //centraliza
-          directed: true,
           animate: true,
           animationDuration: 1000,
-          avoidOverlap: true,
-          nodeDimensionsIncludeLabels: false,
+          // directed: true,
+          // avoidOverlap: true,
+          // avoidOverlapPadding: 10,
+          // nodeDimensionsIncludeLabels: false,
           // padding: 50,
           // circle: true,
-          // spacingFactor: 2,
-
+          spacingFactor: 10, //undefined
         },
         style: [
           {
@@ -221,14 +222,15 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
         ],
         elements:elementos,
         minZoom: 0.1,
-        maxZoom:3,
+        maxZoom:6,
         zoomFactor: 0.05, // zoom factor per zoom tick
-        zoomDelay: 45 // how many ms between zoom ticks
+        zoomDelay: 45, // how many ms between zoom ticks
+        zoom: 3
       };
       // cytoscape(config);
+
       setCy(cytoscape(config))    
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     
     // funções automaticas inicializadas junto com o grafico 
@@ -271,7 +273,11 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
           // console.log('tap on background');
         }
       });
-    } 
+
+      
+    }
+    
+   
     CytoscapeFunctions()
   
      

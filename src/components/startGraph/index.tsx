@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { CreateGraph } from "../CreateGraph";
 import { GraphManipulation } from "../GraphManipulation";

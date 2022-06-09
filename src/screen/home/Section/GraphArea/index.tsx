@@ -21,11 +21,57 @@ Modal.setAppElement('#root')
 
 export function GraphArea({setRequest}:any){
   const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
-  const [node, setNode] = useState({} as any)
+  const [element, setElement] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
-  const layouts = ['circle','random','grid','cose','concentric','breadthfirst','cose']
-  const [spacingFactorElements, setSpacingFactorElements] = useState(1)
+  const [spacingFactorElements, setSpacingFactorElements] = useState(3) // devido o maxZoom ser 3 é recomendado começarmos com 3
+  const hiddenFileRequestInput = useRef<any>(null); 
+  const layouts = [
+    {
+      name: "preset",
+      spacingFactor: 1.5,
+      fit: true
+    },
+    {
+      name: "preset",
+      spacingFactor: 0.5,
+      fit: true
+    },
+    {
+      name: "concentric",
+      minNodeSpacing: 12,
+      fit: true
+    },
+    {
+      name:'circle',
+      fit: true
+    },
+    {
+      name:'random',
+      fit: true
+    },
+    {
+      name:'cose',
+      fit: true
+    },
+    {
+      name:'grid',
+      fit: true
+    },
+    {
+      name:'breadthfirst',
+      fit: true
+  }]
   var count = 0
+
+  useEffect( () => {
+
+    cy?.on('tap', (event: any) => {
+      console.log('data->', event.target._private.data)
+      console.log('all->', event.target._private)
+      setElement(event.target._private.data)
+    });
+
+  },[cy])
 
 
   function handleOpenSetupModal(){
@@ -36,11 +82,22 @@ export function GraphArea({setRequest}:any){
     setIsSetupModal(false)
   }
   
-  function handleChangeSpacingFactor(spacing: number) {
-    const newSpacing = spacingFactorElements +(spacing)
+  function handleChangeZoomLevel(level: number) {
+    
+
+    const newSpacing = cy?.zoom() +(level)
     setSpacingFactorElements(newSpacing)
 
     cy?.zoom(newSpacing);
+  }
+
+  function handleChangeSpacingFactor(spacing: number){
+    
+    cy?.layout({
+      name: "preset",
+      spacingFactor: spacing,
+      fit: true
+    }).run()
   }
 
   function AddEle(){
@@ -69,17 +126,9 @@ export function GraphArea({setRequest}:any){
    }
   }
 
-  useEffect(() => {
-    cy?.on('tap', (event: any) => {
-      console.log('data->', event.target._private.data)
-      console.log('all->', event.target._private)
-      setNode(event.target._private.data)
-    });
-  },[cy])
-  
   function DelEle(){
     try {
-      var ele = cy.$('#'+node.id);
+      var ele = cy.$('#'+element.id);
       cy.remove( ele );
     }
     catch (e) {
@@ -87,8 +136,7 @@ export function GraphArea({setRequest}:any){
     }
   }
 
-
-  function handleChange(file:any){ 
+  function handleUploadRequestJSON(file:any){ 
     const reader = new FileReader();
     reader.onload = function(e: any) {
       // console.log(JSON.parse(e.target.result));
@@ -101,17 +149,12 @@ export function GraphArea({setRequest}:any){
     }
   };
 
-  const hiddenFileInput = useRef<any>(null);
-  const handleClick = () => {
-    hiddenFileInput.current.click();
+  function handleClick (){
+    hiddenFileRequestInput.current.click();
   };
 
   function handleChangeLayout() {
-    cy?.layout(
-      {
-        name: layouts[count],
-      }
-    ).run();
+    cy?.layout(layouts[count]).run();
     count = (count+1)%layouts.length
   }
    
@@ -122,14 +165,14 @@ export function GraphArea({setRequest}:any){
       <NavOptions>
         <ul>
           <li className="tooltip">   
-             <AiOutlineZoomIn fontSize="1.5em"  onClick={()=>handleChangeSpacingFactor(+.1)} /> 
-             <AiOutlineZoomOut fontSize="1.5em" onClick={()=>handleChangeSpacingFactor(-.1)} /> 
+             <AiOutlineZoomIn fontSize="1.5em"  onClick={()=>handleChangeZoomLevel(+.1)} /> 
+             <AiOutlineZoomOut fontSize="1.5em" onClick={()=>handleChangeZoomLevel(-.1)} /> 
           <span className="tooltiptext">Drag zoom in or zoom out</span> 
           </li>
 
           <li className="tooltip">
-             <BiUndo fontSize="1.5em" onClick={()=>{}}/>   
-             <BiRedo fontSize="1.5em" onClick={()=>{}}/>   
+             <BiUndo fontSize="1.5em" onClick={()=>{handleChangeSpacingFactor(1.1)}}/>   
+             <BiRedo fontSize="1.5em" onClick={()=>{handleChangeSpacingFactor(0.9)}}/>   
             <span className="tooltiptext">Undo and Redo in elements Graph</span> 
           </li>
 
@@ -140,7 +183,7 @@ export function GraphArea({setRequest}:any){
           </li>
           
           <li className="tooltip"> 
-            <input type="file" name="UploadJSON" id="UploadJSON" ref={hiddenFileInput} onChange={handleChange} />
+            <input type="file" name="UploadJSON" id="UploadJSON" ref={hiddenFileRequestInput} onChange={handleUploadRequestJSON} />
             <BiGitPullRequest fontSize="1.5em"  cursor="pointer"  onClick={handleClick} />
             <span className="tooltiptext">Upload archive json from requests</span> 
           </li>
