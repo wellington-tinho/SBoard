@@ -24,6 +24,7 @@ export function GraphArea({setRequest}:any){
   const [node, setNode] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
   const layouts = ['circle','random','grid','cose','concentric','breadthfirst','cose']
+  const [spacingFactorElements, setSpacingFactorElements] = useState(1)
   var count = 0
 
 
@@ -35,23 +36,43 @@ export function GraphArea({setRequest}:any){
     setIsSetupModal(false)
   }
   
+  function handleChangeSpacingFactor(spacing: number) {
+    const newSpacing = spacingFactorElements +(spacing)
+    setSpacingFactorElements(newSpacing)
+
+    cy?.zoom(newSpacing);
+  }
 
   function AddEle(){
     try {
       cy.add({
         // group: 'nodes',
-        data: { weight: Math.floor(Math.random() * 100) + 1 },
-        position: { x: Math.floor(Math.random() * 300) + 1, y: Math.floor(Math.random() * 300) + 1}
+        data: {
+          "Country": "Hungary",
+          "domain": 0,
+          "label": "0",
+          "name": "0",
+          "pos": [
+            19.03991,
+            47.49801
+          ],
+          "region": 0,
+          "type": "t",
+          "value": 0,
+          "weight": 0
+          },
+        position: { x: 400, y: 100 },
       });
    }
    catch (e) {
-      console.log('error');
+      console.log('error not AddEle');
    }
   }
 
   useEffect(() => {
     cy?.on('tap', (event: any) => {
-      // console.log('data->', event.target._private.data)
+      console.log('data->', event.target._private.data)
+      console.log('all->', event.target._private)
       setNode(event.target._private.data)
     });
   },[cy])
@@ -85,7 +106,7 @@ export function GraphArea({setRequest}:any){
     hiddenFileInput.current.click();
   };
 
-  function handleRun() {
+  function handleChangeLayout() {
     cy?.layout(
       {
         name: layouts[count],
@@ -101,14 +122,14 @@ export function GraphArea({setRequest}:any){
       <NavOptions>
         <ul>
           <li className="tooltip">   
-             <AiOutlineZoomIn fontSize="1.5em" cursor="not-allowed"  /> 
-             <AiOutlineZoomOut fontSize="1.5em" cursor="not-allowed" /> 
+             <AiOutlineZoomIn fontSize="1.5em"  onClick={()=>handleChangeSpacingFactor(+.1)} /> 
+             <AiOutlineZoomOut fontSize="1.5em" onClick={()=>handleChangeSpacingFactor(-.1)} /> 
           <span className="tooltiptext">Drag zoom in or zoom out</span> 
           </li>
 
           <li className="tooltip">
-             <BiUndo fontSize="1.5em" cursor="not-allowed"/>   
-             <BiRedo fontSize="1.5em" cursor="not-allowed"/>   
+             <BiUndo fontSize="1.5em" onClick={()=>{}}/>   
+             <BiRedo fontSize="1.5em" onClick={()=>{}}/>   
             <span className="tooltiptext">Undo and Redo in elements Graph</span> 
           </li>
 
@@ -130,7 +151,7 @@ export function GraphArea({setRequest}:any){
           </li>
         
           <li className="tooltip">   
-            <BsLayoutWtf fontSize="1.5em" cursor="pointer" onClick={handleRun}  /> 
+            <BsLayoutWtf fontSize="1.5em" cursor="pointer" onClick={handleChangeLayout}  /> 
           <span className="tooltiptext">Change layout</span> 
           </li>
           
