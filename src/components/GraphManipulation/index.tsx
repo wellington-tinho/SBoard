@@ -1,5 +1,5 @@
 import cytoscape, { ElementsDefinition } from 'cytoscape';
-import edgehandles from 'cytoscape-edgehandles';
+// import edgehandles from 'cytoscape-edgehandles';
 import { useContext, useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { CytoscapeContext } from '../../CytoscapeContext';
@@ -21,7 +21,8 @@ Modal.setAppElement('#root')
 
 
 export function GraphManipulation({grapJSON}:propsGraphJson){  
-
+  console.log(grapJSON);
+  
   const containerRef = useRef(null);
   const [cy,setCy] = useContext(CytoscapeContext)
   const [nodeElement,setNodeElement] = useState<any>()
@@ -102,13 +103,13 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
           fit: true, //centraliza
           animate: true,
           animationDuration: 1000,
+          spacingFactor: 1, //undefined
           // directed: true,
           // avoidOverlap: true,
           // avoidOverlapPadding: 10,
           // nodeDimensionsIncludeLabels: false,
           // padding: 50,
           // circle: true,
-          spacingFactor: 10, //undefined
         },
         style: [
           {

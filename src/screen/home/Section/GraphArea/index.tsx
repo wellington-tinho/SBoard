@@ -83,10 +83,9 @@ export function GraphArea({setRequest}:any){
   }
   
   function handleChangeZoomLevel(level: number) {
-    
 
     const newSpacing = cy?.zoom() +(level)
-    setSpacingFactorElements(newSpacing)
+    // setSpacingFactorElements(newSpacing)
 
     cy?.zoom(newSpacing);
   }

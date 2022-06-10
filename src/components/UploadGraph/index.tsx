@@ -21,41 +21,7 @@ interface UploadGraphProps{
 
 export function UploadGraph({setGraph}:UploadGraphProps){
   const [graphGML, setGraphGML] = useState()
-  const [grapJSON, setGraphJSON] = useState<iGraphJson>()
-  
-  function onDrop(file:any){ 
-    const reader = new FileReader();
-    reader.onload = function(e: any) {
-
-      
-      if(file[0].type === 'application/json'){
-        if((JSON.parse(e.target.result).elements)==undefined){
-          toast.error('Invalid JSON file!')
-        } 
-        setGraphJSON(JSON.parse(e.target.result).elements);   
-      }else{
-        setGraphGML(e.target.result)      
-      }
-    };
-    reader.readAsText(file[0]);
-  };
-  
-  useEffect(() => {
-    if(graphGML){
-      api.post('convert', {data: graphGML})
-      .then(response => {
-
-        if(response.data.elements === undefined){
-          toast.error('Invalid GML file!')
-          setGraphGML(undefined)
-        }else{
-          setGraphJSON(response.data.elements)
-        }
-      })  
-    }
-  },[graphGML]);
-
-
+  // const [grapJSON, setGraphJSON] = useState<iGraphJson>()
   const {
     getRootProps,
     getInputProps,
@@ -66,9 +32,6 @@ export function UploadGraph({setGraph}:UploadGraphProps){
     maxFiles: 1,
     onDrop,
   });
-
-
-
   const renderDragMessage = useCallback(() => {
     if (!isDragActive) {
       // console.log('isDragActive',isDragActive);
@@ -92,9 +55,43 @@ export function UploadGraph({setGraph}:UploadGraphProps){
 
     return <UploadMessage type="success">Release the files here</UploadMessage>;
   }, [isDragActive, isDragReject]);
+  
+  function onDrop(file:any){ 
+    const reader = new FileReader();
+    reader.onload = function(e: any) {
+
+      
+      if(file[0].type === 'application/json'){
+        if((JSON.parse(e.target.result).elements)==undefined){
+          toast.error('Invalid JSON file!')
+        }else{
+          setGraph(JSON.parse(e.target.result).elements);  
+        }
+      }else{
+        setGraphGML(e.target.result)      
+      }
+    };
+    reader.readAsText(file[0]);
+  };
+  
+  useEffect(() => {
+    if(graphGML){
+      api.post('convert', {data: graphGML})
+      .then(response => {
+
+        if(response.data.elements === undefined){
+          toast.error('Invalid GML file!')
+          setGraphGML(undefined)
+        }else{
+          setGraph(response.data.elements)
+        }
+      })  
+    }
+  },[graphGML]);
 
 
-  if (!grapJSON){   
+
+
     return (
       <DropContainer {...getRootProps()}>
         {/* // <DropContainer> */}
@@ -103,10 +100,6 @@ export function UploadGraph({setGraph}:UploadGraphProps){
         {renderDragMessage()}
       </DropContainer>
     );
-  }
 
-  else{
-    setGraph(grapJSON)
-    return null
-  }
+
 }

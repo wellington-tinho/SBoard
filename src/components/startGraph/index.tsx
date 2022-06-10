@@ -11,6 +11,7 @@ export function StartGraph() {
  
   
   if (!graph) {
+
     return (
       <>
         <UploadGraph setGraph={setGraph} />
