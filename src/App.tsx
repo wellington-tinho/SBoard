@@ -1,6 +1,6 @@
 // import { Footer } from "./components/Footer";
 import { ToastContainer } from 'react-toastify';
-import { Home } from './screen/home';
+import { Home } from './screen/home/home';
 import { Header } from './screen/home/Section/Header';
 import { GlobalStyle } from "./styles/global.ts";
 

@@ -72,6 +72,15 @@ export const Container = styled.form`
           input{
             cursor: pointer;
           }
+          text-overflow: ellipsis;
+          h4{
+            width: 6rem;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          
           button{
               padding: 0.25rem 0.5rem;
               border: 1px solid var(--gray-1);

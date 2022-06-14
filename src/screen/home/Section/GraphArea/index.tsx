@@ -9,6 +9,10 @@ import Modal from 'react-modal';
 import { StartGraph } from '../../../../components/startGraph';
 import { CytoscapeContext } from '../../../../CytoscapeContext';
 import { Container, GraphContainer, NavOptions } from "./styles";
+// GiJoin juntar icon
+import { TbFocusCentered } from 'react-icons/tb';
+
+
 
 
 // import { SetupModal } from '../SetupModal';
@@ -101,24 +105,27 @@ export function GraphArea({setRequest}:any){
 
   function AddEle(){
     try {
-      cy.add({
-        // group: 'nodes',
-        data: {
-          "Country": "Hungary",
-          "domain": 0,
-          "label": "0",
-          "name": "0",
-          "pos": [
-            19.03991,
-            47.49801
-          ],
-          "region": 0,
-          "type": "t",
-          "value": 0,
-          "weight": 0
-          },
-        position: { x: 400, y: 100 },
-      });
+      cy.center(
+        cy.add({
+          // group: 'nodes',
+          data: {
+            "Country": "",
+            "domain": 0,
+            "label": "0",
+            "name": "0",
+            "pos": [
+              19.03991,
+              47.49801
+            ],
+            "region": 0,
+            "type": "t",
+            "value": 0,
+            "weight": 0
+            },
+          position: { x: 1, y: 1 },
+        })
+      )
+
    }
    catch (e) {
       console.log('error not AddEle');
@@ -198,7 +205,12 @@ export function GraphArea({setRequest}:any){
           </li>
           
           <li className="tooltip">  
-            <FiPlayCircle color="#228f41" fontSize="1.5em" cursor="not-allowed" /> 
+            <TbFocusCentered fontSize="1.5em" cursor="pointer" onClick={() => cy.center()} /> 
+          <span className="tooltiptext">Center</span> 
+          </li>
+
+          <li className="tooltip">  
+            <FiPlayCircle color="#228f41" fontSize="1.5em" cursor="not-allowed" onClick={() => cy.center()} /> 
           <span className="tooltiptext">Run ??</span> 
           </li>
         
