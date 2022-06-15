@@ -27,7 +27,6 @@ export function GraphArea({setRequest}:any){
   const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
   const [element, setElement] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
-  const [spacingFactorElements, setSpacingFactorElements] = useState(3) // devido o maxZoom ser 3 é recomendado começarmos com 3
   const hiddenFileRequestInput = useRef<any>(null); 
   const layouts = [
     {
@@ -66,6 +65,12 @@ export function GraphArea({setRequest}:any){
       fit: true
   }]
   var count = 0
+
+  // document.body.addEventListener('keydown', function (event) {
+  //   const key = event.key;
+  //   const code = event.keyCode;
+  //   console.log(`Key: ${key}, Code ${code}`);
+  // });
 
   useEffect( () => {
 
@@ -111,11 +116,11 @@ export function GraphArea({setRequest}:any){
           data: {
             "Country": "",
             "domain": 0,
-            "label": "0",
-            "name": "0",
+            "label": "",
+            "name": "",
             "pos": [
-              19.03991,
-              47.49801
+              0,
+              0
             ],
             "region": 0,
             "type": "t",

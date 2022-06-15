@@ -1,5 +1,5 @@
-import cytoscape, { ElementsDefinition } from 'cytoscape';
-// import edgehandles from 'cytoscape-edgehandles';
+import cytoscape, { Core, ElementsDefinition } from 'cytoscape';
+import edgehandles, {EdgeHandlesInstance} from 'cytoscape-edgehandles';
 import { useContext, useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { CytoscapeContext } from '../../CytoscapeContext';
@@ -21,16 +21,11 @@ Modal.setAppElement('#root')
 
 
 export function GraphManipulation({grapJSON}:propsGraphJson){  
-  console.log(grapJSON);
-  
   const containerRef = useRef(null);
-  const [cy,setCy] = useContext(CytoscapeContext)
+  const [cy,setCy] = useContext<Core|any>(CytoscapeContext)
   const [nodeElement,setNodeElement] = useState<any>()
   const [edgeElement,setEdgeElement] = useState<any>()
-
-  console.log(grapJSON);
   
-
   Object.keys(grapJSON.edges).forEach(key=>{      
     (grapJSON.edges[Number(key)].data) = {
       ...grapJSON.edges[Number(key)].data,
@@ -50,7 +45,6 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
 
   //caso nao tiver latitude e longitude, então não tem posição no graph, (gero no random)
   var nothasLongLatInGraph = !grapJSON.nodes[0].data.Longitude && !grapJSON.nodes[0].data.Latitude
-
 
 
   if (notHasPositionInGraph){
@@ -228,9 +222,11 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
         zoomDelay: 45, // how many ms between zoom ticks
         zoom: 3
       };
-      // cytoscape(config);
+      cytoscape.use( edgehandles )
+      
 
-      setCy(cytoscape(config))    
+      setCy(cytoscape(config))
+     
 
     },[])
     
@@ -275,7 +271,27 @@ export function GraphManipulation({grapJSON}:propsGraphJson){
         }
       });
 
-      
+      // // the default values of each option are outlined below:
+      // let defaults = {
+      //   canConnect: function( sourceNode: { same: (arg0: any) => any; }, targetNode: any ){
+      //     // whether an edge can be created between source and target
+      //     return !sourceNode.same(targetNode); // e.g. disallow loops
+      //   },
+      //   edgeParams: function( sourceNode: any, targetNode: any ){
+      //     // for edges between the specified source and target
+      //     // return element object to be passed to cy.add() for edge
+      //     return {};
+      //   },
+      //   hoverDelay: 150, // time spent hovering over a target node before it is considered selected
+      //   snap: true, // when enabled, the edge can be drawn by just moving close to a target node (can be confusing on compound graphs)
+      //   snapThreshold: 50, // the target node must be less than or equal to this many pixels away from the cursor/finger
+      //   snapFrequency: 15, // the number of times per second (Hz) that snap checks done (lower is less expensive)
+      //   noEdgeEventsInDraw: true, // set events:no to edges during draws, prevents mouseouts on compounds
+      //   disableBrowserGestures: true // during an edge drawing gesture, disable browser gestures such as two-finger trackpad swipe and pinch-to-zoom
+      // };
+
+      // let eh:EdgeHandlesInstance = cy?.edgehandles(defaults);
+
     }
     
    

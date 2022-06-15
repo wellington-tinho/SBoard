@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { CytoscapeContext } from "../../CytoscapeContext";
 import { Aside } from "./Section/Aside";
 import { GraphArea } from "./Section/GraphArea";
+import { Core } from "cytoscape";
+
+
 
 const Content = styled.div `
   display: flex;
@@ -22,8 +25,11 @@ const Content = styled.div `
 `
 
 export function Home(){
-  const [cy, setCy] = useState<cytoscape.Core>()
+  const [cy, setCy] = useState<Core>()
   const [request, setRequest]= useState({})
+
+
+
   
   return(
     <CytoscapeContext.Provider value={[cy, setCy]}>
