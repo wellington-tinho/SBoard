@@ -74,11 +74,7 @@ export function GraphArea({setRequest}:any){
 
   useEffect( () => {
     if(cy){
-    console.log('value cy= ',cy)
-
       cy?.on('tap', (event: any) => {
-        console.log('data->', event.target._private.data)
-        console.log('all->', event.target._private)
         setElement(event.target._private.data)
       });
      }

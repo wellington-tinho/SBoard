@@ -16,7 +16,6 @@ specifiers:
   '@vitejs/plugin-react': ^1.0.7
   axios: ^0.21.1
   cytoscape: ^3.19.1
-  cytoscape-dom-node: ^1.1.0
   cytoscape-edgehandles: ^4.0.1
   react: ^17.0.2
   react-cytoscapejs: ^1.2.1
@@ -36,7 +35,6 @@ specifiers:
 dependencies:
   axios: 0.21.4
   cytoscape: 3.21.1
-  cytoscape-dom-node: 1.1.0_cytoscape@3.21.1
   cytoscape-edgehandles: 4.0.1_cytoscape@3.21.1
   react: 17.0.2
   react-cytoscapejs: 1.2.1_sfoxds7t5ydpegc3knd667wn6m
@@ -775,14 +773,6 @@ packages:
   /csstype/3.1.0:
     resolution: {integrity: sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==}
     dev: true
-
-  /cytoscape-dom-node/1.1.0_cytoscape@3.21.1:
-    resolution: {integrity: sha512-t/nL5cm4UL4gvCz3ZSdh6JlnvVbbgx7l15tZmVvA3j8cXHjqPEs7qiUlf8X0XG7uUlfNGkQroH3fiTeHHWH4sQ==}
-    peerDependencies:
-      cytoscape: ^3.19.0
-    dependencies:
-      cytoscape: 3.21.1
-    dev: false
 
   /cytoscape-edgehandles/4.0.1_cytoscape@3.21.1:
     resolution: {integrity: sha512-uSYshkqRZ4luCxK295bEVTg46q4ZW+fwJhcIzMrtfNR7zeAnJ38Z48kUGeu5ibtXkgLbcZAg0YE4ED2dRuaePg==}
