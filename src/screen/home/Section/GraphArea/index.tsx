@@ -1,4 +1,9 @@
 import { lazy, Suspense, useContext, useEffect, useRef, useState } from 'react';
+import { CytoscapeContext } from '../../../../CytoscapeContext';
+import { StartGraph } from '../../../../components/startGraph';
+import useInitCytoscapeExtensions from '../../../../hooks/useInitCytoscapeExtensions';
+const SetupModal = lazy((): Promise<any> =>  import('../../../../components/SetupModal'));
+
 import { AiOutlineZoomIn, AiOutlineZoomOut } from 'react-icons/ai';
 import { BiGitPullRequest, BiRedo, BiUndo } from 'react-icons/bi';
 import { BsGear, BsLayoutWtf } from 'react-icons/bs';
@@ -6,17 +11,14 @@ import { FiPlayCircle } from 'react-icons/fi';
 import { HiOutlineViewGridAdd } from 'react-icons/hi';
 import { RiChatDeleteLine } from 'react-icons/ri';
 import Modal from 'react-modal';
-import { StartGraph } from '../../../../components/startGraph';
-import { CytoscapeContext } from '../../../../CytoscapeContext';
-import { Container, GraphContainer, NavOptions } from "./styles";
-// GiJoin juntar icon
 import { TbFocusCentered } from 'react-icons/tb';
 
+import { Container, GraphContainer, NavOptions } from "./styles";
+// GiJoin juntar icon
 
 
 
 // import { SetupModal } from '../SetupModal';
-const SetupModal = lazy((): Promise<any> =>  import('../../../../components/SetupModal'));
 
 
   
@@ -28,6 +30,8 @@ export function GraphArea({setRequest}:any){
   const [element, setElement] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
   const hiddenFileRequestInput = useRef<any>(null); 
+  // const [eh, setEh] = useState(undefined as unknown as EdgeHandlesInstance);
+  const [drawMode, setDrawMode] = useState(false);
   const layouts = [
     {
       name: "preset",
@@ -64,24 +68,27 @@ export function GraphArea({setRequest}:any){
       name:'breadthfirst',
       fit: true
   }]
+  const { edgeHandles } = useInitCytoscapeExtensions(cy);
   var count = 0
 
-  // document.body.addEventListener('keydown', function (event) {
-  //   const key = event.key;
-  //   const code = event.keyCode;
-  //   console.log(`Key: ${key}, Code ${code}`);
-  // });
 
   useEffect( () => {
+    if(cy){
+    console.log('value cy= ',cy)
 
-    cy?.on('tap', (event: any) => {
-      console.log('data->', event.target._private.data)
-      console.log('all->', event.target._private)
-      setElement(event.target._private.data)
-    });
-
+      cy?.on('tap', (event: any) => {
+        console.log('data->', event.target._private.data)
+        console.log('all->', event.target._private)
+        setElement(event.target._private.data)
+      });
+     }
   },[cy])
 
+  // Update edgehandles draw mode
+  useEffect(() => {
+    if (edgeHandles === undefined) return;
+    drawMode ? edgeHandles.enableDrawMode() : edgeHandles.disableDrawMode();
+  }, [drawMode, edgeHandles]);
 
   function handleOpenSetupModal(){
     setIsSetupModal(true)
@@ -168,6 +175,10 @@ export function GraphArea({setRequest}:any){
     cy?.layout(layouts[count]).run();
     count = (count+1)%layouts.length
   }
+
+  function handleEdgehandles(){
+    setDrawMode(!drawMode)
+  }
    
 
   return(
@@ -214,6 +225,11 @@ export function GraphArea({setRequest}:any){
           <span className="tooltiptext">Center</span> 
           </li>
 
+          <li className="tooltip">  
+            <FiPlayCircle fontSize="1.5em" cursor="not-allowed" onClick={handleEdgehandles} /> 
+          <span className="tooltiptext">{drawMode ? 'Draw On' : 'Draw Off'}</span> 
+          </li>
+        
           <li className="tooltip">  
             <FiPlayCircle color="#228f41" fontSize="1.5em" cursor="not-allowed" onClick={() => cy.center()} /> 
           <span className="tooltiptext">Run ??</span> 
