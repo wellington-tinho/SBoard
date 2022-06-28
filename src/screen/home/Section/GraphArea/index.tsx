@@ -10,8 +10,9 @@ import { BsGear, BsLayoutWtf } from 'react-icons/bs';
 import { FiPlayCircle } from 'react-icons/fi';
 import { HiOutlineViewGridAdd } from 'react-icons/hi';
 import { RiChatDeleteLine } from 'react-icons/ri';
-import Modal from 'react-modal';
 import { TbFocusCentered } from 'react-icons/tb';
+
+import Modal from 'react-modal';
 
 import { Container, GraphContainer, NavOptions } from "./styles";
 // GiJoin juntar icon
