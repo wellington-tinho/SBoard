@@ -4,8 +4,8 @@ import { StartGraph } from '../../../../components/startGraph';
 import useInitCytoscapeExtensions from '../../../../hooks/useInitCytoscapeExtensions';
 const SetupModal = lazy((): Promise<any> =>  import('../../../../components/SetupModal'));
 
-import { AiOutlineZoomIn, AiOutlineZoomOut } from 'react-icons/ai';
-import { BiGitPullRequest, BiRedo, BiUndo } from 'react-icons/bi';
+import { AiOutlineZoomIn, AiOutlineZoomOut, AiOutlineExpandAlt, AiOutlineShrink } from 'react-icons/ai';
+import { BiGitPullRequest } from 'react-icons/bi';
 import { BsGear, BsLayoutWtf } from 'react-icons/bs';
 import { FiPlayCircle } from 'react-icons/fi';
 import { HiOutlineViewGridAdd } from 'react-icons/hi';
@@ -190,10 +190,15 @@ export function GraphArea({setRequest}:any){
           </li>
 
           <li className="tooltip">
+             <AiOutlineExpandAlt fontSize="1.5em" onClick={()=>{handleChangeSpacingFactor(1.1)}}/>   
+             <AiOutlineShrink fontSize="1.5em" onClick={()=>{handleChangeSpacingFactor(0.9)}}/>   
+            <span className="tooltiptext">Undo and Redo in elements Graph</span> 
+          </li>
+          {/* <li className="tooltip">
              <BiUndo fontSize="1.5em" onClick={()=>{handleChangeSpacingFactor(1.1)}}/>   
              <BiRedo fontSize="1.5em" onClick={()=>{handleChangeSpacingFactor(0.9)}}/>   
             <span className="tooltiptext">Undo and Redo in elements Graph</span> 
-          </li>
+          </li> */}
 
           <li className="tooltip"> 
              <HiOutlineViewGridAdd fontSize="1.5em" cursor="pointer" onClick={AddEle}/>

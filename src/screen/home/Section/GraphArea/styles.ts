@@ -38,6 +38,7 @@ export const NavOptions  = styled.nav`
         :hover{
           transition: 0.2s;
           border-bottom: 1px solid var(--green-3);
+          transform: scale(1.4); 
                  
         }
       }
