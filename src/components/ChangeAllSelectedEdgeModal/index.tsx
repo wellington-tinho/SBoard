@@ -47,7 +47,7 @@ export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: Ch
       var delay =             generatesRandomBetweenRange(delayStart, delayEnd)
 
   
-
+      // {refatorar}
       cy.$(`#${edges[i]}`)
       // .data('source',       source ?      source :       cy.$(`#${edges[i]}`).data('source') )
       // .data('target',       target ?      target :       cy.$(`#${edges[i]}`).data('target') )

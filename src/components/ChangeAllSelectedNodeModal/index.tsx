@@ -43,7 +43,7 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
       
       var weight = generatesRandomBetweenRange(weightStart, weightEnd)
       
-      /// Descobrir como chamar esta funçao apenas quando cada valor for alterado
+      /// Descobrir como chamar esta funçao apenas quando cada valor for alterado {refatorar}
       cy.$(`#${nodes[i]}`)
       .data('Country',   country  ?   country :     cy.$(`#${nodes[i]}`).data('Country') )
       .data('domain',    domain   ?   domain  :     cy.$(`#${nodes[i]}`).data('domain') )

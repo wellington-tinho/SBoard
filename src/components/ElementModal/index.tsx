@@ -55,26 +55,27 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
 
   //criaçao dos inputs Nodes e edges
   useEffect(function CreateInputsNodesAndEdges(){
-    // console.log('displaro no cy = ',cy.$(''));   
+    // console.log('displaro no cy = ',cy.$('')); 
     if(cy !== undefined){
+      const cyNodes  = cy.nodes() 
 
     
       var eleNodes:any = []
-      for (let key = 0; key < cy.nodes().length; key++) {
+      for (let key = 0; key < cyNodes.length; key++) {
 
         eleNodes.push(
           <li key={key}> 
                 <input 
-                  // onChange={e => toggleCheckBox(e, cy.nodes()[key])}     //{/* lembrar de refatorar cy.edges() aki */}
+                  // onChange={e => toggleCheckBox(e, cyNodes[key])}     //{/* lembrar de refatorar cy.edges() aki */}
                   type="checkbox"
-                  id={'nodeElementModalInput'+cy.nodes()[key].data("id")}  
-                  name={'nodeElementModalInput'+cy.nodes()[key].data("id")} 
+                  id={'nodeElementModalInput'+cyNodes[key].data("id")}  
+                  name={'nodeElementModalInput'+cyNodes[key].data("id")} 
                   // checked={false}
                   /> 
-                  <h4> Node {cy.nodes()[key].data("id")} </h4> 
+                  <h4> Node {cyNodes[key].data("id")} </h4> 
 
                   <button 
-                    onClick={() =>  handleOpenNodeModal(cy.nodes()[key].data())} > 
+                    onClick={() =>  handleOpenNodeModal(cyNodes[key].data())} > 
                     {/* onClick={() =>  {}} >  */}
                     Change Element
                   </button>
@@ -83,23 +84,24 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
       }
 
       var eleEdges:any = []
-      for (let key = 0; key < cy.edges().length; key++) {
+      const cyEdges  = cy.edges() 
 
-        ///lembrar de refatorar cy.edges() aki
+      for (let key = 0; key < cyEdges.length; key++) {
+
+        ///lembrar de refatorar cyEdges aki
         eleEdges.push(
           <li key={key}> 
                   <input 
-                    // onChange={e => toggleCheckBox(e, cy.edges()[key])}     //{/* lembrar de refatorar cy.edges() aki */}
+                    // onChange={e => toggleCheckBox(e, cyEdges[key])}    
                     type="checkbox"
-                    id={'edgeElementModalInput'+cy.edges()[key].data("id")}
-                    name={'edgeElementModalInput'+cy.edges()[key].data("id")}
+                    id={'edgeElementModalInput'+cyEdges[key].data("id")}
+                    name={'edgeElementModalInput'+cyEdges[key].data("id")}
                     /> 
                     
-                 <h4> Edge {cy.edges()[key].data("id")} </h4>      {/* lembrar de refatorar cy.edges() aki */}
+                 <h4> Edge {cyEdges[key].data("id")} </h4>      
                     
                     <button 
-                      onClick={() =>  handleOpenEdgeModal(cy.edges()[key].data())} >    {/* lembrar de refatorar cy.edges() aki */}
-                      {/* onClick={() =>  {}} >  */}
+                      onClick={() =>  handleOpenEdgeModal(cyEdges[key].data())} >   
                       Change Element
                     </button>
               </li>
@@ -202,8 +204,6 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
     
     
     if (value!==''){
-
-
      /// Filter input value 
       var operation = ''
       if(value[0] == '<'|| value[0] ==  '='|| value[0] ==  '>'){
