@@ -1,10 +1,13 @@
 import React from 'react';
 
 // import { Container } from './styles';
-export function Generate(){
+export function Generate() {
 
   return (
-    <p className="paragraph">Funcionalidade em Construção</p>
+    <p className="paragraph">
+
+      <button> Clique aqui para gerar</button>
+    </p>
     // <form onSubmit={handleSubmitCreateRequest}>
     //   <div className='InfoGeneralRequest'>
     //     <h4>Informe quantas requisições deseja Gerar</h4>

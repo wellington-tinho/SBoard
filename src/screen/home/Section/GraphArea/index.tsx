@@ -228,14 +228,14 @@ export function GraphArea({ setRequest }: any) {
           </li>
 
           <li className="tooltip">
-            <FiPlayCircle fontSize="1.5em" cursor="not-allowed" onClick={handleEdgehandles} />
+            <FiPlayCircle fontSize="1.5em" onClick={handleEdgehandles} />
             <span className="tooltiptext">{drawMode ? 'Draw On' : 'Draw Off'}</span>
           </li>
 
-          <li className="tooltip">
+          {/* <li className="tooltip">
             <FiPlayCircle color="#228f41" fontSize="1.5em" cursor="not-allowed" onClick={() => cy.center()} />
             <span className="tooltiptext">Run ??</span>
-          </li>
+          </li> */}
 
         </ul>
       </NavOptions>

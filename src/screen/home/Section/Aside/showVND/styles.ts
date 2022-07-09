@@ -74,7 +74,7 @@ export const Container = styled.div`
               }
             }
           }
-          div.virtualNetworkRequests{
+          div.virtualNodesRequest{
             display: grid;
             grid-template-columns: 1fr;
             border: 1px solid var(--gray-1);

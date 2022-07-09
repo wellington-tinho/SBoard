@@ -1,13 +1,13 @@
 
 import { Container } from './styles';
 
-interface virtualNodeDemandInterface{
+interface virtualNodeDemandInterface {
   id: number;
   requested: number;
   vnr_id: number;
   domain: number;
   region: number;
-  type: number | string; 
+  type: number | string;
   period: number;
   sink: number;
 }
@@ -16,7 +16,7 @@ interface requestUnicInterface {
   id: number;
   vnd: virtualNodeDemandInterface[];
   links: [[number]];
-  created: number;  
+  created: number;
   duration: number;
   period: number;
   bandwidth: number;
@@ -26,23 +26,23 @@ interface requestUnicInterface {
 }
 
 
-interface AsideOthersProps{
-  requestList: requestUnicInterface[] ,
-  appendRequestList: (file: any)=> void,
-  setRequestList:React.Dispatch<React.SetStateAction<any>>, 
+interface AsideOthersProps {
+  requestList: requestUnicInterface[],
+  appendRequestList: (file: any) => void,
+  setRequestList: React.Dispatch<React.SetStateAction<any>>,
 
 }
 
 export function AsideOthers(
-  {appendRequestList,requestList,setRequestList}:AsideOthersProps
-  ) {
+  { appendRequestList, requestList, setRequestList }: AsideOthersProps
+) {
 
-  function DownloadRequestList(){
+  function DownloadRequestList() {
     var a = document.createElement("a");
-    document.body.appendChild(a);  
+    document.body.appendChild(a);
     var json = JSON.stringify(requestList),
-    blob = new Blob([json], {type: "octet/stream"}),
-    url = window.URL.createObjectURL(blob);
+      blob = new Blob([json], { type: "octet/stream" }),
+      url = window.URL.createObjectURL(blob);
     // a.style = "display: none";
     a.setAttribute('style', 'display: none;');
     a.href = url;
@@ -52,22 +52,22 @@ export function AsideOthers(
   }
 
   return <Container>
-    <button onClick={()=>{setRequestList({})}}> Limpar Todas Requests</button>
-    <button onClick={DownloadRequestList}> Baixar Requests</button>
+    <button onClick={() => { setRequestList({}) }}>  Erase all requests </button>
+    <button onClick={DownloadRequestList}> Download Requests</button>
 
     <div className='UploadJSON'>
-      <input 
-        type="file" 
-        name="AppendJSON" 
-        id="AppendJSON"  
-        onChange={appendRequestList} 
-        hidden={true}  
+      <input
+        type="file"
+        name="AppendJSON"
+        id="AppendJSON"
+        onChange={appendRequestList}
+        hidden={true}
         accept=".json,.JSON"
       />
-      {/* <label htmlFor="UploadJSON">Append JSON</label> */}
-      <label htmlFor="AppendJSON"> 
-        Concatenar nova requisiçao 
-      </label>  
+
+      <label htmlFor="AppendJSON">
+        Concatenate new request
+      </label>
     </div>
   </Container>;
 }

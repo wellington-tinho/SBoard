@@ -17,7 +17,7 @@ interface IEdgeElement {
   label: string;
   negative: number;
   reliability: number;
-  delay: number; 
+  delay: number;
 }
 
 interface EdgeModalProps {
@@ -27,26 +27,26 @@ interface EdgeModalProps {
 }
 
 export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
-  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext); 
+  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
 
-  const [id, setId ] = useState(String)
-  const [source, setSource ] = useState(String)
-  const [target, setTarget ] = useState(String)
-  const [negative, setNegative ] = useState(Number)
+  const [id, setId] = useState(String)
+  const [source, setSource] = useState(String)
+  const [target, setTarget] = useState(String)
+  const [negative, setNegative] = useState(Number)
 
   const [weightStart, setWeightStart] = useState<number>()
-  const [weightEnd, setWeightEnd ] = useState<number>()
+  const [weightEnd, setWeightEnd] = useState<number>()
 
   const [reliabilityStart, setReliabilityStart] = useState<number>()
-  const [reliabilityEnd, setReliabilityEnd ] = useState<number>()
+  const [reliabilityEnd, setReliabilityEnd] = useState<number>()
 
   const [delayStart, setDelayStart] = useState<number>()
   const [delayEnd, setDelayEnd] = useState<number>()
 
-    
+
   useEffect(() => {
-    if(edge){ 
-    
+    if (edge) {
+
       setId(edge.id)
       setSource(edge.source)
       setTarget(edge.target)
@@ -59,38 +59,38 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
       setDelayEnd(edge.delay)
 
     }
-  },[edge])
-
-  
+  }, [edge])
 
 
-  function EditElements(event:FormEvent) {
+
+
+  function EditElements(event: FormEvent) {
     event.preventDefault();
 
 
     /// Descobrir como chamar esta funçao apenas quando cada valor for alterado
     cy.$(`#${id}`)
-    .data('source', source)
-    .data('target', target)
-    .data('negative', negative)
-    
-    if((weightStart && weightEnd) !== edge.weight ){
+      .data('source', source)
+      .data('target', target)
+      .data('negative', negative)
+
+    if ((weightStart && weightEnd) !== edge.weight) {
       cy.$(`#${id}`)
-      .data('weight', generatesRandomBetweenRange(weightStart, weightEnd)) // returns a random number between the ranges
-    }
-    
-    if((reliabilityStart && reliabilityEnd) !== edge.reliability ){
-      cy.$(`#${id}`)
-      .data('reliability', generatesRandomBetweenRange(reliabilityStart, reliabilityEnd)) // returns a random number between the ranges
+        .data('weight', generatesRandomBetweenRange(weightStart, weightEnd)) // returns a random number between the ranges
     }
 
-    if((delayStart && delayEnd) !== edge.delay ){
+    if ((reliabilityStart && reliabilityEnd) !== edge.reliability) {
       cy.$(`#${id}`)
-      .data('delay', generatesRandomBetweenRange(delayStart, delayEnd)) // returns a random number between the ranges
+        .data('reliability', generatesRandomBetweenRange(reliabilityStart, reliabilityEnd)) // returns a random number between the ranges
     }
 
-    toast.success('Edge modified with success!'); 
- 
+    if ((delayStart && delayEnd) !== edge.delay) {
+      cy.$(`#${id}`)
+        .data('delay', generatesRandomBetweenRange(delayStart, delayEnd)) // returns a random number between the ranges
+    }
+
+    toast.success('Edge modified with success!');
+
   }
 
 
@@ -104,29 +104,29 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
     >
 
       <Container onSubmit={EditElements}>
-        <VscChromeClose  onClick={onRequestClose} className='react-modal-close' />
+        <VscChromeClose onClick={onRequestClose} className='react-modal-close' />
         <h2>Edge Data</h2>
 
         <div>
           <div>
             <p>id</p>
-            <input 
+            <input
               onChange={
-                event =>setId(event.target.value)
-                } 
-              type="string" name="id" id='id' 
+                event => setId(event.target.value)
+              }
+              type="string" name="id" id='id'
               placeholder={id}
-              disabled 
+              disabled
             />
           </div>
           <div>
             <p>source</p>
-            <input 
+            <input
               onChange={
-                event =>setSource(event.target.value)
+                event => setSource(event.target.value)
               }
-              type="string" name="source" 
-              id="source" 
+              type="string" name="source"
+              id="source"
               placeholder={source}
               disabled
             />
@@ -134,11 +134,11 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
 
           <div>
             <p>target</p>
-            <input 
+            <input
               onChange={
-                event =>setTarget(event.target.value)
-                } 
-              type="string" name="target" id="target" 
+                event => setTarget(event.target.value)
+              }
+              type="string" name="target" id="target"
               placeholder={target}
               disabled
             />
@@ -146,11 +146,11 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
 
           <div>
             <p>negative</p>
-            <input 
+            <input
               onChange={
                 event => event.target.value === '' ? setNegative(edge.negative) : setNegative(Number(event.target.value))
-                } 
-              type="number" name="negative" id='negative' 
+              }
+              type="number" name="negative" id='negative'
               placeholder={String(negative)}
             />
           </div>
@@ -159,84 +159,85 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
 
             <div className="tooltip">
 
-              <input 
+              <input
                 onChange={
                   event => {
-                    event.target.value === '' ?  setWeightStart(edge.weight) : setWeightStart(Number(event.target.value))  
+                    event.target.value === '' ? setWeightStart(edge.weight) : setWeightStart(Number(event.target.value))
                   }
                 }
-                max={weightEnd} 
-                type="number" name="weightStart" 
-                id="weightStart"	 
+                max={weightEnd}
+                type="number" name="weightStart"
+                id="weightStart"
                 placeholder={String(weightStart)}
               />
-            
-              <input 
+
+              <input
                 onChange={
-                  event => { 
-                    event.target.value === '' ?  setWeightEnd(edge.weight) : setWeightEnd(Number(event.target.value))}
+                  event => {
+                    event.target.value === '' ? setWeightEnd(edge.weight) : setWeightEnd(Number(event.target.value))
                   }
-                min={weightStart}  
+                }
+                min={weightStart}
                 type="number" name="weightEnd"
                 id="weightEnd"
                 placeholder={String(weightEnd)}
               />
-            <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
+              <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
 
             </div>
 
           </div>
-          
+
           <div>
-            <p>Reliability</p>
-                  
+            <p>reliability</p>
+
             <div className="tooltip">
 
-              <input 
+              <input
                 onChange={
-                  event =>{ event.target.value === '' ?  setReliabilityStart(edge.reliability) : setReliabilityStart(Number(event.target.value))}
-                  }
-                max={reliabilityEnd} 
-                type="number" name="ReliabilityStart" 
-                id="RealityStart"	 
+                  event => { event.target.value === '' ? setReliabilityStart(edge.reliability) : setReliabilityStart(Number(event.target.value)) }
+                }
+                max={reliabilityEnd}
+                type="number" name="ReliabilityStart"
+                id="RealityStart"
                 placeholder={String(reliabilityStart)}
               />
- 
-              <input 
+
+              <input
                 onChange={
                   event => event.target.value === '' ? setReliabilityEnd(edge.reliability) : setReliabilityEnd(Number(event.target.value))
-                  } 
+                }
                 min={reliabilityStart}
-                type="number" name="ReliabilityEnd" 
-                id="RealityEnd"	 
+                type="number" name="ReliabilityEnd"
+                id="RealityEnd"
                 placeholder={String(reliabilityEnd)}
               />
-            <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
+              <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
 
             </div>
           </div>
 
           <div>
-            <p>Delay</p>
+            <p>delay</p>
             <div className="tooltip">
 
-              <input 
-                onChange={ 
-                  event => event.target.value === '' ? setDelayStart(edge.delay): setDelayStart(Number(event.target.value))
-                  }
-                max={delayEnd} 
-                type="number" name="DelayStart" 
-                id="RealityStart"	 
+              <input
+                onChange={
+                  event => event.target.value === '' ? setDelayStart(edge.delay) : setDelayStart(Number(event.target.value))
+                }
+                max={delayEnd}
+                type="number" name="DelayStart"
+                id="RealityStart"
                 placeholder={String(delayStart)}
               />
 
-              <input 
+              <input
                 onChange={
-                  event => event.target.value === '' ?setDelayEnd(edge.delay) : setDelayEnd(Number(event.target.value))
-                  }
-                min={delayStart} 
-                type="number" name="DelayEnd" 
-                id="RealityEnd"	 
+                  event => event.target.value === '' ? setDelayEnd(edge.delay) : setDelayEnd(Number(event.target.value))
+                }
+                min={delayStart}
+                type="number" name="DelayEnd"
+                id="RealityEnd"
                 placeholder={String(delayEnd)}
               />
               <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
@@ -244,9 +245,9 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
             </div>
           </div>
 
-         
-      
-          <button  type="submit">
+
+
+          <button type="submit">
             Salvar alterações
           </button >
 
