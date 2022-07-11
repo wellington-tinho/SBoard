@@ -2,7 +2,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
-import { CytoscapeContext } from '../../CytoscapeContext';
+import { CytoscapeContext } from '../../context/CytoscapeContext';
 import { api } from '../../services/api';
 import { Container } from './styles';
 
@@ -17,7 +17,7 @@ interface ChartOptionsProps {
 
 
 export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
-  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
+  const [cy, setCy] = useContext<cytoscape.Core[] | any>(CytoscapeContext);
   const [graphInported, setGraphInported] = useState<any>()
   // const [grapGML, setGraphGML] = useState<string>()
 
@@ -264,8 +264,11 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
         <VscChromeClose onClick={onRequestClose} className='react-modal-close' />
         <h2>Chart Options</h2>
 
+        {console.log(cy?.data())}
 
-        <button onClick={() => { cy.destroy(); }}>
+        <button onClick={() => {
+          cy.destroy(); console.log(cy?.data());
+        }}>
           Clear graph
         </button >
 
@@ -275,13 +278,13 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
 
         <button onClick={handleClick}>
           <input type='file' name="UploadDataset" id="UploadDataset" ref={hiddenFileInput} onChange={InportGraph} />
-
           Import New Graph
         </button >
 
+        {/* 
         <button onClick={() => { console.log('Others') }}>
           Others
-        </button >
+        </button > */}
 
       </Container>
     </Modal>

@@ -3,10 +3,18 @@ import React from 'react';
 // import { Container } from './styles';
 export function Generate() {
 
+  function handleGenerateRequests() { 
+    
+  }
+
+
   return (
     <p className="paragraph">
-
-      <button> Clique aqui para gerar</button>
+      <div>
+        <p>Quantity to be generated</p>
+        <input type="number" name="quantity" id="quantityGenerate" placeholder='10' />
+      </div>
+      <button>Click here to generate</button>
     </p>
     // <form onSubmit={handleSubmitCreateRequest}>
     //   <div className='InfoGeneralRequest'>
