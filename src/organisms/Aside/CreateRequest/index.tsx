@@ -180,7 +180,6 @@ export function CreateRequest(
 
           <CreateOne
             arrayResponseformVND={arrayResponseformVND}
-
             handleSubmitCreateRequest={handleSubmitCreateRequest}
             handleChangeRequest={handleChangeRequest}
             handleChangeVND={handleChangeVND}
@@ -195,11 +194,8 @@ export function CreateRequest(
 
 
           <CreateSeveral
-
-
             setNumberOfRequest={setNumberOfRequest}
             arrayResponseformVND={arrayResponseformVND}
-
             handleSubmitCreateSeveralRequest={handleSubmitCreateSeveralRequest}
             handleChangeRequest={handleChangeRequest}
             handleChangeVND={handleChangeVND}

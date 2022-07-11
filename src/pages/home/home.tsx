@@ -30,7 +30,6 @@ export function Home() {
       <Content>
         <GraphArea setRequest={setRequest} />
         <Aside request={request} />
-        {/* <Footer /> */}
       </Content>
     </CytoscapeContext.Provider>
 
