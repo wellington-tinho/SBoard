@@ -3,7 +3,7 @@ import { FormEvent, useContext, useEffect, useState } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
-import { CytoscapeContext } from '../../CytoscapeContext';
+import { CytoscapeContext } from '../../context/CytoscapeContext';
 import { generatesRandomBetweenRange } from '../../util/randomNumber';
 import { Container } from './styles';
 

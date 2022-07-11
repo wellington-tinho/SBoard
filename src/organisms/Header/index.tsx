@@ -1,6 +1,6 @@
 // import { Container } from "./styles";
 import styled from "styled-components";
-import logoImg from '././../../../../assets/Logo.png';
+import logoImg from '././../../assets/logo.png';
 
 
 
@@ -54,15 +54,15 @@ export const Container = styled.header`
 `;
 
 
-export function Header(){
+export function Header() {
 
   return (
-      <Container>
-        <img src={logoImg} alt="Logo" loading="lazy" height={'37px'} width={'37px'}/>
-        <h1>SBoard</h1>
-        <h2>Dashboard for managing sliced networks</h2>
+    <Container>
+      <img src={logoImg} alt="Logo" loading="lazy" height={'37px'} width={'37px'} />
+      <h1>SBoard</h1>
+      <h2>Dashboard for managing sliced networks</h2>
 
-       {/* <Particles 
+      {/* <Particles 
           id="tsparticles"
           options={{
             fpsLimit: 60,
@@ -138,6 +138,6 @@ export function Header(){
           }}
         /> */}
 
-      </Container>
+    </Container>
   )
 }

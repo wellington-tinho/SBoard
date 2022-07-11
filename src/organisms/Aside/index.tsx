@@ -1,7 +1,7 @@
 import { useContext, useEffect, useReducer, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { CytoscapeContext } from "../../../../CytoscapeContext";
+import { CytoscapeContext } from "../../context/CytoscapeContext";
 import { CreateRequest } from "./CreateRequest";
 import { EditionRequest } from "./EditionRequest/index";
 import { AsideOthers } from "./outhers/others";
@@ -12,13 +12,13 @@ import { Container } from "./styles";
 
 
 
-interface virtualNodeDemandInterface{
+interface virtualNodeDemandInterface {
   id: number;
   requested: number;
   vnr_id: number;
   domain: number;
   region: number;
-  type: number | string; 
+  type: number | string;
   period: number;
   sink: number;
 }
@@ -27,7 +27,7 @@ interface requestUnicInterface {
   id: number;
   vnd: virtualNodeDemandInterface[];
   links: [[number]];
-  created: number;  
+  created: number;
   duration: number;
   period: number;
   bandwidth: number;
@@ -37,14 +37,14 @@ interface requestUnicInterface {
 }
 
 
-const formCreateRequest = (state:any, event:any) => {
+const formCreateRequest = (state: any, event: any) => {
   return {
     ...state,
     [event.name]: event.value
   }
 }
 
-const formCreateVND = (state:any, event:any) => {
+const formCreateVND = (state: any, event: any) => {
   return {
     ...state,
     [event.name]: event.value
@@ -61,14 +61,14 @@ export function Aside({ request }: any) {
 
   const [requestList, setRequestList] = useState<requestUnicInterface[]>(request)
   const qtdRequests = (0)
- 
-  
-  const [checboxState, setChecboxState] = useState( false )
+
+
+  const [checboxState, setChecboxState] = useState(false)
   const colors = ['#6A5ACD', '#0000CD', '#4682B4', '#00FFFF', '#00FF7F', '#00FF7F', '#ADFF2F', '#ADFF2F', '#DAA520', '#8B4513', '#BC8F8F', '#7B68EE', '#4B0082', '#9400D3', '#800080', '#FF00FF', '#C71585', '#FF1493', '#DB7093', '#CD5C5C', '#DC143C', '#FF0000', '#FF4500', '#B22222', '#FF8C00', '#FF8C00']
 
   const [formRequest, setFormRequest] = useReducer(formCreateRequest, {});
-  const [formVND,     setFormVND]     = useReducer(formCreateVND, {});
-  const [arrayResponseformVND,     setArrayResponseFormVND]     = useState<virtualNodeDemandInterface[]>([]);
+  const [formVND, setFormVND] = useReducer(formCreateVND, {});
+  const [arrayResponseformVND, setArrayResponseFormVND] = useState<virtualNodeDemandInterface[]>([]);
 
   const [createLinksSourceRequest, setCreateLinksSourceRequest] = useState<any>()
   const [createLinksTargetRequest, setCreateLinksTargetRequest] = useState<any>()
@@ -81,7 +81,7 @@ export function Aside({ request }: any) {
         var randNum = (Math.floor(Math.random() * 100) + 1)
         var color = (colors)[Math.floor(Math.random() * (colors).length)]
         changeDicChecbox[request.id] = randNum
-        
+
         console.log('node', cy.$(`node[id = "${randNum}"]`).json());
         console.log('edge', cy.$(`edge[id = "e${randNum}"]`).json());
 
@@ -127,40 +127,39 @@ export function Aside({ request }: any) {
   }
 
 
-
   //Adicionar novos Requests na lista de requisiçoes
-  function appendRequestList(file:any){ 
-    
+  function appendRequestList(file: any) {
+
     const reader = new FileReader();
-    reader.onload = function(e: any) {
+    reader.onload = function (e: any) {
       // setQtdRequests(Object.keys(requestList).length);
 
       var prevsElements: any = []
-      Object.keys(requestList).forEach(key => 
+      Object.keys(requestList).forEach(key =>
         prevsElements.push(requestList[Number(key)])
       )
-  
+
       //Adicionadno novos valores á lista de valores inseridos via menu bar
-      Object.keys([JSON.parse(e.target.result)][0]).forEach(key => 
+      Object.keys([JSON.parse(e.target.result)][0]).forEach(key =>
         prevsElements.push(JSON.parse(e.target.result)[key])
       )
-      
+
       setRequestList(prevsElements)
     };
-    
+
     try {
       reader.readAsText(file.target.files[0]);
     } catch (error) {
       console.error('Erro de reader nao foi inserido um arquivo para ler');
     }
   };
-  
+
   // Criacao da sessão VIRTUAL REQUESTS após o componete ser carregado com o json na variavel de requests
   useEffect(() => {
     if (Object.keys(request).length !== 0) {
       setRequestList(request)
     }
-  },[request])
+  }, [request])
 
   return (
     <Container>
@@ -170,41 +169,41 @@ export function Aside({ request }: any) {
 
       <div>
         <Tabs className='Tabs'>
-      
-            <TabList className='TabList'>
-                <Tab className='Tab'> VNR </Tab>
-                <Tab className='Tab'> Create </Tab>
-                <Tab className='Tab'> Edition </Tab>
-                <Tab className='Tab'> Others </Tab>
-                {/* <Tab>Toad</Tab> */}
-            </TabList>
+
+          <TabList className='TabList'>
+            <Tab className='Tab'> VNR </Tab>
+            <Tab className='Tab'> Create </Tab>
+            <Tab className='Tab'> Edition </Tab>
+            <Tab className='Tab'> Others </Tab>
+            {/* <Tab>Toad</Tab> */}
+          </TabList>
 
           <fieldset>
             <TabPanel className='TabPanelVNR'>
               {/* Informaçao sobre os requests, e exibir detalhado */}
-              <ShowVND 
-                requestList = {requestList}
-                checboxState = {checboxState}
-                toggleCheckBoxRequest = {toggleCheckBoxRequest}
-                qtdRequests = {qtdRequests}
+              <ShowVND
+                requestList={requestList}
+                checboxState={checboxState}
+                toggleCheckBoxRequest={toggleCheckBoxRequest}
+                qtdRequests={qtdRequests}
               />
             </TabPanel>
 
-          
+
             <TabPanel className='TabPanelCreate'>
-              <CreateRequest 
-                requestList = {requestList}                              setRequestList = {setRequestList}
-                formRequest = {formRequest}                              setFormRequest = {setFormRequest}
-                formVND = {formVND}                                    setFormVND = {setFormVND}
-                arrayResponseformVND = {arrayResponseformVND}          setArrayResponseFormVND = {setArrayResponseFormVND}  
-                createLinksRequest = {createLinksRequest}              setCreateLinksRequest = {setCreateLinksRequest}
-                createLinksSourceRequest = {createLinksSourceRequest}  setCreateLinksSourceRequest = {setCreateLinksSourceRequest}
-                createLinksTargetRequest = {createLinksTargetRequest}  setCreateLinksTargetRequest = {setCreateLinksTargetRequest}
+              <CreateRequest
+                requestList={requestList} setRequestList={setRequestList}
+                formRequest={formRequest} setFormRequest={setFormRequest}
+                formVND={formVND} setFormVND={setFormVND}
+                arrayResponseformVND={arrayResponseformVND} setArrayResponseFormVND={setArrayResponseFormVND}
+                createLinksRequest={createLinksRequest} setCreateLinksRequest={setCreateLinksRequest}
+                createLinksSourceRequest={createLinksSourceRequest} setCreateLinksSourceRequest={setCreateLinksSourceRequest}
+                createLinksTargetRequest={createLinksTargetRequest} setCreateLinksTargetRequest={setCreateLinksTargetRequest}
               />
             </TabPanel>
 
             <TabPanel className='TabPanelEdition'>
-              <EditionRequest 
+              <EditionRequest
                 qtdRequests={qtdRequests}
                 requestList={requestList}
                 setRequestList={setRequestList}
@@ -212,15 +211,15 @@ export function Aside({ request }: any) {
             </TabPanel>
 
             <TabPanel className='TabPanelOthers'>
-              <AsideOthers 
+              <AsideOthers
                 appendRequestList={appendRequestList}
-                requestList = {requestList}
-                setRequestList = {setRequestList}   
+                requestList={requestList}
+                setRequestList={setRequestList}
               />
             </TabPanel>
-          </fieldset>  
-  
-        </Tabs> 
+          </fieldset>
+
+        </Tabs>
 
       </div>
     </Container>

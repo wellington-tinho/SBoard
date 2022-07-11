@@ -1,13 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { CytoscapeContext } from "../../CytoscapeContext";
-import { Aside } from "./Section/Aside";
-import { GraphArea } from "./Section/GraphArea";
+import { CytoscapeContext } from "../../context/CytoscapeContext";
+import { Aside } from "../../organisms/Aside";
+import { GraphArea } from "../../organisms/GraphArea";
 import { Core } from "cytoscape";
 
-
-
-const Content = styled.div `
+const Content = styled.div`
   display: flex;
   /* align-items: stretch; */
   border: 1px solid var(--background);
@@ -23,19 +21,15 @@ const Content = styled.div `
     align-items: center;
   }
 `
-
-export function Home(){
+export function Home() {
   const [cy, setCy] = useState<Core>()
-  const [request, setRequest]= useState({})
+  const [request, setRequest] = useState({})
 
-
-
-  
-  return(
+  return (
     <CytoscapeContext.Provider value={[cy, setCy]}>
       <Content>
-        <GraphArea setRequest={setRequest}/>
-        <Aside request={request}/>
+        <GraphArea setRequest={setRequest} />
+        <Aside request={request} />
         {/* <Footer /> */}
       </Content>
     </CytoscapeContext.Provider>

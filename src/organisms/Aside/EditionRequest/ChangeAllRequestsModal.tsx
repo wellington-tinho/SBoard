@@ -3,7 +3,7 @@ import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
-import { generatesRandomBetweenRange } from '../../../../../util/randomNumber';
+import { generatesRandomBetweenRange } from '../../../util/randomNumber';
 
 
 
@@ -83,13 +83,13 @@ export const Container = styled.form`
     }
 `;
 
-interface virtualNodeDemandInterface{
+interface virtualNodeDemandInterface {
   id: number;
   requested: number;
   vnr_id: number;
   domain: number;
   region: number;
-  type: number | string; 
+  type: number | string;
   period: number;
   sink: number;
 }
@@ -98,7 +98,7 @@ interface requestUnicInterface {
   id: number;
   vnd: virtualNodeDemandInterface[];
   links: [[number]];
-  created: number;  
+  created: number;
   duration: number;
   period: number;
   bandwidth: number;
@@ -106,7 +106,7 @@ interface requestUnicInterface {
   reliability: number;
   type_slice: string;
 }
-interface ChangeAllRequestsModalProps{
+interface ChangeAllRequestsModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
   changedRequests: requestUnicInterface[];
@@ -114,47 +114,47 @@ interface ChangeAllRequestsModalProps{
   setRequestList: React.Dispatch<React.SetStateAction<requestUnicInterface[]>>,
 }
 
-export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,requestList,setRequestList}: ChangeAllRequestsModalProps){
-  
-  const [created , setCreated] =        useState<requestUnicInterface["created"]>       ()
-  const [duration , setDuration] =      useState<requestUnicInterface["duration"]>      ()
-  const [period , setPeriod] =          useState<requestUnicInterface["period"]>        ()
-  const [type_slice , setType_slice] =  useState<requestUnicInterface["type_slice"]>    ()
-  
-  const [links , setLinks] =            useState<requestUnicInterface["links"]>         ()
-  const [vnd , setVnd] =                useState<requestUnicInterface["vnd"]>           ()
-  
-  const [delayStart, setDelayStart] =        useState<requestUnicInterface["delay"]>         ()
-  const [delayEnd , setDelayEnd] =           useState<requestUnicInterface["delay"]>         ()
-  
-  const [bandwidthStart, setBandwidthStart]= useState<requestUnicInterface["bandwidth"]>     ()
-  const [bandwidthEnd, setBandwidthEnd] =    useState<requestUnicInterface["bandwidth"]>     ()
-  
-  const [reliabilityStart, setReliabilityStart]=useState<requestUnicInterface["reliability"]>()
-  const [reliabilityEnd, setReliabilityEnd ] =  useState<requestUnicInterface["reliability"]>()
- 
+export function ChangeAllRequestsModal({ isOpen, onRequestClose, changedRequests, requestList, setRequestList }: ChangeAllRequestsModalProps) {
 
-  function SalveChange(event:FormEvent){
+  const [created, setCreated] = useState<requestUnicInterface["created"]>()
+  const [duration, setDuration] = useState<requestUnicInterface["duration"]>()
+  const [period, setPeriod] = useState<requestUnicInterface["period"]>()
+  const [type_slice, setType_slice] = useState<requestUnicInterface["type_slice"]>()
+
+  const [links, setLinks] = useState<requestUnicInterface["links"]>()
+  const [vnd, setVnd] = useState<requestUnicInterface["vnd"]>()
+
+  const [delayStart, setDelayStart] = useState<requestUnicInterface["delay"]>()
+  const [delayEnd, setDelayEnd] = useState<requestUnicInterface["delay"]>()
+
+  const [bandwidthStart, setBandwidthStart] = useState<requestUnicInterface["bandwidth"]>()
+  const [bandwidthEnd, setBandwidthEnd] = useState<requestUnicInterface["bandwidth"]>()
+
+  const [reliabilityStart, setReliabilityStart] = useState<requestUnicInterface["reliability"]>()
+  const [reliabilityEnd, setReliabilityEnd] = useState<requestUnicInterface["reliability"]>()
+
+
+  function SalveChange(event: FormEvent) {
     event.preventDefault();
 
 
-    var updatedRequestList = {...requestList}
-    
-  
-      
-    for  (var i in changedRequests){
+    var updatedRequestList = { ...requestList }
+
+
+
+    for (var i in changedRequests) {
       var request = changedRequests[i]
-    
-      created && (updatedRequestList[request.id].created = created); 
-      duration &&  (updatedRequestList[request.id].duration = duration) 
-      
-      period &&  (updatedRequestList[request.id].period = period) 
 
-      type_slice &&  (updatedRequestList[request.id].type_slice = type_slice) 
+      created && (updatedRequestList[request.id].created = created);
+      duration && (updatedRequestList[request.id].duration = duration)
 
-      links &&  (updatedRequestList[request.id].links = links) 
+      period && (updatedRequestList[request.id].period = period)
 
-      vnd &&  (updatedRequestList[request.id].vnd = vnd);
+      type_slice && (updatedRequestList[request.id].type_slice = type_slice)
+
+      links && (updatedRequestList[request.id].links = links)
+
+      vnd && (updatedRequestList[request.id].vnd = vnd);
 
       (reliabilityStart && reliabilityEnd) && (
         updatedRequestList[request.id].reliability = Number(
@@ -166,24 +166,24 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
         updatedRequestList[request.id].bandwidth = Number(
           generatesRandomBetweenRange(bandwidthStart, bandwidthEnd)
         )
-      ); 
-     
+      );
+
       (delayStart && delayEnd) && (
         updatedRequestList[request.id].delay = Number(
           generatesRandomBetweenRange(delayStart, delayEnd)
         )
-      )  
+      )
     }
- 
-    
-    
+
+
+
     setRequestList(updatedRequestList)
 
 
     toast.success('Request modified with success!')
-    
+
   }
-;
+  ;
 
   return (
     <Modal
@@ -194,18 +194,18 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
     >
 
       <Container onSubmit={SalveChange}>
-        <VscChromeClose  onClick={onRequestClose} className='react-modal-close' />
+        <VscChromeClose onClick={onRequestClose} className='react-modal-close' />
         <h2>Change All Requests Modal </h2>
 
         <h3>Altered elements {Object.keys(changedRequests).length}</h3>
 
         <div>
-         
+
           <div>
             <p>ID</p>
-            <input 
+            <input
               onChange={
-                ()=>{}
+                () => { }
               }
               type="number" name='ID'
               id='ID'
@@ -213,10 +213,10 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
               disabled
             />
           </div>
-         
+
           <div>
             <p>created</p>
-            <input 
+            <input
               onChange={
                 event => event.target.value === '' ? setCreated(undefined) : setCreated(Number(event.target.value))
               }
@@ -225,10 +225,10 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
               placeholder={"Enter a value for all requests here"}
             />
           </div>
-         
+
           <div>
             <p>duration</p>
-            <input 
+            <input
               onChange={
                 event => event.target.value === '' ? setDuration(undefined) : setDuration(+event.target.value)
               }
@@ -240,7 +240,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
 
           <div>
             <p>period</p>
-            <input 
+            <input
               onChange={
                 event => event.target.value === '' ? setPeriod(undefined) : setPeriod(+event.target.value)
               }
@@ -252,7 +252,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
 
           <div>
             <p>type_slice</p>
-            <input 
+            <input
               onChange={
                 event => event.target.value === '' ? setType_slice(undefined) : setType_slice(event.target.value)
               }
@@ -267,16 +267,16 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
             <div className="tooltip">
               <input
                 onChange={
-                  event =>{ event.target.value === '' ?  setDelayStart(undefined) : setDelayStart(+event.target.value) }
+                  event => { event.target.value === '' ? setDelayStart(undefined) : setDelayStart(+event.target.value) }
                 }
                 max={delayEnd}
                 type="number" name='delayStart'
                 id='delayStart'
                 placeholder={"Enter a value for all requests here"}
               />
-             <input 
+              <input
                 onChange={
-                  event =>{ event.target.value === '' ?  setDelayEnd(undefined) : setDelayEnd(+event.target.value) }
+                  event => { event.target.value === '' ? setDelayEnd(undefined) : setDelayEnd(+event.target.value) }
                 }
                 min={delayStart}
                 type="number" name='delayEnd'
@@ -286,29 +286,29 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
               <span className="tooltiptext"> Insert a number from start to end, to generate a random number between them.</span>
             </div>
           </div>
-                
-        
+
+
 
           <div>
             <p>Reliability</p>
             <div className="tooltip">
-              <input 
+              <input
                 onChange={
-                  event =>{ event.target.value === '' ?  setReliabilityStart(undefined) : setReliabilityStart(Number(event.target.value))}
-                  }
-                max={reliabilityEnd} 
-                type="number" name="ReliabilityStart" 
-                id="RealityStart"	 
+                  event => { event.target.value === '' ? setReliabilityStart(undefined) : setReliabilityStart(Number(event.target.value)) }
+                }
+                max={reliabilityEnd}
+                type="number" name="ReliabilityStart"
+                id="RealityStart"
                 placeholder={"Enter a value for all requests here"}
               />
- 
-              <input 
+
+              <input
                 onChange={
                   event => event.target.value === '' ? setReliabilityEnd(undefined) : setReliabilityEnd(Number(event.target.value))
-                  } 
+                }
                 min={reliabilityStart}
-                type="number" name="ReliabilityEnd" 
-                id="RealityEnd"	 
+                type="number" name="ReliabilityEnd"
+                id="RealityEnd"
                 placeholder={"Enter a value for all requests here"}
               />
               <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
@@ -319,9 +319,9 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
           <div>
             <p>Bandwidth</p>
             <div className="tooltip">
-              <input onChange={ 
-                  event=> event.target.value === '' ? setBandwidthStart(undefined) : setBandwidthStart(Number(event.target.value))
-                }
+              <input onChange={
+                event => event.target.value === '' ? setBandwidthStart(undefined) : setBandwidthStart(Number(event.target.value))
+              }
                 max={bandwidthEnd}
                 type="number" name="BandwidthStart"
                 id="BandwidthStart"
@@ -329,14 +329,14 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
               />
 
               <input onChange={
-                  event=> event.target.value === '' ? setBandwidthEnd(undefined) : setBandwidthEnd(Number(event.target.value))
-                }
+                event => event.target.value === '' ? setBandwidthEnd(undefined) : setBandwidthEnd(Number(event.target.value))
+              }
                 min={bandwidthStart}
                 type="number" name="BandwidthEnd"
                 id="BandwidthEnd"
                 placeholder={"Enter a value for all requests here"}
               />
-            <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
+              <span className="tooltiptext">Insert a number from start to end, to generate a random number between them.</span>
             </div>
           </div>
 
@@ -352,7 +352,7 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
               placeholder={String(links)}
             />
           </div> */}
-         
+
           {/* <div className="vnd">
             <p>vnd</p>
             <input 
@@ -364,11 +364,11 @@ export function ChangeAllRequestsModal({isOpen, onRequestClose, changedRequests,
               placeholder={String(vnd)}
             />
           </div> */}
-        
-             
-         
-      
-          <button  type="submit">
+
+
+
+
+          <button type="submit">
             Salvar alterações
           </button >
 

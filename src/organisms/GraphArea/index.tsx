@@ -1,8 +1,7 @@
 import { lazy, Suspense, useContext, useEffect, useRef, useState } from 'react';
-import { CytoscapeContext } from '../../../../CytoscapeContext';
-import { StartGraph } from '../../../../components/startGraph';
-import useInitCytoscapeExtensions from '../../../../hooks/useInitCytoscapeExtensions';
-const SetupModal = lazy((): Promise<any> => import('../../../../components/SetupModal'));
+import { StartGraph } from '../startGraph';
+import { CytoscapeContext } from '../../context/CytoscapeContext';
+const SetupModal = lazy((): Promise<any> => import('../SetupModal'));
 
 import { AiOutlineZoomIn, AiOutlineZoomOut, AiOutlineExpandAlt, AiOutlineShrink } from 'react-icons/ai';
 import { BiGitPullRequest } from 'react-icons/bi';
@@ -15,6 +14,8 @@ import { TbFocusCentered } from 'react-icons/tb';
 import Modal from 'react-modal';
 
 import { Container, GraphContainer, NavOptions } from "./styles";
+import useInitCytoscapeExtensions from '../../hooks/useInitCytoscapeExtensions';
+
 // GiJoin juntar icon
 
 
