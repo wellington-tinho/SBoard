@@ -30,13 +30,11 @@ Modal.setAppElement('#root')
 export function GraphArea({ setRequest }: any) {
   const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
 
-  console.log(cy);
 
 
   const [element, setElement] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
   const hiddenFileRequestInput = useRef<any>(null);
-  // const [eh, setEh] = useState(undefined as unknown as EdgeHandlesInstance);
   const [drawMode, setDrawMode] = useState(false);
   const layouts = [
     {

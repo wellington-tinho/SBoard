@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { AppProvider } from "../../context/AppContextProvider";
-
 import { Aside } from "../../organisms/Aside";
 import { GraphArea } from "../../organisms/GraphArea";
 
@@ -31,6 +30,7 @@ export function Home() {
         <Aside request={request} />
       </Content>
     </AppProvider>
+
 
   );
 }

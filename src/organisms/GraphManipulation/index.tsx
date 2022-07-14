@@ -1,5 +1,4 @@
 import cytoscape, { Core, ElementsDefinition } from 'cytoscape';
-import edgehandles from 'cytoscape-edgehandles';
 import { useContext, useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { CytoscapeContext } from '../../context/CytoscapeGraph/CytoscapeContext';
