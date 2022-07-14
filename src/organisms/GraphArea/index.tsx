@@ -1,6 +1,6 @@
 import { lazy, Suspense, useContext, useEffect, useRef, useState } from 'react';
 import { StartGraph } from '../startGraph';
-import { CytoscapeContext } from '../../context/CytoscapeContext';
+import { CytoscapeContext } from '../../context/CytoscapeGraph/CytoscapeContext';
 const SetupModal = lazy((): Promise<any> => import('../SetupModal'));
 
 import { AiOutlineZoomIn, AiOutlineZoomOut, AiOutlineExpandAlt, AiOutlineShrink } from 'react-icons/ai';
@@ -29,6 +29,10 @@ Modal.setAppElement('#root')
 
 export function GraphArea({ setRequest }: any) {
   const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
+
+  console.log(cy);
+
+
   const [element, setElement] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
   const hiddenFileRequestInput = useRef<any>(null);

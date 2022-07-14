@@ -2,7 +2,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
-import { CytoscapeContext } from '../../context/CytoscapeContext';
+import { CytoscapeContext } from '../../context/CytoscapeGraph/CytoscapeContext';
 import { api } from '../../services/api';
 import { Container } from './styles';
 
@@ -263,8 +263,6 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
       <Container >
         <VscChromeClose onClick={onRequestClose} className='react-modal-close' />
         <h2>Chart Options</h2>
-
-        {console.log(cy?.data())}
 
         <button onClick={() => {
           cy.destroy(); console.log(cy?.data());

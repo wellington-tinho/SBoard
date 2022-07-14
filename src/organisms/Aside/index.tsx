@@ -1,13 +1,12 @@
 import { useContext, useEffect, useReducer, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { CytoscapeContext } from "../../context/CytoscapeContext";
+import { CytoscapeContext } from "../../context/CytoscapeGraph/CytoscapeContext"; 
 import { CreateRequest } from "./CreateRequest";
 import { EditionRequest } from "./EditionRequest/index";
 import { AsideOthers } from "./outhers/others";
 import { ShowVND } from "./showVND/showVND";
 import { Container } from "./styles";
-
 
 
 
@@ -62,9 +61,13 @@ export function Aside({ request }: any) {
   const [requestList, setRequestList] = useState<requestUnicInterface[]>(request)
   const qtdRequests = (0)
 
-
   const [checboxState, setChecboxState] = useState(false)
-  const colors = ['#6A5ACD', '#0000CD', '#4682B4', '#00FFFF', '#00FF7F', '#00FF7F', '#ADFF2F', '#ADFF2F', '#DAA520', '#8B4513', '#BC8F8F', '#7B68EE', '#4B0082', '#9400D3', '#800080', '#FF00FF', '#C71585', '#FF1493', '#DB7093', '#CD5C5C', '#DC143C', '#FF0000', '#FF4500', '#B22222', '#FF8C00', '#FF8C00']
+  
+  const colors = ['#6A5ACD', '#0000CD', '#4682B4', '#00FFFF', '#00FF7F', '#00FF7F', '#ADFF2F', 
+                  '#ADFF2F', '#DAA520', '#8B4513', '#BC8F8F', '#7B68EE', '#4B0082', '#9400D3', 
+                  '#800080', '#FF00FF', '#C71585', '#FF1493', '#DB7093', '#CD5C5C', '#DC143C', 
+                  '#FF0000', '#FF4500', '#B22222', '#FF8C00', '#FF8C00'
+                ]
 
   const [formRequest, setFormRequest] = useReducer(formCreateRequest, {});
   const [formVND, setFormVND] = useReducer(formCreateVND, {});
