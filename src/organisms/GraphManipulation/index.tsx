@@ -1,5 +1,5 @@
 import cytoscape, { Core, ElementsDefinition } from 'cytoscape';
-import edgehandles from 'cytoscape-edgehandles';
+// import edgehandles from 'cytoscape-edgehandles';
 import { useContext, useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { CytoscapeContext } from '../../context/CytoscapeContext';
@@ -257,7 +257,7 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
       zoomDelay: 45, // how many ms between zoom ticks
       zoom: 3
     };
-    cytoscape.use(edgehandles)
+    // cytoscape.use(edgehandles)
 
 
     setCy(cytoscape(config))

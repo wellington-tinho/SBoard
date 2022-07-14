@@ -1,9 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { CytoscapeContext } from "../../context/CytoscapeContext";
+import { CytoscapeProvider } from "../../context/CytoscapeContext";
 import { Aside } from "../../organisms/Aside";
 import { GraphArea } from "../../organisms/GraphArea";
-import { Core } from "cytoscape";
 
 const Content = styled.div`
   display: flex;
@@ -22,16 +21,15 @@ const Content = styled.div`
   }
 `
 export function Home() {
-  const [cy, setCy] = useState<Core>()
   const [request, setRequest] = useState({})
 
   return (
-    <CytoscapeContext.Provider value={[cy, setCy]}>
+    <CytoscapeProvider>
       <Content>
         <GraphArea setRequest={setRequest} />
         <Aside request={request} />
       </Content>
-    </CytoscapeContext.Provider>
+    </CytoscapeProvider>
 
   );
 }

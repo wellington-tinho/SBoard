@@ -1,28 +1,18 @@
 import { useEffect, useState } from "react";
-
-import cytoscape from "cytoscape";
-import type Cy from "cytoscape";
-// import cytoscapeDomNode from "cytoscape-dom-node";
+import cytoscape,{Core} from "cytoscape";
 import edgehandles from "cytoscape-edgehandles";
 import type { EdgeHandlesInstance } from "cytoscape-edgehandles";
 
-// cytoscape.use(cytoscapeDomNode);
-cytoscape.use(edgehandles);
 
-type UseInitCytoscapeExtensions = (cy: Cy.Core | undefined) => {
+type UseInitCytoscapeExtensions = (cy: Core | undefined) => {
   edgeHandles: EdgeHandlesInstance | undefined;
 };
+cytoscape.use(edgehandles);
 
 const useInitCytoscapeExtensions: UseInitCytoscapeExtensions = (cy) => {
   const [edgeHandles, setEdgeHandles] = useState<EdgeHandlesInstance>();
-
-  // // Initialise domNode instance
-  // useEffect(() => {
-  //   if (cy === undefined) return;
-  //   // @ts-expect-error Module is not typed
-  //   cy.domNode();
-  // }, [cy]);
-
+  console.log("cytoscape.use(edgehandles)");
+  
   // Initialise edgehandles instance
   useEffect(() => {
     if (cy === undefined) return;
