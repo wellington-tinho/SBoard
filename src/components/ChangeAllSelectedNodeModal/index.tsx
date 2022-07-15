@@ -17,7 +17,7 @@ interface ChangeAllSelectedNodeModalProps {
 }
 
 export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: ChangeAllSelectedNodeModalProps) {
-  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
+  const cy = useContext<cytoscape.Core[]>(CytoscapeContext)[0];
 
 
   const [country, setCountry] = useState(String)

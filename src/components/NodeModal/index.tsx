@@ -28,7 +28,7 @@ interface NodeModalProps {
 }
 
 export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
-  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
+  const cy = useContext<cytoscape.Core[]>(CytoscapeContext)[0];
 
   const [country, setCountry] = useState<string>()
   const [domain, setDomain] = useState<number>()

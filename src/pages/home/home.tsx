@@ -20,15 +20,18 @@ const Content = styled.div`
     align-items: center;
   }
 `
+
 export function Home() {
   // const [request, setRequest] = useState({})
   const [request, setRequest] = useContext(RequestContext);
+  console.log(request,'request (Home)'   );
+  console.log( setRequest,'setRequest (Home)');
 
 
   return (
       <Content>
-        <GraphArea setRequest={setRequest} />
-        <Aside request={request} />
+        <GraphArea />
+        <Aside />
       </Content>
 
   );

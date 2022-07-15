@@ -20,7 +20,7 @@ interface ChangeAllSelectedEdgeModalProps {
 
 export function ChangeAllSelectedEdgeModal({ isOpen, onRequestClose, edges }: ChangeAllSelectedEdgeModalProps) {
 
-  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
+  const cy = useContext<cytoscape.Core[]>(CytoscapeContext)[0];
 
   const [source, setSource] = useState<number | string>()
   const [target, setTarget] = useState<number | string>()

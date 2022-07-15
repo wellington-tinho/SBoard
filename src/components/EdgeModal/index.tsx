@@ -27,7 +27,7 @@ interface EdgeModalProps {
 }
 
 export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
-  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
+  const cy = useContext<cytoscape.Core[]>(CytoscapeContext)[0];
 
   const [id, setId] = useState(String)
   const [source, setSource] = useState(String)

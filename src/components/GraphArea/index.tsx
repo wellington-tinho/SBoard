@@ -1,6 +1,7 @@
 import { lazy, Suspense, useContext, useEffect, useRef, useState } from 'react';
 import { StartGraph } from '../startGraph';
 import { CytoscapeContext } from '../../context/CytoscapeGraph/CytoscapeContext';
+import { RequestContext } from '../../context/Request/RequestContext';
 const SetupModal = lazy((): Promise<any> => import('../SetupModal'));
 
 import { AiOutlineZoomIn, AiOutlineZoomOut, AiOutlineExpandAlt, AiOutlineShrink } from 'react-icons/ai';
@@ -27,8 +28,13 @@ import useInitCytoscapeExtensions from '../../hooks/useInitCytoscapeExtensions';
 
 Modal.setAppElement('#root')
 
-export function GraphArea({ setRequest }: any) {
-  const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
+export function GraphArea() {
+  const cy = useContext<cytoscape.Core[]>(CytoscapeContext)[0];
+  const setRequest = useContext(RequestContext)[1];
+
+  console.log(setRequest,'setRequest (GraphArea)');
+
+
 
   const [element, setElement] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);

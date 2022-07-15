@@ -2,6 +2,7 @@ import { useContext, useEffect, useReducer, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { CytoscapeContext } from "../../context/CytoscapeGraph/CytoscapeContext"; 
+import { RequestContext } from "../../context/Request/RequestContext";
 import { CreateRequest } from "./CreateRequest";
 import { EditionRequest } from "./EditionRequest/index";
 import { AsideOthers } from "./outhers/others";
@@ -55,8 +56,11 @@ const formCreateVND = (state: any, event: any) => {
 // Tentei deixar essa variavel dentro de setColorGraph() mas sempre ele ficava sendo reecriada
 var changeDicChecbox: { [index: string]: any; } = {};
 
-export function Aside({ request }: any) {
-  const [cy] = useContext(CytoscapeContext);
+export function Aside() {
+  const cy = useContext(CytoscapeContext)[0];
+  const request = useContext(RequestContext)[0];
+  console.log(request,'request (Aside)');
+
 
   const [requestList, setRequestList] = useState<requestUnicInterface[]>(request)
   const qtdRequests = (0)
