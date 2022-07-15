@@ -30,8 +30,6 @@ Modal.setAppElement('#root')
 export function GraphArea({ setRequest }: any) {
   const [cy] = useContext<cytoscape.Core[]>(CytoscapeContext);
 
-
-
   const [element, setElement] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
   const hiddenFileRequestInput = useRef<any>(null);

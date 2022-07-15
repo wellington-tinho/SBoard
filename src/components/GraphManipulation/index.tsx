@@ -83,8 +83,6 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
 
 
 
-
-
   //configuraçoes e inicializaçao do cytoscape graph
   useEffect(() => {
     const config = {
@@ -103,8 +101,8 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
         // circle: true,
       },
       style: [
-        {
-          selector: 'node',
+
+        {selector: 'node',
           style: {
             content: 'data(label)',
             'background-color': "rgb(153,153,153)",
@@ -125,8 +123,14 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
             },
           }
         },
-        {
-          selector: 'edge',
+
+        {selector: '.eh-ghost-node',
+          style: {
+            'label': ''
+            }
+        },
+
+        {selector: 'edge',
           style: {
             'line-style': 'solid',
             'line-color': '#b3b3b3',
@@ -140,8 +144,7 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
           }
         },
 
-        {
-          selector: 'edge:selected',
+        {selector: 'edge:selected',
           style: {
             content: (ele: any) => {
               return (
@@ -167,50 +170,45 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
             'textBackgroundShape': 'round-rectangle',
             'opacity': 1,
             'z-index': 99,
-
           }
         },
-        {
-          selector: '.eh-hover',
-          style: {
+
+        {selector: '.eh-hover',
+         style: {
             'background-color': 'red'
           }
         },
 
-        {
-          selector: '.eh-source',
+        {selector: '.eh-source',
           style: {
             'border-width': 2,
             'border-color': 'red'
           }
         },
 
-        {
-          selector: '.eh-target',
+        {selector: '.eh-target',
           style: {
             'border-width': 2,
             'border-color': 'red'
           }
         },
 
-        {
-          selector: '.eh-preview, .eh-ghost-edge',
-          style: {
-            'background-color': 'red',
-            'line-color': 'red',
-            'target-arrow-color': 'red',
-            'source-arrow-color': 'red'
-          }
+        {selector: '.eh-preview, .eh-ghost-edge',
+            style: {
+              'background-color': 'red',
+              'line-color': 'red',
+              'target-arrow-color': 'red',
+              'source-arrow-color': 'red'
+            }
         },
-
-        {
-          selector: '.eh-ghost-edge.eh-preview-active',
+        
+        {selector: '.eh-ghost-edge.eh-preview-active',
           style: {
             'opacity': 0
           }
         },
-        {
-          selector: 'node:selected',
+       
+        {selector: 'node:selected',
           style: {
             // classes: 'background',
             content: (ele: any) => {
@@ -257,8 +255,6 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
       zoom: 3
     };
     setCy(cytoscape(config))
-
-
   }, [])
 
   // funções automaticas inicializadas junto com o grafico 
@@ -303,8 +299,6 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
     });
 
   }
-
-
   CytoscapeFunctions()
 
 

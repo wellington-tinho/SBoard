@@ -1,9 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import { AppProvider } from "../../context/AppContextProvider";
 import { RequestContext } from "../../context/Request/RequestContext";
-import { Aside } from "../../organisms/Aside";
-import { GraphArea } from "../../organisms/GraphArea";
+import { Aside } from "../../components/Aside";
+import { GraphArea } from "../../components/GraphArea";
 
 const Content = styled.div`
   display: flex;
@@ -23,7 +22,6 @@ const Content = styled.div`
 `
 export function Home() {
   // const [request, setRequest] = useState({})
-
   const [request, setRequest] = useContext(RequestContext);
 
 

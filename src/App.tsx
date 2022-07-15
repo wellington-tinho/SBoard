@@ -1,7 +1,7 @@
 // import { Footer } from "./components/Footer";
 import { ToastContainer } from 'react-toastify';
 import { AppProvider } from './context/AppContextProvider';
-import { Header } from './organisms/Header';
+import { Header } from './components/Header';
 import { Home } from './pages/home/home';
 import { GlobalStyle } from "./styles/global.ts";
 
