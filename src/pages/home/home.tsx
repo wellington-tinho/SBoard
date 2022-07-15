@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { AppProvider } from "../../context/AppContextProvider";
+import { RequestContext } from "../../context/Request/RequestContext";
 import { Aside } from "../../organisms/Aside";
 import { GraphArea } from "../../organisms/GraphArea";
 
@@ -21,16 +22,16 @@ const Content = styled.div`
   }
 `
 export function Home() {
-  const [request, setRequest] = useState({})
+  // const [request, setRequest] = useState({})
+
+  const [request, setRequest] = useContext(RequestContext);
+
 
   return (
-    <AppProvider>
       <Content>
         <GraphArea setRequest={setRequest} />
         <Aside request={request} />
       </Content>
-    </AppProvider>
-
 
   );
 }

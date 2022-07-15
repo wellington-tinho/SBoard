@@ -7,7 +7,7 @@ interface RequestContextPros {
 }
 
 export function RequestProvider({children}:RequestContextPros){
-  const [request, setRequest] = useState();
+  const [request, setRequest] = useState({});
 
   return (
     <RequestContext.Provider value={[request, setRequest]}>
