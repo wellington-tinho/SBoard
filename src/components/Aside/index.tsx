@@ -59,7 +59,6 @@ var changeDicChecbox: { [index: string]: any; } = {};
 export function Aside() {
   const cy = useContext(CytoscapeContext)[0];
   const request = useContext(RequestContext)[0];
-  console.log(request,'request (Aside)');
 
 
   const [requestList, setRequestList] = useState<requestUnicInterface[]>(request)
@@ -162,11 +161,11 @@ export function Aside() {
   };
 
   // Criacao da sessão VIRTUAL REQUESTS após o componete ser carregado com o json na variavel de requests
-  useEffect(() => {
-    if (Object.keys(request).length !== 0) {
-      setRequestList(request)
-    }
-  }, [request])
+  // useEffect(() => {
+  //   if (Object.keys(request).length !== 0) {
+  //     setRequestList(request)
+  //   }
+  // }, [request])
 
   return (
     <Container>
@@ -189,7 +188,7 @@ export function Aside() {
             <TabPanel className='TabPanelVNR'>
               {/* Informaçao sobre os requests, e exibir detalhado */}
               <ShowVND
-                requestList={requestList}
+                requestList={request}
                 checboxState={checboxState}
                 toggleCheckBoxRequest={toggleCheckBoxRequest}
                 qtdRequests={qtdRequests}
@@ -211,9 +210,7 @@ export function Aside() {
 
             <TabPanel className='TabPanelEdition'>
               <EditionRequest
-                qtdRequests={qtdRequests}
-                requestList={requestList}
-                setRequestList={setRequestList}
+                qtdRequests={qtdRequests} 
               />
             </TabPanel>
 

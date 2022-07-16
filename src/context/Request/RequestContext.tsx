@@ -8,8 +8,6 @@ interface RequestContextPros {
 
 export function RequestProvider({children}:RequestContextPros){
   const [request, setRequest] = useState({});
-  console.log(request,'request (RequestProvider)');
-  console.log(setRequest,'setRequest (RequestProvider)' );
 
   
 

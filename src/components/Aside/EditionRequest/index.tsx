@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
+import { RequestContext } from '../../../context/Request/RequestContext';
 import { ChangeAllRequestsModal } from './ChangeAllRequestsModal';
 import { ChangeRequestsModal } from './ChangeRequestModal';
 import { Container } from './styles';
@@ -31,8 +32,6 @@ interface requestUnicInterface {
 }
 
 interface EditionRequestProps {
-  requestList: requestUnicInterface[] | any,
-  setRequestList: React.Dispatch<React.SetStateAction<requestUnicInterface[]>>,
   qtdRequests: number
 }
 
@@ -41,8 +40,6 @@ Modal.setAppElement('#root')
 
 export function EditionRequest(
   {
-    requestList,
-    setRequestList,
     qtdRequests
   }: EditionRequestProps) {
   const [requestUnic, setRequestUnic] = useState<requestUnicInterface>({} as requestUnicInterface)
@@ -52,6 +49,9 @@ export function EditionRequest(
   const [isChangeRequestModal, setIsChangeRequestModal] = useState(false);
 
   const [changedRequests, setChangedRequests] = useState<requestUnicInterface[]>([{} as requestUnicInterface]);
+
+  const [requestList, setRequestList] = useContext(RequestContext);
+
 
 
   //Criação dos inputs para alteração de todos os requests

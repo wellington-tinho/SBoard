@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import styled from "styled-components";
-import { RequestContext } from "../../context/Request/RequestContext";
 import { Aside } from "../../components/Aside";
 import { GraphArea } from "../../components/GraphArea";
 
@@ -23,16 +21,11 @@ const Content = styled.div`
 
 export function Home() {
   // const [request, setRequest] = useState({})
-  const [request, setRequest] = useContext(RequestContext);
-  console.log(request,'request (Home)'   );
-  console.log( setRequest,'setRequest (Home)');
-
 
   return (
       <Content>
         <GraphArea />
         <Aside />
       </Content>
-
   );
 }

@@ -32,8 +32,6 @@ export function GraphArea() {
   const cy = useContext<cytoscape.Core[]>(CytoscapeContext)[0];
   const setRequest = useContext(RequestContext)[1];
 
-  console.log(setRequest,'setRequest (GraphArea)');
-
 
 
   const [element, setElement] = useState({} as any)
