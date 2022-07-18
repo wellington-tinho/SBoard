@@ -1,4 +1,6 @@
 
+import { useContext } from 'react';
+import { RequestContext } from '../../../context/Request/RequestContext';
 import { Container } from './styles';
 
 interface virtualNodeDemandInterface {
@@ -27,15 +29,13 @@ interface requestUnicInterface {
 
 
 interface AsideOthersProps {
-  requestList: requestUnicInterface[],
   appendRequestList: (file: any) => void,
-  setRequestList: React.Dispatch<React.SetStateAction<any>>,
-
 }
 
 export function AsideOthers(
-  { appendRequestList, requestList, setRequestList }: AsideOthersProps
+  { appendRequestList}: AsideOthersProps
 ) {
+  const [requestList, setRequestList] = useContext(RequestContext);
 
   function DownloadRequestList() {
     var a = document.createElement("a");

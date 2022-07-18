@@ -1,5 +1,7 @@
 
 // import { useState } from 'react';
+import { useContext } from 'react';
+import { RequestContext } from '../../../context/Request/RequestContext';
 import { Container } from './styles';
 
 interface virtualNodeDemandInterface {
@@ -28,7 +30,6 @@ interface requestUnicInterface {
 
 
 interface showVNDProps {
-  requestList: requestUnicInterface[] | any;
   checboxState: boolean;
   toggleCheckBoxRequest: (e: any, request: any) => void;
   qtdRequests: number;
@@ -55,19 +56,14 @@ function visibleDiv(divVisible: string, buttonVerInfo: string) {
 
 
 export function ShowVND({
-  requestList,
   checboxState,
   toggleCheckBoxRequest,
   qtdRequests,
 
 }: showVNDProps) {
+  const requestList = useContext(RequestContext)[0];
 
-  // const [requestVisualization, setRequestVisualization] =  useState<JSX.Element>({} as JSX.Element)
   var auxRequestElementsHTML: any = []
-
-
-
-
 
   Object.keys(requestList).forEach(key => {
 
@@ -94,7 +90,7 @@ export function ShowVND({
             <div>
               <p>   Id  </p>
               <p> - </p>
-              <p>   {Number(key) + qtdRequests}              </p>
+              <p>   {requestList[key].id}     </p>
             </div>
 
             <div>
@@ -151,7 +147,7 @@ export function ShowVND({
                       <div>
                         <p> id</p>
                         <p> - </p>
-                        <p> {requestList[key].vnd[index].id}</p>
+                        <p> {requestList[key].vnd[index]?.id}</p>
                       </div>
                       <div>
                         <p> requested</p>
@@ -200,11 +196,10 @@ export function ShowVND({
               {Object.keys(requestList[key].links).map((__, index: number) => {
 
                 return (
-                  <div className='links virtualNetworkRequests' key={index}>
+                  <div className='links virtualNodesRequest' key={index}>
                     <p className="linkIndex">Link {index} </p>
                     <div>
                       <p> {requestList[key].links[index][0]}</p>
-                      <p> - </p>
                       <p> {requestList[key].links[index][1]}</p>
                     </div>
                   </div>

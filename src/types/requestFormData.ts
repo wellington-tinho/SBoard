@@ -21,3 +21,9 @@ export interface RequestFormDate {
   reliability?: number;
   type_slice?: string;
 }
+
+
+export interface IlinkConvert {
+  linkSource: string;
+  LinkTarget: string;
+}

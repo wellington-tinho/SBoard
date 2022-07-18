@@ -113,11 +113,13 @@ export const Container = styled.div`
           div.links{
             
             div{
-              p:first-of-type{ 
+              p{ 
                 border: 2px solid var(--white-3) ;
                 width: 5rem;
                 word-wrap: break-word;
                 text-align: center;
+                border-bottom: 2px solid transparent;
+
                 :hover{
                   border: 2px solid var(--green-1);
                   font-weight: 600;

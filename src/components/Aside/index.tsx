@@ -188,7 +188,6 @@ export function Aside() {
             <TabPanel className='TabPanelVNR'>
               {/* Informaçao sobre os requests, e exibir detalhado */}
               <ShowVND
-                requestList={request}
                 checboxState={checboxState}
                 toggleCheckBoxRequest={toggleCheckBoxRequest}
                 qtdRequests={qtdRequests}
@@ -217,8 +216,6 @@ export function Aside() {
             <TabPanel className='TabPanelOthers'>
               <AsideOthers
                 appendRequestList={appendRequestList}
-                requestList={requestList}
-                setRequestList={setRequestList}
               />
             </TabPanel>
           </fieldset>
