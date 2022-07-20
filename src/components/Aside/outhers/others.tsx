@@ -33,7 +33,7 @@ interface AsideOthersProps {
 }
 
 export function AsideOthers(
-  { appendRequestList}: AsideOthersProps
+  {appendRequestList}: AsideOthersProps
 ) {
   const [requestList, setRequestList] = useContext(RequestContext);
 

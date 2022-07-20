@@ -1,4 +1,4 @@
-interface virtualNodeDemandInterface {
+export interface virtualNodeDemandInterface {
   id?: number;
   requested?: number;
   vnr_id?: number;
@@ -12,7 +12,7 @@ interface virtualNodeDemandInterface {
 export interface RequestFormDate {
   id?: number;
   vnd?: virtualNodeDemandInterface[];
-  links?: [[number]];
+  links?: number[][] ;
   created?: number;
   duration?: number;
   period?: number;

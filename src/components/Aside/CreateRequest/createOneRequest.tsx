@@ -1,150 +1,175 @@
+import { useContext, useState  } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { RequestContext } from '../../../context/Request/RequestContext';
+import { IlinkConvert, RequestFormDate } from '../../../types/requestFormData';
+import { create_id } from '../../../util/randonIDs';
 
-// import { Container } from './styles';
-interface virtualNodeDemandInterface{
-  id: number;
-  requested: number;
-  vnr_id: number;
-  domain: number;
-  region: number;
-  type: number | string; 
-  period: number;
-  sink: number;
-}
-
-interface propsCreateOne{
-  arrayResponseformVND: virtualNodeDemandInterface[],
-  handleSubmitCreateRequest: any,
-  handleChangeRequest: any,
-  handleChangeVND: any,
-  handleSubmitVND: any,
-  handleChangeCreateLinksSourceRequest: any,
-  handleChangeCreateLinksTargetRequest: any,
-  handleSubmitCreateLinksRequest: any,
-}
-
-export function CreateOne({
-    arrayResponseformVND,
-    handleSubmitCreateRequest,
-    handleChangeRequest,
-    handleChangeVND,
-    handleSubmitVND,
-    handleChangeCreateLinksSourceRequest,
-    handleChangeCreateLinksTargetRequest,
-    handleSubmitCreateLinksRequest
-  }:propsCreateOne 
-) {
-
- 
+export function CreateOne() {
+  const [_, setRequest] = useContext(RequestContext);
+  const [virtualNodesRequest, setVirtualNodesRequest] = useState<any>([]);
+  const [links, setLinks] = useState<number[]>([] as number[]);
+  const [qtdRequests, setQtdRequests] = useState(1);
   
+  const {register, handleSubmit, reset} = useForm<RequestFormDate>()
+  const {register:register2, handleSubmit:handleSubmit2, reset:reset2} = useForm()
+  const {register:register3, handleSubmit:handleSubmit3, reset:reset3} = useForm<IlinkConvert>()
+
+  function clearForm() {
+    setVirtualNodesRequest([])
+    setLinks([])
+    reset()
+    reset2()
+    reset3()
+  }
+  
+
+  function auxCreateMultiplesRequest (date: RequestFormDate) {
+      const requestList = []
+      for (let i = 0; i < qtdRequests; i++) {
+        requestList.push({ ...date, 'vnd': {... virtualNodesRequest}, 'links': links })
+        requestList[i].id  = requestList[i].id || create_id()
+    }
+    console.log(requestList);
+    
+    return(requestList)
+  }
+
+
+  function handleSubmitCreateRequest (date: RequestFormDate){  
+    
+    const requestAux  = auxCreateMultiplesRequest(date)
+    setRequest(requestAux)
+    clearForm();
+    toast.success('Create request with success!');
+  }
+
+  function handleSubmitCreateVND (date: any){  
+    const virtualNodesRequestAux = ([ ...virtualNodesRequest, date ])
+    setVirtualNodesRequest(virtualNodesRequestAux)
+  }
+
+  function handleSubmitCreateLink (date:IlinkConvert){
+    const correctLinks = [parseInt(date.linkSource), parseInt(date.LinkTarget)]
+    const arrayAux = ([ ...links, correctLinks])
+    setLinks(arrayAux as number[])
+  }
+
+
+   // dict InfoGeneralRequest
   return (
  
-    <form onSubmit={handleSubmitCreateRequest}>
+    <form onSubmit={handleSubmit(handleSubmitCreateRequest)}>
       <div className='InfoGeneralRequest'>
         <h4>Informação geral da requição</h4>
         <div> 
+          <p> id </p> 
+          <input id="id-creation"   placeholder="Deixe em branco para ser gerado randomicamente"   type="number" {...register("id", {valueAsNumber: true, })}  />
+        </div> 
+        <div> 
           <p> created </p> 
-          <input type="number" name="created"      id="created-creation"     placeholder="created"      onChange={handleChangeRequest} />
+          <input id="created-creation"   placeholder="created"   type="number" {...register("created", {valueAsNumber: true, })}  required/>
         </div> 
 
         <div> 
           <p> duration </p> 
-          <input type="number" name="duration"     id="duration-creation"    placeholder="duration"     onChange={handleChangeRequest} />
+          <input  id="duration-creation"    placeholder="duration" type="number"  {...register("duration", {valueAsNumber: true, })}    required/>
         </div> 
 
         <div> 
           <p> period </p> 
-          <input type="number" name="period"       id="period-creation"      placeholder="period"       onChange={handleChangeRequest} />
+          <input  id="period-creation"      placeholder="period" type="number"  {...register("period", {valueAsNumber: true, })}      required/>
         </div> 
 
         <div> 
           <p> bandwidth </p> 
-          <input type="number" name="bandwidth"    id="bandwidth-creation"   placeholder="bandwidth"    onChange={handleChangeRequest} />
+          <input  id="bandwidth-creation"   placeholder="bandwidth" type="number"  {...register("bandwidth", {valueAsNumber: true, })}   required/>
         </div> 
 
         <div> 
           <p> delay </p> 
-          <input type="number" name="delay"        id="delay-creation"       placeholder="delay"        onChange={handleChangeRequest} />
+          <input  id="delay-creation"       placeholder="delay" type="number"  {...register("delay", {valueAsNumber: true, })}       required/>
         </div> 
 
         <div> 
           <p> reliability </p> 
-          <input type="number" name="reliability"  id="reliability-creation" placeholder="reliability"  onChange={handleChangeRequest} />
+          <input  id="reliability-creation" placeholder="reliability" type="number"  {...register("reliability", {valueAsNumber: true, })} required/>
         </div> 
 
         <div> 
           <p> type_slice </p> 
-          <input type="text" name="type_slice"   id="type_slice-creation"  placeholder="type_slice"   onChange={handleChangeRequest} />
+          <input type="text" id="type_slice-creation"  placeholder="type_slice"  {...register("type_slice")}  required/>
         </div> 
 
       </div>
 
-      <div className='InfoVNDRequest'>
+     <div className='InfoVNDRequest'>
 
         <h4>Informaçao virtual node demand</h4>
         <div> 
           <p> vnr_id </p> 
-          <input type="text" name="vnr_id"    id="vnr_id"        placeholder="vnr_id"       onChange={handleChangeVND} />
+          <input type="number" id="vnr_id"        placeholder="vnr_id"       {...register2("vnr_id", {valueAsNumber: true, })} />
         </div> 
 
         <div> 
           <p> requested </p> 
-          <input type="text" name="requested" id="requested-vnd" placeholder="requested-vnd"  onChange={handleChangeVND} required/>
+          <input type="number" id="requested-vnd" placeholder="requested-vnd"  {...register2("requested", {valueAsNumber: true, })} required/>
         </div> 
 
 
         <div> 
           <p> domain </p> 
-          <input type="text" name="domain"    id="domain-vnd"    placeholder="domain-vnd"     onChange={handleChangeVND} required/>
+          <input type="number" id="domain-vnd"    placeholder="domain-vnd"     {...register2("domain", {valueAsNumber: true, })} required/>
         </div> 
 
         <div> 
           <p> region </p> 
-          <input type="text" name="region"    id="region-vnd"    placeholder="region-vnd"     onChange={handleChangeVND} required/>
+          <input type="number" id="region-vnd"    placeholder="region-vnd"     {...register2("region", {valueAsNumber: true, })} required/>
         </div> 
 
         <div> 
           <p> type </p> 
-          <input type="text" name="type"      id="type-vnd"      placeholder="type-vnd"       onChange={handleChangeVND} required/>
+          <input type="text" id="type-vnd"      placeholder="type-vnd"       {...register2("type")} required/>
         </div> 
 
         <div> 
           <p> period </p> 
-          <input type="text" name="period"    id="period-vnd"    placeholder="period-vnd"     onChange={handleChangeVND} required/>
+          <input type="number" id="period-vnd"    placeholder="period-vnd"     {...register2("period", {valueAsNumber: true, })} required/>
         </div> 
 
         <div> 
           <p> sink </p> 
-          <input type="text" name="sink"      id="sink-vnd"      placeholder="sink-vnd"       onChange={handleChangeVND} required/>
+          <input type="number" id="sink-vnd"      placeholder="sink-vnd"       {...register2("sink", {valueAsNumber: true, })} required/>
         </div> 
 
-        <button  onClick={handleSubmitVND}>
+        <button  onClick={handleSubmit2(handleSubmitCreateVND)}>
           Adcionar
         </button>
       </div>
       
       <h4>Link Source / Target</h4>
-      <select name="linkSource" id="linkSource" defaultValue={'DEFAULT'} onChange={handleChangeCreateLinksSourceRequest} >
+      <select id="linkSource" defaultValue={'DEFAULT'} {...register3('linkSource')} >
         <option value='DEFAULT' disabled hidden>Select Slice</option>
         {
-          arrayResponseformVND.map((__: any, index:number) => {
+          virtualNodesRequest.map((__: any, index:number) => {
             // arrayResponseformVND[index]['vnr_id'] = index
             return <option key={index} value={index}> link {index} </option>
           })
         }    
       </select>
 
-      <select name="LinkTarget" id="LinkTarget" defaultValue={'DEFAULT'} onChange={handleChangeCreateLinksTargetRequest} >
+      <select id="LinkTarget" defaultValue={'DEFAULT'}  {...register3('LinkTarget')} >
       <option value='DEFAULT' disabled hidden>Select Slice</option>
         {
-          arrayResponseformVND.map((__:any, index:number) => {
+          virtualNodesRequest.map((__:any, index:number) => {
             // arrayResponseformVND[index]['vnr_id'] = index
             return <option key={index} value={index}> link {index} </option>
           })
         }
       </select>
-      <button onClick={handleSubmitCreateLinksRequest}>
+      <button onClick={handleSubmit3(handleSubmitCreateLink)}>
         Adcionar Links
-      </button>
+      </button> 
       
       <button type="submit">
         Create Request
@@ -152,4 +177,3 @@ export function CreateOne({
     </form>
   )
 }
-

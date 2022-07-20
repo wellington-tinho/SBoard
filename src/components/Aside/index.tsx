@@ -72,14 +72,6 @@ export function Aside() {
                   '#FF0000', '#FF4500', '#B22222', '#FF8C00', '#FF8C00'
                 ]
 
-  const [formRequest, setFormRequest] = useReducer(formCreateRequest, {});
-  const [formVND, setFormVND] = useReducer(formCreateVND, {});
-  const [arrayResponseformVND, setArrayResponseFormVND] = useState<virtualNodeDemandInterface[]>([]);
-
-  const [createLinksSourceRequest, setCreateLinksSourceRequest] = useState<any>()
-  const [createLinksTargetRequest, setCreateLinksTargetRequest] = useState<any>()
-
-  const [createLinksRequest, setCreateLinksRequest] = useState<any>([])
   // Funcao principal para colorir o grafo
   function setColorGraph(checked: any, request: any) {
     try {
@@ -196,15 +188,7 @@ export function Aside() {
 
 
             <TabPanel className='TabPanelCreate'>
-              <CreateRequest
-                requestList={requestList} setRequestList={setRequestList}
-                formRequest={formRequest} setFormRequest={setFormRequest}
-                formVND={formVND} setFormVND={setFormVND}
-                arrayResponseformVND={arrayResponseformVND} setArrayResponseFormVND={setArrayResponseFormVND}
-                createLinksRequest={createLinksRequest} setCreateLinksRequest={setCreateLinksRequest}
-                createLinksSourceRequest={createLinksSourceRequest} setCreateLinksSourceRequest={setCreateLinksSourceRequest}
-                createLinksTargetRequest={createLinksTargetRequest} setCreateLinksTargetRequest={setCreateLinksTargetRequest}
-              />
+              <CreateRequest/>
             </TabPanel>
 
             <TabPanel className='TabPanelEdition'>
