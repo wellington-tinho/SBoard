@@ -15,3 +15,8 @@ export const generatesRandomBetweenRange = (min: number| undefined, max: number|
   return Math.floor(Math.random() * (max - min + 1)) + min;
 } 
 
+
+export const simple_random_Between_Range = (min= 1, max= 999_999_999)=>  {
+  return Math.round(min + Math.random() * (max - min));
+}
+
