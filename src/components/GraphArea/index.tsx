@@ -17,23 +17,12 @@ import Modal from 'react-modal';
 import { Container, GraphContainer, NavOptions } from "./styles";
 import useInitCytoscapeExtensions from '../../hooks/useInitCytoscapeExtensions';
 
-// GiJoin juntar icon
-
-
-
-// import { SetupModal } from '../SetupModal';
-
-
-
 
 Modal.setAppElement('#root')
 
 export function GraphArea() {
   const cy = useContext<cytoscape.Core[]>(CytoscapeContext)[0];
   const setRequest = useContext(RequestContext)[1];
-
-
-
   const [element, setElement] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
   const hiddenFileRequestInput = useRef<any>(null);
@@ -101,10 +90,7 @@ export function GraphArea() {
   }
 
   function handleChangeZoomLevel(level: number) {
-
     const newSpacing = cy?.zoom() + (level)
-    // setSpacingFactorElements(newSpacing)
-
     cy?.zoom(newSpacing);
   }
 
@@ -199,11 +185,6 @@ export function GraphArea() {
             <AiOutlineShrink fontSize="1.5em" onClick={() => { handleChangeSpacingFactor(0.9) }} />
             <span className="tooltiptext">Controll spacing between elements Graph</span>
           </li>
-          {/* <li className="tooltip">
-             <BiUndo fontSize="1.5em" onClick={()=>{handleChangeSpacingFactor(1.1)}}/>   
-             <BiRedo fontSize="1.5em" onClick={()=>{handleChangeSpacingFactor(0.9)}}/>   
-            <span className="tooltiptext">Undo and Redo in elements Graph</span> 
-          </li> */}
 
           <li className="tooltip">
             <HiOutlineViewGridAdd fontSize="1.5em" cursor="pointer" onClick={AddEle} />
@@ -236,11 +217,6 @@ export function GraphArea() {
             <FiPlayCircle fontSize="1.5em" onClick={handleEdgehandles} />
             <span className="tooltiptext">{drawMode ? 'Draw On' : 'Draw Off'}</span>
           </li>
-
-          {/* <li className="tooltip">
-            <FiPlayCircle color="#228f41" fontSize="1.5em" cursor="not-allowed" onClick={() => cy.center()} />
-            <span className="tooltiptext">Run ??</span>
-          </li> */}
 
         </ul>
       </NavOptions>

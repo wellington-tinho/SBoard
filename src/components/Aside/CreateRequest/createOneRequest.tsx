@@ -23,7 +23,6 @@ export function CreateOne() {
     reset3()
   }
   
-
   function auxCreateMultiplesRequest (date: RequestFormDate) {
       const requestList = []
       for (let i = 0; i < qtdRequests; i++) {
@@ -34,7 +33,6 @@ export function CreateOne() {
     
     return(requestList)
   }
-
 
   function handleSubmitCreateRequest (date: RequestFormDate){  
     

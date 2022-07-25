@@ -60,8 +60,7 @@ export function Aside() {
   const cy = useContext(CytoscapeContext)[0];
   const request = useContext(RequestContext)[0];
 
-
-  const [requestList, setRequestList] = useState<requestUnicInterface[]>(request)
+  const [requestList, setRequestList] = useContext(RequestContext)
   const qtdRequests = (0)
 
   const [checboxState, setChecboxState] = useState(false)
@@ -142,6 +141,7 @@ export function Aside() {
         prevsElements.push(JSON.parse(e.target.result)[key])
       )
 
+      console.log(prevsElements)
       setRequestList(prevsElements)
     };
 

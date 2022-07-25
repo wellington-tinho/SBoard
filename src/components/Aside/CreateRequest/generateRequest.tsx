@@ -12,10 +12,10 @@ export function Generate() {
     
     const requestArrayObjec:any = {}
     const virtualNodesRequesArrayObject:any= {}
+    const linksAux:RequestFormDate["links"] = []
     
     const request:RequestFormDate = {}
     const virtualNodesRequest:virtualNodeDemandInterface = {}
-    const linksAux:RequestFormDate["links"] = []
     
     
     const QUANTITY_RANDOM_REQUESTS = simple_random_Between_Range(1,10)
