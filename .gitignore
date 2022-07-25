@@ -27,3 +27,5 @@ api/VNRs_Generator.py
 src/__react-app-env.d.ts
 /dist
 dist/*
+src/context/_AppContextProvider.tsx
+src/hooks/_useCytoscape.tsx
