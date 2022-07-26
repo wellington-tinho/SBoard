@@ -21,7 +21,7 @@ import useInitCytoscapeExtensions from '../../hooks/useInitCytoscapeExtensions';
 Modal.setAppElement('#root')
 
 export function GraphArea() {
-  const cy = useContext<cytoscape.Core[]>(CytoscapeContext)[0];
+  const {cy} = useContext(CytoscapeContext);
   const setRequest = useContext(RequestContext)[1];
   const [element, setElement] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
@@ -90,8 +90,9 @@ export function GraphArea() {
   }
 
   function handleChangeZoomLevel(level: number) {
-    const newSpacing = cy?.zoom() + (level)
-    cy?.zoom(newSpacing);
+    if (cy == undefined) return;
+    const newSpacing = cy.zoom() + (level)
+    cy.zoom(newSpacing);
   }
 
   function handleChangeSpacingFactor(spacing: number) {
@@ -105,8 +106,8 @@ export function GraphArea() {
 
   function AddEle() {
     try {
-      cy.center(
-        cy.add({
+      cy?.center(
+        cy?.add({
           // group: 'nodes',
           data: {
             "Country": "",
@@ -133,9 +134,10 @@ export function GraphArea() {
   }
 
   function DelEle() {
+    if (cy == undefined) return;
     try {
       var ele = cy.$('#' + element.id);
-      cy.remove(ele);
+      cy?.remove(ele);
     }
     catch (e) {
       console.log('error');
@@ -209,7 +211,7 @@ export function GraphArea() {
           </li>
 
           <li className="tooltip">
-            <TbFocusCentered fontSize="1.5em" cursor="pointer" onClick={() => cy.center()} />
+            <TbFocusCentered fontSize="1.5em" cursor="pointer" onClick={() => cy?.center()} />
             <span className="tooltiptext">Center</span>
           </li>
 

@@ -17,9 +17,10 @@ export interface iGraphJson{
 
 interface UploadGraphProps{
   setGraph:React.Dispatch<React.SetStateAction<any>>,
+  setIsGraph: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-export function UploadGraph({setGraph}:UploadGraphProps){
+export function UploadGraph({setGraph,setIsGraph}:UploadGraphProps){
   const [graphGML, setGraphGML] = useState()
   // const [grapJSON, setGraphJSON] = useState<iGraphJson>()
   const {
@@ -65,10 +66,12 @@ export function UploadGraph({setGraph}:UploadGraphProps){
         if((JSON.parse(e.target.result).elements)==undefined){
           toast.error('Invalid JSON file!')
         }else{
-          setGraph(JSON.parse(e.target.result).elements);  
+          setGraph(JSON.parse(e.target.result).elements); 
+          setIsGraph(true); 
         }
       }else{
         setGraphGML(e.target.result)      
+        
       }
     };
     reader.readAsText(file[0]);
@@ -84,6 +87,8 @@ export function UploadGraph({setGraph}:UploadGraphProps){
           setGraphGML(undefined)
         }else{
           setGraph(response.data.elements)
+          setIsGraph(true); 
+
         }
       })  
     }

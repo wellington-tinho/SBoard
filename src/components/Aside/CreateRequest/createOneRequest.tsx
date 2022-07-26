@@ -9,7 +9,7 @@ export function CreateOne() {
   const [_, setRequest] = useContext(RequestContext);
   const [virtualNodesRequest, setVirtualNodesRequest] = useState<any>([]);
   const [links, setLinks] = useState<number[]>([] as number[]);
-  const [qtdRequests, setQtdRequests] = useState(1);
+  const qtdRequests = 1;
   
   const {register, handleSubmit, reset} = useForm<RequestFormDate>()
   const {register:register2, handleSubmit:handleSubmit2, reset:reset2} = useForm()

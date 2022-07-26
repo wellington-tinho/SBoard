@@ -1,7 +1,13 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, Dispatch } from "react";
 import { Core } from "cytoscape";
 
-export const CytoscapeContext = createContext({} as any)
+
+interface IContextProps {
+  cy: Core | undefined;
+  setCy: Dispatch<React.SetStateAction<Core | undefined>>,
+}
+
+export const CytoscapeContext = createContext({} as IContextProps)
 
 interface CytoscapeContextPros {
   children:ReactNode
@@ -9,9 +15,8 @@ interface CytoscapeContextPros {
 
 export function CytoscapeProvider({children}:CytoscapeContextPros){
   const [cy, setCy] = useState<Core>();
-
   return (
-    <CytoscapeContext.Provider value={[cy, setCy]}>
+    <CytoscapeContext.Provider value={{cy, setCy}}>
         {children}
     </CytoscapeContext.Provider>
   )

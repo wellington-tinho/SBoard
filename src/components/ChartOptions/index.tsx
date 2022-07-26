@@ -1,8 +1,8 @@
-
 import { useContext, useEffect, useRef, useState } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import Modal from 'react-modal';
 import { CytoscapeContext } from '../../context/CytoscapeGraph/CytoscapeContext';
+import { IsGraphContext } from '../../context/IsGraph/isGraph';
 import { api } from '../../services/api';
 import { Container } from './styles';
 
@@ -17,7 +17,11 @@ interface ChartOptionsProps {
 
 
 export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
-  const [cy, setCy] = useContext<cytoscape.Core[] | any>(CytoscapeContext);
+  const {cy, setCy} = useContext(CytoscapeContext);
+  
+  const {setIsGraph} = useContext(IsGraphContext);
+  
+
   const [graphInported, setGraphInported] = useState<any>()
   // const [grapGML, setGraphGML] = useState<string>()
 
@@ -32,7 +36,7 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
   function ExportGraph() {
     var a = document.createElement("a");
     document.body.appendChild(a);
-    var json = JSON.stringify(cy.json()),
+    var json = JSON.stringify(cy?.json()),
       blob = new Blob([json], { type: "octet/stream" }),
       url = window.URL.createObjectURL(blob);
     // a.style = "display: none";
@@ -241,7 +245,7 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
         zoomFactor: 0.05, // zoom factor per zoom tick
         zoomDelay: 45 // how many ms between zoom ticks
       };
-      cy.json(config)
+      cy?.json(config)
 
     }
     // var layout = cy?.layout({
@@ -265,7 +269,8 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
         <h2>Chart Options</h2>
 
         <button onClick={() => {
-          cy.destroy(); console.log(cy?.data());
+          setIsGraph(false)
+          setCy(undefined as unknown as cytoscape.Core)
         }}>
           Clear graph
         </button >

@@ -1,7 +1,8 @@
-import cytoscape, { Core, ElementsDefinition } from 'cytoscape';
+import cytoscape, { ElementsDefinition } from 'cytoscape';
 import { useContext, useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { CytoscapeContext } from '../../context/CytoscapeGraph/CytoscapeContext';
+import { IsGraphContext } from '../../context/IsGraph/isGraph';
 import { ChartOptions } from '../ChartOptions';
 import { EdgeModal } from '../EdgeModal';
 import { ElementModal } from '../ElementModal';
@@ -19,7 +20,9 @@ Modal.setAppElement('#root')
 
 export function GraphManipulation({ grapJSON }: propsGraphJson) {
   const containerRef = useRef(null);
-  const [cy, setCy] = useContext<Core | any>(CytoscapeContext)
+
+  const {cy, setCy} = useContext(CytoscapeContext);
+
   const [nodeElement, setNodeElement] = useState<any>()
   const [edgeElement, setEdgeElement] = useState<any>()
 

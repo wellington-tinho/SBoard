@@ -1,8 +1,9 @@
-import { useContext, useEffect, useReducer, useState } from "react";
+import { useContext, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { CytoscapeContext } from "../../context/CytoscapeGraph/CytoscapeContext"; 
 import { RequestContext } from "../../context/Request/RequestContext";
+import { RequestFormDate } from "../../types/requestFormData";
 import { CreateRequest } from "./CreateRequest";
 import { EditionRequest } from "./EditionRequest/index";
 import { AsideOthers } from "./outhers/others";
@@ -23,43 +24,12 @@ interface virtualNodeDemandInterface {
   sink: number;
 }
 
-interface requestUnicInterface {
-  id: number;
-  vnd: virtualNodeDemandInterface[];
-  links: [[number]];
-  created: number;
-  duration: number;
-  period: number;
-  bandwidth: number;
-  delay: number;
-  reliability: number;
-  type_slice: string;
-}
-
-
-const formCreateRequest = (state: any, event: any) => {
-  return {
-    ...state,
-    [event.name]: event.value
-  }
-}
-
-const formCreateVND = (state: any, event: any) => {
-  return {
-    ...state,
-    [event.name]: event.value
-  }
-}
-
-
 // Variavel global responsavel por conter um dicinoario com o Id do request e quais nós/edges foram alterados com esse Id
 // Tentei deixar essa variavel dentro de setColorGraph() mas sempre ele ficava sendo reecriada
 var changeDicChecbox: { [index: string]: any; } = {};
 
 export function Aside() {
-  const cy = useContext(CytoscapeContext)[0];
-  const request = useContext(RequestContext)[0];
-
+  const {cy} = useContext(CytoscapeContext);
   const [requestList, setRequestList] = useContext(RequestContext)
   const qtdRequests = (0)
 
@@ -72,41 +42,33 @@ export function Aside() {
                 ]
 
   // Funcao principal para colorir o grafo
-  function setColorGraph(checked: any, request: any) {
+  function setColorGraph(checked: Boolean, request: RequestFormDate) {
+    
     try {
       if (checked) {
         var randNum = (Math.floor(Math.random() * 100) + 1)
         var color = (colors)[Math.floor(Math.random() * (colors).length)]
         changeDicChecbox[request.id] = randNum
 
-        console.log('node', cy.$(`node[id = "${randNum}"]`).json());
-        console.log('edge', cy.$(`edge[id = "e${randNum}"]`).json());
+        console.log('node', cy?.$(`node[id = "${randNum}"]`).json());
+        console.log('edge', cy?.$(`edge[id = "e${randNum}"]`).json());
 
-        cy.style()
-          .selector(`node[id = "${randNum}"]`)
+        cy?.$(`node[id = "${randNum}"]`)
           .style({ 'background-color': `${color}` })
-          .update();
 
-        cy.style()
-          .selector(`edge[id = "e${randNum}"]`)
+        cy?.$(`edge[id = "e${randNum}"]`)
           .style({ 'line-color': `${color}` })
-          .update();
         // .$(`edge[Delay = ${randNum}]`)
 
       }
       else {
 
-
-        cy.style()
-          .selector(`node[id = "${changeDicChecbox[request.id]}"]`)
+        cy?.$(`node[id = "${changeDicChecbox[request.id]}"]`)
           .style({ 'background-color': `grey` })
-          .update();
 
 
-        cy.style()
-          .selector(`edge[id = "e${changeDicChecbox[request.id]}"]`)
+        cy?.$(`edge[id = "e${changeDicChecbox[request.id]}"]`)
           .style({ 'line-color': 'grey' })
-          .update();
       }
     }
     catch (e) {
