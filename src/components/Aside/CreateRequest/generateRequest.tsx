@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { RequestContext } from '../../../context/Request/RequestContext';
 import { RequestFormDate, virtualNodeDemandInterface } from '../../../types/requestFormData';
 import {simple_random_Between_Range } from '../../../util/randomNumber';
-// import { create_id } from '../../../util/randonIDs';
+import { create_id } from '../../../util/randonIDs';
 
 
 export function Generate() {
@@ -14,7 +14,9 @@ export function Generate() {
     const virtualNodesRequesArrayObject:any= {}
     const linksAux:RequestFormDate["links"] = []
     
-    const request:RequestFormDate = {}
+    const request:RequestFormDate = {
+      id: create_id()
+    }
     const virtualNodesRequest:virtualNodeDemandInterface = {}
     
     
