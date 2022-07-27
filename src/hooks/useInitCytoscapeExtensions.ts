@@ -4,13 +4,13 @@ import edgehandles from "cytoscape-edgehandles";
 import type { EdgeHandlesInstance } from "cytoscape-edgehandles";
 
 
-type UseInitCytoscapeExtensions = (cy: Core | undefined) => {
-  edgeHandles: EdgeHandlesInstance | undefined;
+type UseInitCytoscapeExtensions = (cy: Core) => {
+  edgeHandles: EdgeHandlesInstance ;
 };
 cytoscape.use(edgehandles);
 
 const useInitCytoscapeExtensions: UseInitCytoscapeExtensions = (cy) => {
-  const [edgeHandles, setEdgeHandles] = useState<EdgeHandlesInstance>();
+  const [edgeHandles, setEdgeHandles] = useState<EdgeHandlesInstance>({} as EdgeHandlesInstance);
   
   // Initialise edgehandles instance
   useEffect(() => {
