@@ -2,7 +2,6 @@ import cytoscape, { ElementsDefinition } from 'cytoscape';
 import { useContext, useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { CytoscapeContext } from '../../context/CytoscapeGraph/CytoscapeContext';
-import { IsGraphContext } from '../../context/IsGraph/isGraph';
 import { ChartOptions } from '../ChartOptions';
 import { EdgeModal } from '../EdgeModal';
 import { ElementModal } from '../ElementModal';

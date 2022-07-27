@@ -47,33 +47,6 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
     window.URL.revokeObjectURL(url);
   }
 
-  // useEffect(() => {
-  //   if(grapGML){
-
-  //     // grapGML.slice(1,-1)
-  //     var a = document.createElement("a");
-  //     document.body.appendChild(a);  
-  //     var json = (grapGML),
-  //     blob = new Blob([json], {type: "octet/stream"}),
-  //     url = window.URL.createObjectURL(blob);
-  //     // a.style = "display: none";
-  //     a.setAttribute('style', 'display: none;');
-  //     a.href = url;
-  //     a.download = 'NSboard_Dataset.gml';
-  //     a.click();
-  //     window.URL.revokeObjectURL(url);
-  //   }
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // },[grapGML])
-
-  // function ExportGraph(){
-  //   console.log(cy.json());
-
-  //   api.post('convertGML', {data: cy.json()})
-  //   .then(response => setGraphGML(response.data)) 
-  // }
-
 
   function InportGraph(file: any) {
     const reader = new FileReader();
@@ -108,17 +81,66 @@ export function ChartOptions({ isOpen, onRequestClose }: ChartOptionsProps) {
 
     if (graphInported) {
       // alert('entrou');
-      Object.keys((graphInported.elements).nodes).forEach(key => {
-        graphInported.elements.nodes[key].data.id = '' + graphInported.elements.nodes[key].data.id
+      Object.keys(graphInported.elements.edges).forEach(key => {
+        (graphInported.elements.edges[Number(key)].data) = {
+          ...graphInported.elements.edges[Number(key)].data,
+    
+          id: `e${Number(key)}`,
+          delay: `${graphInported.elements.edges[Number(key)].data.delay ? graphInported.elements.edges[Number(key)].data.delay : (Math.floor(Math.random() * 100) + 1)}`,
+          reliability: `${graphInported.elements.edges[Number(key)].data.reliability ? graphInported.elements.edges[Number(key)].data.reliability : (Math.floor(Math.random() * 100) + 1)}`,
+          weight: `${graphInported.elements.edges[Number(key)].data.weight ? graphInported.elements.edges[Number(key)].data.weight : (Math.floor(Math.random() * 100) + 1)}`,
+          negative: `${graphInported.elements.edges[Number(key)].data.negative ? graphInported.elements.edges[Number(key)].data.negative : (Math.floor(Math.random() * 100) + 1)}`,
+        }
       })
 
-      Object.keys((graphInported.elements).edges).forEach(key => {
-        graphInported.elements.edges[key].data.id = `e${key}`
-        graphInported.elements.edges[key].data.source = ('' + graphInported.elements.edges[key].data.source)
-        graphInported.elements.edges[key].data.target = ('' + graphInported.elements.edges[key].data.target)
+     
+  //se o primeiro node não tem position entao os outros tambem nao terá, (diferença de envio via GML e JSON)
+  var notHasPositionInGraph = !graphInported.elements.nodes[0].position
+
+  // encontrei um erro de um graph que tinha longitude e latitude em um node, mas não tinha position
+  var nothasPosInGraph = !graphInported.elements.nodes[0].data.pos
+
+  //caso nao tiver latitude e longitude, então não tem posição no graph, (gero no random)
+  var nothasLongLatInGraph = !graphInported.elements.nodes[0].data.Longitude && !graphInported.elements.nodes[0].data.Latitude
+
+
+  if (notHasPositionInGraph) {
+
+    if (!nothasPosInGraph) {
+      Object.keys(graphInported.elements.nodes).forEach((key) => {
+        (
+          graphInported.elements.nodes[Number(key)].data = {
+            ...graphInported.elements.nodes[Number(key)].data,
+          },
+          graphInported.elements.nodes[Number(key)].position = {
+            x: Number(`${graphInported.elements.nodes[Number(key)].data.pos[0]}`),
+            y: Number(`${graphInported.elements.nodes[Number(key)].data.pos[1]}`),
+          }
+        )
       })
+    }
+    else if (!nothasLongLatInGraph) {
+      Object.keys(graphInported.elements.nodes).forEach((key) => {
+        (
+          graphInported.elements.nodes[Number(key)].data = {
+            ...graphInported.elements.nodes[Number(key)].data,
+          },
+          graphInported.elements.nodes[Number(key)].position = {
+            x: Number(`${graphInported.elements.nodes[Number(key)].data.Longitude}`),
+            y: Number(`${graphInported.elements.nodes[Number(key)].data.Latitude}`),
+          }
+        )
+      })
+    }
+  } else {
+    Object.keys(graphInported.elements.nodes).forEach(key => {
+      (graphInported.elements.nodes[Number(key)].data = { ...graphInported.elements.nodes[Number(key)].data })
+    })
+  }
+
 
       const config = {
+
         container: containerRef.current,
         elements: graphInported.elements,
         layout: {
