@@ -1,8 +1,9 @@
+import { log } from 'console';
 import { useContext, useState  } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { RequestContext } from '../../../context/Request/RequestContext';
-import { IlinkConvert, RequestFormDate } from '../../../types/requestFormData';
+import { IlinkConvert, RequestFormDate, virtualNodeDemandInterface } from '../../../types/requestFormData';
 import { create_id } from '../../../util/randonIDs';
 
 export function CreateOne() {
@@ -23,26 +24,30 @@ export function CreateOne() {
     reset3()
   }
   
-  function auxCreateMultiplesRequest (date: RequestFormDate) {
-      const requestList = []
-      for (let i = 0; i < qtdRequests; i++) {
-        requestList.push({ ...date, 'vnd': {... virtualNodesRequest}, 'links': links })
-        requestList[i].id  = requestList[i].id || create_id()
-    }
-    console.log(requestList);
-    
-    return(requestList)
-  }
-
   function handleSubmitCreateRequest (date: RequestFormDate){  
-    
     const requestAux  = auxCreateMultiplesRequest(date)
     setRequest(requestAux)
     clearForm();
     toast.success('Create request with success!');
   }
 
-  function handleSubmitCreateVND (date: any){  
+  function auxCreateMultiplesRequest (date: RequestFormDate) {
+      const requestList = []
+      for (let i = 0; i < qtdRequests; i++) {
+        requestList.push({ ...date, 'vnd': {... virtualNodesRequest}, 'links': links })
+        requestList[i].id  = requestList[i].id || create_id() //Defnir id para cada request
+    }
+    console.log(requestList);
+    
+    return(requestList)
+  }
+
+  function handleSubmitCreateVND (date:virtualNodeDemandInterface ){ 
+    const QUANTITY_REQUESTS = virtualNodesRequest.length
+    
+    date.id = QUANTITY_REQUESTS
+    
+    if (isNaN(Number(date.vnr_id))) date.vnr_id = QUANTITY_REQUESTS
     const virtualNodesRequestAux = ([ ...virtualNodesRequest, date ])
     setVirtualNodesRequest(virtualNodesRequestAux)
   }

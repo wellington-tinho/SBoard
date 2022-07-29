@@ -36,7 +36,7 @@ export function Generate() {
     
 
       for (var j = 0; j < (QUANTITY_RANDOM_VND); j++) {
-        virtualNodesRequest.id = simple_random_Between_Range(0,QUANTITY_RANDOM_VND)
+        virtualNodesRequest.id = j
         virtualNodesRequest.requested = simple_random_Between_Range(0,QUANTITY_RANDOM_VND)
         virtualNodesRequest.vnr_id = simple_random_Between_Range(0,QUANTITY_RANDOM_VND)
         virtualNodesRequest.domain = simple_random_Between_Range(0,QUANTITY_RANDOM_VND)
