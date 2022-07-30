@@ -35,7 +35,7 @@ export function CreateOne() {
       const requestList = []
       for (let i = 0; i < qtdRequests; i++) {
         requestList.push({ ...date, 'vnd': {... virtualNodesRequest}, 'links': links })
-        requestList[i].id  = requestList[i].id || create_id() //Defnir id para cada request
+        requestList[i].id  = requestList[i].id || create_id() //Definir id para cada request
     }
     console.log(requestList);
     
@@ -46,8 +46,10 @@ export function CreateOne() {
     const QUANTITY_REQUESTS = virtualNodesRequest.length
     
     date.id = QUANTITY_REQUESTS
+
+    // Se o usuário nao informar o id do vnr, então o id do vnr será a quantidade de vnds que já existem dessa forma cada novo VND irá receber um id diferente 
+    if (isNaN(Number(date.vnr_id))) date.vnr_id = QUANTITY_REQUESTS 
     
-    if (isNaN(Number(date.vnr_id))) date.vnr_id = QUANTITY_REQUESTS
     const virtualNodesRequestAux = ([ ...virtualNodesRequest, date ])
     setVirtualNodesRequest(virtualNodesRequestAux)
   }
