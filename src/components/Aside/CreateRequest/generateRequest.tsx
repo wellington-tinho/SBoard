@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { toast } from 'react-toastify';
 import { RequestContext } from '../../../context/Request/RequestContext';
 import { RequestFormDate, virtualNodeDemandInterface } from '../../../types/requestFormData';
 import {simple_random_Between_Range } from '../../../util/randomNumber';
@@ -17,7 +18,7 @@ export function Generate() {
     const request:RequestFormDate = {
       id: create_id()
     }
-    const virtualNodesRequest:virtualNodeDemandInterface = {}
+    const virtualNodesRequest:virtualNodeDemandInterface = {} as virtualNodeDemandInterface
     
     
     const QUANTITY_RANDOM_REQUESTS = simple_random_Between_Range(1,10)
@@ -55,7 +56,8 @@ export function Generate() {
       requestArrayObjec[i]={...request, 'vnd':virtualNodesRequesArrayObject,'links':linksAux}
     }
     setRequest(requestArrayObjec)
-    alert('Create request with success!')
+    toast.success('Create request with success!');
+
   }
 
 
