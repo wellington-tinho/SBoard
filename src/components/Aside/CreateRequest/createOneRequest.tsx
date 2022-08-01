@@ -1,4 +1,3 @@
-import { log } from 'console';
 import { useContext, useState  } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -148,7 +147,7 @@ export function CreateOne() {
         </div> 
 
         <button  onClick={handleSubmit2(handleSubmitCreateVND)}>
-          Adcionar
+          Adicionar
         </button>
       </div>
       

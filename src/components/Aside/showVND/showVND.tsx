@@ -1,7 +1,9 @@
 
 // import { useState } from 'react';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { CytoscapeContext } from '../../../context/CytoscapeGraph/CytoscapeContext';
 import { RequestContext } from '../../../context/Request/RequestContext';
+import { RequestFormDate } from '../../../types/requestFormData';
 import { Container } from './styles';
 
 interface virtualNodeDemandInterface {
@@ -32,8 +34,8 @@ interface requestUnicInterface {
 interface showVNDProps {
   checboxState: boolean;
   toggleCheckBoxRequest: (e: any, request: any) => void;
-  qtdRequests: number;
 }
+
 
 // função para definir a visibilidade de informacoes da lista de requests
 function visibleDiv(divVisible: string, buttonVerInfo: string) {
@@ -55,13 +57,66 @@ function visibleDiv(divVisible: string, buttonVerInfo: string) {
 
 
 
-export function ShowVND({
-  checboxState,
-  toggleCheckBoxRequest,
-  qtdRequests,
+// Variavel global responsavel por conter um dicinoario com o Id do request e quais nós/edges foram alterados com esse Id
+// Tentei deixar essa variavel dentro de setColorGraph() mas sempre ele ficava sendo reecriada
+var changeDicChecbox: { [index: string]: any; } = {};
 
-}: showVNDProps) {
+
+export function ShowVND() {
+  const {cy} = useContext(CytoscapeContext);
+  const [checboxState, setChecboxState] = useState(false)
   const requestList = useContext(RequestContext)[0];
+  const colors = ['#6A5ACD', '#0000CD', '#4682B4', '#00FFFF', '#00FF7F', '#00FF7F', '#ADFF2F', 
+  '#ADFF2F', '#DAA520', '#8B4513', '#BC8F8F', '#7B68EE', '#4B0082', '#9400D3', 
+  '#800080', '#FF00FF', '#C71585', '#FF1493', '#DB7093', '#CD5C5C', '#DC143C', 
+  '#FF0000', '#FF4500', '#B22222', '#FF8C00', '#FF8C00'
+]
+
+
+    // Funcao principal para colorir o grafo
+    function setColorGraph(checked: Boolean, request: RequestFormDate) {
+      try {
+        if (checked) {
+          var randNum = (Math.floor(Math.random() * 100) + 1)
+          var color = (colors)[Math.floor(Math.random() * (colors).length)]
+          changeDicChecbox[request.id] = randNum
+  
+          console.log('node', cy?.$(`node[id = "${randNum}"]`).json());
+          console.log('edge', cy?.$(`edge[id = "e${randNum}"]`).json());
+  
+          cy?.$(`node[id = "${randNum}"]`)
+            .style({ 'background-color': `${color}` })
+  
+          cy?.$(`edge[id = "e${randNum}"]`)
+            .style({ 'line-color': `${color}` })
+          // .$(`edge[Delay = ${randNum}]`)
+  
+        }
+        else {
+  
+          cy?.$(`node[id = "${changeDicChecbox[request.id]}"]`)
+            .style({ 'background-color': `grey` })
+  
+  
+          cy?.$(`edge[id = "e${changeDicChecbox[request.id]}"]`)
+            .style({ 'line-color': 'grey' })
+        }
+      }
+      catch (e) {
+        console.log('Crie ou importe um grafico para ver o resultado')
+        console.log(e);
+      }
+    }
+    
+  
+    // Verificando se foi apertado checkbox dos requests e enviando para funcao de colorir
+    function toggleCheckBoxRequest(e: any, request: any) {
+      const { checked } = e.target
+      setChecboxState(checked)
+      console.log(request);
+      setColorGraph(checked, request)
+    }
+  
 
   var auxRequestElementsHTML: any = []
 
@@ -75,15 +130,15 @@ export function ShowVND({
             defaultChecked={checboxState}
             type="checkbox" name={key} id={key}
           />
-          <h4> Request {Number(key) + qtdRequests} </h4>
+          <h4> Request {Number(key)} </h4>
           <button
-            id={'buttonVerInfo' + (Number(key) + qtdRequests)}
-            onClick={() => visibleDiv(('divVisible' + (Number(key) + qtdRequests)), ('buttonVerInfo' + (Number(key) + qtdRequests)))} >
+            id={'buttonVerInfo' + (Number(key))}
+            onClick={() => visibleDiv(('divVisible' + (Number(key))), ('buttonVerInfo' + (Number(key))))} >
             View more
           </button>
         </div>
 
-        <div id={'divVisible' + (Number(key) + qtdRequests)} className='visible' style={{ display: 'none' }}>
+        <div id={'divVisible' + (Number(key))} className='visible' style={{ display: 'none' }}>
 
           <div className='styleInfosRequests'>
 
