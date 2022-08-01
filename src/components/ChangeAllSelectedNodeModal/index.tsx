@@ -17,8 +17,7 @@ interface ChangeAllSelectedNodeModalProps {
 }
 
 export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: ChangeAllSelectedNodeModalProps) {
-  const cy = useContext<cytoscape.Core[]>(CytoscapeContext)[0];
-
+  const {cy} = useContext(CytoscapeContext);
 
   const [country, setCountry] = useState(String)
   const [label, setLabel] = useState(String)
@@ -44,16 +43,16 @@ export function ChangeAllSelectedNodeModal({ isOpen, onRequestClose, nodes }: Ch
       var weight = generatesRandomBetweenRange(weightStart, weightEnd)
 
       /// Descobrir como chamar esta funçao apenas quando cada valor for alterado {refatorar}
-      cy.$(`#${nodes[i]}`)
-        .data('Country', country ? country : cy.$(`#${nodes[i]}`).data('Country'))
-        .data('domain', domain ? domain : cy.$(`#${nodes[i]}`).data('domain'))
-        .data('label', label ? label : cy.$(`#${nodes[i]}`).data('label'))
-        .data('name', name ? name : cy.$(`#${nodes[i]}`).data('name'))
-        .data('region', region ? region : cy.$(`#${nodes[i]}`).data('region'))
-        .data('type', type ? type : cy.$(`#${nodes[i]}`).data('type'))
-        .data('value', value ? value : cy.$(`#${nodes[i]}`).data('value'))
-        .data('pos', pos ? pos : cy.$(`#${nodes[i]}`).data('pos'))
-        .data('weight', weight ? weight : cy.$(`#${nodes[i]}`).data('weight'))
+      cy?.$(`#${nodes[i]}`)
+        .data('Country', country ? country : cy?.$(`#${nodes[i]}`).data('Country'))
+        .data('domain', domain ? domain : cy?.$(`#${nodes[i]}`).data('domain'))
+        .data('label', label ? label : cy?.$(`#${nodes[i]}`).data('label'))
+        .data('name', name ? name : cy?.$(`#${nodes[i]}`).data('name'))
+        .data('region', region ? region : cy?.$(`#${nodes[i]}`).data('region'))
+        .data('type', type ? type : cy?.$(`#${nodes[i]}`).data('type'))
+        .data('value', value ? value : cy?.$(`#${nodes[i]}`).data('value'))
+        .data('pos', pos ? pos : cy?.$(`#${nodes[i]}`).data('pos'))
+        .data('weight', weight ? weight : cy?.$(`#${nodes[i]}`).data('weight'))
     }
     toast.success('Nodes modified with success!');
   }

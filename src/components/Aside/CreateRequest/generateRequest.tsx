@@ -1,8 +1,9 @@
 import { useContext } from 'react';
+import { toast } from 'react-toastify';
 import { RequestContext } from '../../../context/Request/RequestContext';
 import { RequestFormDate, virtualNodeDemandInterface } from '../../../types/requestFormData';
 import {simple_random_Between_Range } from '../../../util/randomNumber';
-// import { create_id } from '../../../util/randonIDs';
+import { create_id } from '../../../util/randonIDs';
 
 
 export function Generate() {
@@ -12,10 +13,12 @@ export function Generate() {
     
     const requestArrayObjec:any = {}
     const virtualNodesRequesArrayObject:any= {}
-    
-    const request:RequestFormDate = {}
-    const virtualNodesRequest:virtualNodeDemandInterface = {}
     const linksAux:RequestFormDate["links"] = []
+    
+    const request:RequestFormDate = {
+      id: create_id()
+    }
+    const virtualNodesRequest:virtualNodeDemandInterface = {} as virtualNodeDemandInterface
     
     
     const QUANTITY_RANDOM_REQUESTS = simple_random_Between_Range(1,10)
@@ -34,7 +37,7 @@ export function Generate() {
     
 
       for (var j = 0; j < (QUANTITY_RANDOM_VND); j++) {
-        virtualNodesRequest.id = simple_random_Between_Range(0,QUANTITY_RANDOM_VND)
+        virtualNodesRequest.id = j
         virtualNodesRequest.requested = simple_random_Between_Range(0,QUANTITY_RANDOM_VND)
         virtualNodesRequest.vnr_id = simple_random_Between_Range(0,QUANTITY_RANDOM_VND)
         virtualNodesRequest.domain = simple_random_Between_Range(0,QUANTITY_RANDOM_VND)
@@ -53,7 +56,8 @@ export function Generate() {
       requestArrayObjec[i]={...request, 'vnd':virtualNodesRequesArrayObject,'links':linksAux}
     }
     setRequest(requestArrayObjec)
-    alert('Create request with success!')
+    toast.success('Create request with success!');
+
   }
 
 

@@ -5,14 +5,19 @@ import { Container } from "./styles";
 
 interface CreateGraphProps{
   setGraph:React.Dispatch<React.SetStateAction<any>>,
+  setIsGraph: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 
 
-export function CreateGraph({setGraph}:CreateGraphProps){
-  
+export function CreateGraph({setGraph, setIsGraph}:CreateGraphProps){
+
+  function createDefaultGraph(){
+    setGraph(defaultGraph)
+    setIsGraph(true)
+  }
   return (
-    <Container onClick={()=>setGraph(defaultGraph)}>
+    <Container onClick={createDefaultGraph}>
       <p>CreateGraph</p> 
     </Container>
   )

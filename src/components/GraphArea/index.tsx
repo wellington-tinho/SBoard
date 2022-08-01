@@ -17,23 +17,12 @@ import Modal from 'react-modal';
 import { Container, GraphContainer, NavOptions } from "./styles";
 import useInitCytoscapeExtensions from '../../hooks/useInitCytoscapeExtensions';
 
-// GiJoin juntar icon
-
-
-
-// import { SetupModal } from '../SetupModal';
-
-
-
 
 Modal.setAppElement('#root')
 
 export function GraphArea() {
-  const cy = useContext<cytoscape.Core[]>(CytoscapeContext)[0];
+  const {cy} = useContext(CytoscapeContext);
   const setRequest = useContext(RequestContext)[1];
-
-
-
   const [element, setElement] = useState({} as any)
   const [isSetupModal, setIsSetupModal] = useState(false);
   const hiddenFileRequestInput = useRef<any>(null);
@@ -101,11 +90,9 @@ export function GraphArea() {
   }
 
   function handleChangeZoomLevel(level: number) {
-
-    const newSpacing = cy?.zoom() + (level)
-    // setSpacingFactorElements(newSpacing)
-
-    cy?.zoom(newSpacing);
+    if (cy == undefined) return;
+    const newSpacing = cy.zoom() + (level)
+    cy.zoom(newSpacing);
   }
 
   function handleChangeSpacingFactor(spacing: number) {
@@ -119,8 +106,8 @@ export function GraphArea() {
 
   function AddEle() {
     try {
-      cy.center(
-        cy.add({
+      cy?.center(
+        cy?.add({
           // group: 'nodes',
           data: {
             "Country": "",
@@ -147,9 +134,10 @@ export function GraphArea() {
   }
 
   function DelEle() {
+    if (cy == undefined) return;
     try {
       var ele = cy.$('#' + element.id);
-      cy.remove(ele);
+      cy?.remove(ele);
     }
     catch (e) {
       console.log('error');
@@ -199,11 +187,6 @@ export function GraphArea() {
             <AiOutlineShrink fontSize="1.5em" onClick={() => { handleChangeSpacingFactor(0.9) }} />
             <span className="tooltiptext">Controll spacing between elements Graph</span>
           </li>
-          {/* <li className="tooltip">
-             <BiUndo fontSize="1.5em" onClick={()=>{handleChangeSpacingFactor(1.1)}}/>   
-             <BiRedo fontSize="1.5em" onClick={()=>{handleChangeSpacingFactor(0.9)}}/>   
-            <span className="tooltiptext">Undo and Redo in elements Graph</span> 
-          </li> */}
 
           <li className="tooltip">
             <HiOutlineViewGridAdd fontSize="1.5em" cursor="pointer" onClick={AddEle} />
@@ -228,7 +211,7 @@ export function GraphArea() {
           </li>
 
           <li className="tooltip">
-            <TbFocusCentered fontSize="1.5em" cursor="pointer" onClick={() => cy.center()} />
+            <TbFocusCentered fontSize="1.5em" cursor="pointer" onClick={() => cy?.center()} />
             <span className="tooltiptext">Center</span>
           </li>
 
@@ -236,11 +219,6 @@ export function GraphArea() {
             <FiPlayCircle fontSize="1.5em" onClick={handleEdgehandles} />
             <span className="tooltiptext">{drawMode ? 'Draw On' : 'Draw Off'}</span>
           </li>
-
-          {/* <li className="tooltip">
-            <FiPlayCircle color="#228f41" fontSize="1.5em" cursor="not-allowed" onClick={() => cy.center()} />
-            <span className="tooltiptext">Run ??</span>
-          </li> */}
 
         </ul>
       </NavOptions>

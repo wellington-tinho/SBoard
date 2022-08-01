@@ -33,7 +33,7 @@ interface ElementModalProps {
 
 export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
 
-  const cy = useContext<cytoscape.Core[]>(CytoscapeContext)[0];
+  const {cy} = useContext(CytoscapeContext);
   const [arrayNodes, setArrayNodes] = useState<any>()
   const [arrayEdges, setArrayEdges] = useState<any>()
   const [nodeElement, setNodeElement] = useState<any>()
@@ -48,14 +48,8 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   const [typeIntersectionEnd, setTypeIntersectionEnd] = useState<string>();
 
 
-
-
-
-
-
   //criaçao dos inputs Nodes e edges
   useEffect(function CreateInputsNodesAndEdges() {
-    // console.log('displaro no cy = ',cy.$('')); 
     if (cy !== undefined) {
       const cyNodes = cy.nodes()
 
@@ -134,7 +128,8 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
 
         for (var j = 0; j < Edges.length; j++) {
           var eleInput: any = window.document.getElementsByName(`edgeElementModalInput${Edges[j].data('id')}`)
-
+          console.log(eleInput);
+          
           var edgeSource = Edges.$id(`e${j}`).data('source');
           var edgeTarget = Edges.$id(`e${j}`).data('target');
 
@@ -192,9 +187,8 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   }
 
 
-
   function filterElements(value: any, type: string, element: string) {
-
+    if (cy == undefined) return;
 
     var elemento = cy.$(`${element}`)
     for (var j = 0; j < elemento.length; j++) {
@@ -232,8 +226,11 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
       }
     }
   }
+  
 
   function ChangeSelectedallElements(elementType: 'node' | 'edge') {
+    if (cy == undefined) return;
+    
     var elementArray = cy.$(`${elementType}`)
     for (var j = 0; j < elementArray.length; j++) {
       var eleInput: any = window.document.getElementsByName(`${elementType}ElementModalInput${elementArray[j].data('id')}`)

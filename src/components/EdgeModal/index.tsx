@@ -27,7 +27,7 @@ interface EdgeModalProps {
 }
 
 export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
-  const cy = useContext<cytoscape.Core[]>(CytoscapeContext)[0];
+  const {cy} = useContext(CytoscapeContext);  
 
   const [id, setId] = useState(String)
   const [source, setSource] = useState(String)
@@ -69,23 +69,23 @@ export function EdgeModal({ isOpen, onRequestClose, edge }: EdgeModalProps) {
 
 
     /// Descobrir como chamar esta funçao apenas quando cada valor for alterado
-    cy.$(`#${id}`)
+    cy?.$(`#${id}`)
       .data('source', source)
       .data('target', target)
       .data('negative', negative)
 
     if ((weightStart && weightEnd) !== edge.weight) {
-      cy.$(`#${id}`)
+      cy?.$(`#${id}`)
         .data('weight', generatesRandomBetweenRange(weightStart, weightEnd)) // returns a random number between the ranges
     }
 
     if ((reliabilityStart && reliabilityEnd) !== edge.reliability) {
-      cy.$(`#${id}`)
+      cy?.$(`#${id}`)
         .data('reliability', generatesRandomBetweenRange(reliabilityStart, reliabilityEnd)) // returns a random number between the ranges
     }
 
     if ((delayStart && delayEnd) !== edge.delay) {
-      cy.$(`#${id}`)
+      cy?.$(`#${id}`)
         .data('delay', generatesRandomBetweenRange(delayStart, delayEnd)) // returns a random number between the ranges
     }
 

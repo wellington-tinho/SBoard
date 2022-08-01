@@ -28,7 +28,7 @@ interface NodeModalProps {
 }
 
 export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
-  const cy = useContext<cytoscape.Core[]>(CytoscapeContext)[0];
+  const {cy} = useContext(CytoscapeContext);
 
   const [country, setCountry] = useState<string>()
   const [domain, setDomain] = useState<number>()
@@ -76,7 +76,7 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
 
 
     /// Descobrir como chamar esta funçao apenas quando cada valor for alterado
-    cy.$(`#${id}`)
+    cy?.$(`#${id}`)
       .data('Country', country)
       .data('domain', domain)
       .data('label', label)
@@ -87,7 +87,7 @@ export function NodeModal({ isOpen, onRequestClose, node }: NodeModalProps) {
       .data('pos', pos)
 
     if ((weightStart && weightEnd) !== node.weight) {
-      cy.$(`#${id}`)
+      cy?.$(`#${id}`)
         .data('weight', generatesRandomBetweenRange(weightStart, weightEnd)) // returns a random number between the ranges
     }
 

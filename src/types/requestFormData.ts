@@ -1,16 +1,16 @@
 export interface virtualNodeDemandInterface {
   id?: number;
-  requested?: number;
   vnr_id?: number;
-  domain?: number;
-  region?: number;
-  type?: number | string;
-  period?: number;
-  sink?: number;
+  requested: number;
+  domain: number;
+  region: number;
+  period: number;
+  sink: number;
+  type: number | string;
 }
 
 export interface RequestFormDate {
-  id?: number;
+  id: number;
   vnd?: virtualNodeDemandInterface[];
   links?: number[][] ;
   created?: number;
