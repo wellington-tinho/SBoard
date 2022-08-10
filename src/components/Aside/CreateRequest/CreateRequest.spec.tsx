@@ -1,15 +1,23 @@
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { RequestProvider } from '../../../context/Request/RequestContext';
 import { ShowVND } from '../showVND/showVND';
 import { CreateOne } from './createOneRequest';
 
 
 describe('CreateRequest', () => {
 it('create request with all values', async () => {
+  const { getByText: getByTextCreateOne, getByPlaceholderText } = render(
+    <RequestProvider>
+      <CreateOne />
+    </RequestProvider> 
+  );
+  const { getByText: getByTextShowVND, queryByText  } = render(
+    <RequestProvider>
+      <ShowVND />
+    </RequestProvider>
+  );
   
-  const { getByText: getByTextShowVND, rerender } = render(<ShowVND />);
-  const { getByText: getByTextCreateOne, getByPlaceholderText } = render(<CreateOne />);
-
 
     // const submitButton = getByText('Create Request');
     const id =  getByPlaceholderText('Deixe em branco para ser gerado randomicamente')
@@ -50,11 +58,17 @@ it('create request with all values', async () => {
     userEvent.click(Adicionar)
     userEvent.click(Adicionar)
 
-    
     userEvent.click(CreateRequest)
+    
+    // rerender(
+    //   <RequestProvider>
+    //     <ShowVND />
+    //   </RequestProvider>
+    // );
 
-    rerender(<ShowVND />);
-    expect( await getByTextShowVND('Request 0')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(queryByText('Request 0')).toBeInTheDocument();
+    });
 
   });
 
