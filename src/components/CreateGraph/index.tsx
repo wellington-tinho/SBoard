@@ -18,7 +18,7 @@ export function CreateGraph({setGraph, setIsGraph}:CreateGraphProps){
   }
   return (
     <Container onClick={createDefaultGraph}>
-      <p>CreateGraph</p> 
+      <p>Create a Graph</p> 
     </Container>
   )
 }
