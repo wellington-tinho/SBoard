@@ -17,23 +17,21 @@ export const Container = styled.button`
   border: 1px dashed var(--gray-3);
   border-radius: 4px;
   cursor: pointer;
-  background-color: var(--white-3);
+  background-color: var(--white-1);
 
 
   padding: 1.4rem .5rem;
   transition: transform 0.2s ease;
  
+  p{
+   font-weight: 600;
+   color: var(--gray-3);
+   font-size: 1rem;
+  }
   :hover{
-     background-color: var(--white-1);
-     transform: scale(1.1); 
-   }
+    background-color: var(--white-1);
+    transform: scale(1.1); 
+  }
 
-   p{
-    font-weight: 600;
-    color: var(--gray-3);
-    font-size: 1rem;
-
-
-   }
   `
 
