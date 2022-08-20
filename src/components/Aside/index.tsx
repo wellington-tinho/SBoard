@@ -1,12 +1,15 @@
-import { useContext } from "react";
+import { lazy, Suspense, useContext } from "react";
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { RequestContext } from "../../context/Request/RequestContext";
-import { CreateRequest } from "./CreateRequest";
-import { EditionRequest } from "./EditionRequest/index";
-import { AsideOthers } from "./outhers/others";
+
 import { ShowVND } from "./showVND/showVND";
 import { Container } from "./styles";
+
+const CreateRequest = lazy(()=> import("./CreateRequest").then(module=>({default:module.CreateRequest})))
+const EditionRequest = lazy(()=> import("./EditionRequest/index").then(module=>({default:module.EditionRequest})))
+const AsideOthers = lazy(()=> import("./outhers/others").then(module=>({default:module.AsideOthers})))
+
 
 
 
@@ -69,19 +72,25 @@ export function Aside() {
 
 
             <TabPanel className='TabPanelCreate'>
-              <CreateRequest/>
+              <Suspense fallback={<div>CreateRequest Loading ...</div>}>
+                <CreateRequest/>
+              </Suspense>
             </TabPanel>
 
             <TabPanel className='TabPanelEdition'>
-              <EditionRequest
-                qtdRequests={qtdRequests} 
-              />
+              <Suspense fallback={<div>EditionRequest Loading ...</div>}>
+                <EditionRequest
+                  qtdRequests={qtdRequests} 
+                />
+              </Suspense>
             </TabPanel>
 
             <TabPanel className='TabPanelOthers'>
+            <Suspense fallback={<div>AsideOthers Loading ...</div>}>
               <AsideOthers
                 appendRequestList={appendRequestList}
               />
+            </Suspense>
             </TabPanel>
           </fieldset>
 

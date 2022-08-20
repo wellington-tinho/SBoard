@@ -1,6 +1,6 @@
 // import { Container } from "./styles";
 import styled from "styled-components";
-import logoImg from '../../assets/Logo.png';
+import logoImg from '../../assets/Logo.svg';
 
 
 
@@ -19,8 +19,6 @@ export const Container = styled.header`
   img{ 
     /* border-radius: 50%; */
     /* padding: 0.10rem; */
-
-    height: 2.5rem;
     margin: 0 2rem;
 
   }
@@ -40,10 +38,6 @@ export const Container = styled.header`
   @media (max-width: 1280px){
     height: 2.5rem;
 
-    img{
-      height: 2rem;
-      margin: 0 2rem;
-    }
    h1{ 
      font-size: 1.5rem;
    }
