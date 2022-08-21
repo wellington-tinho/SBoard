@@ -1,12 +1,13 @@
 import cytoscape, { ElementsDefinition } from 'cytoscape';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useContext, useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { CytoscapeContext } from '../../context/CytoscapeGraph/CytoscapeContext';
-import { ChartOptions } from '../ChartOptions';
-import { EdgeModal } from '../EdgeModal';
 import { ElementModal } from '../ElementModal';
-import { NodeModal } from '../NodeModal';
 
+// const ElementModal = lazy(()=> import('../ElementModal').then(module=>({default:module.ElementModal})))
+const ChartOptions = lazy(()=> import('../ChartOptions').then(module=>({default:module.ChartOptions})))
+const NodeModal = lazy(()=> import('../NodeModal').then(module=>({default:module.NodeModal})))
+const EdgeModal = lazy(()=> import('../EdgeModal').then(module=>({default:module.EdgeModal})))
 
 export interface propsGraphJson {
   grapJSON: ElementsDefinition,
@@ -347,27 +348,31 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
         <div ref={containerRef} style={{ width: 'calc(100vw - 18rem)', height: '86vh' }} />
       </div>
 
-      <NodeModal
-        isOpen={isNodeModal}
-        onRequestClose={handleCloseNodeModal}
-        node={nodeElement}
-      />
+      
+      
+      <Suspense fallback={<div>Modals Loading ...</div>}>
+        <NodeModal
+          isOpen={isNodeModal}
+          onRequestClose={handleCloseNodeModal}
+          node={nodeElement}
+        />
 
       <EdgeModal
         isOpen={isEdgeModal}
         onRequestClose={handleCloseEdgeModal}
         edge={edgeElement}
-      />
+        />
 
       <ElementModal
         isOpen={isElementModal}
         onRequestClose={handleCloseElementModal}
-      />
+        />
 
       <ChartOptions
         isOpen={isChartOptionsModal}
         onRequestClose={handleCloseChartOptionsModal}
-      />
+        />
+    </Suspense>
     </div>
   );
 }
