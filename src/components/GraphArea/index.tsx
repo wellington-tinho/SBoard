@@ -171,6 +171,17 @@ export function GraphArea() {
     setDrawMode(!drawMode)
   }
 
+  function newColor() {
+    if (!cy) return;
+  
+
+    var aStar = cy.elements().aStar({ root: "#1", goal: "#10" });
+    aStar.path.select();
+    console.log(aStar.path);
+    console.log(aStar);
+    
+  }
+
 
   return (
     <Container>
@@ -219,6 +230,10 @@ export function GraphArea() {
           <li className="tooltip">
             <FiPlayCircle fontSize="1.5em" onClick={handleEdgehandles} />
             <span className="tooltiptext">{drawMode ? 'Draw On' : 'Draw Off'}</span>
+          </li>
+
+          <li className="tooltip">
+            <button onClick={newColor}>Run</button>
           </li>
 
         </ul>

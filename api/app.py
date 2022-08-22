@@ -14,7 +14,6 @@ CORS(app)
 @app.route("/convert", methods=['POST'])
 def GML_JSON():
   data= request.get_json()
-
   if(data):
     try:
       file=data['data']
