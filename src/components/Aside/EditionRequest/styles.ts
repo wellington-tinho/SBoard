@@ -16,8 +16,7 @@ export const Container = styled.div`
 
     div{
       border-bottom: 1px solid #acdcb9;
-     
-          
+  
       h3{
         font: 1rem 'Roboto Slab';
         font-weight: 600;
@@ -38,24 +37,20 @@ export const Container = styled.div`
         margin: 0 0 1rem 0;
       }
       button.changeElementList{
-        font-size: .9rem;
-        font-weight: bold;
-        width: 100%;
-        padding: 0 1rem;
-        height: 2.4rem;
-        border-radius: 0.25rem;
-        background: var(--white-2);
-        border: 1px solid var(--green-3);
-        cursor: pointer;
         margin: 1rem 0;
-        transition: background-color 0.3s;
-
-
+        padding: .5rem;
+        border-radius: 0.25rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--green-3);
+        transition: transform 0.2s ease;
+        font-weight: 600;
+        color: var(--gray-4);
         :hover{
           background-color: var(--green-3);
           color: white;
-          border: 1px solid black;
-        }
+          filter: brightness(0.9);
+          transform: scale(1.1); 
+        } 
       }
     }
     ul.listRequest{

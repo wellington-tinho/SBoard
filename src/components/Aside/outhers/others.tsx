@@ -1,5 +1,5 @@
 
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { RequestContext } from '../../../context/Request/RequestContext';
 import { Container } from './styles';
 
@@ -36,6 +36,14 @@ export function AsideOthers(
   {appendRequestList}: AsideOthersProps
 ) {
   const [requestList, setRequestList] = useContext(RequestContext);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    // 👇️ open file input box on click of other element
+    if (null !== inputRef.current) {
+      inputRef.current.click();
+    }
+  };
 
   function DownloadRequestList() {
     var a = document.createElement("a");
@@ -54,20 +62,18 @@ export function AsideOthers(
   return <Container>
     <button onClick={() => { setRequestList({}) }}>  Erase all requests </button>
     <button onClick={DownloadRequestList}> Download Requests</button>
+    <button onClick={handleClick}> Concatenate new request </button>
 
-    <div className='UploadJSON'>
-      <input
-        type="file"
-        name="AppendJSON"
-        id="AppendJSON"
-        onChange={appendRequestList}
-        hidden={true}
-        accept=".json,.JSON"
-      />
+    <input
+      type="file"
+      name="AppendJSON"
+      id="AppendJSON"
+      onChange={appendRequestList}
+      hidden={true}
+      accept=".json,.JSON"
+      style={{display: 'none'}}
+      ref={inputRef}
+    />
 
-      <label htmlFor="AppendJSON">
-        Concatenate new request
-      </label>
-    </div>
   </Container>;
 }
