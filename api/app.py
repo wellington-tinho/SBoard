@@ -1,6 +1,6 @@
 from flask import Flask, request
-import networkx as nx
 from flask_cors import CORS
+import networkx as nx
 import json
 import os 
 
@@ -21,6 +21,21 @@ def GML_JSON():
       return nx.cytoscape_data(df)
     except:
       return json.dumps({"error": "Error in converting GML to JSON"})
+
+
+# Simulation of the Mappend algorithm for the given graph and parameters 
+@app.route("/mappend", methods=['POST'])
+def Mappend():
+  data= request.get_json()
+  cy_data = {
+    'elements': data['data']['elements'],
+    'data': [],
+  }
+  G = nx.cytoscape_graph(cy_data)
+  response = {
+    'mappend_data': list(G.nodes())
+  }
+  return json.dumps(response)
 
 
 

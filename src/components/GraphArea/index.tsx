@@ -17,6 +17,7 @@ import Modal from 'react-modal';
 
 import { Container, GraphContainer, NavOptions } from "./styles";
 import useInitCytoscapeExtensions from '../../hooks/useInitCytoscapeExtensions';
+import { api } from '../../services/api';
 
 
 Modal.setAppElement('#root')
@@ -97,7 +98,6 @@ export function GraphArea() {
   }
 
   function handleChangeSpacingFactor(spacing: number) {
-
     cy?.layout({
       name: "preset",
       spacingFactor: spacing,
@@ -173,13 +173,15 @@ export function GraphArea() {
 
   function newColor() {
     if (!cy) return;
-  
-
-    var aStar = cy.elements().aStar({ root: "#1", goal: "#10" });
-    aStar.path.select();
-    console.log(aStar.path);
-    console.log(aStar);
-    
+    // var aStar = cy.elements().aStar({ root: "#66", goal: "#68" });
+    // aStar.path.select();
+    // console.log(aStar.path);
+    // console.log(aStar);
+    api.post('mappend', {data: cy?.json()})
+    .then(response => {
+      console.log(response.data);
+      
+    }) 
   }
 
 
