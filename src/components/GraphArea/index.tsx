@@ -173,15 +173,15 @@ export function GraphArea() {
 
   function newColor() {
     if (!cy) return;
-    // var aStar = cy.elements().aStar({ root: "#66", goal: "#68" });
-    // aStar.path.select();
-    // console.log(aStar.path);
-    // console.log(aStar);
     api.post('mappend', {data: cy?.json()})
     .then(response => {
-      console.log(response.data);
-      
-    }) 
+      console.log(response.data, 'Mappend fictitious');
+      // ignore response (Mappend fictitious)
+    })
+    var aStar = cy.elements().aStar({ root: "#66", goal: "#68" });
+    aStar.path.select();
+    // console.log(aStar.path);
+    // console.log(aStar);
   }
 
 

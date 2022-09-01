@@ -52,6 +52,7 @@ export function ElementModal({ isOpen, onRequestClose }: ElementModalProps) {
   useEffect(function CreateInputsNodesAndEdges() {
     if (cy !== undefined) {
       const cyNodes = cy.nodes()
+      console.log(cyNodes,'cyNodes')
 
 
       var eleNodes: any = []

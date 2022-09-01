@@ -33,7 +33,7 @@ def Mappend():
   }
   G = nx.cytoscape_graph(cy_data)
   response = {
-    'mappend_data': list(G.nodes())
+    'mappend_data': list(G.nodes(data=True))
   }
   return json.dumps(response)
 
