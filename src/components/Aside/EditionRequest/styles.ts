@@ -9,15 +9,12 @@ export const Container = styled.div`
     /* overflow-y: scroll; */
     display: grid;
     grid-template-columns: 1fr;
-    height: 45rem;
     margin: .5rem;
-    
     /* background-color: aqua; */
 
     div{
       border-bottom: 1px solid #acdcb9;
-     
-          
+  
       h3{
         font: 1rem 'Roboto Slab';
         font-weight: 600;
@@ -35,27 +32,22 @@ export const Container = styled.div`
           border: 1px solid var(--gray-3);
           font-size: 1rem;
         }
-        margin: 0 0 1rem 0;
       }
       button.changeElementList{
-        font-size: .9rem;
-        font-weight: bold;
-        width: 100%;
-        padding: 0 1rem;
-        height: 2.4rem;
+        margin: 1.5rem 0;
+        padding: .5rem;
         border-radius: 0.25rem;
-        background: var(--white-2);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
         border: 1px solid var(--green-3);
-        cursor: pointer;
-        margin: 1rem 0;
-        transition: background-color 0.3s;
-
-
+        transition: transform 0.2s ease;
+        font-weight: 600;
+        color: var(--gray-4);
         :hover{
           background-color: var(--green-3);
           color: white;
-          border: 1px solid black;
-        }
+          filter: brightness(0.9);
+          transform: scale(1.08); 
+        } 
       }
     }
     ul.listRequest{

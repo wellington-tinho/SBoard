@@ -58,11 +58,16 @@ interface ITypeMessageColor {
 }
 
 export const UploadMessage = styled.p<ITypeMessageColor>`
-   display: flex;
-   color: ${(props) => messageColors[props.type || "default"]};
-   justify-content: center;
-   align-items: center;
-   padding: 15px 0;
-   font-weight: 500;
-   font-size: 1rem;
+    display: flex;
+    color: ${(props) => messageColors[props.type || "default"]};
+    justify-content: flex-start;
+    align-items: center; // em telas pequenas  align-items: flex-start;
+    font-weight: 500;
+    font-size: 1rem;
+    text-align: start;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* white-space: ; */
  `;

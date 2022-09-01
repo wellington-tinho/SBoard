@@ -29,12 +29,12 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
   Object.keys(grapJSON.edges).forEach(key => {
     (grapJSON.edges[Number(key)].data) = {
       ...grapJSON.edges[Number(key)].data,
-
       id: `e${Number(key)}`,
       delay: `${grapJSON.edges[Number(key)].data.delay ? grapJSON.edges[Number(key)].data.delay : (Math.floor(Math.random() * 100) + 1)}`,
       reliability: `${grapJSON.edges[Number(key)].data.reliability ? grapJSON.edges[Number(key)].data.reliability : (Math.floor(Math.random() * 100) + 1)}`,
       weight: `${grapJSON.edges[Number(key)].data.weight ? grapJSON.edges[Number(key)].data.weight : (Math.floor(Math.random() * 100) + 1)}`,
       negative: `${grapJSON.edges[Number(key)].data.negative ? grapJSON.edges[Number(key)].data.negative : (Math.floor(Math.random() * 100) + 1)}`,
+      requests: []
     }
   })
   //se o primeiro node não tem position entao os outros tambem nao terá, (diferença de envio via GML e JSON)
@@ -46,7 +46,6 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
   //caso nao tiver latitude e longitude, então não tem posição no graph, (gero no random)
   var nothasLongLatInGraph = !grapJSON.nodes[0].data.Longitude && !grapJSON.nodes[0].data.Latitude
 
-
   if (notHasPositionInGraph) {
 
     if (!nothasPosInGraph) {
@@ -54,19 +53,22 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
         (
           grapJSON.nodes[Number(key)].data = {
             ...grapJSON.nodes[Number(key)].data,
+            requests: []
           },
           grapJSON.nodes[Number(key)].position = {
             x: Number(`${grapJSON.nodes[Number(key)].data.pos[0]}`),
             y: Number(`${grapJSON.nodes[Number(key)].data.pos[1]}`),
           }
         )
-      })
+      },
+      )
     }
     else if (!nothasLongLatInGraph) {
       Object.keys(grapJSON.nodes).forEach((key) => {
         (
           grapJSON.nodes[Number(key)].data = {
             ...grapJSON.nodes[Number(key)].data,
+            requests: []
           },
           grapJSON.nodes[Number(key)].position = {
             x: Number(`${grapJSON.nodes[Number(key)].data.Longitude}`),
@@ -77,7 +79,7 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
     }
   } else {
     Object.keys(grapJSON.nodes).forEach(key => {
-      (grapJSON.nodes[Number(key)].data = { ...grapJSON.nodes[Number(key)].data })
+      (grapJSON.nodes[Number(key)].data = { ...grapJSON.nodes[Number(key)].data,  requests: [] })
     })
   }
 
@@ -138,7 +140,7 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
             'line-style': 'solid',
             'line-color': '#b3b3b3',
             'curve-style': 'bezier ',
-            // content: 'data(label)',
+            // 'content':  'data(requests)',
             // 'control-point-step-size': 40,
             // 'control-point-weights': 0.5,
             // 'segment-weights': 0.5,
@@ -153,11 +155,12 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
               return (
                 ' id:' + ele.data().id +
                 ' source:' + ele.data().source +
-                '\n target:' + ele.data().target +
-                ' delay:' + ele.data().delay +
-                '\n reliability:' + ele.data().reliability +
-                ' bandwidth:' + ele.data().weight +
-                ' negative:' + ele.data().negative
+                ' target:' + ele.data().target +
+                '\ndelay:' + ele.data().delay +
+                ' reliability:' + ele.data().reliability +
+                ' \nbandwidth:' + ele.data().weight +
+                ' negative:' + ele.data().negative +
+                ' \nrequests_ids:' + ele.data().requests
               )
             },
             'line-color': '#4a7aff',
@@ -225,7 +228,8 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
                 '\n region:' + ele.data().region +
                 ' pos:' + ele.data().pos +
                 ' value:' + ele.data().value +
-                ' bandwidth:' + ele.data().weight
+                ' bandwidth:' + ele.data().weight +
+                ' \nrequests_ids:' + ele.data().requests
               )
             },
 
@@ -246,7 +250,6 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
             // 'text-halign': 'center',
             // 'font-size': '10',
             // "text-max-width": "5px",
-
           }
         }
       ],
@@ -300,7 +303,6 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
         // console.log('tap on background');
       }
     });
-
   }
   CytoscapeFunctions()
 

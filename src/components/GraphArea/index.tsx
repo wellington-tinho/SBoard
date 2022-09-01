@@ -17,6 +17,7 @@ import Modal from 'react-modal';
 
 import { Container, GraphContainer, NavOptions } from "./styles";
 import useInitCytoscapeExtensions from '../../hooks/useInitCytoscapeExtensions';
+import { api } from '../../services/api';
 
 
 Modal.setAppElement('#root')
@@ -97,7 +98,6 @@ export function GraphArea() {
   }
 
   function handleChangeSpacingFactor(spacing: number) {
-
     cy?.layout({
       name: "preset",
       spacingFactor: spacing,
@@ -171,6 +171,19 @@ export function GraphArea() {
     setDrawMode(!drawMode)
   }
 
+  function newColor() {
+    if (!cy) return;
+    api.post('mappend', {data: cy?.json()})
+    .then(response => {
+      console.log(response.data, 'Mappend fictitious');
+      // ignore response (Mappend fictitious)
+    })
+    var aStar = cy.elements().aStar({ root: "#66", goal: "#68" });
+    aStar.path.select();
+    // console.log(aStar.path);
+    // console.log(aStar);
+  }
+
 
   return (
     <Container>
@@ -219,6 +232,10 @@ export function GraphArea() {
           <li className="tooltip">
             <FiPlayCircle fontSize="1.5em" onClick={handleEdgehandles} />
             <span className="tooltiptext">{drawMode ? 'Draw On' : 'Draw Off'}</span>
+          </li>
+
+          <li className="tooltip">
+            <button onClick={newColor}>Run</button>
           </li>
 
         </ul>
