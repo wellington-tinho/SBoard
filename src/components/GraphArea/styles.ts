@@ -23,13 +23,12 @@ export const NavOptions  = styled.nav`
       display: flex;
       align-items: center;
 
-      input{
+      input.hidden{
         /* visibility: hidden; */
         /* padding: 0;
         height: 0;
         margin: 0; */
         display: none;
-
       }
 
       svg{

@@ -5,13 +5,15 @@ import { RequestContext } from '../../context/Request/RequestContext';
 
 const SetupModal = lazy((): Promise<any> => import('../SetupModal'));
 
-import { AiOutlineZoomIn, AiOutlineZoomOut, AiOutlineExpandAlt, AiOutlineShrink } from 'react-icons/ai';
+import { AiOutlineExpandAlt, AiOutlineShrink, AiOutlineZoomIn, AiOutlineZoomOut } from 'react-icons/ai';
 import { BiGitPullRequest } from 'react-icons/bi';
 import { BsGear, BsLayoutWtf } from 'react-icons/bs';
-import { FiPlayCircle } from 'react-icons/fi';
 import { HiOutlineViewGridAdd } from 'react-icons/hi';
 import { RiChatDeleteLine } from 'react-icons/ri';
 import { TbFocusCentered } from 'react-icons/tb';
+import { IoAnalyticsOutline } from 'react-icons/io5';
+
+
 
 import Modal from 'react-modal';
 
@@ -67,14 +69,15 @@ export function GraphArea() {
     }]
   const { edgeHandles } = useInitCytoscapeExtensions(cy);
   var count = 0
+  var prevSpacingFactor = 50 // 50 is the default value in range 0-150
 
 
   useEffect(() => {
-    if (cy) {
-      cy?.on('tap', (event: any) => {
-        setElement(event.target._private.data)
-      });
-    }
+    if (!cy) return;
+    cy.on('tap', (event: any) => {
+      setElement(event.target._private.data)
+    });
+    
   }, [cy])
 
   // Update edgehandles draw mode
@@ -98,8 +101,35 @@ export function GraphArea() {
   }
 
   function handleChangeSpacingFactor(spacing: number) {
+    if (cy == undefined) return;
+    
+
+    if(spacing === prevSpacingFactor){
+      prevSpacingFactor = spacing
+      spacing = 1
+    }
+    if(spacing < prevSpacingFactor){
+      prevSpacingFactor = spacing
+      spacing = 0.9
+    }
+    if(spacing > prevSpacingFactor){
+      prevSpacingFactor = spacing
+      spacing = 1.1
+    }
+
+    console.log(spacing)
     cy?.layout({
-      name: "preset",
+      name: "preset", // colocar o layout atual
+      spacingFactor: spacing,
+      fit: true
+    }).run()
+  }
+  function handleChangeSpacingFactor2(spacing: number) {
+    if (cy == undefined) return;
+    
+    console.log(spacing)
+    cy?.layout({
+      name: "preset", // colocar o layout atual
       spacingFactor: spacing,
       fit: true
     }).run()
@@ -171,18 +201,7 @@ export function GraphArea() {
     setDrawMode(!drawMode)
   }
 
-  function newColor() {
-    if (!cy) return;
-    api.post('mappend', {data: cy?.json()})
-    .then(response => {
-      console.log(response.data, 'Mappend fictitious');
-      // ignore response (Mappend fictitious)
-    })
-    var aStar = cy.elements().aStar({ root: "#66", goal: "#68" });
-    aStar.path.select();
-    // console.log(aStar.path);
-    // console.log(aStar);
-  }
+
 
 
   return (
@@ -191,51 +210,53 @@ export function GraphArea() {
       <NavOptions>
         <ul>
           <li className="tooltip">
-            <AiOutlineZoomIn fontSize="1.5em" onClick={() => handleChangeZoomLevel(+.1)} />
-            <AiOutlineZoomOut fontSize="1.5em" onClick={() => handleChangeZoomLevel(-.1)} />
+            <AiOutlineZoomIn fontSize="1.5em" onClick={() => handleChangeZoomLevel(+.1)}  style={{ cursor: cy ? 'pointer' : 'not-allowed' }} />
+            <AiOutlineZoomOut fontSize="1.5em" onClick={() => handleChangeZoomLevel(-.1)} style={{ cursor: cy ? 'pointer' : 'not-allowed' }} /> 
             <span className="tooltiptext">Drag zoom in or zoom out</span>
           </li>
 
           <li className="tooltip">
-            <AiOutlineExpandAlt fontSize="1.5em" onClick={() => { handleChangeSpacingFactor(1.1) }} />
-            <AiOutlineShrink fontSize="1.5em" onClick={() => { handleChangeSpacingFactor(0.9) }} />
+            <input type="range" name="spacingFactor" id="spacingFactor" min="1" max="150" step="1" onChange={(e) => handleChangeSpacingFactor(Number(e.target.value))} disabled={!cy} />
             <span className="tooltiptext">Controll spacing between elements Graph</span>
           </li>
 
           <li className="tooltip">
-            <HiOutlineViewGridAdd fontSize="1.5em" cursor="pointer" onClick={AddEle} />
-            <RiChatDeleteLine fontSize="1.5em" cursor="pointer" onClick={DelEle} />
+            <AiOutlineExpandAlt fontSize="1.5em" onClick={() => { handleChangeSpacingFactor2(1.1) }}  style={{ cursor: cy ? 'pointer' : 'not-allowed' }} />
+            <AiOutlineShrink fontSize="1.5em" onClick={() => { handleChangeSpacingFactor2(0.9) }}  style={{ cursor: cy ? 'pointer' : 'not-allowed' }} />
+            <span className="tooltiptext">Controll spacing between elements Graph</span>
+          </li>
+
+          <li className="tooltip">
+            <HiOutlineViewGridAdd fontSize="1.5em" cursor="pointer" onClick={AddEle} style={{ cursor: cy ? 'pointer' : 'not-allowed' }} />
+            <RiChatDeleteLine fontSize="1.5em" cursor="pointer" onClick={DelEle} style={{ cursor: cy ? 'pointer' : 'not-allowed' }} />
             <span className="tooltiptext">Add or remove element graph</span>
           </li>
 
-          <li className="tooltip">
-            <input type="file" name="UploadJSON" id="UploadJSON" ref={hiddenFileRequestInput} onChange={handleUploadRequestJSON} />
-            <BiGitPullRequest fontSize="1.5em" cursor="pointer" onClick={handleClick} />
-            <span className="tooltiptext">Upload archive json from requests</span>
-          </li>
 
           <li className="tooltip">
-            <BsGear fontSize="1.5em" cursor="pointer" onClick={handleOpenSetupModal} />
+            <BsGear fontSize="1.5em" cursor="pointer" onClick={handleOpenSetupModal} style={{ cursor: cy ? 'pointer' : 'not-allowed' }} />
             <span className="tooltiptext">Open setup modal</span>
           </li>
 
           <li className="tooltip">
-            <BsLayoutWtf fontSize="1.5em" cursor="pointer" onClick={handleChangeLayout} />
+            <BsLayoutWtf fontSize="1.5em" cursor="pointer" onClick={handleChangeLayout} style={{ cursor: cy ? 'pointer' : 'not-allowed' }} />
             <span className="tooltiptext">Change layout</span>
           </li>
 
           <li className="tooltip">
-            <TbFocusCentered fontSize="1.5em" cursor="pointer" onClick={() => cy?.center()} />
+            <TbFocusCentered fontSize="1.5em" cursor="pointer" onClick={() => cy?.center()} style={{ cursor: cy ? 'pointer' : 'not-allowed' }} />
             <span className="tooltiptext">Center</span>
           </li>
 
           <li className="tooltip">
-            <FiPlayCircle fontSize="1.5em" onClick={handleEdgehandles} />
+            <IoAnalyticsOutline fontSize="1.5em" onClick={handleEdgehandles} style={{ cursor: cy ? 'pointer' : 'not-allowed' }} />
             <span className="tooltiptext">{drawMode ? 'Draw On' : 'Draw Off'}</span>
           </li>
 
           <li className="tooltip">
-            <button onClick={newColor}>Run</button>
+            <input type="file" name="UploadJSON" id="UploadJSON" className='hidden' ref={hiddenFileRequestInput} onChange={handleUploadRequestJSON} />
+            <BiGitPullRequest fontSize="1.5em" cursor="pointer" onClick={handleClick} />
+            <span className="tooltiptext">Upload archive json from requests</span>
           </li>
 
         </ul>
