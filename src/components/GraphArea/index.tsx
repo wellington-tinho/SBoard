@@ -117,7 +117,7 @@ export function GraphArea() {
       spacing = 1.1
     }
 
-    console.log(spacing)
+    // console.log(spacing)
     cy?.layout({
       name: "preset", // colocar o layout atual
       spacingFactor: spacing,
@@ -127,7 +127,7 @@ export function GraphArea() {
   function handleChangeSpacingFactor2(spacing: number) {
     if (cy == undefined) return;
     
-    console.log(spacing)
+    // console.log(spacing)
     cy?.layout({
       name: "preset", // colocar o layout atual
       spacingFactor: spacing,

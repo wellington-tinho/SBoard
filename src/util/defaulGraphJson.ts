@@ -8,7 +8,7 @@ export const defaultGraph = {
           "label": "label 0",
           "name": "0",
           "pos": [
-            0,
+            1,
             0
           ],
           "region": 0,

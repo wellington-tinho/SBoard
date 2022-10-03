@@ -7,7 +7,7 @@ const Content = styled.div`
   /* align-items: stretch; */
   border: 1px solid var(--background);
   height: calc( 100vh - 4rem ); 
-
+  min-width: 500px !important;	
   
   @media (max-width: 1280px){
     height: calc( 100vh - 2.5rem ); 
@@ -16,6 +16,7 @@ const Content = styled.div`
   @media (max-width: 500px){
     flex-direction: column;
     align-items: center;
+
   }
 `
 
