@@ -4,6 +4,7 @@ import { IsGraphContext } from "../../context/IsGraph/isGraph";
 import { CreateGraph } from "../CreateGraph";
 import { GraphManipulation } from "../GraphManipulation";
 import { UploadGraph } from "../UploadGraph";
+import { GraphContainer } from "./styles";
 
 
 
@@ -17,13 +18,12 @@ export function StartGraph() {
 
   if (!isGraph) {
     return (
-      <>
+      <GraphContainer>
         <UploadGraph setGraph={setGraph} setIsGraph={setIsGraph}/>
         <CreateGraph setGraph={setGraph} setIsGraph={setIsGraph}/>
-      </>
+      </GraphContainer>
     )
   } else {
-
     return ( 
       < GraphManipulation grapJSON={graph}/>
     )

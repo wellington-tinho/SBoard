@@ -75,31 +75,48 @@ export function ShowVND() {
 
     // Funcao principal para colorir o grafo
     function setColorGraph(checked: Boolean, request: RequestFormDate) {
-      try {
+      if (!cy) return;
+      try { 
+        // api.post('mappend', {data: cy?.json()})
+        // .then(response => {
+        //   console.log(response.data, 'Mappend fictitious');
+        //   // ignore response (Mappend fictitious)
+        // })
+    
+        const cyNodes = cy.nodes()
+        const lengthGraph =  cyNodes.length
+        
         if (checked) {
-          var randNum = (Math.floor(Math.random() * 100) + 1)
+          const root = (Math.round(Math.random() * lengthGraph-1)+1);
+          const goal = (Math.round(Math.random() * lengthGraph-1))+1;
+      
+          console.log(root, 'root');
+          console.log(goal, 'goal');
+          
+          const aStar = cy.elements().aStar({ root: `#${cyNodes[root].data('id')}`, goal: `#${cyNodes[goal].data('id')}` });
+          aStar.path.select();
+
           var color = (colors)[Math.floor(Math.random() * (colors).length)]
-          changeDicChecbox[request.id] = randNum
-  
-          console.log('node', cy?.$(`node[id = "${randNum}"]`).json());
-          console.log('edge', cy?.$(`edge[id = "e${randNum}"]`).json());
-  
-          cy?.$(`node[id = "${randNum}"]`)
-            .style({ 'background-color': `${color}` })
-  
-          cy?.$(`edge[id = "e${randNum}"]`)
-            .style({ 'line-color': `${color}` })
-          // .$(`edge[Delay = ${randNum}]`)
-  
+          for (let key = 0; key < aStar.path.length; key++) {
+            aStar.path[key].style('line-color', `${color}`);
+            aStar.path[key].style('background-color', `${color}`);
+            aStar.path[key].data("requests", aStar.path[key].data("requests") + `${request.id},`); // coocar id do request
+          }
+          changeDicChecbox[request.id] = [root,goal]
         }
         else {
+          const [root,goal] = changeDicChecbox[request.id] 
+          
+          const aStar = cy.elements().aStar({ root: `#${cyNodes[root].data('id')}`, goal: `#${cyNodes[goal].data('id')}` });
+          aStar.path.select();
+
+          for (let key = 0; key < aStar.path.length; key++) {
+            aStar.path[key].style('line-color', 'grey');
+            aStar.path[key].style('background-color', 'grey');
+            const labelRequest = aStar.path[key].data("requests").replace(`${request.id},`, '')
+            aStar.path[key].data("requests", labelRequest); // coocar id do request
+          }
   
-          cy?.$(`node[id = "${changeDicChecbox[request.id]}"]`)
-            .style({ 'background-color': `grey` })
-  
-  
-          cy?.$(`edge[id = "e${changeDicChecbox[request.id]}"]`)
-            .style({ 'line-color': 'grey' })
         }
       }
       catch (e) {

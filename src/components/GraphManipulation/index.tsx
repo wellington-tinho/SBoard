@@ -3,6 +3,7 @@ import { lazy, Suspense, useContext, useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { CytoscapeContext } from '../../context/CytoscapeGraph/CytoscapeContext';
 import { ElementModal } from '../ElementModal';
+import { GraphStyles } from './styles';
 
 // const ElementModal = lazy(()=> import('../ElementModal').then(module=>({default:module.ElementModal})))
 const ChartOptions = lazy(()=> import('../ChartOptions').then(module=>({default:module.ChartOptions})))
@@ -347,7 +348,7 @@ export function GraphManipulation({ grapJSON }: propsGraphJson) {
   return (
     <div>
       <div id='cy' >
-        <div ref={containerRef} style={{ width: 'calc(100vw - 18rem)', height: '86vh' }} />
+        <GraphStyles ref={containerRef} />
       </div>
 
       
