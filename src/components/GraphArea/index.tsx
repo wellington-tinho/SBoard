@@ -19,7 +19,6 @@ import Modal from 'react-modal';
 
 import { Container, GraphContainer, NavOptions } from "./styles";
 import useInitCytoscapeExtensions from '../../hooks/useInitCytoscapeExtensions';
-import { api } from '../../services/api';
 
 
 Modal.setAppElement('#root')

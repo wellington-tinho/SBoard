@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== 'production') {
    API = ('http://127.0.0.1:5000/')
   
 } else {
-   API = ('https://sboard-api.herokuapp.com/')
+   API = ('https://sboard-api.onrender.com/')
   
 }
 
